@@ -3,616 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wang Weize | Ultimate Dynasty & AI Assistant</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700;900&family=Plus+Jakarta+Sans:wght@400;800&family=Playfair+Display:wght@700;900&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <title>Pemberitahuan Penangguhan Pembayaran YouTube</title>
     <style>
-        /* === TEMA CHINA KUNO (IMPERIAL ULTIMATE) === */
-        :root { --imperial-red: #C41E3A; --emperor-gold: #FFD700; --ink-black: #1a1a1a; --rice-paper: #FDF6E3; }
-        body { background-color: var(--rice-paper); color: var(--ink-black); font-family: 'Noto Serif SC', serif; background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png'); overflow-x: hidden; scroll-behavior: smooth; padding-bottom: 120px; }
-        
-        /* === PERBAIKAN NAMA SULTAN (ANTI BLUR/SILAU - SANGAT TAJAM) === */
-        .emperor-name { 
-            font-family: 'Playfair Display', serif; 
-            font-size: clamp(3rem, 8vw, 6.5rem); 
-            font-weight: 900; 
-            color: #C41E3A; /* Merah Kekaisaran Solid */
-            /* Garis luar Emas Solid dan Bayangan Hitam Tebal, Dijamin Kelihatan Jelas! */
-            text-shadow: 
-                -2px -2px 0 #D4AF37,  
-                 2px -2px 0 #D4AF37,
-                -2px  2px 0 #D4AF37,
-                 2px  2px 0 #D4AF37,
-                 5px  5px 10px rgba(0,0,0,0.8); 
-            letter-spacing: 5px; 
-            display: inline-block; 
-            line-height: 1.2;
-            padding: 10px;
+        body {
+            background-color: #f1f3f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-
-        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
-
-        /* === UI KOMPONEN UMUM === */
-        .glass-scroll { background: rgba(253, 246, 227, 0.95); backdrop-filter: blur(10px); border: 3px solid var(--imperial-red); border-radius: 12px; transition: all 0.5s; }
-        .hidden-tab { display: none !important; }
-        .active-nav { background: var(--imperial-red) !important; color: var(--emperor-gold) !important; transform: scale(1.05); box-shadow: 0 -5px 15px rgba(196,30,58,0.5); }
-        canvas { touch-action: none; cursor: crosshair; }
-        .imperial-particle { position: fixed; top: -10px; pointer-events: none; z-index: 0; opacity: 0.15; animation: fall linear infinite; font-size: 24px; color: #D4AF37; }
-
-        /* === SECTION PROFIL EKSKLUSIF STYLES === */
-        .profil-container { background: linear-gradient(145deg, #faf3e0, #f5e6d3); border: 3px solid #C41E3A; border-radius: 40px; box-shadow: 20px 20px 0 rgba(196,30,58,0.3), 0 20px 40px rgba(0,0,0,0.2); padding: 40px; position: relative; overflow: hidden; }
-        .garis-emas { height: 3px; background: linear-gradient(90deg, transparent, #D4AF37, #C41E3A, #D4AF37, transparent); width: 80%; margin: 20px auto; border-radius: 100%; }
-        .kartu-generasi { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border: 2px solid #C41E3A; border-radius: 30px; padding: 20px; width: 240px; box-shadow: 10px 10px 0 #C41E3A; transition: all 0.4s ease; }
-        .kartu-generasi:hover { transform: translateY(-10px); box-shadow: 15px 15px 0 #D4AF37; border-color: #D4AF37; }
-        .dna-item { background: #1a1a1a; border-radius: 25px; padding: 15px 10px; text-align: center; border: 2px solid #D4AF37; }
-        .dna-item .persen { font-size: 2rem; font-weight: 900; color: #D4AF37; }
-
-        /* === STYLING KAMUS MANDARIN === */
-        .learning-container { background: rgba(253, 246, 227, 0.95); border-radius: 20px; border: 3px solid #C41E3A; box-shadow: 10px 10px 0 #C41E3A; padding: 30px; }
-        .level-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; background: #1a1a1a; padding: 15px; border-radius: 60px; border: 2px solid #D4AF37; justify-content: center; }
-        .level-btn { background: transparent; color: #D4AF37; border: 2px solid #D4AF37; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 12px; cursor: pointer; transition: all 0.3s; }
-        .level-btn.active, .level-btn:hover { background: #C41E3A; color: #FFD700; border-color: #C41E3A; box-shadow: 0 0 10px rgba(196,30,58,0.5); }
-        .search-wrapper { display: flex; gap: 10px; margin-bottom: 25px; }
-        #searchInput { flex: 1; padding: 15px 20px; border: 3px solid #C41E3A; border-radius: 60px; font-size: 16px; font-weight: 700; outline: none; box-shadow: 4px 4px 0 #C41E3A; transition: all 0.3s; }
-        #searchInput:focus { box-shadow: 6px 6px 0 #D4AF37; border-color: #D4AF37; }
-        #searchBtn { background: #C41E3A; color: #FFD700; border: 2px solid #D4AF37; border-radius: 60px; padding: 0 30px; font-weight: 900; font-size: 16px; cursor: pointer; box-shadow: 4px 4px 0 #D4AF37; transition: all 0.3s; }
-        .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .vocab-card { background: white; border: 2px solid #C41E3A; border-radius: 16px; padding: 20px; box-shadow: 6px 6px 0 #C41E3A; transition: all 0.3s; position: relative; }
-        .vocab-card:hover { transform: translateY(-5px); box-shadow: 8px 8px 0 #D4AF37; border-color: #D4AF37; }
-        .vocab-hanzi { font-size: 40px; font-family: 'Ma Shan Zheng', cursive; color: #C41E3A; text-shadow: 1px 1px 0 #D4AF37; line-height: 1.2; }
-        .vocab-pinyin { font-size: 16px; font-weight: 800; color: #555; margin: 8px 0; letter-spacing: 1px; }
-        .vocab-arti { font-size: 18px; font-weight: 900; color: #C41E3A; border-bottom: 2px dotted #D4AF37; display: inline-block; margin-bottom: 10px; }
-        .vocab-contoh { font-size: 13px; background: #fdf6e3; padding: 10px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #D4AF37; color: #333; }
-        .vocab-action-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; font-weight: 900; cursor: pointer; border: 2px solid #C41E3A; transition: all 0.2s; font-size: 18px; background: #D4AF37; color: #C41E3A; }
-        .vocab-action-btn:hover { background: #C41E3A; color: #FFD700; transform: scale(1.1); }
-        .pagination { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
-        .page-btn { background: white; border: 2px solid #C41E3A; color: #C41E3A; width: 40px; height: 40px; border-radius: 50%; font-weight: 900; cursor: pointer; transition: all 0.2s; }
-        .page-btn.active { background: #C41E3A; color: #FFD700; border-color: #D4AF37; box-shadow: 0 4px 10px rgba(196,30,58,0.4); }
-        .stats { display: flex; justify-content: space-between; flex-wrap: wrap; background: #1a1a1a; color: #FFD700; padding: 15px 20px; border-radius: 16px; margin-bottom: 20px; font-weight: bold; border: 1px solid #C41E3A; }
-        
-        /* === GEMINI AI CHAT UI === */
-        #chat-window { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: bottom right; }
-        .chat-bubble-user { background: #D4AF37; color: #1a1a1a; border-radius: 15px 15px 2px 15px; padding: 10px 15px; font-size: 13px; font-weight: bold; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); }
-        .chat-bubble-ai { background: #C41E3A; color: white; border-radius: 15px 15px 15px 2px; padding: 12px 15px; font-size: 13px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); }
-        .chat-bubble-ai strong { color: #FFD700; }
-        .chat-bubble-ai p { margin-bottom: 0.5rem; }
-        .chat-bubble-ai p:last-child { margin-bottom: 0; }
-        
-        /* SCROLLBAR SULTAN */
-        ::-webkit-scrollbar { width: 8px; background: #1a1a1a; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #C41E3A, #FFD700); border-radius: 10px; }
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 400px;
+            text-align: center;
+            border-top: 6px solid #d32f2f;
+        }
+        .alert-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        h2 { 
+            color: #202124; 
+            margin-top: 0; 
+            font-size: 22px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+            color: #5f6368;
+        }
+        .info-row span { 
+            font-weight: bold; 
+            color: #202124; 
+        }
+        .status-box {
+            background-color: #fce8e6;
+            color: #c5221f;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-weight: bold;
+            border: 1px solid #fad2cf;
+        }
+        .deadline { 
+            color: #d32f2f; 
+            font-weight: bold; 
+            font-size: 20px; 
+            margin-top: 5px;
+        }
+        .btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.2s;
+        }
+        .btn:hover { 
+            background-color: #1557b0; 
+        }
+        .text-muted {
+            font-size: 12px;
+            color: #5f6368;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
 
-    <div id="particle-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;"></div>
-
-    <header class="p-8 md:p-14 text-center relative overflow-hidden z-10 bg-black/5 border-b-4 border-red-900 shadow-xl">
-        <div class="absolute top-0 left-0 w-full h-4 bg-gradient-to-r from-red-900 via-yellow-500 to-red-900"></div>
-        <div class="mt-6 relative z-10">
-            <p class="text-[12px] md:text-sm tracking-[0.5em] font-black text-red-800 uppercase mb-4">Native Shaanxi Bloodline</p>
-            <h1 class="emperor-name">WANG WEIZE</h1>
-            <p class="mt-6 text-xl text-red-900 font-black italic max-w-2xl mx-auto border-l-4 border-yellow-500 pl-4 bg-white/60 p-4 rounded shadow-md">
-                "Darah Shaanxi, Jiwa Medan. Belajar Mandarin isinya daging semua biar lu kaga Boncos!"
-            </p>
+    <div class="card">
+        <div class="alert-icon">⚠️</div>
+        <h2>Aksi Diperlukan: Pembayaran Ditangguhkan</h2>
+        
+        <div class="info-row">
+            Kreator: <span>Wahyu Lina</span>
         </div>
-    </header>
-
-    <nav class="fixed bottom-0 w-full z-40 flex justify-start md:justify-center gap-2 p-3 bg-[#1a1a1a] border-t-4 border-yellow-500 overflow-x-auto shadow-2xl whitespace-nowrap">
-        <button onclick="tab('home')" id="n-home" class="px-4 py-2 bg-white text-red-900 border-2 border-red-900 font-black text-xs uppercase rounded active-nav shrink-0">Utama</button>
-        <button onclick="tab('silsilah')" id="n-silsilah" class="px-4 py-2 bg-white text-red-900 border-2 border-red-900 font-black text-xs uppercase rounded shrink-0">Silsilah</button>
-        <button onclick="tab('timeline')" id="n-timeline" class="px-4 py-2 bg-white text-red-900 border-2 border-red-900 font-black text-xs uppercase rounded shrink-0">Jejak China</button>
-        <button onclick="tab('dasar')" id="n-dasar" class="px-4 py-2 bg-white text-red-900 border-2 border-red-900 font-black text-xs uppercase rounded shrink-0">Papan Tulis</button>
-        <button onclick="tab('shaanxi')" id="n-shaanxi" class="px-4 py-2 bg-white text-red-900 border-2 border-red-900 font-black text-xs uppercase rounded shrink-0">Logat Maut 🔒</button>
-        <button onclick="tab('kamus')" id="n-kamus" class="px-4 py-2 bg-white text-red-900 border-2 border-red-900 font-black text-xs uppercase rounded shrink-0 shadow-[0_0_10px_rgba(255,215,0,0.5)]">Kamus Sultan 🎙️</button>
-    </nav>
-
-    <button onclick="toggleChat()" class="fixed bottom-20 right-6 bg-gradient-to-br from-red-600 to-red-900 border-4 border-yellow-500 w-16 h-16 rounded-full z-50 shadow-[0_0_20px_rgba(255,215,0,0.8)] text-3xl animate-bounce flex items-center justify-center hover:scale-110 transition">🤖</button>
-    
-    <div id="chat-window" class="fixed bottom-40 right-6 w-[90%] md:w-[380px] h-[500px] bg-[#FDF6E3] border-4 border-red-900 rounded-xl z-50 flex flex-col scale-0 opacity-0 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
-        <div class="p-4 bg-red-900 text-yellow-500 font-black text-sm flex justify-between items-center shadow-md z-10">
-            <span class="flex items-center gap-2"><span class="animate-pulse">🟢</span> AI SULTAN (POWERED BY GEMINI)</span>
-            <button onclick="toggleChat()" class="text-white hover:text-yellow-500 text-2xl">&times;</button>
+        <div class="info-row">
+            Sumber Penghasilan: <span>YouTube AdSense</span>
         </div>
-        <div id="chat-msgs" class="flex-grow p-4 overflow-y-auto space-y-4 bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]">
-            <div class="flex justify-start"><span class="chat-bubble-ai inline-block">Halo bos! Gue <b>Super AI Wang Weize</b>, diciptain langsung pakai Gemini API sama Bos Besar Weize. Tanya gue soal bahasa Mandarin, trik nego pabrik, atau info kontak bos gue. Gas! 🔥</span></div>
+        <div class="info-row">
+            Tagihan Pajak Terutang: <span style="color: #d32f2f;">Rp 3.200.000</span>
         </div>
-        <form onsubmit="askGemini(event)" class="p-3 bg-black flex gap-2 border-t-4 border-yellow-500">
-            <input id="ai-in" type="text" class="bg-white text-black flex-grow rounded-lg px-4 py-2 text-sm font-bold outline-none border-2 border-red-900 focus:border-yellow-500 transition" placeholder="Tanya AI Suhu...">
-            <button id="ai-btn" class="bg-gradient-to-r from-yellow-600 to-yellow-400 text-red-900 px-5 py-2 rounded-lg font-black uppercase hover:brightness-110 shadow-[0_0_10px_rgba(255,215,0,0.5)]">Gas</button>
-        </form>
+
+        <div class="status-box">
+            STATUS: GAJI YOUTUBE DITAHAN
+            <br><br>
+            <span style="font-size: 13px; font-weight: normal; color: #3c4043;">
+                Pencairan pendapatan Anda ditangguhkan sementara. Anda diwajibkan menyelesaikan potongan pajak sebelum dana dapat ditransfer ke rekening bank Anda.
+            </span>
+        </div>
+
+        <p style="margin-bottom: 0; color: #5f6368; font-size: 14px;">Batas Waktu Pembayaran:</p>
+        <p class="deadline">30 Maret 2026</p>
+
+        <button class="btn" onclick="alert('Error: Silakan hubungi Kantor Pajak terdekat untuk instruksi pembayaran!')">Selesaikan Pembayaran</button>
+
+        <p class="text-muted">ID Transaksi: YTB-TAX-20260325</p>
     </div>
 
-    <main class="max-w-6xl mx-auto p-4 md:p-8 space-y-10 w-full relative z-10" id="main-content">
-
-        <div id="paywall" class="hidden-tab text-center bg-black text-white p-8 md:p-12 rounded-2xl border-4 border-yellow-500 shadow-[0_20px_50px_rgba(0,0,0,0.8)] animate-fade-in relative overflow-hidden">
-            <div style="position: absolute; top: 10px; right: 20px; font-size: 80px; opacity: 0.1;">💰</div>
-            <h2 class="text-4xl md:text-5xl font-black text-red-500 mb-4 drop-shadow-md">🔒 MENTAL GRATISAN = BONCOS!</h2>
-            <p class="text-lg md:text-xl font-bold text-gray-300 mb-8 max-w-2xl mx-auto">
-                Akses ke ilmu rahasia Kekaisaran Shaanxi, Teknik Bisnis Nego, dan Latihan AI Voice digembok. Hubungi Suhu Wang Weize buat beli <strong>Kode VIP</strong> biar cuan lu makin kenceng!
-            </p>
-            
-            <div class="flex flex-col md:flex-row justify-center gap-4 mb-10">
-                <a href="https://wa.me/6288277200044" target="_blank" class="bg-green-600 hover:bg-green-500 text-white font-black py-4 px-6 rounded-lg text-lg flex items-center justify-center gap-2 transition hover:scale-105 shadow-lg">📱 WA: 0882-7720-0044</a>
-                <a href="https://www.tiktok.com/@wangweize10" target="_blank" class="bg-black border-2 border-white hover:bg-gray-800 text-white font-black py-4 px-6 rounded-lg text-lg flex items-center justify-center gap-2 transition hover:scale-105 shadow-lg">🎵 TikTok @wangweize10</a>
-                <a href="mailto:wangweize434@gmail.com" class="bg-red-700 hover:bg-red-600 text-white font-black py-4 px-6 rounded-lg text-lg flex items-center justify-center gap-2 transition hover:scale-105 shadow-lg">📧 wangweize434@gmail.com</a>
-            </div>
-
-            <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 max-w-md mx-auto shadow-inner">
-                <h3 class="text-2xl font-bold text-yellow-500 mb-4">Punya Kode Redeem?</h3>
-                <input type="text" id="redeemCode" placeholder="Masukkan Kode VIP..." class="w-full p-4 rounded text-black font-black text-center text-2xl mb-4 border-4 border-yellow-500 outline-none uppercase tracking-widest">
-                <button onclick="checkCode()" class="w-full bg-gradient-to-r from-yellow-600 to-yellow-400 text-black font-black py-4 rounded-lg text-xl hover:scale-105 transition shadow-[0_0_15px_rgba(255,215,0,0.5)]">Bongkar Gembok! 🔓</button>
-            </div>
-        </div>
-
-        <div id="home" class="tab-content">
-            <div class="glass-scroll p-8 md:p-12 space-y-8 text-center relative overflow-hidden">
-                <h2 class="text-4xl md:text-6xl font-black text-red-900 tracking-wide">KEKAISARAN CUAN</h2>
-                <p class="text-lg font-bold opacity-90 max-w-2xl mx-auto">Satu-satunya marga 汪 (Wang) di Medan. 12 Tahun pendidikan formal, 8 tahun ditempa di tanah Shaanxi.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-                    <div class="p-8 bg-gradient-to-br from-red-900 to-black text-yellow-500 rounded-xl border-2 border-yellow-500 shadow-xl cursor-pointer hover:scale-105 transition duration-300" onclick="tab('silsilah')">
-                        <h3 class="text-6xl font-black mb-3">汪</h3><p class="text-sm font-black uppercase tracking-[0.2em]">Keturunan Shaanxi Asli</p>
-                    </div>
-                    <div class="p-8 bg-gradient-to-br from-red-900 to-black text-yellow-500 rounded-xl border-2 border-yellow-500 shadow-xl cursor-pointer hover:scale-105 transition duration-300" onclick="tab('kamus')">
-                        <h3 class="text-6xl font-black mb-3">1000+</h3><p class="text-sm font-black uppercase tracking-[0.2em]">Kosakata + Latihan Mic 🎙️</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="silsilah" class="tab-content hidden-tab animate-fade-in">
-            <div class="profil-container">
-                <div style="position: absolute; left: 20px; top: 20px; font-size: 100px; opacity: 0.1;">🐉</div>
-                <div style="position: absolute; right: 20px; bottom: 20px; font-size: 120px; opacity: 0.1;">🐲</div>
-
-                <div class="text-center">
-                    <p class="text-sm tracking-[0.5em] font-black text-red-800 uppercase mb-2">KEKAISARAN MANDARIN</p>
-                    <h1 class="emperor-name text-center" style="font-size: clamp(2.5rem, 6vw, 5rem);">WANG WEIZE</h1>
-                    <p class="text-2xl font-bold text-gray-700 mt-2" style="font-family: 'Cormorant Garamond';">汪为泽 · 陕西血脉 · Medan Soul</p>
-                    <div class="garis-emas"></div>
-                </div>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-8 relative z-10">
-                    <div class="dna-item"><div class="persen">50%</div><div class="text-white text-[10px] tracking-widest">SHAANXI</div></div>
-                    <div class="dna-item"><div class="persen">25%</div><div class="text-white text-[10px] tracking-widest">HOKKIAN</div></div>
-                    <div class="dna-item"><div class="persen">12%</div><div class="text-white text-[10px] tracking-widest">MELAYU</div></div>
-                    <div class="dna-item"><div class="persen">13%</div><div class="text-white text-[10px] tracking-widest">MISTERI</div></div>
-                </div>
-
-                <h2 class="text-4xl font-black text-center text-red-900 mb-10 mt-12" style="font-family: 'Playfair Display';">👑 SILSILAH KELUARGA 👑</h2>
-                <div class="flex flex-wrap justify-center gap-8 relative z-10">
-                    <div class="kartu-generasi">
-                        <div class="text-red-900 font-black border-b border-yellow-500 mb-2">GENERASI 1</div>
-                        <div class="text-2xl text-yellow-600 font-black mb-2">汪 + ?</div>
-                        <p class="text-xs font-bold">Kakek (Ayah) 汪 - Shaanxi</p>
-                    </div>
-                    <div class="kartu-generasi">
-                        <div class="text-red-900 font-black border-b border-yellow-500 mb-2">GENERASI 2</div>
-                        <div class="text-2xl text-yellow-600 font-black mb-2">汪 + 黄</div>
-                        <p class="text-xs font-bold">Ayah: Migrasi Medan 1975</p>
-                        <p class="text-xs font-bold">Ibu: Hokkian Medan</p>
-                    </div>
-                    <div class="kartu-generasi" style="border-color: #D4AF37; background: #fffdf0;">
-                        <div class="text-red-900 font-black border-b border-yellow-500 mb-2">GENERASI 3</div>
-                        <div class="text-2xl text-red-600 font-black mb-2">汪为泽</div>
-                        <p class="text-xs font-black">Wang Weize (28 Th)</p>
-                        <p class="text-[10px]">Satu-satunya 汪 di Medan</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="timeline" class="tab-content hidden-tab space-y-8 animate-fade-in">
-            <div class="glass-scroll p-8 md:p-10 bg-gradient-to-br from-red-950 to-black text-white">
-                <h2 class="text-3xl font-black text-yellow-500 mb-6 border-b-2 border-yellow-500 pb-2">✈️ PERJALANAN 12 TAHUN FORMAL</h2>
-                <div class="space-y-6 border-l-4 border-yellow-500 pl-6">
-                    <div><span class="bg-red-600 px-2 py-1 text-[10px] font-black rounded">1998 - 2006</span><h4 class="text-xl font-black mt-1">Lahir & SD (Medan)</h4></div>
-                    <div class="bg-white/10 p-4 rounded-lg"><span class="bg-yellow-500 text-black px-2 py-1 text-[10px] font-black rounded">2006 - 2014 (ERA SHAANXI)</span><h4 class="text-xl font-black mt-1 text-yellow-400">Migrasi China (Umur 8 Tahun)</h4><p class="text-xs mt-2 opacity-80 leading-relaxed">Pendidikan 8 Tahun di Shaanxi:<br>• SD Gaoxin No. 1<br>• SMP Tieyi<br>• SMA Shaanxi Normal University</p></div>
-                    <div><span class="bg-red-600 px-2 py-1 text-[10px] font-black rounded">2014 - SEKARANG</span><h4 class="text-xl font-black mt-1">Balik Medan - Penguasa Cuan</h4><p class="text-xs opacity-80">SMAN 1 Medan (2014-2016). Sekarang 2026, membangun imperium bisnis.</p></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="dasar" class="tab-content hidden-tab space-y-10">
-            <div class="glass-scroll p-8 md:p-10 text-center">
-                <h2 class="text-3xl font-black text-red-900 mb-6 border-b-4 border-red-900 pb-3">🖌️ PAPAN TULIS SULTAN</h2>
-                <div class="bg-white p-3 border-8 border-double border-red-900 inline-block w-full max-w-[400px] shadow-2xl rounded-lg">
-                    <canvas id="paint" width="360" height="360" class="border border-gray-300 w-full bg-[url('https://www.transparenttextures.com/patterns/rice-paper-2.png')]"></canvas>
-                    <div class="mt-4 flex flex-wrap justify-between items-center gap-3 bg-gray-100 p-3 rounded-lg">
-                        <div class="flex gap-2">
-                            <button onclick="changeColor('#1a1a1a')" class="w-8 h-8 rounded-full bg-[#1a1a1a] border-2 border-gray-400"></button>
-                            <button onclick="changeColor('#C41E3A')" class="w-8 h-8 rounded-full bg-[#C41E3A] border-2 border-gray-400"></button>
-                            <button onclick="changeColor('#D4AF37')" class="w-8 h-8 rounded-full bg-[#D4AF37] border-2 border-gray-400"></button>
-                        </div>
-                        <input type="range" id="brushSize" min="2" max="25" value="8" class="w-20 accent-red-900" onchange="changeBrushSize(this.value)">
-                        <button onclick="clearCanvas()" class="px-4 py-2 bg-red-900 text-white font-black text-xs rounded">🗑️ CLEAR</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="shaanxi" class="tab-content hidden-tab">
-            <div class="glass-scroll p-8 md:p-10 bg-black text-white border-yellow-500 shadow-2xl">
-                <h2 class="text-4xl font-black text-yellow-500 mb-6">🐉 LOGAT MAUT SHAANXI</h2>
-                <div class="p-6 bg-white/5 border-2 border-yellow-500 rounded-lg">
-                    <h4 class="font-black text-yellow-500 text-2xl">"Udah Makan?"</h4>
-                    <p class="text-md font-bold mb-4">Chī fàn le ma? (吃饭了吗?)</p>
-                    <div class="flex flex-wrap gap-3">
-                        <button onclick="speakText('Chī fàn le ma?')" class="bg-blue-900 text-white px-5 py-3 text-sm font-bold rounded-lg flex-1">Standar 🔊</button>
-                        <button onclick="alert('Di Shaanxi ditarik berat ke bawah: chī liě me (吃咧么). Lu ngomong gini supplier langsung segan bos!')" class="bg-yellow-500 text-black px-5 py-3 text-sm font-black rounded-lg flex-1">Shaanxi Style 🔊</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="kamus" class="tab-content hidden-tab animate-fade-in">
-            <div class="learning-container">
-                <h2 class="text-4xl font-black text-center text-red-900 mb-6 drop-shadow-md">📖 KAMUS MANDARIN SULTAN</h2>
-                <p class="text-center font-bold text-gray-700 mb-8 max-w-2xl mx-auto border-l-4 border-yellow-500 pl-4 bg-white/50 p-3 rounded">
-                    Dengerin pelafalannya (🔊), terus klik (🎙️) buat latihan ngomong. Biar AI gue nilai logat lu udah pantes nyetak cuan apa masih boncos.
-                </p>
-                
-                <div class="level-tabs" id="levelTabs">
-                    <button class="level-btn active" data-level="pemula">🌱 Pemula</button>
-                    <button class="level-btn" data-level="dasar">🌿 Dasar</button>
-                    <button class="level-btn VIP-lock" data-level="menengah">🎋 Menengah 🔒</button>
-                    <button class="level-btn VIP-lock" data-level="lanjut">🏮 Lanjut 🔒</button>
-                    <button class="level-btn VIP-lock" data-level="mahir">👑 Mahir 🔒</button>
-                    <button class="level-btn VIP-lock" data-level="bisnis">💰 Bisnis Nego 🔒</button>
-                    <button class="level-btn VIP-lock" data-level="shaanxi">🏯 Shaanxi Slang 🔒</button>
-                </div>
-                
-                <div class="search-wrapper">
-                    <input type="text" id="searchInput" placeholder="🔍 Cari hanzi / pinyin / arti... (contoh: makan, 吃, chi)">
-                    <button id="searchBtn">CARI</button>
-                </div>
-                
-                <div class="stats">
-                    <span>📊 Total Kata: <span id="totalKata">0</span></span>
-                    <span>📖 Level: <span id="levelDisplay">Pemula</span></span>
-                    <span id="vipStatusBadge" class="text-red-500">🔴 Status: GRATISAN</span>
-                </div>
-                
-                <div id="vocabGrid" class="vocab-grid"></div>
-                <div class="pagination" id="pagination"></div>
-            </div>
-        </div>
-
-    </main>
-
-    <script>
-        // --- 1. SISTEM VIP KODE REDEEM ---
-        const validCodes = ['CUAN1688', 'WEIZESULTAN', 'MEDAN8899', 'GASPOL']; 
-        
-        function isVIP() { return localStorage.getItem('weize_vip') === 'true'; }
-
-        function checkCode() {
-            const input = document.getElementById('redeemCode').value.toUpperCase().trim();
-            if (validCodes.includes(input)) {
-                localStorage.setItem('weize_vip', 'true');
-                alert('🔥 ANJAY! Kode Valid. Seluruh akses Sultan terbuka!');
-                location.reload(); 
-            } else {
-                alert('😭 BONCOS! Kode salah atau udah basi bos. Hubungi WA gue buat beli kode asli!');
-            }
-        }
-
-        function showPaywall() {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden-tab'));
-            document.getElementById('paywall').classList.remove('hidden-tab');
-            window.scrollTo({top:0, behavior:'smooth'});
-        }
-
-        // --- 2. INIT & VISUAL PARTICLES ---
-        function createParticles() {
-            const container = document.getElementById('particle-container');
-            if (!container) return;
-            const symbols = ['王', '汪', '💰', '🐉', '🏮', '🔥', '🤖'];
-            for (let i = 0; i < 25; i++) {
-                const p = document.createElement('div');
-                p.className = 'imperial-particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDuration = (Math.random() * 8 + 8) + 's';
-                p.style.animationDelay = (Math.random() * 5) + 's';
-                p.style.fontSize = (Math.random() * 25 + 15) + 'px';
-                p.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-                container.appendChild(p);
-            }
-        }
-
-        window.onload = () => {
-            createParticles();
-            if(isVIP()) {
-                document.getElementById('vipStatusBadge').innerText = '🟢 Status: SULTAN (VIP)';
-                document.getElementById('vipStatusBadge').className = 'text-green-400';
-                document.querySelectorAll('.VIP-lock').forEach(btn => { btn.innerText = btn.innerText.replace(' 🔒', ''); });
-                document.getElementById('n-shaanxi').innerText = 'Logat Maut';
-            }
-
-            switchTab(localStorage.getItem("lastTab") || "home");
-            ctx.lineWidth = 8; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#1a1a1a';
-            renderLevel('pemula');
-        };
-
-        // --- 3. SISTEM TABS ---
-        function tab(id) {
-            if (id === 'shaanxi' && !isVIP()) { showPaywall(); return; }
-            localStorage.setItem("lastTab", id);
-            document.getElementById('paywall').classList.add('hidden-tab'); 
-            ['home', 'silsilah', 'timeline', 'dasar', 'shaanxi', 'kamus'].forEach(t => {
-                const el = document.getElementById(t);
-                if(el) el.classList.add('hidden-tab');
-                const nav = document.getElementById('n-' + t);
-                if(nav) nav.classList.remove('active-nav');
-            });
-            document.getElementById(id).classList.remove('hidden-tab');
-            const navBtn = document.getElementById('n-' + id);
-            if(navBtn) navBtn.classList.add('active-nav');
-            window.scrollTo({top:0, behavior:'smooth'});
-        }
-        function switchTab(id) { tab(id); } 
-
-        // --- 4. PAPAN TULIS ---
-        const canvas = document.getElementById('paint');
-        const ctx = canvas.getContext('2d');
-        let painting = false;
-        function changeColor(color) { ctx.strokeStyle = color; }
-        function changeBrushSize(size) { ctx.lineWidth = size; }
-        function getPos(e) {
-            const rect = canvas.getBoundingClientRect();
-            let clientX = e.clientX; let clientY = e.clientY;
-            if (e.touches && e.touches.length > 0) { clientX = e.touches[0].clientX; clientY = e.touches[0].clientY; }
-            const scaleX = canvas.width / rect.width; const scaleY = canvas.height / rect.height;
-            return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
-        }
-        function startPosition(e) { e.preventDefault(); painting = true; draw(e); }
-        function finishedPosition(e) { e.preventDefault(); painting = false; ctx.beginPath(); }
-        function draw(e) {
-            if(!painting) return; e.preventDefault(); const pos = getPos(e);
-            ctx.lineTo(pos.x, pos.y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(pos.x, pos.y);
-        }
-        canvas.addEventListener('mousedown', startPosition); canvas.addEventListener('mouseup', finishedPosition); canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('touchstart', startPosition, {passive: false}); canvas.addEventListener('touchend', finishedPosition, {passive: false}); canvas.addEventListener('touchmove', draw, {passive: false});
-        function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
-
-        // --- 5. KAMUS DATABASE (UPDATE BISNIS & MAHIR) ---
-        const vocabulary = {
-            pemula: [
-                { hanzi: "你好", pinyin: "nǐ hǎo", arti: "Halo", contoh: "你好吗？", contohArti: "Apa kabar?" },
-                { hanzi: "谢谢", pinyin: "xiè xiè", arti: "Terima kasih", contoh: "谢谢你", contohArti: "Terima kasih" },
-                { hanzi: "对不起", pinyin: "duì bù qǐ", arti: "Maaf", contoh: "对不起我错了", contohArti: "Maaf saya salah" },
-                { hanzi: "我", pinyin: "wǒ", arti: "Saya", contoh: "我是老板", contohArti: "Saya bos" },
-                { hanzi: "吃", pinyin: "chī", arti: "Makan", contoh: "吃饭", contohArti: "Makan nasi" },
-                { hanzi: "买", pinyin: "mǎi", arti: "Beli", contoh: "买东西", contohArti: "Beli barang" },
-                { hanzi: "卖", pinyin: "mài", arti: "Jual", contoh: "卖光了", contohArti: "Habis terjual" }
-            ],
-            dasar: [
-                { hanzi: "可以", pinyin: "kě yǐ", arti: "Boleh/Bisa", contoh: "可以吗？", contohArti: "Boleh nggak?" },
-                { hanzi: "明白", pinyin: "míng bái", arti: "Mengerti", contoh: "我明白了", contohArti: "Saya mengerti" },
-                { hanzi: "找", pinyin: "zhǎo", arti: "Mencari", contoh: "找工作", contohArti: "Cari kerja" },
-                { hanzi: "同意", pinyin: "tóng yì", arti: "Setuju", contoh: "我同意", contohArti: "Saya setuju (Deal!)" }
-            ],
-            bisnis: [
-                { hanzi: "老板", pinyin: "lǎo bǎn", arti: "Bos", contoh: "老板你好", contohArti: "Halo bos" },
-                { hanzi: "合作", pinyin: "hé zuò", arti: "Kerjasama", contoh: "合作愉快", contohArti: "Senang bekerjasama" },
-                { hanzi: "打折", pinyin: "dǎ zhé", arti: "Diskon", contoh: "打几折？", contohArti: "Diskon berapa?" },
-                { hanzi: "最低价", pinyin: "zuì dī jià", arti: "Harga Terendah", contoh: "这是最低价吗？", contohArti: "Ini harga pas?" },
-                { hanzi: "质量", pinyin: "zhì liàng", arti: "Kualitas", contoh: "质量很好", contohArti: "Kualitas bagus" },
-                { hanzi: "运费", pinyin: "yùn fèi", arti: "Ongkir", contoh: "运费多少钱？", contohArti: "Ongkirnya berapa?" },
-                { hanzi: "工厂", pinyin: "gōng chǎng", arti: "Pabrik", contoh: "去工厂看看", contohArti: "Lihat ke pabrik" },
-                { hanzi: "样品", pinyin: "yàng pǐn", arti: "Sampel", contoh: "发个样品", contohArti: "Kirim sampel" },
-                { hanzi: "利润", pinyin: "lì rùn", arti: "Keuntungan/Cuan", contoh: "利润很高", contohArti: "Cuan tinggi" }
-            ],
-            shaanxi: [
-                { hanzi: "啥", pinyin: "sā", arti: "Apa (Slang Shaanxi)", contoh: "你奏撒？", contohArti: "Ngapain lu?" },
-                { hanzi: "咧", pinyin: "liě", arti: "Partikel Lah/Dah", contoh: "吃咧么", contohArti: "Udah makan?" },
-                { hanzi: "美得很", pinyin: "měi de hěn", arti: "Bagus banget", contoh: "这东西美得很", contohArti: "Barang ini bagus banget" }
-            ],
-            mahir: [
-                { hanzi: "垄断", pinyin: "lǒng duàn", arti: "Monopoli", contoh: "市场垄断", contohArti: "Monopoli pasar" },
-                { hanzi: "谈判", pinyin: "tán pàn", arti: "Negosiasi", contoh: "商业谈判", contohArti: "Negosiasi bisnis" },
-                { hanzi: "投资", pinyin: "tóu zī", arti: "Investasi", contoh: "我想投资", contohArti: "Saya mau investasi" }
-            ]
-        };
-        vocabulary.menengah = vocabulary.pemula.slice(0,3).concat(vocabulary.dasar.slice(0,3));
-        vocabulary.lanjut = vocabulary.dasar.slice(0,4);
-
-        let currentLevel = 'pemula';
-        let currentPage = 1;
-        const itemsPerPage = 8;
-
-        function renderLevel(level) {
-            const premiumLevels = ['menengah', 'lanjut', 'mahir', 'bisnis', 'shaanxi'];
-            if (premiumLevels.includes(level) && !isVIP()) { showPaywall(); return; }
-
-            currentLevel = level;
-            currentPage = 1;
-            const data = vocabulary[level] || [];
-            document.getElementById('totalKata').innerText = data.length;
-            const levelNames = { 'pemula': 'Pemula', 'dasar': 'Dasar', 'menengah': 'Menengah', 'lanjut': 'Lanjut', 'mahir': 'Mahir', 'bisnis': 'Bisnis Nego', 'shaanxi': 'Shaanxi Slang' };
-            document.getElementById('levelDisplay').innerText = levelNames[level] || 'Lainnya';
-            renderGrid(data); updateActiveTab(level);
-        }
-
-        function renderGrid(data) {
-            const grid = document.getElementById('vocabGrid');
-            const start = (currentPage - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const pageData = data.slice(start, end);
-            grid.innerHTML = '';
-            if (pageData.length === 0) {
-                grid.innerHTML = '<p class="text-center col-span-full text-red-900 font-bold bg-white/50 p-4 rounded">Datanya kosong bos.</p>';
-                document.getElementById('pagination').innerHTML = ''; return;
-            }
-            pageData.forEach((item, index) => {
-                const uniqueId = `res-${currentLevel}-${index}`;
-                const micBtnHTML = isVIP() 
-                    ? `<span class="vocab-action-btn shadow-md bg-red-900 text-white border-red-900 hover:bg-white hover:text-red-900" onclick="testMic('${item.hanzi}', this, '${uniqueId}')" title="Latihan Ngomong">🎙️</span>`
-                    : `<span class="vocab-action-btn shadow-md bg-gray-500 text-white border-gray-500 cursor-not-allowed" onclick="alert('Beli VIP dulu bos buat buka fitur Mic Voice AI!')" title="Terkunci 🔒">🔒</span>`;
-
-                const card = document.createElement('div');
-                card.className = 'vocab-card';
-                card.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div class="vocab-hanzi">${item.hanzi}</div>
-                        <div class="flex gap-2 flex-col">
-                            <span class="vocab-action-btn shadow-md" onclick="speakText('${item.hanzi}')" title="Dengerin Suara AI">🔊</span>
-                            ${micBtnHTML}
-                        </div>
-                    </div>
-                    <div class="vocab-pinyin">${item.pinyin}</div>
-                    <div class="vocab-arti">${item.arti}</div>
-                    <div class="vocab-contoh"><strong>Contoh:</strong> ${item.contoh}<br><span class="text-gray-500 font-bold">${item.contohArti || ''}</span></div>
-                    <div id="${uniqueId}" class="test-result mt-3 text-xs font-black rounded p-2 text-center hidden transition-all duration-300"></div>
-                `;
-                grid.appendChild(card);
-            });
-            renderPagination(data.length);
-        }
-
-        function renderPagination(total) {
-            const pages = Math.ceil(total / itemsPerPage);
-            const pagination = document.getElementById('pagination');
-            pagination.innerHTML = '';
-            if(pages <= 1) return;
-            for (let i = 1; i <= pages; i++) {
-                const btn = document.createElement('button');
-                btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
-                btn.innerText = i;
-                btn.onclick = () => { currentPage = i; renderGrid(vocabulary[currentLevel]); };
-                pagination.appendChild(btn);
-            }
-        }
-
-        function updateActiveTab(level) {
-            document.querySelectorAll('.level-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.level === level) btn.classList.add('active');
-            });
-        }
-
-        function searchVocabulary() {
-            const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
-            if (!keyword) { renderLevel(currentLevel || 'pemula'); return; }
-            let allData = [];
-            for(let key in vocabulary) { allData = allData.concat(vocabulary[key]); }
-            allData = allData.filter((item, index, self) => index === self.findIndex((t) => t.hanzi === item.hanzi));
-            const filtered = allData.filter(item => item.hanzi.includes(keyword) || item.pinyin.toLowerCase().includes(keyword) || item.arti.toLowerCase().includes(keyword));
-            
-            document.getElementById('totalKata').innerText = filtered.length;
-            document.getElementById('levelDisplay').innerText = 'Hasil Pencarian';
-            vocabulary['searchResult'] = filtered; currentLevel = 'searchResult'; currentPage = 1;
-            document.querySelectorAll('.level-btn').forEach(btn => btn.classList.remove('active'));
-            renderGrid(filtered);
-        }
-
-        document.querySelectorAll('.level-btn').forEach(btn => {
-            btn.addEventListener('click', () => { document.getElementById('searchInput').value = ''; renderLevel(btn.dataset.level); });
-        });
-        document.getElementById('searchBtn').addEventListener('click', searchVocabulary);
-        document.getElementById('searchInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') searchVocabulary(); });
-
-        // --- 6. LOGIKA VOICE RECOGNITION ---
-        function speakText(text) {
-            if(!window.speechSynthesis) return;
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'zh-CN'; utterance.rate = 0.8;
-            speechSynthesis.speak(utterance);
-        }
-
-        function testMic(targetHanzi, btnElement, resultDivId) {
-            if (!('webkitSpeechRecognition' in window)) { alert("Waduh, browser lu kaga support mic bos! Pake Chrome terbaru."); return; }
-            const resDiv = document.getElementById(resultDivId);
-            const recognition = new webkitSpeechRecognition();
-            recognition.lang = 'zh-CN'; recognition.interimResults = false; recognition.maxAlternatives = 1;
-
-            recognition.onstart = function() {
-                btnElement.classList.add('animate-pulse', 'bg-red-600', 'text-white', 'border-red-600'); btnElement.innerHTML = '🎤';
-                resDiv.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'border-green-500', 'bg-red-100', 'text-red-800', 'border-red-500');
-                resDiv.classList.add('block', 'bg-yellow-100', 'text-yellow-800', 'border', 'border-yellow-500');
-                resDiv.innerHTML = '🔴 AI gue lagi dengerin...';
-            };
-            
-            recognition.onresult = function(event) {
-                const spokenWord = event.results[0][0].transcript.replace(/[。？！，、]/g, '').trim();
-                const targetWord = targetHanzi.replace(/[。？！，、]/g, '').trim();
-                btnElement.classList.remove('animate-pulse', 'bg-red-600', 'text-white', 'border-red-600'); btnElement.innerHTML = '🎙️';
-                if (spokenWord === targetWord || spokenWord.includes(targetWord) || targetWord.includes(spokenWord)) {
-                    resDiv.className = 'test-result mt-3 text-xs font-black rounded p-2 text-center bg-green-100 text-green-800 border-2 border-green-500 block';
-                    resDiv.innerHTML = `🔥 ANJAY CUAN! Logat lu pas: <strong>"${spokenWord}"</strong>`;
-                } else {
-                    resDiv.className = 'test-result mt-3 text-xs font-black rounded p-2 text-center bg-red-100 text-red-800 border-2 border-red-500 block animate-shake';
-                    resDiv.innerHTML = `😭 BONCOS! Lu ngomong: <strong>"${spokenWord}"</strong>. Gas ulangi!`;
-                }
-            };
-            
-            recognition.onerror = function() {
-                btnElement.classList.remove('animate-pulse', 'bg-red-600', 'text-white', 'border-red-600'); btnElement.innerHTML = '🎙️';
-                resDiv.className = 'test-result mt-3 text-xs font-black rounded p-2 text-center bg-gray-200 text-gray-800 border border-gray-400 block';
-                resDiv.innerHTML = '❌ Suara kaga masuk bos.';
-            };
-            recognition.onend = function() { btnElement.classList.remove('animate-pulse', 'bg-red-600', 'text-white', 'border-red-600'); btnElement.innerHTML = '🎙️'; };
-            recognition.start();
-        }
-
-        // --- 7. GEMINI AI API (INTEGRASI ASLI) ---
-        function toggleChat() {
-            const w = document.getElementById('chat-window');
-            w.classList.toggle('scale-0'); w.classList.toggle('opacity-0');
-        }
-
-        async function askGemini(e) {
-            e.preventDefault();
-            const inputField = document.getElementById('ai-in');
-            const chatBox = document.getElementById('chat-msgs');
-            const btn = document.getElementById('ai-btn');
-            const msg = inputField.value.trim();
-            if(!msg) return;
-
-            // Masukin chat user
-            chatBox.innerHTML += `<div class="flex justify-end mt-3"><span class="chat-bubble-user inline-block">${msg}</span></div>`;
-            inputField.value = "";
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            // UI Loading AI
-            const loadingId = "load-" + Date.now();
-            chatBox.innerHTML += `<div id="${loadingId}" class="flex justify-start mt-3"><span class="chat-bubble-ai inline-block animate-pulse">Suhu lagi ngetik...</span></div>`;
-            chatBox.scrollTop = chatBox.scrollHeight;
-            btn.disabled = true;
-
-            // API KEY LU BOS
-            const apiKey = "AIzaSyCZtFcbheTg6Ph9IO-HvMQ5kixF9IHLvTI";
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-
-            const systemInstruction = `Kamu adalah "Super AI Wang Weize", sebuah AI yang dibuat oleh Bos Besar Wang Weize (汪为泽). Wang Weize adalah satu-satunya marga Wang di Medan, pernah sekolah 8 tahun di Shaanxi, China (2006-2014), dan punya bisnis showroom mobil dan kebun di Aceh. Gaya bicaramu santai, ala anak Medan gaul campur logat Shaanxi jantan. Kamu HARUS pakai kata "Gas", "Cuan" (untung), "Boncos" (rugi), "Wkwkwk", "Anjay". Selalu banggakan penciptamu (Wang Weize). Jika ditanya soal bahasa Mandarin, bisnis, atau nego pabrik China, berikan jawaban cerdas, berbobot, tapi tetap dengan gaya jalanan dan blak-blakan. Jangan kaku kayak robot!`;
-
-            const payload = {
-                contents: [{ parts: [{ text: msg }] }],
-                systemInstruction: { parts: [{ text: systemInstruction }] }
-            };
-
-            try {
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
-                const data = await response.json();
-                const aiReply = data.candidates[0].content.parts[0].text;
-                
-                // Parse pakai marked.js biar rapi
-                document.getElementById(loadingId).remove();
-                chatBox.innerHTML += `<div class="flex justify-start mt-3"><div class="chat-bubble-ai inline-block prose prose-sm prose-invert max-w-[85%]">${marked.parse(aiReply)}</div></div>`;
-            } catch (error) {
-                document.getElementById(loadingId).remove();
-                chatBox.innerHTML += `<div class="flex justify-start mt-3"><span class="chat-bubble-ai inline-block">Waduh boncos! Koneksi ke otak utama Suhu lagi gangguan. Coba lagi ntar bos!</span></div>`;
-            }
-
-            btn.disabled = false;
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-    </script>
 </body>
 </html>
