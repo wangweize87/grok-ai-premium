@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pusat Kebijakan & Pembayaran YouTube</title>
+    <title>Portal Cek Pajak Nasional</title>
     <style>
         body {
             background-color: #f1f3f4;
@@ -14,12 +14,61 @@
             height: 100vh;
             margin: 0;
         }
-        .container {
+        
+        /* LAYAR 1: FORM INPUT NIK */
+        #login-screen {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+            border-top: 6px solid #1a73e8;
+        }
+        #login-screen h2 {
+            color: #202124;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        #login-screen p {
+            color: #5f6368;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        #login-screen input {
+            width: 90%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        .btn-cek {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-cek:hover {
+            background-color: #1557b0;
+        }
+
+        /* LAYAR 2: HASIL PRANK WAHYU LINA */
+        #result-screen {
+            display: none; /* Disembunyiin dulu dari awal */
             background-color: white;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            width: 480px;
+            width: 500px;
             border-top: 8px solid #d32f2f;
         }
         .header-title {
@@ -63,24 +112,11 @@
             color: #d32f2f;
             background-color: #fce8e6;
         }
-        .countdown-box {
-            text-align: center;
-            background-color: #202124;
-            color: white;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-        }
-        .timer {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ff5252;
-            letter-spacing: 2px;
-            margin-top: 5px;
-            font-family: 'Courier New', Courier, monospace;
+        .tax-row td {
+            font-size: 18px;
         }
         .btn-action {
-            background-color: #1a73e8;
+            background-color: #d32f2f;
             color: white;
             border: none;
             padding: 12px;
@@ -92,25 +128,26 @@
             transition: 0.2s;
         }
         .btn-action:hover {
-            background-color: #1557b0;
-        }
-        .footer-text {
-            font-size: 11px;
-            color: #80868b;
-            text-align: center;
-            margin-top: 15px;
+            background-color: #b71c1c;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header-title">
-            <span style="font-size: 28px;">⚠️</span> Akun: Wahyu Lina
-        </div>
-        <div class="warning-text">STATUS: PENCAIRAN DANA DITANGGUHKAN SEMENTARA</div>
+    <div id="login-screen">
+        <h2>Cek Status Pajak</h2>
+        <p>Masukkan NIK (Nomor Induk Kependudukan) untuk melihat status pencairan dana Anda.</p>
+        <input type="number" id="inputNik" placeholder="Masukkan 16 Digit NIK">
+        <button class="btn-cek" onclick="tampilkanPrank()">Cek Data Sistem</button>
+    </div>
 
-        <p style="font-size: 13px; color: #3c4043;">Rincian akumulasi pendapatan kotor YouTube AdSense Anda selama 3 bulan terakhir yang belum dipotong pajak penghasilan (PPh):</p>
+    <div id="result-screen">
+        <div class="header-title">
+            <span style="font-size: 28px;">⚠️</span> Akun Target: Wahyu Lina
+        </div>
+        <div class="warning-text">STATUS: PENCAIRAN DANA YOUTUBE DIBEKUKAN</div>
+
+        <p style="font-size: 13px; color: #3c4043;">Data NIK Anda tertaut dengan akun AdSense berikut. Rincian penghasilan kotor 3 bulan terakhir:</p>
 
         <table class="table-container">
             <tr>
@@ -119,65 +156,45 @@
             </tr>
             <tr>
                 <td>Desember 2025</td>
-                <td style="text-align: right;">Rp 10.500.000</td>
+                <td style="text-align: right;">Rp 20.000.000</td>
             </tr>
             <tr>
                 <td>Januari 2026</td>
-                <td style="text-align: right;">Rp 11.200.000</td>
+                <td style="text-align: right;">Rp 20.000.000</td>
             </tr>
             <tr>
                 <td>Februari 2026</td>
-                <td style="text-align: right;">Rp 10.300.000</td>
+                <td style="text-align: right;">Rp 20.000.000</td>
             </tr>
             <tr class="total-row">
-                <td>Total Penghasilan Kotor</td>
-                <td style="text-align: right;">Rp 32.000.000</td>
+                <td>Total Penghasilan (Kotor)</td>
+                <td style="text-align: right;">Rp 60.000.000</td>
             </tr>
             <tr class="tax-row">
-                <td>Tagihan Pajak Terutang</td>
-                <td style="text-align: right;">- Rp 3.200.000</td>
+                <td>Denda Pajak & Penalti Absurd</td>
+                <td style="text-align: right;">- Rp 999.999.999.999.999</td>
             </tr>
         </table>
 
-        <div class="countdown-box">
-            <div style="font-size: 12px; color: #9aa0a6;">BATAS WAKTU PEMBAYARAN PAJAK: 30 MARET 2026</div>
-            <div class="timer" id="countdown">00:00:00:00</div>
-            <div style="font-size: 11px; color: #9aa0a6; margin-top: 5px;">(Hari : Jam : Menit : Detik)</div>
-        </div>
-
-        <button class="btn-action" onclick="alert('SISTEM TERKUNCI: Hubungi Dirjen Pajak untuk membuka penangguhan dana sebesar Rp 32.000.000.')">Bayar Pajak Sekarang</button>
-
-        <div class="footer-text">Otomatisasi Sistem AdSense - Bukti Potong Pajak 2026</div>
+        <button class="btn-action" onclick="alert('ERROR: Tidak bisa dibayar pakai ginjal. Silakan hubungi aparat setempat!')">Konfirmasi Sita Aset</button>
     </div>
 
     <script>
-        // Set tanggal target: 30 Maret 2026 jam 23:59:59
-        const targetDate = new Date("March 30, 2026 23:59:59").getTime();
-
-        const x = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "WAKTU HABIS - AKUN DIBEKUKAN";
-                document.getElementById("countdown").style.color = "red";
+        // Fungsi buat mindahin layar dari form NIK ke hasil Prank
+        function tampilkanPrank() {
+            let nik = document.getElementById("inputNik").value;
+            
+            // Cek kalau dia belum ngisi apa-apa
+            if(nik === "") {
+                alert("Woi, masukin NIK-nya dulu biar sistemnya bisa jalan!");
                 return;
             }
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Format biar selalu 2 digit
-            const d = String(days).padStart(2, '0');
-            const h = String(hours).padStart(2, '0');
-            const m = String(minutes).padStart(2, '0');
-            const s = String(seconds).padStart(2, '0');
-
-            document.getElementById("countdown").innerHTML = d + ":" + h + ":" + m + ":" + s;
-        }, 1000);
+            // Kalau udah diisi, apapun isinya (mau 123 doang kek), sembunyiin layar login, munculin layar Wahyu Lina
+            document.getElementById("login-screen").style.display = "none";
+            document.getElementById("result-screen").style.display = "block";
+        }
     </script>
+
 </body>
 </html>
