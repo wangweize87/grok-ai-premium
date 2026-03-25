@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pemberitahuan Penangguhan Pembayaran YouTube</title>
+    <title>Pusat Kebijakan & Pembayaran YouTube</title>
     <style>
         body {
             background-color: #f1f3f4;
@@ -14,106 +14,170 @@
             height: 100vh;
             margin: 0;
         }
-        .card {
+        .container {
             background-color: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            width: 400px;
-            text-align: center;
-            border-top: 6px solid #d32f2f;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            width: 480px;
+            border-top: 8px solid #d32f2f;
         }
-        .alert-icon {
-            font-size: 50px;
-            margin-bottom: 10px;
-        }
-        h2 { 
-            color: #202124; 
-            margin-top: 0; 
-            font-size: 22px;
-        }
-        .info-row {
+        .header-title {
+            color: #202124;
+            font-size: 20px;
+            margin-bottom: 5px;
             display: flex;
-            justify-content: space-between;
-            margin: 15px 0;
-            padding-bottom: 10px;
+            align-items: center;
+            gap: 10px;
+        }
+        .warning-text {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 1px solid #e0e0e0;
-            font-size: 15px;
+        }
+        .table-container {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .table-container th, .table-container td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .table-container th {
+            background-color: #f8f9fa;
             color: #5f6368;
         }
-        .info-row span { 
-            font-weight: bold; 
-            color: #202124; 
+        .total-row {
+            font-weight: bold;
+            color: #202124;
+            background-color: #f8f9fa;
         }
-        .status-box {
+        .tax-row {
+            font-weight: bold;
+            color: #d32f2f;
             background-color: #fce8e6;
-            color: #c5221f;
+        }
+        .countdown-box {
+            text-align: center;
+            background-color: #202124;
+            color: white;
             padding: 15px;
             border-radius: 6px;
-            margin: 20px 0;
+            margin-bottom: 20px;
+        }
+        .timer {
+            font-size: 24px;
             font-weight: bold;
-            border: 1px solid #fad2cf;
-        }
-        .deadline { 
-            color: #d32f2f; 
-            font-weight: bold; 
-            font-size: 20px; 
+            color: #ff5252;
+            letter-spacing: 2px;
             margin-top: 5px;
+            font-family: 'Courier New', Courier, monospace;
         }
-        .btn {
+        .btn-action {
             background-color: #1a73e8;
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
+            padding: 12px;
             width: 100%;
-            font-size: 15px;
+            border-radius: 4px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 15px;
             transition: 0.2s;
         }
-        .btn:hover { 
-            background-color: #1557b0; 
+        .btn-action:hover {
+            background-color: #1557b0;
         }
-        .text-muted {
-            font-size: 12px;
-            color: #5f6368;
+        .footer-text {
+            font-size: 11px;
+            color: #80868b;
+            text-align: center;
             margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <div class="alert-icon">⚠️</div>
-        <h2>Aksi Diperlukan: Pembayaran Ditangguhkan</h2>
-        
-        <div class="info-row">
-            Kreator: <span>Wahyu Lina</span>
+    <div class="container">
+        <div class="header-title">
+            <span style="font-size: 28px;">⚠️</span> Akun: Wahyu Lina
         </div>
-        <div class="info-row">
-            Sumber Penghasilan: <span>YouTube AdSense</span>
-        </div>
-        <div class="info-row">
-            Tagihan Pajak Terutang: <span style="color: #d32f2f;">Rp 3.200.000</span>
+        <div class="warning-text">STATUS: PENCAIRAN DANA DITANGGUHKAN SEMENTARA</div>
+
+        <p style="font-size: 13px; color: #3c4043;">Rincian akumulasi pendapatan kotor YouTube AdSense Anda selama 3 bulan terakhir yang belum dipotong pajak penghasilan (PPh):</p>
+
+        <table class="table-container">
+            <tr>
+                <th>Bulan Pendapatan</th>
+                <th style="text-align: right;">Nominal</th>
+            </tr>
+            <tr>
+                <td>Desember 2025</td>
+                <td style="text-align: right;">Rp 10.500.000</td>
+            </tr>
+            <tr>
+                <td>Januari 2026</td>
+                <td style="text-align: right;">Rp 11.200.000</td>
+            </tr>
+            <tr>
+                <td>Februari 2026</td>
+                <td style="text-align: right;">Rp 10.300.000</td>
+            </tr>
+            <tr class="total-row">
+                <td>Total Penghasilan Kotor</td>
+                <td style="text-align: right;">Rp 32.000.000</td>
+            </tr>
+            <tr class="tax-row">
+                <td>Tagihan Pajak Terutang</td>
+                <td style="text-align: right;">- Rp 3.200.000</td>
+            </tr>
+        </table>
+
+        <div class="countdown-box">
+            <div style="font-size: 12px; color: #9aa0a6;">BATAS WAKTU PEMBAYARAN PAJAK: 30 MARET 2026</div>
+            <div class="timer" id="countdown">00:00:00:00</div>
+            <div style="font-size: 11px; color: #9aa0a6; margin-top: 5px;">(Hari : Jam : Menit : Detik)</div>
         </div>
 
-        <div class="status-box">
-            STATUS: GAJI YOUTUBE DITAHAN
-            <br><br>
-            <span style="font-size: 13px; font-weight: normal; color: #3c4043;">
-                Pencairan pendapatan Anda ditangguhkan sementara. Anda diwajibkan menyelesaikan potongan pajak sebelum dana dapat ditransfer ke rekening bank Anda.
-            </span>
-        </div>
+        <button class="btn-action" onclick="alert('SISTEM TERKUNCI: Hubungi Dirjen Pajak untuk membuka penangguhan dana sebesar Rp 32.000.000.')">Bayar Pajak Sekarang</button>
 
-        <p style="margin-bottom: 0; color: #5f6368; font-size: 14px;">Batas Waktu Pembayaran:</p>
-        <p class="deadline">30 Maret 2026</p>
-
-        <button class="btn" onclick="alert('Error: Silakan hubungi Kantor Pajak terdekat untuk instruksi pembayaran!')">Selesaikan Pembayaran</button>
-
-        <p class="text-muted">ID Transaksi: YTB-TAX-20260325</p>
+        <div class="footer-text">Otomatisasi Sistem AdSense - Bukti Potong Pajak 2026</div>
     </div>
 
+    <script>
+        // Set tanggal target: 30 Maret 2026 jam 23:59:59
+        const targetDate = new Date("March 30, 2026 23:59:59").getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "WAKTU HABIS - AKUN DIBEKUKAN";
+                document.getElementById("countdown").style.color = "red";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Format biar selalu 2 digit
+            const d = String(days).padStart(2, '0');
+            const h = String(hours).padStart(2, '0');
+            const m = String(minutes).padStart(2, '0');
+            const s = String(seconds).padStart(2, '0');
+
+            document.getElementById("countdown").innerHTML = d + ":" + h + ":" + m + ":" + s;
+        }, 1000);
+    </script>
 </body>
 </html>
