@@ -1,111 +1,1744 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Actions Required - Google AdSense</title>
-    <style>
-        body { font-family: 'Roboto', sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
-        .top-bar { background: #fff; padding: 15px 25px; border-bottom: 1px solid #ddd; display: flex; align-items: center; }
-        .logo { color: #5f6368; font-size: 22px; font-weight: 500; }
-        .main-container { max-width: 850px; margin: 40px auto; padding: 0 20px; }
-        
-        /* Notifikasi Merah ala Google */
-        .error-banner { 
-            background-color: #d93025; color: white; padding: 18px 24px; 
-            border-radius: 4px; display: flex; align-items: center; gap: 15px;
-            margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Masterclass AI & Algoritma | malas berfikir</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            orbitron: ['Orbitron','sans-serif'],
+            rajdhani: ['Rajdhani','sans-serif'],
+            mono: ['JetBrains Mono','monospace'],
+          },
+          colors: {
+            neon: { cyan:'#00f5ff', yellow:'#ffe600', green:'#39ff14' },
+            dark: { 950:'#030712', 900:'#0a0e1a', 800:'#0d1424', 700:'#111827', 600:'#1a2235' }
+          }
         }
-        .error-banner b { font-size: 16px; }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --neon-cyan:#00f5ff; --neon-yellow:#ffe600; --neon-green:#39ff14;
+      --neon-pink:#ff007f; --neon-purple:#bf00ff;
+      --bg-deep:#030712; --bg-card:rgba(13,20,36,0.85); --glass:rgba(0,245,255,0.04);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background-color:var(--bg-deep);font-family:'Rajdhani',sans-serif;color:#e2e8f0;overflow-x:hidden;}
+    ::-webkit-scrollbar{width:4px;}
+    ::-webkit-scrollbar-track{background:#030712;}
+    ::-webkit-scrollbar-thumb{background:var(--neon-cyan);border-radius:2px;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+    .grid-bg{background-image:linear-gradient(rgba(0,245,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,0.04) 1px,transparent 1px);background-size:50px 50px;}
+    .neon-text-cyan{color:var(--neon-cyan);text-shadow:0 0 10px var(--neon-cyan),0 0 30px rgba(0,245,255,0.4);}
+    .neon-text-yellow{color:var(--neon-yellow);text-shadow:0 0 10px var(--neon-yellow),0 0 30px rgba(255,230,0,0.4);}
+    .neon-text-pink{color:var(--neon-pink);text-shadow:0 0 10px var(--neon-pink),0 0 30px rgba(255,0,127,0.4);}
+    .neon-text-purple{color:var(--neon-purple);text-shadow:0 0 10px var(--neon-purple),0 0 30px rgba(191,0,255,0.4);}
+    .neon-border-cyan{border:1px solid rgba(0,245,255,0.4);box-shadow:0 0 15px rgba(0,245,255,0.1),inset 0 0 15px rgba(0,245,255,0.03);}
+    .glass-card{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(0,245,255,0.12);box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 0 1px rgba(0,245,255,0.05) inset;}
+    .glass-card-yellow{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,230,0,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 30px rgba(255,230,0,0.06) inset;}
+    .glass-card-pink{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,0,127,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 30px rgba(255,0,127,0.06) inset;}
+    .glass-card-purple{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(191,0,255,0.25);box-shadow:0 8px 32px rgba(0,0,0,0.6),0 0 30px rgba(191,0,255,0.08) inset;}
+    .btn-neon-cyan{background:transparent;border:1px solid var(--neon-cyan);color:var(--neon-cyan);padding:12px 28px;font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;position:relative;transition:all 0.3s ease;overflow:hidden;text-shadow:0 0 8px var(--neon-cyan);box-shadow:0 0 15px rgba(0,245,255,0.2);}
+    .btn-neon-cyan::before{content:'';position:absolute;inset:0;background:var(--neon-cyan);transform:translateX(-100%);transition:transform 0.3s ease;z-index:-1;}
+    .btn-neon-cyan:hover::before{transform:translateX(0);}
+    .btn-neon-cyan:hover{color:#030712;text-shadow:none;box-shadow:0 0 30px rgba(0,245,255,0.5);}
+    .btn-neon-yellow{background:linear-gradient(135deg,rgba(255,230,0,0.15),rgba(255,230,0,0.05));border:1px solid var(--neon-yellow);color:var(--neon-yellow);padding:12px 28px;font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;position:relative;transition:all 0.3s ease;overflow:hidden;text-shadow:0 0 8px var(--neon-yellow);box-shadow:0 0 15px rgba(255,230,0,0.15);}
+    .btn-neon-yellow:hover{background:var(--neon-yellow);color:#030712;text-shadow:none;box-shadow:0 0 30px rgba(255,230,0,0.5);}
+    .btn-neon-pink{background:linear-gradient(135deg,rgba(255,0,127,0.15),rgba(255,0,127,0.05));border:1px solid var(--neon-pink);color:var(--neon-pink);padding:12px 28px;font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.3s ease;text-shadow:0 0 8px var(--neon-pink);box-shadow:0 0 15px rgba(255,0,127,0.15);}
+    .btn-neon-pink:hover{background:var(--neon-pink);color:#030712;text-shadow:none;box-shadow:0 0 30px rgba(255,0,127,0.5);}
+    .btn-solid-cyan{background:linear-gradient(135deg,#00f5ff,#00b8d9);color:#030712;padding:12px 28px;font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 20px rgba(0,245,255,0.4);}
+    .btn-solid-cyan:hover{box-shadow:0 0 40px rgba(0,245,255,0.7);transform:translateY(-2px);}
+    .btn-solid-pink{background:linear-gradient(135deg,#ff007f,#cc0066);color:#fff;padding:12px 28px;font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 20px rgba(255,0,127,0.4);}
+    .btn-solid-pink:hover{box-shadow:0 0 40px rgba(255,0,127,0.7);transform:translateY(-2px);}
 
-        .payment-card { 
-            background: white; border: 1px solid #dadce0; border-radius: 8px; 
-            padding: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .section-title { font-size: 18px; color: #202124; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f1f1; font-size: 14px; }
-        .label { color: #5f6368; }
-        .value { color: #202124; font-weight: 600; text-align: right; }
-        
-        .hold-status { color: #d93025; font-weight: bold; text-transform: uppercase; font-size: 13px; }
-        .amount { font-size: 36px; color: #202124; margin: 20px 0; font-weight: 300; }
-        
-        .action-footer { margin-top: 30px; text-align: right; }
-        .btn-fix { background: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-weight: 500; }
-        
-        /* Form NIK Awal */
-        #nik-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #f1f3f4; display: flex; justify-content: center; align-items: center; z-index: 100;
-        }
-        .nik-box { background: white; padding: 40px; border-radius: 8px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 350px; }
-    </style>
+    /* === BRAND LOGO GLITCH ANIMATION === */
+    .brand-logo{font-family:'Orbitron',sans-serif;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;position:relative;display:inline-block;color:var(--neon-cyan);}
+    .brand-logo::before,.brand-logo::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;font-family:inherit;font-weight:inherit;letter-spacing:inherit;}
+    .brand-logo::before{color:var(--neon-pink);animation:brandGlitch1 4s infinite;clip-path:inset(40% 0 61% 0);}
+    .brand-logo::after{color:var(--neon-cyan);animation:brandGlitch2 4s infinite;clip-path:inset(0 0 90% 0);}
+    @keyframes brandGlitch1{0%,90%,100%{transform:translate(0);opacity:0;}91%{transform:translate(-3px,2px);opacity:0.8;}92%{transform:translate(3px,-1px);opacity:0.8;}93%{transform:translate(0);opacity:0;}}
+    @keyframes brandGlitch2{0%,85%,100%{transform:translate(0);opacity:0;}86%{transform:translate(3px,1px);opacity:0.7;}87%{transform:translate(-2px,0);opacity:0.7;}88%{transform:translate(0);opacity:0;}}
+    .brand-neon-pulse{animation:brandPulse 3s ease-in-out infinite;text-shadow:0 0 8px var(--neon-cyan),0 0 20px rgba(0,245,255,0.5),0 0 40px rgba(0,245,255,0.2);}
+    @keyframes brandPulse{0%,100%{text-shadow:0 0 8px var(--neon-cyan),0 0 20px rgba(0,245,255,0.5);}50%{text-shadow:0 0 15px var(--neon-cyan),0 0 40px rgba(0,245,255,0.8),0 0 80px rgba(0,245,255,0.3),0 0 120px rgba(0,245,255,0.1);}}
+    .brand-blink{animation:brandBlink 5s ease-in-out infinite;}
+    @keyframes brandBlink{0%,96%,100%{opacity:1;}97%{opacity:0.1;}98%{opacity:1;}99%{opacity:0.05;}}
+
+    /* === GENERAL ANIMATIONS === */
+    @keyframes glitch{0%,90%,100%{transform:translate(0);clip-path:none;}91%{transform:translate(-3px,1px);}92%{transform:translate(3px,-1px);clip-path:inset(20% 0 60% 0);}93%{transform:translate(-2px,0);}94%{transform:translate(2px,1px);clip-path:inset(60% 0 20% 0);}95%{transform:translate(0);}}
+    @keyframes pulseNeon{0%,100%{text-shadow:0 0 10px var(--neon-cyan),0 0 30px rgba(0,245,255,0.4);}50%{text-shadow:0 0 20px var(--neon-cyan),0 0 60px rgba(0,245,255,0.7),0 0 100px rgba(0,245,255,0.3);}}
+    @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+    @keyframes scanline{0%{transform:translateY(-100%);}100%{transform:translateY(100vh);}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+    @keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+    @keyframes dataStream{0%{background-position:0 0;}100%{background-position:0 -200px;}}
+    @keyframes terminalBlink{0%,100%{opacity:1;}50%{opacity:0;}}
+    @keyframes matrixRain{0%{transform:translateY(-100%);}100%{transform:translateY(100vh);}}
+    @keyframes rgbShift{0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);}}
+    @keyframes scanBar{0%{top:-5px;}100%{top:100%;}}
+
+    .animate-fade-in-up{animation:fadeInUp 0.8s ease forwards;}
+    .animate-float{animation:float 6s ease-in-out infinite;}
+    .animate-pulse-neon{animation:pulseNeon 2s ease-in-out infinite;}
+    .animate-glitch{animation:glitch 4s infinite;}
+    .delay-200{animation-delay:0.2s;}
+    .scanline::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(transparent,rgba(0,245,255,0.15),transparent);animation:scanline 8s linear infinite;pointer-events:none;}
+    .section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--neon-cyan),transparent);margin:0;}
+    .section-divider-pink{height:1px;background:linear-gradient(90deg,transparent,var(--neon-pink),transparent);margin:0;}
+    .section-divider-purple{height:1px;background:linear-gradient(90deg,transparent,var(--neon-purple),transparent);margin:0;}
+    .cyber-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.25);padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;color:var(--neon-cyan);}
+    .nav-link{font-family:'Orbitron',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(226,232,240,0.7);transition:color 0.3s;}
+    .nav-link:hover{color:var(--neon-cyan);text-shadow:0 0 8px var(--neon-cyan);}
+    .pricing-card{transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);}
+    .pricing-card:hover{transform:translateY(-8px);}
+    .badge-bestseller{background:linear-gradient(135deg,#ffe600,#ff9900);color:#030712;font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.15em;padding:4px 12px;position:absolute;top:-14px;left:50%;transform:translateX(-50%);white-space:nowrap;}
+    .feature-tab{cursor:pointer;padding:12px 16px;border-bottom:2px solid transparent;font-family:'Orbitron',sans-serif;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;transition:all 0.3s;color:rgba(226,232,240,0.5);white-space:nowrap;}
+    .feature-tab.active{border-bottom-color:var(--neon-cyan);color:var(--neon-cyan);text-shadow:0 0 8px var(--neon-cyan);}
+    .feature-tab:hover{color:rgba(0,245,255,0.8);}
+    .video-card{transition:all 0.3s ease;}
+    .video-card:hover{transform:translateY(-4px);}
+    .video-card:hover .video-overlay{opacity:1;}
+    .video-overlay{opacity:0;transition:opacity 0.3s;background:rgba(0,245,255,0.15);}
+    input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:rgba(0,245,255,0.2);outline:none;border-radius:2px;}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--neon-cyan);cursor:pointer;box-shadow:0 0 10px var(--neon-cyan);}
+    .progress-bar{height:4px;background:rgba(0,245,255,0.15);border-radius:2px;overflow:hidden;}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--neon-cyan),#0099ff);border-radius:2px;transition:width 0.8s cubic-bezier(0.4,0,0.2,1);box-shadow:0 0 8px var(--neon-cyan);}
+    .algo-node{transition:all 0.3s;}
+    .algo-node:hover{transform:scale(1.05);}
+    .deco-circle{position:absolute;border-radius:50%;pointer-events:none;}
+    .shimmer-text{background:linear-gradient(90deg,var(--neon-yellow) 0%,#ffffff 40%,var(--neon-cyan) 60%,var(--neon-yellow) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 4s linear infinite;}
+    #mobile-menu{display:none;}
+    #mobile-menu.open{display:block;}
+    .check-item::before{content:'▸';color:var(--neon-cyan);margin-right:8px;}
+    .footer-glow{background:radial-gradient(ellipse at center bottom,rgba(0,245,255,0.06) 0%,transparent 70%);}
+
+    /* === AI TERMINAL SECTION === */
+    .terminal-window{background:#030712;border:1px solid rgba(0,245,255,0.2);border-radius:4px;overflow:hidden;box-shadow:0 0 30px rgba(0,245,255,0.08);}
+    .terminal-header{background:rgba(0,245,255,0.06);border-bottom:1px solid rgba(0,245,255,0.15);padding:10px 16px;display:flex;align-items:center;gap:8px;}
+    .terminal-dot{width:10px;height:10px;border-radius:50%;}
+    .typewriter{overflow:hidden;white-space:pre-wrap;word-break:break-all;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:rgba(0,245,255,0.85);line-height:1.6;}
+    .cursor-blink{display:inline-block;width:8px;height:14px;background:var(--neon-cyan);margin-left:2px;animation:terminalBlink 1s step-end infinite;vertical-align:middle;}
+
+    /* === AI VIDEO TABS === */
+    .ai-tab{cursor:pointer;padding:10px 24px;font-family:'Orbitron',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.3s;border-bottom:2px solid transparent;color:rgba(226,232,240,0.4);}
+    .ai-tab.active{color:var(--neon-cyan);border-bottom-color:var(--neon-cyan);text-shadow:0 0 8px var(--neon-cyan);}
+    .ai-tab:hover{color:rgba(0,245,255,0.7);}
+    .ai-panel{display:none;}
+    .ai-panel.active{display:block;}
+
+    /* === BLACK MARKET === */
+    .bm-card{background:rgba(10,5,20,0.9);border:1px solid rgba(191,0,255,0.25);border-radius:2px;transition:all 0.3s;position:relative;overflow:hidden;}
+    .bm-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--neon-purple),transparent);animation:shimmer 3s linear infinite;background-size:200%;}
+    .bm-card:hover{border-color:rgba(191,0,255,0.5);box-shadow:0 0 20px rgba(191,0,255,0.15);transform:translateY(-3px);}
+    .bm-badge{background:linear-gradient(135deg,#bf00ff,#7700cc);color:#fff;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.12em;padding:2px 10px;display:inline-block;}
+
+    /* === ENDORSE SECTION === */
+    .endorse-card{background:rgba(20,5,10,0.9);border:1px solid rgba(255,0,127,0.2);border-radius:2px;transition:all 0.3s;overflow:hidden;position:relative;}
+    .endorse-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,0,127,0.03),transparent);pointer-events:none;}
+    .endorse-card:hover{border-color:rgba(255,0,127,0.45);box-shadow:0 0 25px rgba(255,0,127,0.12);transform:translateY(-4px);}
+
+    /* === TERMINAL AI ORACLE === */
+    .oracle-terminal{background:#000;border:1px solid rgba(0,245,255,0.3);border-radius:2px;height:380px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 30px rgba(0,245,255,0.1);}
+    .oracle-header{background:rgba(0,245,255,0.08);border-bottom:1px solid rgba(0,245,255,0.15);padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--neon-cyan);display:flex;justify-content:space-between;align-items:center;}
+    .oracle-body{flex:1;overflow-y:auto;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;line-height:1.8;}
+    .oracle-body::-webkit-scrollbar{width:3px;}
+    .oracle-body::-webkit-scrollbar-thumb{background:var(--neon-cyan);}
+    .oracle-input-row{border-top:1px solid rgba(0,245,255,0.15);padding:8px 12px;display:flex;align-items:center;gap:8px;background:rgba(0,245,255,0.03);}
+    .oracle-input{background:transparent;border:none;outline:none;flex:1;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--neon-cyan);}
+    .oracle-prompt{color:var(--neon-green);font-family:'JetBrains Mono',monospace;font-size:0.75rem;}
+    .msg-user{color:rgba(255,230,0,0.9);margin-bottom:4px;}
+    .msg-bot{color:rgba(0,245,255,0.85);margin-bottom:12px;padding-left:12px;border-left:2px solid rgba(0,245,255,0.3);}
+    .msg-sys{color:rgba(57,255,20,0.7);margin-bottom:8px;}
+
+    /* SCAN EFFECT ON BM */
+    .scan-effect{position:relative;overflow:hidden;}
+    .scan-effect::after{content:'';position:absolute;left:0;right:0;height:60px;background:linear-gradient(to bottom,transparent,rgba(191,0,255,0.06),transparent);animation:scanBar 4s linear infinite;pointer-events:none;}
+
+    /* SCROLLBAR */
+    .custom-scroll::-webkit-scrollbar{width:3px;}
+    .custom-scroll::-webkit-scrollbar-thumb{background:var(--neon-cyan);}
+  </style>
 </head>
-<body>
+<body class="grid-bg">
 
-    <div id="nik-overlay">
-        <div class="nik-box">
-            <img src="https://www.gstatic.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" width="92" alt="Google">
-            <h3 style="margin-top:20px; color:#202124;">Verifikasi Keamanan</h3>
-            <p style="font-size:13px; color:#5f6368;">Sistem mendeteksi aktivitas mencurigakan. Masukkan NIK Anda untuk memverifikasi kepemilikan akun.</p>
-            <input type="password" id="nikInput" placeholder="Masukkan 16 Digit NIK" style="width:90%; padding:10px; margin-bottom:20px; border:1px solid #dadce0; border-radius:4px; text-align:center;">
-            <button class="btn-fix" style="width:100%;" onclick="showPrank()">Verifikasi Sekarang</button>
+<nav class="fixed top-0 left-0 right-0 z-50" style="background:rgba(3,7,18,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,245,255,0.1);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+    <div class="flex items-center gap-3">
+      <div style="width:8px;height:8px;background:var(--neon-cyan);border-radius:50%;box-shadow:0 0 10px var(--neon-cyan);animation:pulseNeon 2s infinite;flex-shrink:0;"></div>
+      <span class="brand-logo brand-neon-pulse brand-blink text-xs" data-text="MALAS BERFIKIR" style="font-size:0.75rem;">MALAS BERFIKIR</span>
+    </div>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#ai-showcase" class="nav-link">AI Lab</a>
+      <a href="#fitur" class="nav-link">Tools</a>
+      <a href="#portfolio" class="nav-link">Portfolio</a>
+      <a href="#endorse" class="nav-link">Endorse</a>
+      <a href="#blackmarket" class="nav-link" style="color:rgba(191,0,255,0.8);">Black Market</a>
+      <a href="#pricing" class="nav-link">Harga</a>
+      <a href="https://wa.me/082219989497" target="_blank" class="btn-neon-cyan text-xs" style="padding:8px 16px;border-radius:2px;">Daftar</a>
+    </div>
+    <button class="md:hidden text-cyan-400" onclick="toggleMenu()">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" style="background:rgba(3,7,18,0.98);border-top:1px solid rgba(0,245,255,0.1);">
+    <div class="px-6 py-4 flex flex-col gap-3">
+      <a href="#ai-showcase" class="nav-link py-2" onclick="toggleMenu()">AI Lab</a>
+      <a href="#fitur" class="nav-link py-2" onclick="toggleMenu()">Tools</a>
+      <a href="#portfolio" class="nav-link py-2" onclick="toggleMenu()">Portfolio</a>
+      <a href="#endorse" class="nav-link py-2" onclick="toggleMenu()">Endorse</a>
+      <a href="#blackmarket" class="nav-link py-2" onclick="toggleMenu()" style="color:rgba(191,0,255,0.8);">Black Market</a>
+      <a href="#pricing" class="nav-link py-2" onclick="toggleMenu()">Harga</a>
+      <a href="https://wa.me/082219989497" target="_blank" class="btn-neon-cyan text-center mt-2">Daftar Sekarang</a>
+    </div>
+  </div>
+</nav>
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden scanline pt-20" style="background:radial-gradient(ellipse at 20% 50%,rgba(0,245,255,0.04) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(255,230,0,0.03) 0%,transparent 50%);">
+  <div class="deco-circle" style="width:600px;height:600px;border:1px solid rgba(0,245,255,0.06);top:-100px;right:-200px;animation:rotate 40s linear infinite;"></div>
+  <div class="deco-circle" style="width:400px;height:400px;border:1px solid rgba(255,230,0,0.05);bottom:-100px;left:-150px;animation:rotate 30s linear infinite reverse;"></div>
+  <div class="deco-circle" style="width:200px;height:200px;border:1px solid rgba(0,245,255,0.08);top:20%;left:5%;animation:rotate 20s linear infinite;"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-20 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="space-y-8 animate-fade-in-up">
+        <div class="flex flex-wrap gap-3">
+          <span class="cyber-tag"><span style="width:6px;height:6px;background:var(--neon-green);border-radius:50%;box-shadow:0 0 6px var(--neon-green);display:inline-block;"></span>LIVE 2026</span>
+          <span class="cyber-tag" style="border-color:rgba(255,230,0,0.25);color:var(--neon-yellow);"><span>⚡</span>AI-POWERED MASTERCLASS</span>
         </div>
+        <div>
+          <h1 class="font-orbitron font-black leading-tight" style="font-size:clamp(1.8rem,4vw,3rem);">
+            <span class="animate-glitch block" style="color:white;">MASTERCLASS</span>
+            <span class="block mt-1 shimmer-text" style="font-size:clamp(1.6rem,3.5vw,2.6rem);">AI & DOMINASI</span>
+            <span class="neon-text-cyan block mt-1 animate-pulse-neon" style="font-size:clamp(1.6rem,3.5vw,2.6rem);">ALGORITMA</span>
+            <span class="block mt-1" style="color:rgba(226,232,240,0.9);font-size:clamp(1.4rem,3vw,2.2rem);">CONTENT CREATOR</span>
+          </h1>
+        </div>
+        <p class="text-base leading-relaxed font-rajdhani" style="color:rgba(226,232,240,0.65);max-width:520px;font-size:1.05rem;">
+          Strategi komprehensif mendulang <span class="neon-text-cyan font-semibold">jutaan penayangan organik</span> dengan integrasi kecerdasan buatan — <span style="color:rgba(255,230,0,0.9);">ChatGPT, Sora 2, Veo 3</span>. Dari zero ke viral, dengan metodologi berbasis data.
+        </p>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="glass-card p-4 text-center" style="border-radius:4px;"><div class="font-orbitron font-black neon-text-cyan" style="font-size:1.5rem;">10M+</div><div class="text-xs font-mono mt-1" style="color:rgba(226,232,240,0.5);">Total Views</div></div>
+          <div class="glass-card p-4 text-center" style="border-radius:4px;"><div class="font-orbitron font-black neon-text-yellow" style="font-size:1.5rem;">3K+</div><div class="text-xs font-mono mt-1" style="color:rgba(226,232,240,0.5);">Students</div></div>
+          <div class="glass-card p-4 text-center" style="border-radius:4px;"><div class="font-orbitron font-black" style="font-size:1.5rem;color:var(--neon-green);">98%</div><div class="text-xs font-mono mt-1" style="color:rgba(226,232,240,0.5);">Satisfaction</div></div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="https://youtube.com/@malasberfikir" target="_blank" class="btn-neon-cyan inline-flex items-center justify-center gap-2 no-underline" style="border-radius:2px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.58 7.19c-.24-.9-1-1.6-1.9-1.84C18.01 5 12 5 12 5s-6 0-7.68.35c-.9.24-1.65.94-1.9 1.84C2 8.88 2 12 2 12s0 3.12.42 4.81c.24.9 1 1.6 1.9 1.84C6 19 12 19 12 19s6 0 7.68-.35c.9-.24 1.65-.94 1.9-1.84C22 15.12 22 12 22 12s0-3.12-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
+            Portofolio YouTube
+          </a>
+          <a href="https://www.tiktok.com/@malasberfikir.official" target="_blank" class="btn-neon-yellow inline-flex items-center justify-center gap-2 no-underline" style="border-radius:2px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77 0 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 106.33 6.29V8.69a8.18 8.18 0 004.78 1.52V6.79a4.85 4.85 0 01-1.8-.1z"/></svg>
+            Portofolio TikTok
+          </a>
+        </div>
+      </div>
+      <div class="flex justify-center items-center animate-float delay-200">
+        <div class="relative" style="max-width:420px;width:100%;">
+          <div style="position:absolute;inset:-2px;background:linear-gradient(135deg,var(--neon-cyan),transparent,var(--neon-yellow),transparent,var(--neon-cyan));border-radius:8px;animation:rotate 6s linear infinite;z-index:0;opacity:0.5;"></div>
+          <div class="glass-card relative z-10 overflow-hidden" style="border-radius:6px;">
+            <img src="https://placehold.co/420x560/0a0e1a/00f5ff?text=POSTER+AI+MASTERCLASS&font=oswald" alt="Poster AI Masterclass" style="width:100%;display:block;filter:brightness(0.85) saturate(1.2);" onerror="this.src='https://via.placeholder.com/420x560/0a0e1a/00f5ff?text=Poster+Masterclass'"/>
+            <div style="position:absolute;top:0;left:0;width:30px;height:30px;border-top:2px solid var(--neon-cyan);border-left:2px solid var(--neon-cyan);"></div>
+            <div style="position:absolute;top:0;right:0;width:30px;height:30px;border-top:2px solid var(--neon-cyan);border-right:2px solid var(--neon-cyan);"></div>
+            <div style="position:absolute;bottom:0;left:0;width:30px;height:30px;border-bottom:2px solid var(--neon-yellow);border-left:2px solid var(--neon-yellow);"></div>
+            <div style="position:absolute;bottom:0;right:0;width:30px;height:30px;border-bottom:2px solid var(--neon-yellow);border-right:2px solid var(--neon-yellow);"></div>
+            <div style="position:absolute;top:8px;right:10px;font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--neon-cyan);background:rgba(0,0,0,0.6);padding:2px 8px;">LIVE 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,transparent,var(--bg-deep));"></div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="ai-showcase" class="py-24 relative" style="background:linear-gradient(to bottom,var(--bg-deep),#060010);">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(191,0,255,0.06) 0%,transparent 60%);pointer-events:none;"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+    <div class="text-center mb-12">
+      <span class="cyber-tag mx-auto mb-4 inline-block" style="border-color:rgba(191,0,255,0.3);color:var(--neon-purple);">// AI GENERATION ENGINE · LIVE DEMO</span>
+      <h2 class="font-orbitron font-black text-2xl md:text-3xl mt-4">
+        <span class="neon-text-purple">MESIN</span> <span style="color:white;">GENERASI VIDEO AI</span>
+      </h2>
+      <p class="font-rajdhani mt-3 text-base" style="color:rgba(226,232,240,0.5);">Sora 2 · Veo 3 · Grok AI — Tools masa depan yang kami ajarkan</p>
     </div>
 
-    <div class="header">
-        <div class="logo">AdSense</div>
+    <div class="flex overflow-x-auto gap-0 mb-0 glass-card-purple" style="border-radius:4px 4px 0 0;">
+      <button class="ai-tab active flex-shrink-0" onclick="switchAI(0,'tab-ai-0')">⚡ SORA 2</button>
+      <button class="ai-tab flex-shrink-0" onclick="switchAI(1,'tab-ai-1')" id="tab-ai-1">🎬 VEO 3</button>
+      <button class="ai-tab flex-shrink-0" onclick="switchAI(2,'tab-ai-2')" id="tab-ai-2">🤖 GROK AI</button>
     </div>
 
-    <div class="main-container">
-        <div class="error-banner">
-            <span>⚠️</span>
+    <div id="ai-panel-0" class="ai-panel active terminal-window" style="border-radius:0 4px 4px 4px;border-top:none;">
+      <div class="grid md:grid-cols-2 gap-0" style="min-height:400px;">
+        <div style="position:relative;background:#000;border-right:1px solid rgba(191,0,255,0.15);">
+          <div style="padding:10px 14px;background:rgba(191,0,255,0.08);border-bottom:1px solid rgba(191,0,255,0.15);display:flex;align-items:center;gap:8px;">
+            <span style="width:10px;height:10px;background:#ff5f57;border-radius:50%;"></span>
+            <span style="width:10px;height:10px;background:#febc2e;border-radius:50%;"></span>
+            <span style="width:10px;height:10px;background:#28c840;border-radius:50%;"></span>
+            <span class="font-mono text-xs neon-text-purple" style="margin-left:8px;">SORA-2 · OpenAI · VIDEO SYNTHESIS</span>
+          </div>
+          <div style="position:relative;padding-top:56.25%;">
+            <iframe src="https://www.youtube.com/embed/2tvszDH6hkA?autoplay=0&controls=1&modestbranding=1&rel=0" style="position:absolute;inset:0;width:100%;height:100%;border:none;" title="Sora 2 Demo" allowfullscreen></iframe>
+          </div>
+          <div style="padding:10px 14px;background:rgba(191,0,255,0.04);">
+            <span class="font-mono text-xs" style="color:rgba(191,0,255,0.6);">▶ OpenAI Sora 2 Official Demo</span>
+          </div>
+        </div>
+        <div style="padding:24px;display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <div style="width:8px;height:8px;background:var(--neon-purple);border-radius:50%;box-shadow:0 0 6px var(--neon-purple);animation:terminalBlink 1s infinite;"></div>
+            <span class="font-mono text-xs neon-text-purple">PROMPT INPUT · SORA 2 ENGINE</span>
+          </div>
+          <div style="background:#000;border:1px solid rgba(191,0,255,0.25);border-radius:2px;padding:16px;flex:1;">
+            <div class="font-mono text-xs" style="color:rgba(191,0,255,0.5);margin-bottom:8px;">$ sora2 --generate --quality 4K --fps 60</div>
+            <div id="typewriter-sora" class="typewriter" style="color:rgba(191,0,255,0.85);min-height:120px;"></div>
+            <span id="cursor-sora" class="cursor-blink" style="background:var(--neon-purple);display:none;"></span>
+          </div>
+          <div class="glass-card-purple p-4" style="border-radius:2px;">
+            <p class="font-mono text-xs neon-text-purple mb-2">// SORA 2 CAPABILITIES</p>
+            <ul class="space-y-1 font-rajdhani text-sm" style="color:rgba(226,232,240,0.7);">
+              <li>✦ Generate video 4K hingga 60 detik dari teks</li>
+              <li>✦ Physics simulation ultra-realistis</li>
+              <li>✦ Character consistency across scenes</li>
+              <li>✦ Multi-scene video dengan satu prompt</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ai-panel-1" class="ai-panel terminal-window" style="border-radius:0 4px 4px 4px;border-top:none;">
+      <div class="grid md:grid-cols-2 gap-0" style="min-height:400px;">
+        <div style="position:relative;background:#000;border-right:1px solid rgba(0,245,255,0.15);">
+          <div style="padding:10px 14px;background:rgba(0,245,255,0.06);border-bottom:1px solid rgba(0,245,255,0.15);display:flex;align-items:center;gap:8px;">
+            <span style="width:10px;height:10px;background:#ff5f57;border-radius:50%;"></span>
+            <span style="width:10px;height:10px;background:#febc2e;border-radius:50%;"></span>
+            <span style="width:10px;height:10px;background:#28c840;border-radius:50%;"></span>
+            <span class="font-mono text-xs neon-text-cyan" style="margin-left:8px;">VEO-3 · Google DeepMind · VIDEO GENERATION</span>
+          </div>
+          <div style="position:relative;padding-top:56.25%;">
+            <iframe src="https://www.youtube.com/embed/Ynr93Mwm4VU?autoplay=0&controls=1&modestbranding=1&rel=0" style="position:absolute;inset:0;width:100%;height:100%;border:none;" title="Veo 3 Demo" allowfullscreen></iframe>
+          </div>
+          <div style="padding:10px 14px;background:rgba(0,245,255,0.03);">
+            <span class="font-mono text-xs" style="color:rgba(0,245,255,0.5);">▶ Google Veo 3 Official Demo</span>
+          </div>
+        </div>
+        <div style="padding:24px;display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <div style="width:8px;height:8px;background:var(--neon-cyan);border-radius:50%;box-shadow:0 0 6px var(--neon-cyan);animation:terminalBlink 1.2s infinite;"></div>
+            <span class="font-mono text-xs neon-text-cyan">PROMPT INPUT · VEO 3 ENGINE</span>
+          </div>
+          <div style="background:#000;border:1px solid rgba(0,245,255,0.2);border-radius:2px;padding:16px;flex:1;">
+            <div class="font-mono text-xs" style="color:rgba(0,245,255,0.4);margin-bottom:8px;">$ veo3 --cinematic --audio-sync --duration 60s</div>
+            <div id="typewriter-veo" class="typewriter" style="color:rgba(0,245,255,0.85);min-height:120px;"></div>
+            <span id="cursor-veo" class="cursor-blink" style="display:none;"></span>
+          </div>
+          <div class="glass-card p-4" style="border-radius:2px;">
+            <p class="font-mono text-xs neon-text-cyan mb-2">// VEO 3 CAPABILITIES</p>
+            <ul class="space-y-1 font-rajdhani text-sm" style="color:rgba(226,232,240,0.7);">
+              <li>✦ Audio generation sinkron otomatis dengan video</li>
+              <li>✦ Cinematic grade output, siap YouTube 4K</li>
+              <li>✦ Motion control & camera angle prompt</li>
+              <li>✦ Integrasi langsung Google Workspace</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ai-panel-2" class="ai-panel terminal-window" style="border-radius:0 4px 4px 4px;border-top:none;">
+      <div class="grid md:grid-cols-2 gap-0" style="min-height:400px;">
+        <div style="position:relative;background:#000;border-right:1px solid rgba(255,230,0,0.15);">
+          <div style="padding:10px 14px;background:rgba(255,230,0,0.06);border-bottom:1px solid rgba(255,230,0,0.15);display:flex;align-items:center;gap:8px;">
+            <span style="width:10px;height:10px;background:#ff5f57;border-radius:50%;"></span>
+            <span style="width:10px;height:10px;background:#febc2e;border-radius:50%;"></span>
+            <span style="width:10px;height:10px;background:#28c840;border-radius:50%;"></span>
+            <span class="font-mono text-xs neon-text-yellow" style="margin-left:8px;">GROK-3 · xAI · MULTIMODAL GENERATION</span>
+          </div>
+          <div style="position:relative;padding-top:56.25%;">
+            <iframe src="https://www.youtube.com/embed/8t8YCEiGpHs?autoplay=0&controls=1&modestbranding=1&rel=0" style="position:absolute;inset:0;width:100%;height:100%;border:none;" title="Grok AI Demo" allowfullscreen></iframe>
+          </div>
+          <div style="padding:10px 14px;background:rgba(255,230,0,0.03);">
+            <span class="font-mono text-xs" style="color:rgba(255,230,0,0.5);">▶ xAI Grok 3 & Aurora Visual Demo</span>
+          </div>
+        </div>
+        <div style="padding:24px;display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <div style="width:8px;height:8px;background:var(--neon-yellow);border-radius:50%;box-shadow:0 0 6px var(--neon-yellow);animation:terminalBlink 0.9s infinite;"></div>
+            <span class="font-mono text-xs neon-text-yellow">PROMPT INPUT · GROK ENGINE</span>
+          </div>
+          <div style="background:#000;border:1px solid rgba(255,230,0,0.2);border-radius:2px;padding:16px;flex:1;">
+            <div class="font-mono text-xs" style="color:rgba(255,230,0,0.4);margin-bottom:8px;">$ grok3 --mode aurora --realtime true --context web</div>
+            <div id="typewriter-grok" class="typewriter" style="color:rgba(255,230,0,0.85);min-height:120px;"></div>
+            <span id="cursor-grok" class="cursor-blink" style="background:var(--neon-yellow);display:none;"></span>
+          </div>
+          <div class="glass-card-yellow p-4" style="border-radius:2px;">
+            <p class="font-mono text-xs neon-text-yellow mb-2">// GROK 3 CAPABILITIES</p>
+            <ul class="space-y-1 font-rajdhani text-sm" style="color:rgba(226,232,240,0.7);">
+              <li>✦ Real-time data access via X (Twitter) API</li>
+              <li>✦ Aurora: image & video generation native</li>
+              <li>✦ Reasoning mode "Think" untuk analisis mendalam</li>
+              <li>✦ Voice mode ultra-natural multilingual</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider-purple"></div>
+
+<section id="portfolio" class="py-24" style="background:linear-gradient(to bottom,#060010,#080c18);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-16">
+      <span class="cyber-tag mx-auto mb-4 inline-block">LIVE API · YOUTUBE DATA v3</span>
+      <h2 class="font-orbitron font-black text-2xl md:text-3xl mt-4"><span class="neon-text-cyan">VIDEO</span> <span style="color:white;">TERBARU</span></h2>
+      <p class="font-rajdhani mt-3 text-base" style="color:rgba(226,232,240,0.5);">Konten live dari channel @malasberfikir</p>
+    </div>
+    <div id="yt-loading" class="text-center py-12">
+      <div style="width:48px;height:48px;border:2px solid rgba(0,245,255,0.2);border-top:2px solid var(--neon-cyan);border-radius:50%;animation:rotate 1s linear infinite;margin:0 auto;"></div>
+      <p class="font-mono text-xs mt-4" style="color:rgba(0,245,255,0.6);">Fetching data from YouTube API...</p>
+    </div>
+    <div id="yt-grid" class="grid md:grid-cols-3 gap-6" style="display:none;"></div>
+    <div id="yt-error" style="display:none;" class="text-center py-4">
+      <p class="font-mono text-xs mb-6" style="color:rgba(255,230,0,0.7);">⚠ API quota exceeded. Showing cached preview.</p>
+      <div id="yt-fallback" class="grid md:grid-cols-3 gap-6"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="fitur" class="py-24" style="background:linear-gradient(to bottom,#080c18,#030712);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-12">
+      <span class="cyber-tag mx-auto mb-4 inline-block">// TERMINAL LAB · 12 AI TOOLS</span>
+      <h2 class="font-orbitron font-black text-2xl md:text-3xl mt-4"><span style="color:white;">TOOLKIT</span> <span class="neon-text-yellow">INTERAKTIF</span></h2>
+      <p class="font-rajdhani mt-3 text-base" style="color:rgba(226,232,240,0.5);">12 simulator canggih untuk mengoptimalkan strategi konten Anda</p>
+    </div>
+
+    <div class="flex overflow-x-auto gap-0 glass-card" style="border-radius:4px 4px 0 0;border-bottom:1px solid rgba(0,245,255,0.15);">
+      <button class="feature-tab active flex-shrink-0" onclick="switchFeature(0)" id="tab-0">💰 AdSense</button>
+      <button class="feature-tab flex-shrink-0" onclick="switchFeature(1)" id="tab-1">🎯 FYP Sim</button>
+      <button class="feature-tab flex-shrink-0" onclick="switchFeature(2)" id="tab-2">🤖 AI Ideas</button>
+      <button class="feature-tab flex-shrink-0" onclick="switchFeature(3)" id="tab-3">🎣 Hook</button>
+      <button class="feature-tab flex-shrink-0" onclick="switchFeature(4)" id="tab-4">🗺 Roadmap</button>
+      <button class="feature-tab flex-shrink-0" onclick="switchFeature(5)" id="tab-5">👁 Shadowban</button>
+      <button class="feature-tab flex-shrink-0" onclick="switchFeature(6)" id="tab-6"># Hashtag</button>
+      <button class="feature-tab flex-shrink-0" onclick="switchFeature(7)" id="tab-7">🖼 Thumbnail</button>
+      <button class="feature-tab flex-shrink-0" onclick="switchFeature(8)" id="tab-8">🔥 Viral Title</button>
+      <button class="feature-tab flex-shrink-0" onclick="switchFeature(9)" id="tab-9">🕐 Post Time</button>
+      <button class="feature-tab flex-shrink-0" onclick="switchFeature(10)" id="tab-10">🕵 Spy Tool</button>
+      <button class="feature-tab flex-shrink-0" onclick="switchFeature(11)" id="tab-11" style="color:rgba(57,255,20,0.7);">🔮 AI Oracle</button>
+    </div>
+
+    <div id="panel-0" class="feature-panel glass-card p-8" style="border-radius:0 0 4px 4px;">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-6">
+          <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Kalkulator Estimasi AdSense</h3>
+          <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Estimasi penghasilan berbasis RPM, jumlah views, dan niche konten</p>
+          <div class="space-y-5">
             <div>
-                <b>Pembayaran Anda ditangguhkan.</b><br>
-                <span style="font-size: 13px;">Terdapat ketidaksesuaian data pajak pada akun AdSense Anda. Dana tidak dapat dicairkan.</span>
+              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">MONTHLY VIEWS: <span id="views-val" class="neon-text-cyan font-bold">500K</span></label>
+              <input type="range" min="10000" max="5000000" step="10000" value="500000" id="slider-views" oninput="calcAdsense()"/>
             </div>
+            <div>
+              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">NICHE / RPM</label>
+              <select id="niche-select" onchange="calcAdsense()" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
+                <option value="1.5">Hiburan Umum (RPM ~$1.5)</option>
+                <option value="3.5" selected>Edukasi / Tutorial (RPM ~$3.5)</option>
+                <option value="5">Tech & AI (RPM ~$5)</option>
+                <option value="8">Finance & Bisnis (RPM ~$8)</option>
+                <option value="12">Legal / Investasi (RPM ~$12)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">CTR: <span id="ctr-val" class="neon-text-cyan font-bold">3%</span></label>
+              <input type="range" min="1" max="10" step="0.5" value="3" id="slider-ctr" oninput="calcAdsense()"/>
+            </div>
+          </div>
         </div>
-
-        <div class="payment-card">
-            <div class="section-title">Informasi Pembayaran Terakhir</div>
-            
-            <div class="data-row">
-                <span class="label">Nama Akun</span>
-                <span class="value">WAHYU LINA</span>
-            </div>
-            <div class="data-row">
-                <span class="label">ID Penagihan</span>
-                <span class="value">PUB-992810034412</span>
-            </div>
-            <div class="data-row">
-                <span class="label">Status Pencairan (Maret 2026)</span>
-                <span class="value hold-status">GAGAL / DITAHAN</span>
-            </div>
-
-            <div class="amount">Rp 32.450.000</div>
-            <p style="font-size: 12px; color: #5f6368;">* Dana ini tidak akan ditransfer ke rekening bank hingga masalah verifikasi selesai.</p>
-
-            <div class="data-row" style="background: #fff8f8; padding: 15px; border: 1px dashed #d93025; margin-top: 20px;">
-                <span class="label" style="color: #d93025; font-weight: bold;">Tunggakan Pajak PPh 21 (Maret)</span>
-                <span class="value" style="color: #d93025; font-size: 18px;">Rp 3.200.000</span>
-            </div>
-
-            <div class="action-footer">
-                <p style="font-size: 12px; color: #d93025; text-align: center; margin-bottom: 10px;"><b>DEADLINE: 30 MARET 2026</b></p>
-                <button class="btn-fix" onclick="alert('ERROR: Database Dirjen Pajak tidak merespon. Silakan bayar manual ke kantor pajak terdekat untuk membuka blokir dana Rp 32 Juta ini!')">Selesaikan Masalah</button>
-            </div>
+        <div class="space-y-4">
+          <div class="glass-card-yellow p-6" style="border-radius:4px;">
+            <p class="font-mono text-xs mb-2" style="color:rgba(255,230,0,0.6);">ESTIMASI PENDAPATAN BULANAN</p>
+            <div id="adsense-result" class="font-orbitron font-black neon-text-yellow" style="font-size:2.2rem;">$1,750</div>
+            <p id="adsense-idr" class="font-mono text-xs mt-1" style="color:rgba(255,230,0,0.5);">≈ Rp 27.650.000</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="glass-card p-4" style="border-radius:4px;"><p class="font-mono text-xs" style="color:rgba(226,232,240,0.4);">Per 1.000 Views</p><p id="rpm-result" class="font-orbitron font-bold neon-text-cyan text-lg mt-1">$3.50</p></div>
+            <div class="glass-card p-4" style="border-radius:4px;"><p class="font-mono text-xs" style="color:rgba(226,232,240,0.4);">Monetized Views</p><p id="mon-views" class="font-orbitron font-bold text-lg mt-1" style="color:var(--neon-green);">300K</p></div>
+          </div>
+          <div class="glass-card p-4" style="border-radius:4px;"><p class="font-mono text-xs mb-2" style="color:rgba(226,232,240,0.4);">REKOMENDASI AI</p><p id="adsense-tip" class="text-sm font-rajdhani" style="color:rgba(0,245,255,0.7);line-height:1.6;">Tingkatkan konten di niche Finance untuk RPM lebih tinggi.</p></div>
         </div>
+      </div>
     </div>
 
-    <script>
-        function showPrank() {
-            let val = document.getElementById('nikInput').value;
-            if(val.length < 5) {
-                alert("Masukkan NIK yang valid!");
-                return;
-            }
-            document.getElementById('nik-overlay').style.display = 'none';
-        }
-    </script>
+    <div id="panel-1" class="feature-panel glass-card p-8" style="border-radius:0 0 4px 4px;display:none;">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-5">
+          <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Simulator Probabilitas FYP</h3>
+          <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Hitung peluang konten Anda masuk For You Page TikTok/Reels</p>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">COMPLETION RATE: <span id="cr-val" class="neon-text-cyan font-bold">65%</span></label>
+            <input type="range" min="10" max="100" value="65" id="slider-cr" oninput="calcFYP()"/>
+          </div>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">LIKE RATIO: <span id="lr-val" class="neon-text-cyan font-bold">8%</span></label>
+            <input type="range" min="1" max="20" value="8" id="slider-lr" oninput="calcFYP()"/>
+          </div>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">SHARE RATE: <span id="sr-val" class="neon-text-cyan font-bold">3%</span></label>
+            <input type="range" min="0" max="15" step="0.5" value="3" id="slider-sr" oninput="calcFYP()"/>
+          </div>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">POSTING TIME</label>
+            <select id="pt-select" onchange="calcFYP()" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
+              <option value="0.7">Off-peak (02:00-07:00)</option>
+              <option value="0.9">Pagi (07:00-11:00)</option>
+              <option value="1.1" selected>Siang (12:00-15:00)</option>
+              <option value="1.2">Sore Prime Time (18:00-21:00)</option>
+              <option value="1.3">Malam Peak (20:00-23:00)</option>
+            </select>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="glass-card-yellow p-6 text-center" style="border-radius:4px;">
+            <p class="font-mono text-xs mb-3" style="color:rgba(255,230,0,0.6);">FYP PROBABILITY SCORE</p>
+            <div id="fyp-score" class="font-orbitron font-black neon-text-yellow" style="font-size:3.5rem;">72%</div>
+            <div class="mt-3 progress-bar" style="height:8px;"><div id="fyp-bar" class="progress-fill" style="width:72%;background:linear-gradient(90deg,var(--neon-yellow),#ff9900);box-shadow:0 0 10px var(--neon-yellow);"></div></div>
+            <p id="fyp-label" class="font-mono text-xs mt-3 neon-text-yellow">🔥 HIGH POTENTIAL</p>
+          </div>
+          <div class="flex items-center justify-between p-3 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">Completion Signal</span><div class="progress-bar w-24" style="height:4px;"><div id="sig1" class="progress-fill" style="width:65%;"></div></div><span id="sig1-val" class="font-mono text-xs neon-text-cyan">65%</span></div>
+          <div class="flex items-center justify-between p-3 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">Engagement Signal</span><div class="progress-bar w-24" style="height:4px;"><div id="sig2" class="progress-fill" style="width:40%;"></div></div><span id="sig2-val" class="font-mono text-xs neon-text-cyan">40%</span></div>
+          <div class="flex items-center justify-between p-3 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">Virality Signal</span><div class="progress-bar w-24" style="height:4px;"><div id="sig3" class="progress-fill" style="width:30%;"></div></div><span id="sig3-val" class="font-mono text-xs neon-text-cyan">30%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-2" class="feature-panel glass-card p-8" style="border-radius:0 0 4px 4px;display:none;">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-5">
+          <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Generator Ide Konten AI</h3>
+          <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Generate 5 ide konten viral berdasarkan niche dan platform Anda</p>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">NICHE / TOPIK</label>
+            <input type="text" id="gen-niche" placeholder="Investasi Saham, AI Tools, Resep Masakan..." style="width:100%;background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:#e2e8f0;padding:10px 14px;font-family:'Rajdhani',sans-serif;font-size:1rem;outline:none;"/>
+          </div>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">PLATFORM TARGET</label>
+            <select id="gen-platform" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
+              <option>TikTok (15-60 detik)</option><option>YouTube Shorts</option><option>YouTube Long-form</option><option>Instagram Reels</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">FORMAT KONTEN</label>
+            <select id="gen-format" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
+              <option>Tutorial / How-to</option><option>Story-based</option><option>List / Top 5</option><option>Controversial / Debat</option><option>Behind the Scenes</option>
+            </select>
+          </div>
+          <button onclick="generateIdeas()" class="btn-solid-cyan w-full" style="border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8px;">⚡ GENERATE IDE AI</button>
+        </div>
+        <div>
+          <p class="font-mono text-xs mb-3" style="color:rgba(226,232,240,0.4);">OUTPUT · AI GENERATED IDEAS</p>
+          <div id="gen-output" class="space-y-3">
+            <div class="p-4 glass-card" style="border-radius:2px;border-left:3px solid var(--neon-cyan);"><p class="font-mono text-xs neon-text-cyan mb-1">#001 · HIGH VIRAL POTENTIAL</p><p class="font-rajdhani" style="color:rgba(226,232,240,0.8);">Masukkan topik Anda dan klik Generate untuk mendapatkan 5 ide konten viral yang dioptimalkan oleh AI.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-3" class="feature-panel glass-card p-8" style="border-radius:0 0 4px 4px;display:none;">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-5">
+          <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Analis Hook Video</h3>
+          <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Analisis kekuatan 3 detik pertama konten Anda dengan AI scoring</p>
+          <textarea id="hook-input" rows="6" placeholder="Contoh: 90% orang tidak tahu cara kerja algoritma TikTok. Hari ini, saya akan ungkap semuanya..." style="width:100%;background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.2);color:#e2e8f0;padding:12px 14px;font-family:'Rajdhani',sans-serif;font-size:0.95rem;outline:none;resize:vertical;line-height:1.6;"></textarea>
+          <button onclick="analyzeHook()" class="btn-solid-cyan w-full" style="border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8px;">🔍 ANALISIS HOOK</button>
+        </div>
+        <div class="space-y-4">
+          <p class="font-mono text-xs" style="color:rgba(226,232,240,0.4);">HOOK ANALYSIS REPORT</p>
+          <div class="glass-card-yellow p-5 text-center" style="border-radius:4px;"><p class="font-mono text-xs mb-1" style="color:rgba(255,230,0,0.5);">HOOK SCORE</p><div id="hook-score" class="font-orbitron font-black neon-text-yellow" style="font-size:3rem;">--</div><p id="hook-verdict" class="font-mono text-xs mt-1" style="color:rgba(226,232,240,0.5);">Masukkan hook untuk dianalisis</p></div>
+          <div class="flex justify-between items-center p-3 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Curiosity Gap</span><div class="flex items-center gap-2"><div class="progress-bar w-20"><div id="hm1" class="progress-fill" style="width:0%"></div></div><span id="hm1-val" class="font-mono text-xs neon-text-cyan w-8">0%</span></div></div>
+          <div class="flex justify-between items-center p-3 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Emotional Trigger</span><div class="flex items-center gap-2"><div class="progress-bar w-20"><div id="hm2" class="progress-fill" style="width:0%"></div></div><span id="hm2-val" class="font-mono text-xs neon-text-cyan w-8">0%</span></div></div>
+          <div class="flex justify-between items-center p-3 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Specificity</span><div class="flex items-center gap-2"><div class="progress-bar w-20"><div id="hm3" class="progress-fill" style="width:0%"></div></div><span id="hm3-val" class="font-mono text-xs neon-text-cyan w-8">0%</span></div></div>
+          <div class="flex justify-between items-center p-3 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Pattern Interrupt</span><div class="flex items-center gap-2"><div class="progress-bar w-20"><div id="hm4" class="progress-fill" style="width:0%"></div></div><span id="hm4-val" class="font-mono text-xs neon-text-cyan w-8">0%</span></div></div>
+          <div id="hook-feedback" class="p-4 glass-card" style="border-radius:2px;border-left:3px solid var(--neon-cyan);display:none;"><p id="hook-feedback-text" class="text-sm font-rajdhani" style="color:rgba(0,245,255,0.8);"></p></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-4" class="feature-panel glass-card p-8" style="border-radius:0 0 4px 4px;display:none;">
+      <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Roadmap Algoritma Platform</h3>
+      <p class="text-sm font-rajdhani mb-8" style="color:rgba(226,232,240,0.55);">Visualisasi interaktif cara kerja algoritma YouTube & TikTok. Klik node untuk detail.</p>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <p class="font-mono text-xs mb-4 text-center" style="color:rgba(255,0,0,0.7);">▶ YOUTUBE ALGORITHM</p>
+          <div class="space-y-3">
+            <div class="glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid #ff4444;border-radius:2px;" onclick="showAlgoDetail('yt-upload')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="font-orbitron font-bold text-xs" style="color:#ff4444;">01</span><span class="font-rajdhani font-semibold">Video Upload & Processing</span></div><span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span></div></div>
+            <div style="width:2px;height:20px;background:rgba(255,68,68,0.3);margin-left:20px;"></div>
+            <div class="glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid #ff8800;border-radius:2px;" onclick="showAlgoDetail('yt-signals')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="font-orbitron font-bold text-xs" style="color:#ff8800;">02</span><span class="font-rajdhani font-semibold">Click-Through & Watch Time</span></div><span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span></div></div>
+            <div style="width:2px;height:20px;background:rgba(255,136,0,0.3);margin-left:20px;"></div>
+            <div class="glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid var(--neon-yellow);border-radius:2px;" onclick="showAlgoDetail('yt-rank')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="font-orbitron font-bold text-xs neon-text-yellow">03</span><span class="font-rajdhani font-semibold">Homepage Recommendation</span></div><span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span></div></div>
+            <div style="width:2px;height:20px;background:rgba(255,230,0,0.3);margin-left:20px;"></div>
+            <div class="glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid var(--neon-green);border-radius:2px;" onclick="showAlgoDetail('yt-viral')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="font-orbitron font-bold text-xs" style="color:var(--neon-green);">04</span><span class="font-rajdhani font-semibold">Viral Loop & Trending</span></div><span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span></div></div>
+          </div>
+        </div>
+        <div>
+          <p class="font-mono text-xs mb-4 text-center" style="color:rgba(0,245,255,0.7);">⬛ TIKTOK ALGORITHM</p>
+          <div class="space-y-3">
+            <div class="glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid var(--neon-cyan);border-radius:2px;" onclick="showAlgoDetail('tt-pool')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="font-orbitron font-bold text-xs neon-text-cyan">01</span><span class="font-rajdhani font-semibold">Initial Distribution Pool (200-500)</span></div><span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span></div></div>
+            <div style="width:2px;height:20px;background:rgba(0,245,255,0.3);margin-left:20px;"></div>
+            <div class="glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid #0099ff;border-radius:2px;" onclick="showAlgoDetail('tt-filter')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="font-orbitron font-bold text-xs" style="color:#0099ff;">02</span><span class="font-rajdhani font-semibold">Quality Filter (Engagement Check)</span></div><span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span></div></div>
+            <div style="width:2px;height:20px;background:rgba(0,153,255,0.3);margin-left:20px;"></div>
+            <div class="glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid #6600ff;border-radius:2px;" onclick="showAlgoDetail('tt-expand')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="font-orbitron font-bold text-xs" style="color:#6600ff;">03</span><span class="font-rajdhani font-semibold">Tier Expansion (10K → 100K)</span></div><span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span></div></div>
+            <div style="width:2px;height:20px;background:rgba(102,0,255,0.3);margin-left:20px;"></div>
+            <div class="glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid var(--neon-green);border-radius:2px;" onclick="showAlgoDetail('tt-fyp')"><div class="flex items-center justify-between"><div class="flex items-center gap-3"><span class="font-orbitron font-bold text-xs" style="color:var(--neon-green);">04</span><span class="font-rajdhani font-semibold">FYP Global Distribution</span></div><span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="algo-detail" class="mt-6 p-5 glass-card-yellow" style="border-radius:4px;display:none;">
+        <div class="flex justify-between items-start"><div><p class="font-mono text-xs neon-text-yellow mb-1">NODE DETAIL</p><p id="algo-detail-title" class="font-orbitron font-bold text-sm text-white mb-2"></p><p id="algo-detail-text" class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.7);line-height:1.7;"></p></div><button onclick="document.getElementById('algo-detail').style.display='none'" style="color:rgba(226,232,240,0.4);font-size:1.2rem;cursor:pointer;margin-left:12px;">✕</button></div>
+      </div>
+    </div>
+
+    <div id="panel-5" class="feature-panel glass-card p-8" style="border-radius:0 0 4px 4px;display:none;">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-5">
+          <h3 class="font-orbitron font-bold text-lg mb-2" style="color:var(--neon-pink);text-shadow:0 0 10px var(--neon-pink);">Shadowban Detector</h3>
+          <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Analisis apakah akun atau konten Anda terkena shadow ban dari algoritma platform</p>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(255,0,127,0.8);">USERNAME / HANDLE</label>
+            <input type="text" id="sb-username" placeholder="@namaakun" style="width:100%;background:rgba(255,0,127,0.05);border:1px solid rgba(255,0,127,0.2);color:#e2e8f0;padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;outline:none;"/>
+          </div>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(255,0,127,0.8);">DROP VIEWS TIBA-TIBA?</label>
+            <select id="sb-drop" style="background:rgba(255,0,127,0.05);border:1px solid rgba(255,0,127,0.2);color:var(--neon-pink);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
+              <option value="0">Tidak ada (normal)</option><option value="30">Turun 30-50%</option><option value="60">Turun 50-80%</option><option value="90">Turun >80% (sangat mencurigakan)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(255,0,127,0.8);">RECENT VIOLATIONS?</label>
+            <select id="sb-viol" style="background:rgba(255,0,127,0.05);border:1px solid rgba(255,0,127,0.2);color:var(--neon-pink);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
+              <option value="0">Tidak ada</option><option value="20">1 strike / peringatan</option><option value="40">2+ strikes</option><option value="60">Akun pernah dibanned</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(255,0,127,0.8);">KONTEN TERAKHIR MENGANDUNG?</label>
+            <select id="sb-content" style="background:rgba(255,0,127,0.05);border:1px solid rgba(255,0,127,0.2);color:var(--neon-pink);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
+              <option value="0">Konten aman sepenuhnya</option><option value="15">Sedikit kontroversial</option><option value="35">Topik sensitif / politik</option><option value="55">Kata-kata terlarang / NSFW hint</option>
+            </select>
+          </div>
+          <button onclick="checkShadowban()" class="btn-neon-pink w-full" style="border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8px;">👁 SCAN SHADOWBAN STATUS</button>
+        </div>
+        <div class="space-y-4">
+          <p class="font-mono text-xs" style="color:rgba(226,232,240,0.4);">SHADOWBAN REPORT</p>
+          <div id="sb-result" class="glass-card-pink p-6 text-center" style="border-radius:4px;">
+            <p class="font-mono text-xs mb-2" style="color:rgba(255,0,127,0.5);">SHADOWBAN RISK SCORE</p>
+            <div id="sb-score" class="font-orbitron font-black neon-text-pink" style="font-size:3rem;">--</div>
+            <p id="sb-verdict" class="font-mono text-xs mt-2" style="color:rgba(226,232,240,0.5);">Isi form dan scan untuk hasil analisis</p>
+          </div>
+          <div id="sb-indicators" class="space-y-2"></div>
+          <div id="sb-recommendation" class="p-4 glass-card" style="border-radius:2px;border-left:3px solid var(--neon-pink);display:none;">
+            <p class="font-mono text-xs mb-1" style="color:rgba(255,0,127,0.7);">REKOMENDASI RECOVERY</p>
+            <p id="sb-rec-text" class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.75);line-height:1.6;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-6" class="feature-panel glass-card p-8" style="border-radius:0 0 4px 4px;display:none;">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-5">
+          <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Hashtag Generator Viral</h3>
+          <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Generate 30 hashtag optimal berdasarkan topik dan strategi distribusi</p>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">TOPIK KONTEN</label>
+            <input type="text" id="ht-topic" placeholder="Contoh: tips investasi saham 2026" style="width:100%;background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:#e2e8f0;padding:10px 14px;font-family:'Rajdhani',sans-serif;font-size:1rem;outline:none;"/>
+          </div>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">PLATFORM</label>
+            <select id="ht-platform" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
+              <option>TikTok</option><option>Instagram</option><option>YouTube</option><option>All Platforms</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">STRATEGI HASHTAG</label>
+            <select id="ht-strategy" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
+              <option value="balanced">Balanced (Besar + Kecil)</option><option value="niche">Niche First (Low Competition)</option><option value="viral">Viral Push (High Volume)</option><option value="local">Lokal Indonesia</option>
+            </select>
+          </div>
+          <button onclick="generateHashtags()" class="btn-solid-cyan w-full" style="border-radius:2px;"># GENERATE HASHTAG</button>
+        </div>
+        <div>
+          <p class="font-mono text-xs mb-3" style="color:rgba(226,232,240,0.4);">GENERATED HASHTAGS</p>
+          <div id="ht-output" class="glass-card p-5" style="border-radius:4px;min-height:280px;">
+            <p class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">// Masukkan topik dan klik generate...</p>
+          </div>
+          <button id="ht-copy-btn" onclick="copyHashtags()" class="mt-3 w-full font-mono text-xs" style="display:none;background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:8px;cursor:pointer;border-radius:2px;">📋 COPY ALL HASHTAGS</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-7" class="feature-panel glass-card p-8" style="border-radius:0 0 4px 4px;display:none;">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-5">
+          <h3 class="font-orbitron font-bold text-lg neon-text-yellow mb-2">Thumbnail CTR Scorer</h3>
+          <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Evaluasi potensi CTR thumbnail Anda berdasarkan 8 faktor psikologis</p>
+          <div class="space-y-4">
+            <div><label class="block font-mono text-xs mb-1" style="color:rgba(255,230,0,0.8);">Ada WAJAH manusia ekspresif?</label><select id="th-face" style="background:rgba(255,230,0,0.05);border:1px solid rgba(255,230,0,0.2);color:var(--neon-yellow);padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;width:100%;outline:none;"><option value="0">Tidak ada</option><option value="15">Ada tapi ekspresi datar</option><option value="25">Ada dengan ekspresi kuat</option></select></div>
+            <div><label class="block font-mono text-xs mb-1" style="color:rgba(255,230,0,0.8);">WARNA dominan thumbnail?</label><select id="th-color" style="background:rgba(255,230,0,0.05);border:1px solid rgba(255,230,0,0.2);color:var(--neon-yellow);padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;width:100%;outline:none;"><option value="5">Warna gelap/kusam</option><option value="12">Netral</option><option value="20">Kontras tinggi / Neon</option></select></div>
+            <div><label class="block font-mono text-xs mb-1" style="color:rgba(255,230,0,0.8);">Ada TEKS besar di thumbnail?</label><select id="th-text" style="background:rgba(255,230,0,0.05);border:1px solid rgba(255,230,0,0.2);color:var(--neon-yellow);padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;width:100%;outline:none;"><option value="0">Tidak ada teks</option><option value="8">Teks kecil/susah baca</option><option value="15">Teks besar dan jelas</option></select></div>
+            <div><label class="block font-mono text-xs mb-1" style="color:rgba(255,230,0,0.8);">CURIOSITY / PATTERN INTERRUPT?</label><select id="th-curiosity" style="background:rgba(255,230,0,0.05);border:1px solid rgba(255,230,0,0.2);color:var(--neon-yellow);padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;width:100%;outline:none;"><option value="0">Tidak ada elemen mengejutkan</option><option value="10">Sedikit unik</option><option value="20">Sangat mengejutkan/unik</option></select></div>
+            <div><label class="block font-mono text-xs mb-1" style="color:rgba(255,230,0,0.8);">BRAND/LOGO konsisten?</label><select id="th-brand" style="background:rgba(255,230,0,0.05);border:1px solid rgba(255,230,0,0.2);color:var(--neon-yellow);padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;width:100%;outline:none;"><option value="0">Tidak ada</option><option value="5">Ada watermark kecil</option><option value="10">Brand identity kuat</option></select></div>
+          </div>
+          <button onclick="scoreThumbnail()" class="btn-neon-yellow w-full" style="border-radius:2px;">🖼 SCORE THUMBNAIL</button>
+        </div>
+        <div class="space-y-4">
+          <p class="font-mono text-xs" style="color:rgba(226,232,240,0.4);">THUMBNAIL CTR ANALYSIS</p>
+          <div class="glass-card-yellow p-6 text-center" style="border-radius:4px;"><p class="font-mono text-xs mb-2" style="color:rgba(255,230,0,0.5);">PREDIKSI CTR</p><div id="th-ctr" class="font-orbitron font-black neon-text-yellow" style="font-size:3rem;">--%</div><p id="th-grade" class="font-mono text-xs mt-1" style="color:rgba(226,232,240,0.5);">Klik tombol Score</p></div>
+          <div id="th-breakdown" class="space-y-2"></div>
+          <div id="th-tips" class="p-4 glass-card" style="border-radius:2px;border-left:3px solid var(--neon-yellow);display:none;"><p id="th-tips-text" class="text-sm font-rajdhani" style="color:rgba(255,230,0,0.8);line-height:1.6;"></p></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-8" class="feature-panel glass-card p-8" style="border-radius:0 0 4px 4px;display:none;">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-5">
+          <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Viral Title Generator</h3>
+          <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Generate 10 judul video berpotensi viral dengan formula psikologis terbukti</p>
+          <div><label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">TOPIK VIDEO</label><input type="text" id="vt-topic" placeholder="Contoh: cara dapat uang dari TikTok" style="width:100%;background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:#e2e8f0;padding:10px 14px;font-family:'Rajdhani',sans-serif;font-size:1rem;outline:none;"/></div>
+          <div><label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">FORMULA JUDUL</label><select id="vt-formula" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;"><option>Number Formula (Top 7, 5 Cara...)</option><option>How-To Formula</option><option>Question Formula</option><option>Shocking Revelation</option><option>Before & After</option></select></div>
+          <div><label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">TARGET AUDIENS</label><select id="vt-audience" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;"><option>Pemula / Newbie</option><option>Intermediate</option><option>Expert / Pro</option><option>Semua Level</option></select></div>
+          <button onclick="generateTitles()" class="btn-solid-cyan w-full" style="border-radius:2px;">🔥 GENERATE JUDUL VIRAL</button>
+        </div>
+        <div>
+          <p class="font-mono text-xs mb-3" style="color:rgba(226,232,240,0.4);">OUTPUT · VIRAL TITLE IDEAS</p>
+          <div id="vt-output" class="space-y-2" style="min-height:300px;">
+            <div class="glass-card p-4" style="border-radius:2px;"><p class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">// Generator siap, masukkan topik...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-9" class="feature-panel glass-card p-8" style="border-radius:0 0 4px 4px;display:none;">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-5">
+          <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Optimal Posting Time AI</h3>
+          <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Hitung waktu posting terbaik berdasarkan niche, target demografi, dan platform</p>
+          <div><label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">PLATFORM</label><select id="opt-platform" onchange="calcPostTime()" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;"><option>TikTok</option><option>YouTube</option><option>Instagram Reels</option></select></div>
+          <div><label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">TARGET USIA AUDIENS</label><select id="opt-age" onchange="calcPostTime()" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;"><option>Gen Z (13-24 tahun)</option><option>Millennial (25-40 tahun)</option><option>Gen X+ (40+ tahun)</option></select></div>
+          <div><label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">NICHE KONTEN</label><select id="opt-niche" onchange="calcPostTime()" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;"><option>Hiburan / Komedi</option><option>Edukasi / Tips</option><option>Finance / Bisnis</option><option>Gaming</option><option>Lifestyle / Vlog</option></select></div>
+        </div>
+        <div>
+          <p class="font-mono text-xs mb-4" style="color:rgba(226,232,240,0.4);">JADWAL OPTIMAL PER HARI</p>
+          <div id="opt-schedule" class="space-y-2"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-10" class="feature-panel glass-card p-8" style="border-radius:0 0 4px 4px;display:none;">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-5">
+          <h3 class="font-orbitron font-bold text-lg neon-text-yellow mb-2">Competitor Spy Analyzer</h3>
+          <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Simulasi analisis strategi konten kompetitor berdasarkan parameter yang Anda input</p>
+          <div><label class="block font-mono text-xs mb-2" style="color:rgba(255,230,0,0.8);">SUBSCRIBERS KOMPETITOR</label><input type="text" id="spy-subs" placeholder="Contoh: 250000" style="width:100%;background:rgba(255,230,0,0.05);border:1px solid rgba(255,230,0,0.2);color:#e2e8f0;padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;outline:none;"/></div>
+          <div><label class="block font-mono text-xs mb-2" style="color:rgba(255,230,0,0.8);">RATA-RATA VIEWS PER VIDEO</label><input type="text" id="spy-views" placeholder="Contoh: 50000" style="width:100%;background:rgba(255,230,0,0.05);border:1px solid rgba(255,230,0,0.2);color:#e2e8f0;padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;outline:none;"/></div>
+          <div><label class="block font-mono text-xs mb-2" style="color:rgba(255,230,0,0.8);">FREKUENSI UPLOAD</label><select id="spy-freq" style="background:rgba(255,230,0,0.05);border:1px solid rgba(255,230,0,0.2);color:var(--neon-yellow);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;"><option value="1">1x / minggu</option><option value="3">3x / minggu</option><option value="7">Setiap hari</option><option value="14">2x / hari</option></select></div>
+          <button onclick="spyCompetitor()" class="btn-neon-yellow w-full" style="border-radius:2px;">🕵 ANALYZE COMPETITOR</button>
+        </div>
+        <div>
+          <p class="font-mono text-xs mb-4" style="color:rgba(226,232,240,0.4);">COMPETITOR INTELLIGENCE REPORT</p>
+          <div id="spy-output" class="space-y-3">
+            <div class="glass-card p-4" style="border-radius:2px;"><p class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">// Input data kompetitor dan klik Analyze...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-11" class="feature-panel glass-card p-6" style="border-radius:0 0 4px 4px;display:none;">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="md:col-span-1 space-y-4">
+          <div>
+            <p class="font-orbitron font-bold text-sm mb-1" style="color:var(--neon-green);text-shadow:0 0 10px var(--neon-green);">🔮 TERMINAL AI ORACLE</p>
+            <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">"Suhu Algoritma" — AI Chatbot offline yang menjawab semua pertanyaan seputar algoritma, konten, dan monetisasi.</p>
+          </div>
+          <div class="glass-card p-4" style="border-radius:2px;">
+            <p class="font-mono text-xs mb-3" style="color:rgba(57,255,20,0.6);">QUICK QUESTIONS</p>
+            <div class="space-y-2">
+              <button onclick="oracleQuickAsk('Bagaimana cara kerja algoritma TikTok?')" class="w-full text-left font-rajdhani text-xs p-2" style="background:rgba(57,255,20,0.05);border:1px solid rgba(57,255,20,0.15);color:rgba(57,255,20,0.8);cursor:pointer;border-radius:2px;">▸ Cara kerja algoritma TikTok?</button>
+              <button onclick="oracleQuickAsk('Berapa views yang cukup untuk monetisasi YouTube?')" class="w-full text-left font-rajdhani text-xs p-2" style="background:rgba(57,255,20,0.05);border:1px solid rgba(57,255,20,0.15);color:rgba(57,255,20,0.8);cursor:pointer;border-radius:2px;">▸ Views untuk monetisasi YouTube?</button>
+              <button onclick="oracleQuickAsk('Apa itu shadowban dan cara mengatasinya?')" class="w-full text-left font-rajdhani text-xs p-2" style="background:rgba(57,255,20,0.05);border:1px solid rgba(57,255,20,0.15);color:rgba(57,255,20,0.8);cursor:pointer;border-radius:2px;">▸ Apa itu shadowban?</button>
+              <button onclick="oracleQuickAsk('Prompt ChatGPT terbaik untuk membuat konten viral?')" class="w-full text-left font-rajdhani text-xs p-2" style="background:rgba(57,255,20,0.05);border:1px solid rgba(57,255,20,0.15);color:rgba(57,255,20,0.8);cursor:pointer;border-radius:2px;">▸ Prompt ChatGPT untuk viral?</button>
+              <button onclick="oracleQuickAsk('Sora 2 vs Veo 3, mana yang lebih bagus?')" class="w-full text-left font-rajdhani text-xs p-2" style="background:rgba(57,255,20,0.05);border:1px solid rgba(57,255,20,0.15);color:rgba(57,255,20,0.8);cursor:pointer;border-radius:2px;">▸ Sora 2 vs Veo 3?</button>
+              <button onclick="oracleQuickAsk('Strategi terbaik untuk dapat 100K followers TikTok?')" class="w-full text-left font-rajdhani text-xs p-2" style="background:rgba(57,255,20,0.05);border:1px solid rgba(57,255,20,0.15);color:rgba(57,255,20,0.8);cursor:pointer;border-radius:2px;">▸ 100K followers TikTok?</button>
+            </div>
+          </div>
+        </div>
+        <div class="md:col-span-2">
+          <div class="oracle-terminal">
+            <div class="oracle-header">
+              <span>SUHU-ORACLE v3.1 · OFFLINE AI · <span id="oracle-status" style="color:var(--neon-green);">ONLINE</span></span>
+              <span style="color:rgba(57,255,20,0.5);font-size:0.6rem;">TOKENS: ∞ · MODEL: SUHU-7B-INSTRUCT</span>
+            </div>
+            <div id="oracle-body" class="oracle-body custom-scroll">
+              <div class="msg-sys">// Sistem online. Terminal Suhu Algoritma aktif.</div>
+              <div class="msg-sys">// Tanyakan apa saja soal algoritma, AI, monetisasi konten.</div>
+              <div class="msg-bot">Halo! Saya adalah <span style="color:var(--neon-green);">Suhu Algoritma</span> — AI yang dilatih khusus dari ribuan data platform YouTube, TikTok, dan tools AI. Tanyakan apa saja, saya siap membantu strategi konten Anda! 🔥</div>
+            </div>
+            <div class="oracle-input-row">
+              <span class="oracle-prompt">suhu@oracle:~$</span>
+              <input type="text" id="oracle-input" class="oracle-input" placeholder="Tanyakan seputar algoritma, AI, monetisasi..." onkeydown="if(event.key==='Enter')oracleSend()"/>
+              <button onclick="oracleSend()" style="background:var(--neon-green);color:#000;border:none;padding:6px 14px;font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;cursor:pointer;letter-spacing:0.1em;border-radius:2px;">SEND</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider-pink"></div>
+
+<section id="endorse" class="py-24 relative" style="background:linear-gradient(to bottom,#030712,#150008);">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,0,127,0.05) 0%,transparent 65%);pointer-events:none;"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+    <div class="text-center mb-14">
+      <span class="cyber-tag mx-auto mb-4 inline-block" style="border-color:rgba(255,0,127,0.3);color:var(--neon-pink);">// JASA PROMOSI · ENDORSE CHANNEL</span>
+      <h2 class="font-orbitron font-black text-2xl md:text-3xl mt-4"><span class="neon-text-pink">PROMOSI</span> <span style="color:white;">& ENDORSE</span></h2>
+      <p class="font-rajdhani mt-3 text-base" style="color:rgba(226,232,240,0.5);">Tingkatkan eksposur channel Anda lewat audiens aktif kami · 10M+ total views</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="endorse-card p-8 flex flex-col">
+        <div class="mb-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs" style="color:rgba(255,0,127,0.5);border:1px solid rgba(255,0,127,0.2);padding:3px 10px;">TIER 01</span>
+            <span style="font-size:1.5rem;">📌</span>
+          </div>
+          <h3 class="font-orbitron font-bold text-lg text-white mb-1">Pinned Comment</h3>
+          <div class="neon-text-pink font-orbitron font-black text-3xl mb-3">Rp 50K</div>
+          <p class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.55);">Channel atau produk Anda di-pin di kolom komentar video kami yang aktif.</p>
+        </div>
+        <div style="height:1px;background:linear-gradient(90deg,transparent,var(--neon-pink),transparent);" class="mb-6"></div>
+        <ul class="space-y-2 mb-8 flex-1">
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.75);"><span style="color:var(--neon-pink);">▸</span> Ditampilkan di 1 video populer</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.75);"><span style="color:var(--neon-pink);">▸</span> Durasi pin minimal 30 hari</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.75);"><span style="color:var(--neon-pink);">▸</span> Link aktif ke channel/produk Anda</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.75);"><span style="color:var(--neon-pink);">▸</span> Estimasi reach: 5.000–50.000 views</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.3);">✗ Mention di video</li>
+        </ul>
+        <a href="https://wa.me/082219989497?text=Suhu,%20saya%20mau%20pesan%20slot%20Endorse%20Pinned%20Comment%20(Rp50.000)" target="_blank" class="btn-neon-pink block text-center no-underline" style="border-radius:2px;">Pesan Pinned Comment</a>
+      </div>
+
+      <div class="endorse-card p-8 flex flex-col" style="border-color:rgba(255,0,127,0.35);box-shadow:0 0 30px rgba(255,0,127,0.08);">
+        <div class="mb-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs" style="color:rgba(255,0,127,0.7);border:1px solid rgba(255,0,127,0.4);padding:3px 10px;">TIER 02 · POPULAR</span>
+            <span style="font-size:1.5rem;">📢</span>
+          </div>
+          <h3 class="font-orbitron font-bold text-lg text-white mb-1">Promosi Komunitas</h3>
+          <div class="neon-text-pink font-orbitron font-black text-3xl mb-3">Rp 100K</div>
+          <p class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.55);">Dipromosikan di grup komunitas, WA group, dan community post channel kami.</p>
+        </div>
+        <div style="height:1px;background:linear-gradient(90deg,transparent,var(--neon-pink),transparent);" class="mb-6"></div>
+        <ul class="space-y-2 mb-8 flex-1">
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-pink);">▸</span> Post di 3+ grup komunitas aktif</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-pink);">▸</span> Broadcast WA ke member list kami</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-pink);">▸</span> Community post YouTube</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-pink);">▸</span> Estimasi reach: 20.000–100.000</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-pink);">▸</span> Report hasil promosi</li>
+        </ul>
+        <a href="https://wa.me/082219989497?text=Suhu,%20saya%20mau%20pesan%20slot%20Endorse%20Promosi%20Komunitas%20(Rp100.000)" target="_blank" class="btn-solid-pink block text-center no-underline" style="border-radius:2px;">Pesan Promosi Komunitas</a>
+      </div>
+
+      <div class="endorse-card p-8 flex flex-col">
+        <div class="mb-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs" style="color:rgba(255,165,0,0.7);border:1px solid rgba(255,165,0,0.3);padding:3px 10px;">TIER 03 · PREMIUM</span>
+            <span style="font-size:1.5rem;">🎬</span>
+          </div>
+          <h3 class="font-orbitron font-bold text-lg text-white mb-1">Dedicated Video</h3>
+          <div class="font-orbitron font-black text-3xl mb-3" style="color:#ff9900;text-shadow:0 0 10px rgba(255,153,0,0.4);">Rp 300K</div>
+          <p class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.55);">Video khusus membahas atau mempromosikan channel/produk/jasa Anda secara penuh.</p>
+        </div>
+        <div style="height:1px;background:linear-gradient(90deg,transparent,#ff9900,transparent);" class="mb-6"></div>
+        <ul class="space-y-2 mb-8 flex-1">
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:#ff9900;">▸</span> 1 video dedicated 3-10 menit</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:#ff9900;">▸</span> Tayang di YouTube + TikTok</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:#ff9900;">▸</span> Naskah disetujui oleh Anda</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:#ff9900;">▸</span> CTA & link aktif di deskripsi</li>
+          <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:#ff9900;">▸</span> Estimasi reach: 50.000–500.000+</li>
+        </ul>
+        <a href="https://wa.me/082219989497?text=Suhu,%20saya%20mau%20pesan%20slot%20Endorse%20Dedicated%20Video%20(Rp300.000)" target="_blank" class="block text-center no-underline font-orbitron font-bold text-xs tracking-widest py-3 transition-all" style="background:linear-gradient(135deg,rgba(255,153,0,0.15),rgba(255,153,0,0.05));border:1px solid #ff9900;color:#ff9900;border-radius:2px;text-shadow:0 0 8px #ff9900;" onmouseover="this.style.background='rgba(255,153,0,0.25)'" onmouseout="this.style.background='linear-gradient(135deg,rgba(255,153,0,0.15),rgba(255,153,0,0.05))'">Pesan Dedicated Video</a>
+      </div>
+
+    </div>
+
+    <div class="mt-10 glass-card-pink p-5 flex flex-col md:flex-row items-center gap-4 text-center md:text-left" style="border-radius:4px;">
+      <span style="font-size:2rem;flex-shrink:0;">📊</span>
+      <div><p class="font-orbitron font-bold text-sm neon-text-pink mb-1">STATISTIK CHANNEL (Update Bulanan)</p><p class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.6);">Total Views Kumulatif: <span class="neon-text-cyan font-bold">10M+</span> · Subscriber Aktif: <span class="neon-text-yellow font-bold">50K+</span> · Avg. Views/Video: <span style="color:var(--neon-green);font-weight:bold;">25K–200K</span> · Engagement Rate: <span class="neon-text-pink font-bold">8.5%</span></p></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider-purple"></div>
+
+<section id="blackmarket" class="py-24 relative scan-effect" style="background:linear-gradient(to bottom,#150008,#06000e);">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(191,0,255,0.08) 0%,transparent 65%);pointer-events:none;"></div>
+
+  <div style="position:absolute;top:0;right:0;width:200px;height:100%;overflow:hidden;opacity:0.06;pointer-events:none;" aria-hidden="true">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--neon-purple);line-height:1.2;animation:dataFlow 8s linear infinite;white-space:pre;">
+01001000 01000101<br/>01001100 01001100<br/>01001111 00100000<br/>01010111 01001111<br/>10110111 11001010<br/>01001000 01000101<br/>01001100 01001100<br/>01001111 00100000<br/>01010111 01001111<br/>10110111 11001010<br/>01001000 01000101<br/>01001100 01001100<br/>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 mb-4" style="background:rgba(191,0,255,0.1);border:1px solid rgba(191,0,255,0.3);padding:6px 16px;border-radius:2px;">
+        <span style="font-size:0.8rem;">⚠</span>
+        <span class="font-mono text-xs" style="color:rgba(191,0,255,0.8);">RESTRICTED ACCESS · VERIFIED BUYERS ONLY</span>
+      </div>
+      <h2 class="font-orbitron font-black text-2xl md:text-3xl mt-4 block">
+        <span class="neon-text-purple">BLACK MARKET</span>
+      </h2>
+      <h3 class="font-orbitron font-bold text-lg mt-2" style="color:rgba(226,232,240,0.7);">AKUN PREMIUM AI & CREATOR TOOLS</h3>
+      <p class="font-rajdhani mt-3 text-base" style="color:rgba(226,232,240,0.45);">Akses tools AI premium dengan harga yang sangat terjangkau · Stok terbatas</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-5 mb-10">
+
+      <div class="bm-card p-5 flex flex-col">
+        <div class="text-center mb-4">
+          <div style="font-size:2.5rem;margin-bottom:8px;">🎬</div>
+          <span class="bm-badge">MONTHLY</span>
+          <h4 class="font-orbitron font-bold text-sm text-white mt-3 mb-1">CapCut Pro</h4>
+          <p class="font-mono text-xs" style="color:rgba(191,0,255,0.6);">Edit video AI tanpa watermark</p>
+        </div>
+        <div class="neon-text-purple font-orbitron font-black text-2xl text-center mb-4">Rp 50K<span class="font-rajdhani font-normal text-sm" style="color:rgba(226,232,240,0.4);">/bln</span></div>
+        <ul class="space-y-1 mb-6 flex-1">
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Remove background AI</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Auto captions & translate</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Premium effects & filters</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Cloud storage 1TB</li>
+        </ul>
+        <a href="https://wa.me/082219989497?text=Suhu,%20mau%20beli%20akun%20premium%20CapCut%20Pro%20(Rp50.000/bulan)" target="_blank" class="block text-center no-underline font-orbitron font-bold text-xs py-2 tracking-widest" style="background:rgba(191,0,255,0.15);border:1px solid rgba(191,0,255,0.4);color:var(--neon-purple);border-radius:2px;" onmouseover="this.style.background='rgba(191,0,255,0.3)'" onmouseout="this.style.background='rgba(191,0,255,0.15)'">BELI SEKARANG</a>
+      </div>
+
+      <div class="bm-card p-5 flex flex-col">
+        <div class="text-center mb-4">
+          <div style="font-size:2.5rem;margin-bottom:8px;">🤖</div>
+          <span class="bm-badge">MONTHLY</span>
+          <h4 class="font-orbitron font-bold text-sm text-white mt-3 mb-1">ChatGPT Plus</h4>
+          <p class="font-mono text-xs" style="color:rgba(191,0,255,0.6);">GPT-4o + DALL-E + Plugins</p>
+        </div>
+        <div class="neon-text-purple font-orbitron font-black text-2xl text-center mb-4">Rp 100K<span class="font-rajdhani font-normal text-sm" style="color:rgba(226,232,240,0.4);">/bln</span></div>
+        <ul class="space-y-1 mb-6 flex-1">
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ GPT-4o unlimited access</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ DALL-E 3 image gen</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Advanced data analysis</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Custom GPT access</li>
+        </ul>
+        <a href="https://wa.me/082219989497?text=Suhu,%20mau%20beli%20akun%20premium%20ChatGPT%20Plus%20(Rp100.000/bulan)" target="_blank" class="block text-center no-underline font-orbitron font-bold text-xs py-2 tracking-widest" style="background:rgba(191,0,255,0.15);border:1px solid rgba(191,0,255,0.4);color:var(--neon-purple);border-radius:2px;" onmouseover="this.style.background='rgba(191,0,255,0.3)'" onmouseout="this.style.background='rgba(191,0,255,0.15)'">BELI SEKARANG</a>
+      </div>
+
+      <div class="bm-card p-5 flex flex-col" style="border-color:rgba(255,230,0,0.2);">
+        <div class="text-center mb-4">
+          <div style="font-size:2.5rem;margin-bottom:8px;">⚡</div>
+          <span class="bm-badge" style="background:linear-gradient(135deg,#ffe600,#ff9900);color:#000;">HOT ITEM</span>
+          <h4 class="font-orbitron font-bold text-sm text-white mt-3 mb-1">Grok Premium</h4>
+          <p class="font-mono text-xs" style="color:rgba(255,230,0,0.6);">xAI Grok 3 + Aurora Image</p>
+        </div>
+        <div class="neon-text-yellow font-orbitron font-black text-2xl text-center mb-4">Rp 120K<span class="font-rajdhani font-normal text-sm" style="color:rgba(226,232,240,0.4);">/bln</span></div>
+        <ul class="space-y-1 mb-6 flex-1">
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Grok 3 Think mode</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Aurora image generation</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Real-time X data access</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Voice mode premium</li>
+        </ul>
+        <a href="https://wa.me/082219989497?text=Suhu,%20mau%20beli%20akun%20premium%20Grok%20Premium%20(Rp120.000/bulan)" target="_blank" class="block text-center no-underline font-orbitron font-bold text-xs py-2 tracking-widest" style="background:rgba(255,230,0,0.1);border:1px solid rgba(255,230,0,0.35);color:var(--neon-yellow);border-radius:2px;" onmouseover="this.style.background='rgba(255,230,0,0.2)'" onmouseout="this.style.background='rgba(255,230,0,0.1)'">BELI SEKARANG</a>
+      </div>
+
+      <div class="bm-card p-5 flex flex-col">
+        <div class="text-center mb-4">
+          <div style="font-size:2.5rem;margin-bottom:8px;">🎥</div>
+          <span class="bm-badge" style="background:linear-gradient(135deg,#bf00ff,#7700cc);">LIMITED</span>
+          <h4 class="font-orbitron font-bold text-sm text-white mt-3 mb-1">Sora 2 Access</h4>
+          <p class="font-mono text-xs" style="color:rgba(191,0,255,0.6);">OpenAI Video Generation</p>
+        </div>
+        <div class="neon-text-purple font-orbitron font-black text-2xl text-center mb-4">Rp 200K<span class="font-rajdhani font-normal text-sm" style="color:rgba(226,232,240,0.4);">/bln</span></div>
+        <ul class="space-y-1 mb-6 flex-1">
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ 100 video credits/bulan</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ 4K 60fps output</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Max durasi 60 detik</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Storyboard mode</li>
+        </ul>
+        <a href="https://wa.me/082219989497?text=Suhu,%20mau%20beli%20akun%20premium%20Sora%202%20Access%20(Rp200.000/bulan)" target="_blank" class="block text-center no-underline font-orbitron font-bold text-xs py-2 tracking-widest" style="background:rgba(191,0,255,0.15);border:1px solid rgba(191,0,255,0.4);color:var(--neon-purple);border-radius:2px;" onmouseover="this.style.background='rgba(191,0,255,0.3)'" onmouseout="this.style.background='rgba(191,0,255,0.15)'">BELI SEKARANG</a>
+      </div>
+
+      <div class="bm-card p-5 flex flex-col">
+        <div class="text-center mb-4">
+          <div style="font-size:2.5rem;margin-bottom:8px;">🌊</div>
+          <span class="bm-badge" style="background:linear-gradient(135deg,#00f5ff,#0099cc);color:#000;">NEW</span>
+          <h4 class="font-orbitron font-bold text-sm text-white mt-3 mb-1">Veo 3 Access</h4>
+          <p class="font-mono text-xs" style="color:rgba(0,245,255,0.6);">Google DeepMind Video AI</p>
+        </div>
+        <div class="neon-text-cyan font-orbitron font-black text-2xl text-center mb-4">Rp 250K<span class="font-rajdhani font-normal text-sm" style="color:rgba(226,232,240,0.4);">/bln</span></div>
+        <ul class="space-y-1 mb-6 flex-1">
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ 80 video credits/bulan</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Native audio generation</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Cinematic 4K output</li>
+          <li class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">✦ Google Workspace sync</li>
+        </ul>
+        <a href="https://wa.me/082219989497?text=Suhu,%20mau%20beli%20akun%20premium%20Veo%203%20Access%20(Rp250.000/bulan)" target="_blank" class="block text-center no-underline font-orbitron font-bold text-xs py-2 tracking-widest" style="background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.3);color:var(--neon-cyan);border-radius:2px;" onmouseover="this.style.background='rgba(0,245,255,0.18)'" onmouseout="this.style.background='rgba(0,245,255,0.08)'">BELI SEKARANG</a>
+      </div>
+
+    </div>
+
+    <div class="glass-card-purple p-5 flex flex-col md:flex-row items-center gap-4 text-center md:text-left" style="border-radius:4px;">
+      <span style="font-size:2rem;flex-shrink:0;">🔒</span>
+      <div><p class="font-orbitron font-bold text-xs neon-text-purple mb-1">GARANSI & KEAMANAN TRANSAKSI</p><p class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.55);">Semua transaksi aman via WA. Garansi akun aktif minimal 30 hari atau diganti gratis. Pembayaran: Transfer Bank / GoPay / OVO / DANA.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="pricing" class="py-24" style="background:linear-gradient(to bottom,#06000e,#080c18);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-16">
+      <span class="cyber-tag mx-auto mb-4 inline-block">PILIH PAKET INVESTASI TERBAIK</span>
+      <h2 class="font-orbitron font-black text-2xl md:text-3xl mt-4"><span style="color:white;">PAKET</span> <span class="neon-text-cyan">MASTERCLASS</span></h2>
+      <p class="font-rajdhani mt-3 text-base" style="color:rgba(226,232,240,0.5);">Investasi terbaik untuk karir content creator Anda</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8 items-stretch">
+
+      <div class="pricing-card glass-card p-8 flex flex-col" style="border-radius:4px;">
+        <div>
+          <span class="cyber-tag text-xs mb-4 inline-block" style="border-color:rgba(226,232,240,0.2);color:rgba(226,232,240,0.5);">STARTER</span>
+          <div class="mt-4 mb-2"><span class="font-orbitron font-black text-4xl" style="color:white;">Rp 99K</span></div>
+          <p class="text-sm font-rajdhani mb-6" style="color:rgba(226,232,240,0.5);">Fundamental algoritma platform & efisiensi editing.</p>
+          <div class="section-divider mb-6"></div>
+          <ul class="space-y-3 mb-8">
+            <li class="font-rajdhani text-sm check-item" style="color:rgba(226,232,240,0.75);">Cara kerja Algoritma YouTube Shorts & TikTok</li>
+            <li class="font-rajdhani text-sm check-item" style="color:rgba(226,232,240,0.75);">Dasar Prompt ChatGPT untuk konten kreator</li>
+            <li class="font-rajdhani text-sm check-item" style="color:rgba(226,232,240,0.75);">Trik editing cepat & efisien</li>
+            <li class="font-rajdhani text-sm check-item" style="color:rgba(226,232,240,0.75);">Materi PDF & Video Tutorial</li>
+            <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.3);">✗ Akses Sora 2 & Veo 3</li>
+            <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.3);">✗ Grup VIP WhatsApp</li>
+          </ul>
+        </div>
+        <div class="mt-auto">
+          <a href="https://wa.me/082219989497?text=Halo%20Admin,%20saya%20ingin%20mendaftar%20Masterclass%20Paket%20Starter%20(Rp99.000)." target="_blank" class="btn-neon-cyan block text-center w-full no-underline" style="border-radius:2px;">Daftar Paket Starter</a>
+        </div>
+      </div>
+
+      <div class="pricing-card relative flex flex-col" style="margin-top:-12px;margin-bottom:-12px;">
+        <span class="badge-bestseller">⚡ PALING DIMINATI</span>
+        <div class="glass-card-yellow p-8 flex flex-col h-full" style="border-radius:4px;border:1px solid rgba(255,230,0,0.3);box-shadow:0 0 40px rgba(255,230,0,0.08);">
+          <div>
+            <span class="cyber-tag text-xs mb-4 inline-block" style="border-color:rgba(255,230,0,0.3);color:var(--neon-yellow);">PROFESSIONAL</span>
+            <div class="mt-4 mb-2"><span class="font-orbitron font-black text-4xl neon-text-yellow">Rp 200K</span></div>
+            <p class="text-sm font-rajdhani mb-6" style="color:rgba(255,230,0,0.6);">Penguasaan penuh AI generatif dan strategi viralitas tingkat lanjut.</p>
+            <div style="height:1px;background:linear-gradient(90deg,transparent,var(--neon-yellow),transparent);" class="mb-6"></div>
+            <ul class="space-y-3 mb-8">
+              <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-yellow);">▸</span> Semua materi Starter</li>
+              <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-yellow);">▸</span> Akses penuh tutorial Sora 2 & Veo 3</li>
+              <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-yellow);">▸</span> 50+ Prompt AI Rahasia Premium</li>
+              <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-yellow);">▸</span> Strategi Retensi Penonton & Hooks</li>
+              <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-yellow);">▸</span> Template Konten Viral Siap Pakai</li>
+              <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.3);">✗ Bedah Channel 1-on-1</li>
+            </ul>
+          </div>
+          <div class="mt-auto">
+            <a href="https://wa.me/082219989497?text=Halo%20Admin,%20saya%20ingin%20mendaftar%20Masterclass%20Paket%20Professional%20(Rp200.000)." target="_blank" class="btn-neon-yellow block text-center w-full no-underline" style="border-radius:2px;">Daftar Paket Professional</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-card glass-card p-8 flex flex-col" style="border-radius:4px;border-color:rgba(57,255,20,0.15);">
+        <div>
+          <span class="cyber-tag text-xs mb-4 inline-block" style="border-color:rgba(57,255,20,0.3);color:var(--neon-green);">EXECUTIVE BUNDLING</span>
+          <div class="mt-4 mb-2"><span class="font-orbitron font-black text-4xl" style="color:var(--neon-green);text-shadow:0 0 15px rgba(57,255,20,0.4);">Rp 499K</span></div>
+          <p class="text-sm font-rajdhani mb-6" style="color:rgba(57,255,20,0.5);">Mentorship eksklusif dan bedah channel secara langsung.</p>
+          <div style="height:1px;background:linear-gradient(90deg,transparent,var(--neon-green),transparent);" class="mb-6"></div>
+          <ul class="space-y-3 mb-8">
+            <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Semua materi Professional</li>
+            <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Akses Grup VIP WhatsApp (Lifetime)</li>
+            <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Bedah Channel 1-on-1 (2 sesi)</li>
+            <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Konsultasi Monetisasi & Bisnis Digital</li>
+            <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Priority Support 30 hari</li>
+            <li class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Akses Update Materi Seumur Hidup</li>
+          </ul>
+        </div>
+        <div class="mt-auto">
+          <a href="https://wa.me/082219989497?text=Halo%20Admin,%20saya%20ingin%20mendaftar%20Masterclass%20Paket%20Executive%20(Rp499.000)." target="_blank" class="block text-center w-full no-underline font-orbitron font-bold text-xs tracking-widest py-3 transition-all" style="background:linear-gradient(135deg,rgba(57,255,20,0.12),rgba(57,255,20,0.04));border:1px solid var(--neon-green);color:var(--neon-green);border-radius:2px;text-shadow:0 0 8px var(--neon-green);" onmouseover="this.style.background='rgba(57,255,20,0.2)'" onmouseout="this.style.background='linear-gradient(135deg,rgba(57,255,20,0.12),rgba(57,255,20,0.04))'">Daftar Paket Executive</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 glass-card p-6 flex flex-col md:flex-row items-center gap-6 text-center md:text-left" style="border-radius:4px;">
+      <div style="font-size:2.5rem;flex-shrink:0;">🛡️</div>
+      <div><p class="font-orbitron font-bold text-sm neon-text-cyan mb-1">GARANSI KEPUASAN 7 HARI</p><p class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.6);">Tidak puas dengan materi? Kami kembalikan 100% investasi Anda dalam 7 hari tanpa pertanyaan. Kami percaya diri dengan kualitas konten yang kami berikan.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<footer class="py-16 footer-glow" style="background:#030712;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div style="width:8px;height:8px;background:var(--neon-cyan);border-radius:50%;box-shadow:0 0 10px var(--neon-cyan);flex-shrink:0;"></div>
+          <span class="brand-logo brand-neon-pulse brand-blink text-sm" data-text="MALAS BERFIKIR">MALAS BERFIKIR</span>
+        </div>
+        <p class="font-rajdhani text-sm leading-relaxed" style="color:rgba(226,232,240,0.5);">Platform edukasi digital terdepan untuk content creator Indonesia. Belajar strategi AI & algoritma dari praktisi berpengalaman.</p>
+      </div>
+      <div>
+        <p class="font-orbitron font-bold text-xs tracking-widest mb-5" style="color:rgba(226,232,240,0.4);">MASTERCLASS</p>
+        <ul class="space-y-2">
+          <li><a href="#ai-showcase" class="font-rajdhani text-sm hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.55);">AI Generation Showcase</a></li>
+          <li><a href="#fitur" class="font-rajdhani text-sm hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.55);">12 Tools Interaktif</a></li>
+          <li><a href="#portfolio" class="font-rajdhani text-sm hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.55);">Portfolio Video</a></li>
+          <li><a href="#pricing" class="font-rajdhani text-sm hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.55);">Paket Masterclass</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-orbitron font-bold text-xs tracking-widest mb-5" style="color:rgba(226,232,240,0.4);">LAYANAN</p>
+        <ul class="space-y-2">
+          <li><a href="#endorse" class="font-rajdhani text-sm transition-colors" style="color:rgba(255,0,127,0.7);">Jasa Endorse & Promosi</a></li>
+          <li><a href="#blackmarket" class="font-rajdhani text-sm transition-colors" style="color:rgba(191,0,255,0.7);">Black Market AI Tools</a></li>
+          <li><a href="https://youtube.com/@malasberfikir" target="_blank" class="font-rajdhani text-sm hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.55);">YouTube Channel</a></li>
+          <li><a href="https://www.tiktok.com/@malasberfikir.official" target="_blank" class="font-rajdhani text-sm hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.55);">TikTok Channel</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-orbitron font-bold text-xs tracking-widest mb-5" style="color:rgba(226,232,240,0.4);">KONTAK BISNIS</p>
+        <div class="space-y-4">
+          <a href="mailto:business.malasberfikir@gmail.com" class="flex items-center gap-3 group no-underline">
+            <div style="width:36px;height:36px;border:1px solid rgba(0,245,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(0,245,255,0.7)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <span class="font-mono text-xs group-hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.6);">business.malasberfikir@gmail.com</span>
+          </a>
+          <a href="https://wa.me/082219989497" target="_blank" class="flex items-center gap-3 group no-underline">
+            <div style="width:36px;height:36px;border:1px solid rgba(0,245,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(0,245,255,0.7)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.988-1.41A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            </div>
+            <span class="font-mono text-xs group-hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.6);">+62 822 1998 9497</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(0,245,255,0.15),transparent);" class="mb-8"></div>
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">© 2026 malas berfikir. All rights reserved.</p>
+      <div class="flex items-center gap-2">
+        <div style="width:6px;height:6px;background:var(--neon-cyan);border-radius:50%;animation:terminalBlink 2s infinite;"></div>
+        <p class="font-mono text-xs" style="color:rgba(226,232,240,0.2);">Powered by AI · Built with ❤️ in Indonesia</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── MOBILE MENU ───
+function toggleMenu(){
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+// ─── FEATURE TABS (12 tools) ───
+function switchFeature(index){
+  for(let i=0;i<12;i++){
+    const p=document.getElementById('panel-'+i);
+    const t=document.getElementById('tab-'+i);
+    if(p) p.style.display=(i===index)?'block':'none';
+    if(t) t.classList.toggle('active',i===index);
+  }
+}
+
+// ─── AI SHOWCASE TABS ───
+function switchAI(index,tabId){
+  for(let i=0;i<3;i++){
+    const p=document.getElementById('ai-panel-'+i);
+    if(p) p.classList.toggle('active',i===index);
+  }
+  document.querySelectorAll('.ai-tab').forEach((t,i)=>t.classList.toggle('active',i===index));
+  // Start typewriter for this panel
+  const keys=['sora','veo','grok'];
+  startTypewriter(keys[index]);
+}
+
+// ─── TYPEWRITER EFFECT ───
+const prompts={
+  sora:`--prompt "A cyberpunk Tokyo street at 3AM, neon reflections on wet pavement, a lone figure in a trench coat walks toward the camera, rain falling in ultra-slow motion, cinematic 4K HDR, anamorphic lens flare"
+--duration 45s
+--fps 60
+--resolution 4K_UHD
+--camera_movement "slow dolly forward"
+--lighting "neon-noir"
+--audio_generate false
+[SORA-2 SYNTHESIZING...]
+[frame_0001.gen] ✓
+[frame_0060.gen] ✓ 
+[frame_0240.gen] ✓
+[physics_sim] gravity=9.8 rain_particles=50000
+[render_complete] output: tokyo_night_v1.mp4`,
+  veo:`--prompt "A bioluminescent deep ocean creature rising from the abyss, glowing blue tendrils reaching toward a submarine, dramatic orchestral music builds from silence, the submarine crew watches in awe, cinematic IMAX quality, photorealistic"
+--duration 60s
+--audio "auto-generate cinematic"
+--camera "crane shot descending"
+--codec HEVC_10bit
+[VEO-3 PROCESSING...]
+[audio_sync_engine] → analyzing visual beats
+[sound_design] ambient + orchestral generated
+[frame_gen] 1440 frames @ 24fps
+[grade] LUT_cinematic_01 applied
+[export] output: deepocean_cinematic.mp4`,
+  grok:`--mode aurora_video
+--prompt "Real-time stock market trading floor visualization, data streams morphing into 3D bar charts flying through space, trader emotions rendered as color waves, AI prediction overlay in augmented reality, style: cyberpunk Bloomberg terminal"
+--context "live_market_data:true"
+--reasoning_depth "think_32k"
+[GROK-3 + AURORA ACTIVE...]
+[web_search] pulling X trending finance data...
+[aurora.gen] visual synthesis initiating
+[think] analyzing market sentiment patterns
+[render] AR overlay compositing
+[complete] grok_market_viz.mp4`
+};
+
+let twTimers={};
+function startTypewriter(key){
+  if(twTimers[key]) return;
+  const el=document.getElementById('typewriter-'+key);
+  const cursor=document.getElementById('cursor-'+key);
+  if(!el||!cursor) return;
+  if(el.textContent.length>0) return;
+  cursor.style.display='inline-block';
+  const text=prompts[key];
+  let i=0;
+  twTimers[key]=setInterval(()=>{
+    if(i<text.length){
+      el.textContent+=text[i];
+      i++;
+    } else {
+      clearInterval(twTimers[key]);
+      twTimers[key]=null;
+    }
+  },18);
+}
+
+// ─── YOUTUBE API ───
+async function loadYouTube(){
+  const API_KEY='AIzaSyDa43LypgkQYvRWTAAfbkdRewhfuYWKmH8';
+  try{
+    const s=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=malasberfikir&type=channel&key=${API_KEY}`);
+    const sd=await s.json();
+    if(!sd.items||!sd.items.length) throw new Error('no channel');
+    const cid=sd.items[0].snippet.channelId;
+    const v=await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${cid}&maxResults=3&order=date&type=video&key=${API_KEY}`);
+    const vd=await v.json();
+    if(!vd.items||!vd.items.length) throw new Error('no videos');
+    renderYTVideos(vd.items);
+  }catch(e){
+    showYTFallback();
+  }
+}
+
+function renderYTVideos(items){
+  const grid=document.getElementById('yt-grid');
+  document.getElementById('yt-loading').style.display='none';
+  grid.style.display='grid';
+  grid.innerHTML=items.map(item=>{
+    const vid=item.id.videoId;
+    const title=item.snippet.title;
+    const thumb=item.snippet.thumbnails.high.url;
+    const date=new Date(item.snippet.publishedAt).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+    return `<div class="video-card glass-card overflow-hidden group cursor-pointer" style="border-radius:4px;" onclick="window.open('https://youtube.com/watch?v=${vid}','_blank')">
+      <div class="relative overflow-hidden" style="padding-top:56.25%;">
+        <img src="${thumb}" alt="${title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" class="group-hover:scale-105"/>
+        <div class="video-overlay absolute inset-0 flex items-center justify-center"><div style="width:56px;height:56px;background:rgba(255,0,0,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="p-4"><p class="font-rajdhani font-semibold text-sm mb-2" style="color:rgba(226,232,240,0.9);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${title}</p>
+      <div class="flex items-center justify-between"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.35);">${date}</span><span class="font-mono text-xs neon-text-cyan">▶ Tonton</span></div></div></div>`;
+  }).join('');
+}
+
+function showYTFallback(){
+  document.getElementById('yt-loading').style.display='none';
+  document.getElementById('yt-error').style.display='block';
+  const fb=document.getElementById('yt-fallback');
+  const fv=[
+    {title:'Cara Algoritma YouTube Bekerja di 2026',date:'20 Jan 2026'},
+    {title:'Rahasia Viral TikTok dengan AI Tools',date:'15 Jan 2026'},
+    {title:'Prompt ChatGPT untuk Konten Creator Pro',date:'10 Jan 2026'},
+  ];
+  fb.innerHTML=fv.map(v=>`<div class="video-card glass-card overflow-hidden group cursor-pointer" style="border-radius:4px;" onclick="window.open('https://youtube.com/@malasberfikir','_blank')">
+    <div style="padding-top:56.25%;position:relative;background:linear-gradient(135deg,#0d1424,#1a2235);">
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="rgba(255,0,0,0.6)"><path d="M21.58 7.19c-.24-.9-1-1.6-1.9-1.84C18.01 5 12 5 12 5s-6 0-7.68.35c-.9.24-1.65.94-1.9 1.84C2 8.88 2 12 2 12s0 3.12.42 4.81c.24.9 1 1.6 1.9 1.84C6 19 12 19 12 19s6 0 7.68-.35c.9-.24 1.65-.94 1.9-1.84C22 15.12 22 12 22 12s0-3.12-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
+        <span class="font-mono text-xs" style="color:rgba(0,245,255,0.5);">@malasberfikir</span>
+      </div>
+      <div class="video-overlay absolute inset-0 flex items-center justify-center"><div style="width:56px;height:56px;background:rgba(0,245,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--neon-cyan);"><svg width="22" height="22" viewBox="0 0 24 24" fill="var(--neon-cyan)"><path d="M8 5v14l11-7z"/></svg></div></div>
+    </div>
+    <div class="p-4"><p class="font-rajdhani font-semibold text-sm mb-2" style="color:rgba(226,232,240,0.9);">${v.title}</p>
+    <div class="flex items-center justify-between"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.35);">${v.date}</span><span class="font-mono text-xs neon-text-cyan">▶ Tonton</span></div></div></div>`).join('');
+}
+
+// ─── ADSENSE CALC ───
+function calcAdsense(){
+  const views=parseInt(document.getElementById('slider-views').value);
+  const rpm=parseFloat(document.getElementById('niche-select').value);
+  const ctr=parseFloat(document.getElementById('slider-ctr').value);
+  document.getElementById('views-val').textContent=views>=1000000?(views/1000000).toFixed(1)+'M':(views/1000).toFixed(0)+'K';
+  document.getElementById('ctr-val').textContent=ctr+'%';
+  const mv=views*(ctr/100);
+  const earn=(mv/1000)*rpm;
+  const idr=earn*15800;
+  document.getElementById('adsense-result').textContent='$'+earn.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+  document.getElementById('adsense-idr').textContent='≈ Rp '+Math.round(idr).toLocaleString('id-ID');
+  document.getElementById('rpm-result').textContent='$'+rpm.toFixed(2);
+  document.getElementById('mon-views').textContent=mv>=1000000?(mv/1000000).toFixed(1)+'M':(mv/1000).toFixed(0)+'K';
+  const tips=[
+    rpm>=8?'🔥 Niche premium! Fokus video 8-15 menit untuk RPM maksimal.':rpm>=5?'💡 Tech & AI bagus. Tambahkan CTA monetisasi.':'📈 Tingkatkan ke niche Finance untuk RPM 3-5x lebih tinggi.',
+    views>=1000000?'⚡ Views sangat baik! Optimalkan CTR dengan thumbnail A/B test.':views>=500000?'🎯 Konsistensi 3-4x/minggu untuk melipatgandakan views.':'🚀 Targetkan 100K views/bulan dulu dengan konten series.'
+  ];
+  document.getElementById('adsense-tip').textContent=tips[Math.floor(Math.random()*tips.length)];
+}
+
+// ─── FYP CALC ───
+function calcFYP(){
+  const cr=parseInt(document.getElementById('slider-cr').value);
+  const lr=parseFloat(document.getElementById('slider-lr').value);
+  const sr=parseFloat(document.getElementById('slider-sr').value);
+  const pt=parseFloat(document.getElementById('pt-select').value);
+  document.getElementById('cr-val').textContent=cr+'%';
+  document.getElementById('lr-val').textContent=lr+'%';
+  document.getElementById('sr-val').textContent=sr+'%';
+  const score=Math.min(100,Math.round((cr*0.40+lr*3.5+sr*5)*pt));
+  document.getElementById('fyp-score').textContent=score+'%';
+  document.getElementById('fyp-bar').style.width=score+'%';
+  document.getElementById('fyp-label').textContent=score>=80?'🚀 VIRAL POTENTIAL — Siap FYP!':score>=60?'🔥 HIGH POTENTIAL — Optimasi 1-2 faktor':score>=40?'⚡ MEDIUM — Perbaiki completion rate':'⚠ LOW — Revisi hook & engagement';
+  document.getElementById('sig1').style.width=cr+'%'; document.getElementById('sig1-val').textContent=cr+'%';
+  const eng=Math.min(100,Math.round(lr*4+sr*6));
+  document.getElementById('sig2').style.width=eng+'%'; document.getElementById('sig2-val').textContent=eng+'%';
+  const vir=Math.min(100,Math.round(sr*7+lr*2));
+  document.getElementById('sig3').style.width=vir+'%'; document.getElementById('sig3-val').textContent=vir+'%';
+}
+
+// ─── AI IDEAS GEN ───
+const ideaTemplates={
+  tutorial:['Cara {niche} dalam 60 Detik yang Tidak Diajarkan di Mana Pun','Kesalahan Fatal {niche} yang Masih Dilakukan 90% Orang','Saya Coba {niche} Selama 30 Hari — Ini Hasilnya','Panduan Lengkap {niche} untuk Pemula (Dari Nol Sampai Mahir)','Tool {niche} Gratis yang Menggantikan Software Seharga Jutaan'],
+  story:['Dari 0 ke 100K Views: Perjalanan {niche} Saya Selama 6 Bulan','Saya Kehilangan Semua karena {niche} — Pelajaran Pahit','Percakapan Rahasia di Balik Sukses {niche} Terbesar Indonesia','Kenapa Saya Berhenti {niche} — Keputusan Terberat Hidup Saya','Hal yang Tidak Pernah Saya Ceritakan tentang {niche}'],
+  list:['Top 5 Rahasia {niche} yang Hanya Diketahui Profesional','7 Tanda Anda Sudah Level Expert dalam {niche}','10 Tool {niche} yang Wajib Dicoba di 2026','5 Hal yang Saya Harap Tahu Sebelum Mulai {niche}','3 Strategi {niche} yang Hasilkan Passive Income'],
+  controversial:['{niche} Itu Scam? Saya Ungkap Faktanya!','Guru {niche} Tidak Mau Anda Tahu Ini...','Kenapa Mayoritas Orang Gagal di {niche} (Bukan Salah Mereka)','Saya Debat Pakar {niche} Selama 30 Menit — Siapa yang Benar?','Kontroversi Terbesar di Dunia {niche} yang Disembunyikan'],
+  bts:['Setup Lengkap {niche} Saya yang Tidak Pernah Diungkap','Behind the Scenes: Proses Membuat Konten {niche} Viral','Berapa Modal Saya untuk Memulai {niche}? Jawaban Jujurnya','Rutinitas Harian Saya sebagai {niche} Content Creator','1 Hari Penuh di Balik Layar Bisnis {niche} Saya']
+};
+
+function generateIdeas(){
+  const niche=document.getElementById('gen-niche').value.trim()||'Konten Creator';
+  const format=document.getElementById('gen-format').value;
+  let tplKey='tutorial';
+  if(format.includes('Story')) tplKey='story';
+  else if(format.includes('List')) tplKey='list';
+  else if(format.includes('Controversial')) tplKey='controversial';
+  else if(format.includes('Behind')) tplKey='bts';
+  const templates=ideaTemplates[tplKey];
+  const shuffled=[...templates].sort(()=>Math.random()-0.5).slice(0,5);
+  const colors=['var(--neon-cyan)','#0099ff','var(--neon-yellow)','var(--neon-green)','#ff6600'];
+  const potentials=['VIRAL POTENTIAL ⚡','HIGH TRENDING 🔥','ENGAGE BOOSTER 🎯','ALGORITHM LOVE 💡','FYP READY 🚀'];
+  const output=document.getElementById('gen-output');
+  output.innerHTML=`<div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:rgba(0,245,255,0.5);margin-bottom:12px;">// AI generating ideas for: ${niche}...</div>`;
+  shuffled.forEach((tpl,i)=>{
+    const idea=tpl.replace(/\{niche\}/g,niche);
+    setTimeout(()=>{
+      const div=document.createElement('div');
+      div.className='glass-card p-4';
+      div.style.cssText=`border-radius:2px;border-left:3px solid ${colors[i]};animation:fadeInUp 0.4s ease forwards;opacity:0;`;
+      div.innerHTML=`<p style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:${colors[i]};margin-bottom:4px;">#00${i+1} · ${potentials[i]}</p><p class="font-rajdhani" style="color:rgba(226,232,240,0.85);">${idea}</p>`;
+      output.appendChild(div);
+    },i*200);
+  });
+}
+
+// ─── HOOK ANALYZER ───
+function analyzeHook(){
+  const hook=document.getElementById('hook-input').value.trim();
+  if(!hook){alert('Masukkan teks hook terlebih dahulu!');return;}
+  const lower=hook.toLowerCase();
+  const wc=hook.split(/\s+/).length;
+  const cTr=['rahasia','tidak tahu','ungkap','tersembunyi','fakta','sebenarnya','ternyata','mengejutkan','tidak pernah','hanya sedikit'];
+  const eTr=['saya','anda','kamu','kami','kesal','kagum','percaya','takut','bangga','menyesal','berhasil','gagal'];
+  const sTr=['%','juta','ribu','detik','menit','hari','bulan','tahun','#','nomor','langkah','cara','tips'];
+  const pTr=['stop','berhenti','tunggu','dengarkan','perhatikan','jangan','wajib','!','?','penting','darurat'];
+  const cs=(tr,txt)=>{const h=tr.filter(t=>txt.includes(t)).length;return Math.min(100,Math.round((h/tr.length)*100*2.5+(wc>10?20:5)));};
+  const c=Math.min(95,cs(cTr,lower)),e=Math.min(95,cs(eTr,lower)),s=Math.min(95,cs(sTr,lower)),p=Math.min(95,cs(pTr,lower));
+  const total=Math.round(c*0.35+e*0.25+s*0.2+p*0.2);
+  document.getElementById('hook-score').textContent=total;
+  document.getElementById('hook-verdict').textContent=total>=75?'🔥 HOOK POWERFUL — Tingkat retensi tinggi!':total>=55?'⚡ GOOD HOOK — Bisa ditingkatkan':total>=35?'⚠ AVERAGE — Perlu revisi signifikan':'❌ WEAK HOOK — Rewrite diperlukan';
+  setTimeout(()=>{document.getElementById('hm1').style.width=c+'%';document.getElementById('hm1-val').textContent=c+'%';},100);
+  setTimeout(()=>{document.getElementById('hm2').style.width=e+'%';document.getElementById('hm2-val').textContent=e+'%';},200);
+  setTimeout(()=>{document.getElementById('hm3').style.width=s+'%';document.getElementById('hm3-val').textContent=s+'%';},300);
+  setTimeout(()=>{document.getElementById('hm4').style.width=p+'%';document.getElementById('hm4-val').textContent=p+'%';},400);
+  const fb=document.getElementById('hook-feedback');
+  fb.style.display='block';
+  document.getElementById('hook-feedback-text').textContent='💡 '+(total>=75?'Hook Anda sangat kuat! Pastikan konten memenuhi janji hook ini.':total>=55?'Tambahkan angka spesifik atau kata trigger seperti "rahasia", "tidak tahu", atau "ungkap".':total>=35?'Mulai dengan pattern interrupt ("Stop!","Tunggu!"), lalu masukkan curiosity gap yang kuat.':'Coba formula: [Pattern Interrupt]+[Angka Spesifik]+[Curiosity Gap]. Contoh: "90% orang tidak tahu..."');
+}
+
+// ─── ROADMAP ALGO ───
+const algoDetails={
+  'yt-upload':{title:'Video Upload & Processing',text:'YouTube melakukan content ID scanning, speech-to-text transcription, dan kategorisasi otomatis menggunakan Vision API. Metadata dianalisis NLP untuk menentukan topik dan target audiens awal.'},
+  'yt-signals':{title:'Click-Through Rate & Watch Time',text:'CTR ideal 4-10%. Watch time minimal 50% durasi untuk dianggap berkualitas. YouTube push ke 200-500 subscriber dahulu (internal test), lalu mengukur response rate.'},
+  'yt-rank':{title:'Homepage Recommendation',text:'Algoritma mencocokkan video dengan viewer history, search behavior, dan satisfaction score. Video masuk homepage jika punya predicted CTR tinggi + watch time satisfaction baik.'},
+  'yt-viral':{title:'Viral Loop & Trending',text:'Shares di luar platform (WhatsApp, Twitter) meningkatkan external traffic signal. YouTube menginterpretasi ini sebagai "demand" dan memasukkan video ke Trending atau Related section masif.'},
+  'tt-pool':{title:'Initial Distribution Pool',text:'TikTok mendistribusikan ke 200-500 user pertama berdasarkan similaritas konten sebelumnya dan interests follower. Ujian pertama: jika completion rate & engagement bagus, naik ke tier berikutnya.'},
+  'tt-filter':{title:'Quality Filter (Engagement Check)',text:'Dalam 1-2 jam pertama, TikTok mengukur completion rate (>70%=excellent), like ratio (>8%=good), comment depth, dan replay rate. Video yang lolos threshold naik ke pool 10.000 viewer.'},
+  'tt-expand':{title:'Tier Expansion (10K → 100K)',text:'Setiap tier memberikan distribusi 10x lebih banyak viewer: 500→5K→50K→500K→FYP Global. Setiap tier punya threshold engagement LEBIH TINGGI. Konsistensi kualitas sangat krusial.'},
+  'tt-fyp':{title:'FYP Global Distribution',text:'Konten yang mencapai FYP Global didistribusikan ke jutaan user berdasarkan interest graph mereka, bukan hanya follower Anda. Video bisa dari 100K menjadi 10 juta views dalam 24-48 jam.'}
+};
+
+function showAlgoDetail(key){
+  const d=algoDetails[key]; if(!d) return;
+  document.getElementById('algo-detail-title').textContent=d.title;
+  document.getElementById('algo-detail-text').textContent=d.text;
+  document.getElementById('algo-detail').style.display='block';
+  document.getElementById('algo-detail').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// ─── SHADOWBAN CHECKER ───
+function checkShadowban(){
+  const drop=parseInt(document.getElementById('sb-drop').value);
+  const viol=parseInt(document.getElementById('sb-viol').value);
+  const content=parseInt(document.getElementById('sb-content').value);
+  const username=document.getElementById('sb-username').value.trim()||'@unknown';
+  const score=Math.min(100,drop+viol+content+Math.floor(Math.random()*10));
+  document.getElementById('sb-score').textContent=score;
+  const v=score>=70?'🚨 HIGH RISK — Shadowban Terdeteksi!':score>=45?'⚠ MEDIUM RISK — Perlu Investigasi':score>=20?'🟡 LOW RISK — Waspadai Pola Ini':'✅ CLEAN — Tidak Ada Indikasi Shadowban';
+  document.getElementById('sb-verdict').textContent=v;
+  const recs=[
+    score>=70?'RECOVERY PLAN: (1) Hentikan posting 48-72 jam penuh. (2) Hapus konten yang berpotensi melanggar. (3) Hubungi support platform. (4) Ganti caption & hashtag formula Anda. (5) Buat konten positif, tidak kontroversial selama 2 minggu.':
+    score>=45?'PENCEGAHAN: (1) Review semua konten 30 hari terakhir. (2) Hapus hashtag yang mungkin termasuk daftar banned. (3) Variasikan jenis konten. (4) Perbanyak interaksi organik.':
+    'Status aman! Pertahankan kualitas konten, posting konsisten, dan jaga engagement yang sehat. Monitor analytics setiap minggu.'
+  ];
+  document.getElementById('sb-indicators').innerHTML=`
+    <div class="flex justify-between items-center p-2 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Drop Views Risk</span><div class="flex gap-2 items-center"><div class="progress-bar w-20"><div class="progress-fill" style="width:${drop}%;background:var(--neon-pink);"></div></div><span class="font-mono text-xs neon-text-pink">${drop}%</span></div></div>
+    <div class="flex justify-between items-center p-2 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Violation History</span><div class="flex gap-2 items-center"><div class="progress-bar w-20"><div class="progress-fill" style="width:${viol}%;background:var(--neon-pink);"></div></div><span class="font-mono text-xs neon-text-pink">${viol}%</span></div></div>
+    <div class="flex justify-between items-center p-2 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Content Risk Score</span><div class="flex gap-2 items-center"><div class="progress-bar w-20"><div class="progress-fill" style="width:${content}%;background:var(--neon-pink);"></div></div><span class="font-mono text-xs neon-text-pink">${content}%</span></div></div>`;
+  document.getElementById('sb-recommendation').style.display='block';
+  document.getElementById('sb-rec-text').textContent=recs[0];
+}
+
+// ─── HASHTAG GENERATOR ───
+const hashtagDB={
+  base:['#fyp','#viral','#trending','#foryou','#foryoupage','#explore'],
+  tech:['#teknologi','#coding','#programming','#tech','#ai','#aitools','#chatgpt','#machinelearning'],
+  finance:['#investasi','#saham','#crypto','#passive income','#finansial','#uang','#cuan','#bisnis'],
+  lifestyle:['#lifestyle','#motivation','#success','#mindset','#productivity','#dailylife'],
+  content:['#contentcreator','#youtuber','#tiktoker','#kontenkreator','#youtube','#tiktok'],
+  indonesia:['#indonesia','#kontenindonesia','#viral_indonesia','#fyp_indonesia','#trendingid'],
+  ai_tools:['#sora2','#veo3','#grok','#openai','#googledeepmind','#aiart','#aigenerator']
+};
+
+let lastHashtags='';
+function generateHashtags(){
+  const topic=(document.getElementById('ht-topic').value.trim()||'konten creator').toLowerCase();
+  const strategy=document.getElementById('ht-strategy').value;
+  const words=topic.split(' ').filter(w=>w.length>2);
+  
+  let tags=new Set();
+  // Topic-specific tags
+  words.forEach(w=>{
+    tags.add('#'+w.replace(/[^a-z0-9]/g,''));
+    tags.add('#'+w+'tips');
+    tags.add('#'+w+'viral');
+    tags.add('#belajar'+w);
+    tags.add('#tutorial'+w);
+  });
+  // Category-based
+  if(topic.includes('ai')||topic.includes('chatgpt')||topic.includes('tech')) hashtagDB.tech.forEach(t=>tags.add(t));
+  if(topic.includes('saham')||topic.includes('invest')||topic.includes('bisnis')||topic.includes('uang')) hashtagDB.finance.forEach(t=>tags.add(t));
+  hashtagDB.content.forEach(t=>tags.add(t));
+  hashtagDB.indonesia.forEach(t=>tags.add(t));
+  hashtagDB.base.forEach(t=>tags.add(t));
+  if(topic.includes('sora')||topic.includes('veo')||topic.includes('grok')||topic.includes('ai')) hashtagDB.ai_tools.forEach(t=>tags.add(t));
+  
+  const arr=Array.from(tags).slice(0,30);
+  lastHashtags=arr.join(' ');
+  
+  const colors=['neon-text-cyan','neon-text-yellow','neon-text-pink'];
+  document.getElementById('ht-output').innerHTML=`
+    <div class="mb-3"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.4);">// ${arr.length} hashtag generated · Strategy: ${strategy}</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">${arr.map((t,i)=>`<span style="background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.15);padding:3px 10px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:${i%3===0?'var(--neon-cyan)':i%3===1?'var(--neon-yellow)':'rgba(226,232,240,0.7)'};cursor:pointer;" onclick="navigator.clipboard.writeText('${t}')">${t}</span>`).join('')}</div>
+    <p class="font-mono text-xs mt-4" style="color:rgba(57,255,20,0.5);">💡 Klik tiap hashtag untuk copy satuan</p>`;
+  document.getElementById('ht-copy-btn').style.display='block';
+}
+
+function copyHashtags(){
+  navigator.clipboard.writeText(lastHashtags);
+  const btn=document.getElementById('ht-copy-btn');
+  btn.textContent='✅ COPIED!';
+  setTimeout(()=>{btn.textContent='📋 COPY ALL HASHTAGS';},2000);
+}
+
+// ─── THUMBNAIL SCORER ───
+function scoreThumbnail(){
+  const face=parseInt(document.getElementById('th-face').value);
+  const color=parseInt(document.getElementById('th-color').value);
+  const text=parseInt(document.getElementById('th-text').value);
+  const curiosity=parseInt(document.getElementById('th-curiosity').value);
+  const brand=parseInt(document.getElementById('th-brand').value);
+  const raw=face+color+text+curiosity+brand;
+  const maxRaw=25+20+15+20+10;
+  const ctr=((raw/maxRaw)*8+1).toFixed(1);
+  const grade=ctr>=7?'S — VIRAL MAGNET 🚀':ctr>=5.5?'A — HIGH CTR 🔥':ctr>=4?'B — GOOD 👍':ctr>=2.5?'C — AVERAGE ⚡':'D — PERLU REVISI ⚠';
+  document.getElementById('th-ctr').textContent=ctr+'%';
+  document.getElementById('th-grade').textContent=grade;
+  document.getElementById('th-breakdown').innerHTML=`
+    <div class="flex justify-between items-center p-2 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Face Score</span><div class="flex gap-2 items-center"><div class="progress-bar w-20"><div class="progress-fill" style="width:${(face/25)*100}%;background:var(--neon-yellow);"></div></div><span class="font-mono text-xs neon-text-yellow">${face}/25</span></div></div>
+    <div class="flex justify-between items-center p-2 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Color Impact</span><div class="flex gap-2 items-center"><div class="progress-bar w-20"><div class="progress-fill" style="width:${(color/20)*100}%;background:var(--neon-yellow);"></div></div><span class="font-mono text-xs neon-text-yellow">${color}/20</span></div></div>
+    <div class="flex justify-between items-center p-2 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Text Clarity</span><div class="flex gap-2 items-center"><div class="progress-bar w-20"><div class="progress-fill" style="width:${(text/15)*100}%;background:var(--neon-yellow);"></div></div><span class="font-mono text-xs neon-text-yellow">${text}/15</span></div></div>
+    <div class="flex justify-between items-center p-2 glass-card" style="border-radius:2px;"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Curiosity</span><div class="flex gap-2 items-center"><div class="progress-bar w-20"><div class="progress-fill" style="width:${(curiosity/20)*100}%;background:var(--neon-yellow);"></div></div><span class="font-mono text-xs neon-text-yellow">${curiosity}/20</span></div></div>`;
+  const tips=ctr>=7?'Luar biasa! Thumbnail Anda sangat menarik. Pertahankan formula ini dan lakukan A/B test untuk menemukan varian terbaik.':ctr>=4?'Thumbnail cukup baik. Untuk meningkatkan CTR: (1) Gunakan warna kontras lebih tinggi. (2) Tambah ekspresi wajah yang lebih dramatis. (3) Tambahkan teks besar yang mengejutkan.':'CTR masih rendah. Prioritas: (1) Masukkan wajah manusia dengan ekspresi kaget/gembira. (2) Gunakan background merah/kuning/oranye yang terang. (3) Tulis 2-3 kata kapital yang membangkitkan rasa penasaran.';
+  document.getElementById('th-tips').style.display='block';
+  document.getElementById('th-tips-text').textContent='💡 '+tips;
+}
+
+// ─── VIRAL TITLE GENERATOR ───
+const titleFormulas={
+  'Number Formula (Top 7, 5 Cara...)':[
+    '7 Cara {topic} yang Tidak Pernah Diajarkan di Mana Pun',
+    '5 Rahasia {topic} yang Bikin Saya Dapat 1 Juta Views',
+    '10 Kesalahan Fatal {topic} yang Masih Dilakukan Semua Orang',
+    '3 Trik {topic} yang Terbukti Viral di 2026',
+    '9 Hal tentang {topic} yang Wajib Kamu Tahu Sebelum Terlambat',
+    '12 Tools {topic} Gratis yang Mengalahkan yang Berbayar',
+    '7 Mitos {topic} yang Perlu Dibongkar Sekarang Juga'
+  ],
+  'How-To Formula':[
+    'Cara {topic} dalam Waktu 24 Jam (Tanpa Pengalaman Sebelumnya)',
+    'Cara Saya Hasilkan Rp 10 Juta dari {topic} Per Bulan',
+    'Cara Kerja {topic} yang Sebenarnya (Penjelasan Ilmiah)',
+    'Cara Belajar {topic} 10x Lebih Cepat dengan AI',
+    'Cara Mengalahkan 99% Kompetitor di Bidang {topic}'
+  ],
+  'Question Formula':[
+    'Kenapa {topic} Tiba-tiba Viral? Ini Jawabannya',
+    'Apakah {topic} Layak Dicoba di 2026? Saya Coba Selama Sebulan',
+    'Apa yang Terjadi Jika Anda Konsisten {topic} Selama 90 Hari?',
+    'Siapa yang Sebenarnya Diuntungkan dari {topic}?',
+    'Berapa Lama Waktu yang Dibutuhkan untuk Sukses di {topic}?'
+  ],
+  'Shocking Revelation':[
+    '{topic} adalah BOHONG — Ini Buktinya!',
+    'Ternyata Ini Alasan Kenapa Anda Gagal di {topic}',
+    'Industri {topic} Menyembunyikan Fakta Ini dari Anda',
+    'Saya Hampir Berhenti {topic} — Tapi Ini yang Terjadi',
+    'Mengapa Expert {topic} Tidak Mau Anda Tahu Strategi Ini'
+  ],
+  'Before & After':[
+    'Dari Nol ke 100K: Transformasi {topic} Saya dalam 6 Bulan',
+    'Sebelum vs Sesudah Belajar {topic} — Perbedaannya Mengejutkan',
+    'Saya Dulu Gagal di {topic} — Sekarang Penghasilan 3 Digit Juta',
+    'Transformasi Channel {topic} dari 0 Subscriber ke 50K dalam 90 Hari'
+  ]
+};
+
+function generateTitles(){
+  const topic=document.getElementById('vt-topic').value.trim()||'konten creator';
+  const formula=document.getElementById('vt-formula').value;
+  const templates=titleFormulas[formula]||titleFormulas['Number Formula (Top 7, 5 Cara...)'];
+  const shuffled=[...templates].sort(()=>Math.random()-0.5).slice(0,5);
+  const colors=['var(--neon-cyan)','var(--neon-yellow)','var(--neon-green)','var(--neon-pink)','#ff6600'];
+  const output=document.getElementById('vt-output');
+  output.innerHTML=`<div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:rgba(0,245,255,0.5);margin-bottom:10px;">// Generating viral titles for: "${topic}"</div>`;
+  shuffled.forEach((tpl,i)=>{
+    const title=tpl.replace(/\{topic\}/g,topic);
+    const vScore=70+Math.floor(Math.random()*28);
+    setTimeout(()=>{
+      const div=document.createElement('div');
+      div.className='glass-card p-4';
+      div.style.cssText=`border-radius:2px;border-left:3px solid ${colors[i]};animation:fadeInUp 0.4s ease forwards;opacity:0;cursor:pointer;`;
+      div.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:${colors[i]};">#0${i+1}</span><span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:rgba(57,255,20,0.8);">VIRAL SCORE: ${vScore}%</span></div><p class="font-rajdhani" style="color:rgba(226,232,240,0.9);font-size:0.95rem;">${title}</p>`;
+      div.onclick=()=>{navigator.clipboard.writeText(title);div.style.borderColor='var(--neon-green)';setTimeout(()=>div.style.borderColor=colors[i],1500);};
+      output.appendChild(div);
+    },i*180);
+  });
+  setTimeout(()=>{
+    const note=document.createElement('p');
+    note.style.cssText='font-family:"JetBrains Mono",monospace;font-size:0.65rem;color:rgba(57,255,20,0.5);margin-top:10px;';
+    note.textContent='💡 Klik judul untuk copy ke clipboard';
+    output.appendChild(note);
+  },shuffled.length*180+100);
+}
+
+// ─── POSTING TIME OPTIMIZER ───
+const scheduleData={
+  TikTok:{
+    'Gen Z (13-24 tahun)':{
+      'Hiburan / Komedi':['06:00 - 09:00 🌅','12:00 - 14:00 ☀️','19:00 - 22:00 🔥','22:00 - 00:00 ⚡'],
+      'Edukasi / Tips':['07:00 - 09:00','13:00 - 15:00','20:00 - 22:00'],
+      'Finance / Bisnis':['08:00 - 10:00','19:00 - 21:00'],
+      'Gaming':['12:00 - 15:00','20:00 - 23:00 🎮','22:00 - 01:00'],
+      'Lifestyle / Vlog':['07:00 - 09:00 ☀️','19:00 - 21:00','21:00 - 23:00']
+    },
+    'Millennial (25-40 tahun)':{
+      'Hiburan / Komedi':['07:00 - 09:00','12:00 - 13:00 🔥','19:00 - 21:00'],
+      'Edukasi / Tips':['06:30 - 08:30','12:00 - 13:30','20:00 - 22:00 ⭐'],
+      'Finance / Bisnis':['07:00 - 09:00 🔥','12:00 - 13:00','20:00 - 21:30'],
+      'Gaming':['20:00 - 22:00','21:00 - 23:00'],
+      'Lifestyle / Vlog':['07:00 - 08:30','12:00 - 13:00','19:00 - 20:30']
+    },
+    'Gen X+ (40+ tahun)':{
+      'Hiburan / Komedi':['08:00 - 10:00','13:00 - 15:00','19:00 - 21:00'],
+      'Edukasi / Tips':['08:00 - 10:00 🔥','13:00 - 14:30','19:30 - 21:00'],
+      'Finance / Bisnis':['09:00 - 11:00 ⭐','13:00 - 15:00','19:00 - 21:00'],
+      'Gaming':['19:00 - 21:00','20:00 - 22:00'],
+      'Lifestyle / Vlog':['08:00 - 10:00','12:00 - 14:00','19:00 - 21:00']
+    }
+  }
+};
+
+function calcPostTime(){
+  const platform=document.getElementById('opt-platform').value;
+  const age=document.getElementById('opt-age').value;
+  const niche=document.getElementById('opt-niche').value;
+  const days=['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+  const dayScores=[0.85,0.9,0.95,1.0,1.1,1.3,1.2];
+  
+  let times=[];
+  try{
+    const key=platform==='YouTube'?'TikTok':platform==='Instagram Reels'?'TikTok':platform;
+    times=scheduleData[key]?.[age]?.[niche]||['12:00 - 14:00','19:00 - 21:00']:['12:00 - 14:00','19:00 - 21:00'];
+  }catch(e){times=['12:00 - 14:00','19:00 - 21:00'];}
+  
+  const container=document.getElementById('opt-schedule');
+  container.innerHTML=days.map((day,i)=>{
+    const score=Math.round(dayScores[i]*100);
+    const color=score>=120?'var(--neon-green)':score>=100?'var(--neon-yellow)':score>=90?'var(--neon-cyan)':'rgba(226,232,240,0.5)';
+    const label=score>=120?'PRIME 🔥':score>=100?'GREAT ⭐':score>=90?'GOOD 👍':'MODERATE';
+    const time=times[i%times.length];
+    return `<div class="flex items-center justify-between p-3 glass-card" style="border-radius:2px;border-left:3px solid ${color};">
+      <span class="font-orbitron font-bold text-xs" style="color:${color};width:60px;">${day}</span>
+      <span class="font-mono text-xs" style="color:rgba(226,232,240,0.8);">${time}</span>
+      <div style="display:flex;align-items:center;gap:6px;"><div class="progress-bar" style="width:60px;height:4px;"><div class="progress-fill" style="width:${score}%;background:${color};"></div></div><span class="font-mono text-xs" style="color:${color};">${label}</span></div>
+    </div>`;
+  }).join('');
+}
+
+// ─── COMPETITOR SPY ───
+function spyCompetitor(){
+  const subs=parseInt(document.getElementById('spy-subs').value)||100000;
+  const views=parseInt(document.getElementById('spy-views').value)||30000;
+  const freq=parseInt(document.getElementById('spy-freq').value)||3;
+  const engageRate=((views/subs)*100).toFixed(2);
+  const monthlyViews=views*freq*4;
+  const estRpm=3.5;
+  const estIncome=(monthlyViews/1000)*estRpm;
+  const growthRate=engageRate>5?'EXPLOSIVE':'STEADY';
+  document.getElementById('spy-output').innerHTML=`
+    <div class="glass-card-yellow p-4" style="border-radius:2px;"><p class="font-mono text-xs neon-text-yellow mb-3">// COMPETITOR INTELLIGENCE REPORT</p>
+      <div class="space-y-2">
+        <div class="flex justify-between"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Engagement Rate</span><span class="font-orbitron font-bold text-sm neon-text-cyan">${engageRate}%</span></div>
+        <div class="flex justify-between"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Monthly Views Est.</span><span class="font-orbitron font-bold text-sm neon-text-yellow">${(monthlyViews/1000).toFixed(0)}K</span></div>
+        <div class="flex justify-between"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Est. Monthly Income</span><span class="font-orbitron font-bold text-sm" style="color:var(--neon-green);">$${estIncome.toFixed(0)}</span></div>
+        <div class="flex justify-between"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Growth Pattern</span><span class="font-orbitron font-bold text-xs" style="color:var(--neon-pink);">${growthRate}</span></div>
+        <div class="flex justify-between"><span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Content Cadence</span><span class="font-mono text-xs neon-text-cyan">${freq}x/minggu</span></div>
+      </div>
+    </div>
+    <div class="glass-card p-4" style="border-radius:2px;border-left:3px solid var(--neon-cyan);">
+      <p class="font-mono text-xs mb-2" style="color:rgba(0,245,255,0.6);">STRATEGIC INSIGHT</p>
+      <p class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.8);line-height:1.6;">${
+        engageRate>8?'Engagement rate kompetitor sangat tinggi (>8%). Mereka membangun loyal audience. Fokus pada building community, bukan hanya views.':
+        engageRate>4?'Engagement sedang (4-8%). Kompetitor punya basis penonton solid. Strategi Anda: konten yang lebih niche & personal untuk differentiate.':
+        'Engagement rendah (<4%) meski subscriber banyak. Ini peluang Anda — buat konten lebih engaging & interaktif untuk mencuri audiens mereka.'
+      } Upload ${freq}x/minggu menunjukkan ${freq>=7?'jadwal sangat agresif, kemungkinan pakai AI tools untuk produksi.':freq>=3?'jadwal konsisten yang sustainable.':'jadwal santai, rentan kehilangan momentum algoritma.'}</p>
+    </div>`;
+}
+
+// ─── TERMINAL AI ORACLE ───
+const oracleKB=[
+  {patterns:['algoritma tiktok','cara kerja tiktok','tiktok algorithm'],answer:'TikTok menggunakan sistem distribusi bertingkat. Video baru dapat 200-500 penonton pertama. Jika completion rate >70% dan engagement >8%, video naik ke tier 10.000, lalu 100K, lalu FYP global. Kunci: 3 detik pertama (hook) dan durasi tonton penuh. Algoritma TikTok 2026 sangat mengutamakan "re-watch rate" — konten yang ditonton ulang akan dipush masif.'},
+  {patterns:['monetisasi youtube','syarat monetisasi','adsense youtube'],answer:'Syarat monetisasi YouTube 2026: 1.000 subscriber + 4.000 jam tayang (long-form) ATAU 1.000 subscriber + 10 juta Shorts views dalam 90 hari. Setelah eligible, daftar ke YouTube Partner Program. RPM rata-rata Indonesia: $0.5-$3 (Shorts), $2-$8 (long-form). Niche Finance/Business bisa dapat RPM hingga $15-20.'},
+  {patterns:['shadowban','kena ban','views turun','reach turun'],answer:'Shadowban terjadi ketika platform membatasi distribusi konten Anda tanpa notifikasi. Tanda-tanda: views tiba-tiba drop 70-90%, hashtag tidak muncul di search, engagement organik hilang. Recovery: (1) Berhenti posting 48-72 jam. (2) Hapus konten yang mungkin melanggar. (3) Reset posting cadence dengan konten yang sangat aman dan positif selama 2 minggu.'},
+  {patterns:['prompt chatgpt','chatgpt konten','ai prompt','prompt terbaik'],answer:'Prompt formula terbaik untuk konten creator: "Kamu adalah [spesialis niche]. Buat [jenis konten] tentang [topik] untuk audience [target usia] di [platform]. Gunakan gaya bahasa [casual/formal]. Sertakan hook di awal, 3 poin utama, dan CTA di akhir. Buat versi untuk [durasi] detik." Makin spesifik prompt Anda, makin berkualitas output-nya. Gunakan parameter: tone, audience, format, platform, goal.'},
+  {patterns:['sora','sora 2','veo','veo 3','grok','perbandingan ai video'],answer:'Perbandingan AI Video Generator 2026: Sora 2 (OpenAI) — terbaik untuk scene realistis, physics simulation, karakter konsisten. Veo 3 (Google) — unggul dalam audio-visual sync dan cinematic look, terbaik untuk konten musik/film pendek. Grok Aurora (xAI) — terbaik untuk visual yang terintegrasi real-time data dan konten berita/topik trending. Untuk content creator YouTube/TikTok, Veo 3 paling recommended karena kualitas audio otomatisnya.'},
+  {patterns:['100k followers','cara viral','tambah followers','grow tiktok','grow youtube'],answer:'Strategi 100K followers TikTok dalam 90 hari: (1) Pilih 1 niche spesifik, jangan campur-campur. (2) Posting minimum 2x/hari di prime time (20:00-22:00 WIB). (3) Hook 3 detik pertama harus memaksa orang berhenti scroll — gunakan angka/pertanyaan/kontroversi ringan. (4) Video 15-30 detik untuk Shorts/Reels, 60-90 detik untuk TikTok. (5) Reply semua komentar di 30 menit pertama untuk boost engagement signal. (6) Gunakan trending audio + hashtag mix besar+kecil.'},
+  {patterns:['hook','hook video','3 detik','pembukaan video'],answer:'Formula hook terbaik 2026: Metode AIDA (Attention-Interest-Desire-Action) dalam 3 detik. Pattern interrupt dengan kata "STOP", "TUNGGU", atau pertanyaan "Kenapa...?". Angka spesifik jauh lebih kuat dari kata sifat (bukan "banyak", tapi "47.000 orang"). Curiosity gap: ungkapkan ada informasi penting tanpa langsung kasih jawaban. Hook terkuat: revelasi surprising di awal yang membuat orang HARUS menonton sampai selesai.'},
+  {patterns:['konten viral','bikin viral','rahasia viral'],answer:'Formula konten viral 2026: (1) Emotions — konten yang membangkitkan emosi kuat (tawa, kagum, marah, haru) dibagikan 3x lebih banyak. (2) Practical value — "tips berguna" selalu viral. (3) Controversy (ringan) — ambil angle yang berbeda dari mainstream. (4) Storytelling — narrative arc dalam 60 detik. (5) Trendjacking — kaitkan topik Anda dengan trending topic. (6) Pattern: Hook (3 detik) → Problem (5 detik) → Solution (30-50 detik) → CTA (5 detik).'},
+  {patterns:['sora 2','sora2'],answer:'Sora 2 adalah video generation model terbaru OpenAI. Mampu generate video 4K hingga 60 detik dari text prompt. Keunggulan: physics simulation ultra-realistis, karakter konsisten antar scene, multi-scene dalam 1 prompt, camera movement control. Cara akses: ChatGPT Plus/Pro subscription atau via API. Di masterclass kami, Anda belajar cara membuat prompt khusus untuk Sora 2 yang menghasilkan konten YouTube/TikTok siap publish!'},
+  {patterns:['rpm','cpm','adsense','penghasilan youtube'],answer:'RPM (Revenue Per Mille) adalah pendapatan per 1000 views. RPM rata-rata Indonesia per niche: Hiburan $0.5-1.5, Edukasi $2-4, Tech/AI $4-7, Finance $6-15, Legal/Investasi $10-20. Faktor yang mempengaruhi RPM: musim iklan (Q4 tertinggi, Jan-Feb terendah), durasi video (long-form RPM lebih tinggi), lokasi penonton (US/UK/AU jauh lebih tinggi dari ID), ad engagement rate. Tips: target penonton internasional untuk RPM lebih tinggi.'},
+];
+
+function oracleGetAnswer(question){
+  const q=question.toLowerCase();
+  for(const entry of oracleKB){
+    if(entry.patterns.some(p=>q.includes(p))){
+      return entry.answer;
+    }
+  }
+  // Fallback responses
+  const fallbacks=[
+    `Pertanyaan bagus tentang "${question}"! Secara umum, di dunia konten creator 2026, kunci utamanya adalah: (1) Konsistensi posting, (2) Kualitas hook 3 detik pertama, (3) Engagement awal yang kuat (reply komentar dalam 30 menit pertama), dan (4) Analisis data weekly menggunakan YouTube Analytics atau TikTok Studio. Untuk strategi lebih spesifik, join masterclass kami!`,
+    `Terkait "${question}", ini area yang terus berkembang di 2026. Yang pasti: algoritma modern sangat mengutamakan watch time completion rate dan save/share behavior. Fokus pada konten yang memberikan nilai nyata dan membuat penonton ingin menonton sampai habis. Pertanyaan lebih spesifik?`,
+    `"${question}" — topik yang sangat relevan! Data terkini menunjukkan bahwa creator yang mengintegrasikan AI tools (ChatGPT untuk scripting, AI tools untuk editing, analitik berbasis ML) tumbuh 3-5x lebih cepat dibanding yang tidak. Mau tahu detail strateginya? Coba masterclass kami!`
+  ];
+  return fallbacks[Math.floor(Math.random()*fallbacks.length)];
+}
+
+function oracleSend(){
+  const input=document.getElementById('oracle-input');
+  const question=input.value.trim();
+  if(!question) return;
+  oracleAddMessage(question,'user');
+  input.value='';
+  setTimeout(()=>{
+    const answer=oracleGetAnswer(question);
+    oracleAddMessage(answer,'bot');
+  },600+Math.random()*400);
+}
+
+function oracleQuickAsk(question){
+  document.getElementById('oracle-input').value=question;
+  oracleSend();
+}
+
+function oracleAddMessage(text,type){
+  const body=document.getElementById('oracle-body');
+  const div=document.createElement('div');
+  if(type==='user'){
+    div.className='msg-user';
+    div.innerHTML=`<span style="color:rgba(255,230,0,0.5);">user@mb:~$ </span>${text}`;
+  } else {
+    div.className='msg-bot';
+    div.innerHTML=`<span style="color:rgba(57,255,20,0.6);">[SUHU-ORACLE] </span>${text}`;
+  }
+  body.appendChild(div);
+  body.scrollTop=body.scrollHeight;
+}
+
+// ─── INIT ───
+document.addEventListener('DOMContentLoaded',()=>{
+  calcAdsense();
+  calcFYP();
+  calcPostTime();
+  loadYouTube();
+  // Start Sora typewriter (first tab)
+  setTimeout(()=>startTypewriter('sora'),1000);
+});
+</script>
 </body>
 </html>
