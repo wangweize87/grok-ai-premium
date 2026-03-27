@@ -1,1394 +1,195 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Masterclass AI & Algoritma | malas berfikir</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet"/>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            orbitron: ['Orbitron', 'sans-serif'],
-            rajdhani: ['Rajdhani', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            neon: {
-              cyan: '#00f5ff',
-              yellow: '#ffe600',
-              green: '#39ff14',
-            },
-            dark: {
-              950: '#030712',
-              900: '#0a0e1a',
-              800: '#0d1424',
-              700: '#111827',
-              600: '#1a2235',
-            }
-          },
-          animation: {
-            'glitch': 'glitch 3s infinite',
-            'scanline': 'scanline 8s linear infinite',
-            'pulse-neon': 'pulseNeon 2s ease-in-out infinite',
-            'float': 'float 6s ease-in-out infinite',
-            'data-flow': 'dataFlow 20s linear infinite',
-            'border-dance': 'borderDance 4s linear infinite',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    :root {
-      --neon-cyan: #00f5ff;
-      --neon-yellow: #ffe600;
-      --neon-green: #39ff14;
-      --bg-deep: #030712;
-      --bg-card: rgba(13, 20, 36, 0.85);
-      --glass: rgba(0, 245, 255, 0.04);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background-color: var(--bg-deep);
-      font-family: 'Rajdhani', sans-serif;
-      color: #e2e8f0;
-      overflow-x: hidden;
-    }
-    /* CUSTOM SCROLLBAR */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #030712; }
-    ::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 2px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrokAI Premium</title>
 
-    /* NOISE OVERLAY */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 0; opacity: 0.4;
-    }
+<script src="https://cdn.tailwindcss.com"></script>
 
-    /* GRID BACKGROUND */
-    .grid-bg {
-      background-image: linear-gradient(rgba(0,245,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,245,255,0.04) 1px, transparent 1px);
-      background-size: 50px 50px;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    /* NEON TEXT */
-    .neon-text-cyan { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan), 0 0 30px rgba(0,245,255,0.4); }
-    .neon-text-yellow { color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow), 0 0 30px rgba(255,230,0,0.4); }
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    /* NEON BORDERS */
-    .neon-border-cyan { border: 1px solid rgba(0,245,255,0.4); box-shadow: 0 0 15px rgba(0,245,255,0.1), inset 0 0 15px rgba(0,245,255,0.03); }
-    .neon-border-yellow { border: 1px solid rgba(255,230,0,0.4); box-shadow: 0 0 15px rgba(255,230,0,0.1), inset 0 0 15px rgba(255,230,0,0.03); }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    /* GLASSMORPHISM */
-    .glass-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(0,245,255,0.12);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,245,255,0.05) inset;
-    }
-    .glass-card-yellow {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,230,0,0.2);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 30px rgba(255,230,0,0.06) inset;
-    }
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background: #050505;
+}
 
-    /* BUTTONS */
-    .btn-neon-cyan {
-      background: transparent;
-      border: 1px solid var(--neon-cyan);
-      color: var(--neon-cyan);
-      padding: 12px 28px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      position: relative;
-      transition: all 0.3s ease;
-      overflow: hidden;
-      text-shadow: 0 0 8px var(--neon-cyan);
-      box-shadow: 0 0 15px rgba(0,245,255,0.2);
-    }
-    .btn-neon-cyan::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: var(--neon-cyan);
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-      z-index: -1;
-    }
-    .btn-neon-cyan:hover::before { transform: translateX(0); }
-    .btn-neon-cyan:hover { color: #030712; text-shadow: none; box-shadow: 0 0 30px rgba(0,245,255,0.5); }
+.glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
 
-    .btn-neon-yellow {
-      background: linear-gradient(135deg, rgba(255,230,0,0.15), rgba(255,230,0,0.05));
-      border: 1px solid var(--neon-yellow);
-      color: var(--neon-yellow);
-      padding: 12px 28px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      position: relative;
-      transition: all 0.3s ease;
-      overflow: hidden;
-      text-shadow: 0 0 8px var(--neon-yellow);
-      box-shadow: 0 0 15px rgba(255,230,0,0.15);
-    }
-    .btn-neon-yellow:hover {
-      background: var(--neon-yellow);
-      color: #030712;
-      text-shadow: none;
-      box-shadow: 0 0 30px rgba(255,230,0,0.5);
-    }
+.gradient-text {
+  background: linear-gradient(90deg, #7c3aed, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-    .btn-solid-cyan {
-      background: linear-gradient(135deg, #00f5ff, #00b8d9);
-      color: #030712;
-      padding: 12px 28px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(0,245,255,0.4);
-    }
-    .btn-solid-cyan:hover { box-shadow: 0 0 40px rgba(0,245,255,0.7); transform: translateY(-2px); }
+.btn-glow:hover {
+  box-shadow: 0 0 25px rgba(124,58,237,0.9);
+}
 
-    /* ANIMATIONS */
-    @keyframes glitch {
-      0%, 90%, 100% { transform: translate(0); clip-path: none; }
-      91% { transform: translate(-3px, 1px); }
-      92% { transform: translate(3px, -1px); clip-path: inset(20% 0 60% 0); }
-      93% { transform: translate(-2px, 0); }
-      94% { transform: translate(2px, 1px); clip-path: inset(60% 0 20% 0); }
-      95% { transform: translate(0); }
-    }
-    @keyframes pulseNeon {
-      0%, 100% { text-shadow: 0 0 10px var(--neon-cyan), 0 0 30px rgba(0,245,255,0.4); }
-      50% { text-shadow: 0 0 20px var(--neon-cyan), 0 0 60px rgba(0,245,255,0.7), 0 0 100px rgba(0,245,255,0.3); }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-16px); }
-    }
-    @keyframes scanline {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(100vh); }
-    }
-    @keyframes dataFlow {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-50%); }
-    }
-    @keyframes borderDance {
-      0%, 100% { border-color: rgba(0,245,255,0.4); }
-      50% { border-color: rgba(0,245,255,1); box-shadow: 0 0 25px rgba(0,245,255,0.5); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes countUp { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    @keyframes shimmer {
-      0% { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
+.card-hover:hover {
+  transform: translateY(-5px) scale(1.03);
+}
 
-    .animate-fade-in-up { animation: fadeInUp 0.8s ease forwards; }
-    .animate-float { animation: float 6s ease-in-out infinite; }
-    .animate-pulse-neon { animation: pulseNeon 2s ease-in-out infinite; }
-    .animate-glitch { animation: glitch 4s infinite; }
-    .delay-100 { animation-delay: 0.1s; }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
-    .delay-400 { animation-delay: 0.4s; }
-    .delay-500 { animation-delay: 0.5s; }
-
-    /* SCANLINE EFFECT */
-    .scanline::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(transparent, rgba(0,245,255,0.15), transparent);
-      animation: scanline 8s linear infinite;
-      pointer-events: none;
-    }
-
-    /* SECTION DIVIDER */
-    .section-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
-      margin: 0;
-    }
-
-    /* TAG */
-    .cyber-tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(0,245,255,0.08);
-      border: 1px solid rgba(0,245,255,0.25);
-      padding: 4px 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      color: var(--neon-cyan);
-    }
-
-    /* NAV */
-    .nav-link {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(226,232,240,0.7);
-      transition: color 0.3s;
-    }
-    .nav-link:hover { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
-
-    /* PRICING CARD */
-    .pricing-card {
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .pricing-card:hover { transform: translateY(-8px); }
-
-    .badge-bestseller {
-      background: linear-gradient(135deg, #ffe600, #ff9900);
-      color: #030712;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      padding: 4px 12px;
-      position: absolute;
-      top: -14px; left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
-    }
-
-    /* FEATURE TABS */
-    .feature-tab {
-      cursor: pointer;
-      padding: 12px 20px;
-      border-bottom: 2px solid transparent;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      transition: all 0.3s;
-      color: rgba(226,232,240,0.5);
-    }
-    .feature-tab.active {
-      border-bottom-color: var(--neon-cyan);
-      color: var(--neon-cyan);
-      text-shadow: 0 0 8px var(--neon-cyan);
-    }
-    .feature-tab:hover { color: rgba(0,245,255,0.8); }
-
-    /* VIDEO CARD */
-    .video-card {
-      transition: all 0.3s ease;
-    }
-    .video-card:hover { transform: translateY(-4px); }
-    .video-card:hover .video-overlay { opacity: 1; }
-    .video-overlay {
-      opacity: 0;
-      transition: opacity 0.3s;
-      background: rgba(0,245,255,0.15);
-    }
-
-    /* RANGE SLIDER */
-    input[type=range] {
-      -webkit-appearance: none;
-      width: 100%; height: 4px;
-      background: rgba(0,245,255,0.2);
-      outline: none; border-radius: 2px;
-    }
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: var(--neon-cyan);
-      cursor: pointer;
-      box-shadow: 0 0 10px var(--neon-cyan);
-    }
-
-    /* PROGRESS BAR */
-    .progress-bar {
-      height: 4px;
-      background: rgba(0,245,255,0.15);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--neon-cyan), #0099ff);
-      border-radius: 2px;
-      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 0 8px var(--neon-cyan);
-    }
-
-    /* ALGORITHM NODE */
-    .algo-node {
-      transition: all 0.3s;
-    }
-    .algo-node:hover { transform: scale(1.05); }
-
-    /* HERO DECO CIRCLES */
-    .deco-circle {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    /* SHIMMER TEXT */
-    .shimmer-text {
-      background: linear-gradient(90deg, var(--neon-yellow) 0%, #ffffff 40%, var(--neon-cyan) 60%, var(--neon-yellow) 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmer 4s linear infinite;
-    }
-
-    /* MOBILE MENU */
-    #mobile-menu { display: none; }
-    #mobile-menu.open { display: block; }
-
-    /* TOOLTIP */
-    .tooltip {
-      position: relative;
-    }
-    .tooltip-text {
-      display: none;
-      position: absolute;
-      bottom: 120%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,245,255,0.15);
-      border: 1px solid var(--neon-cyan);
-      padding: 6px 12px;
-      font-size: 0.75rem;
-      white-space: nowrap;
-      z-index: 10;
-    }
-    .tooltip:hover .tooltip-text { display: block; }
-
-    /* CHECKLIST */
-    .check-item::before {
-      content: '▸';
-      color: var(--neon-cyan);
-      margin-right: 8px;
-    }
-
-    /* FOOTER GLOW */
-    .footer-glow {
-      background: radial-gradient(ellipse at center bottom, rgba(0,245,255,0.06) 0%, transparent 70%);
-    }
-  </style>
+.fake-popup {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 999;
+}
+</style>
 </head>
-<body class="grid-bg">
 
-<!-- ══════════════ NAVIGATION ══════════════ -->
-<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(3,7,18,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,245,255,0.1);">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-    <div class="flex items-center gap-3">
-      <div style="width:8px;height:8px;background:var(--neon-cyan);border-radius:50%;box-shadow:0 0 10px var(--neon-cyan);animation:pulseNeon 2s infinite;"></div>
-      <span class="font-orbitron text-xs font-bold tracking-widest neon-text-cyan">MALAS BERFIKIR</span>
-    </div>
-    <div class="hidden md:flex items-center gap-8">
-      <a href="#fitur" class="nav-link">Fitur</a>
-      <a href="#portfolio" class="nav-link">Portfolio</a>
-      <a href="#pricing" class="nav-link">Harga</a>
-      <a href="https://wa.me/082219989497" target="_blank" class="btn-neon-cyan text-xs" style="padding:8px 20px;">Daftar Sekarang</a>
-    </div>
-    <button id="menu-toggle" class="md:hidden text-cyan-400" onclick="toggleMenu()">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
-    </button>
-  </div>
-  <div id="mobile-menu" style="background:rgba(3,7,18,0.98);border-top:1px solid rgba(0,245,255,0.1);">
-    <div class="px-6 py-4 flex flex-col gap-4">
-      <a href="#fitur" class="nav-link py-2" onclick="toggleMenu()">Fitur</a>
-      <a href="#portfolio" class="nav-link py-2" onclick="toggleMenu()">Portfolio</a>
-      <a href="#pricing" class="nav-link py-2" onclick="toggleMenu()">Harga</a>
-      <a href="https://wa.me/082219989497" target="_blank" class="btn-neon-cyan text-center">Daftar Sekarang</a>
-    </div>
+<body class="text-white">
+
+<!-- NAVBAR -->
+<nav class="fixed w-full top-0 z-50 glass">
+  <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+    <h1 class="text-xl font-bold gradient-text">GrokAI Premium</h1>
+    <a href="#harga" class="bg-gradient-to-r from-purple-600 to-cyan-500 px-4 py-2 rounded-lg btn-glow text-sm">
+      Beli Sekarang
+    </a>
   </div>
 </nav>
 
-<!-- ══════════════ HERO SECTION ══════════════ -->
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden scanline pt-20" style="background: radial-gradient(ellipse at 20% 50%, rgba(0,245,255,0.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(255,230,0,0.03) 0%, transparent 50%);">
+<!-- HERO -->
+<section class="relative h-screen flex items-center justify-center text-center">
+  <video autoplay muted loop class="absolute w-full h-full object-cover">
+    <source src="https://cdn.coverr.co/videos/coverr-artificial-intelligence-technology-9710/1080p.mp4">
+  </video>
+  <div class="absolute inset-0 bg-black/70"></div>
 
-  <!-- Deco Circles -->
-  <div class="deco-circle" style="width:600px;height:600px;border:1px solid rgba(0,245,255,0.06);top:-100px;right:-200px;animation:rotate 40s linear infinite;"></div>
-  <div class="deco-circle" style="width:400px;height:400px;border:1px solid rgba(255,230,0,0.05);bottom:-100px;left:-150px;animation:rotate 30s linear infinite reverse;"></div>
-  <div class="deco-circle" style="width:200px;height:200px;border:1px solid rgba(0,245,255,0.08);top:20%;left:5%;animation:rotate 20s linear infinite;"></div>
+  <div class="relative z-10 px-4" data-aos="fade-up">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">
+      AI Premium Tanpa Batas 🔥
+    </h1>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-20 relative z-10">
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
+    <p class="text-gray-300 mb-6 max-w-xl mx-auto">
+      Chat unlimited + Video AI super cepat. Tanpa iklan. Harga murah tapi fitur DEWA.
+    </p>
 
-      <!-- LEFT CONTENT -->
-      <div class="space-y-8 animate-fade-in-up">
-        <div class="flex flex-wrap gap-3">
-          <span class="cyber-tag">
-            <span style="width:6px;height:6px;background:var(--neon-green);border-radius:50%;box-shadow:0 0 6px var(--neon-green);display:inline-block;"></span>
-            LIVE 2026
-          </span>
-          <span class="cyber-tag" style="border-color:rgba(255,230,0,0.25);color:var(--neon-yellow);">
-            <span>⚡</span> AI-POWERED MASTERCLASS
-          </span>
-        </div>
-
-        <div>
-          <h1 class="font-orbitron font-black leading-tight" style="font-size: clamp(1.8rem, 4vw, 3rem);">
-            <span class="animate-glitch block" style="color:white;">MASTERCLASS</span>
-            <span class="block mt-1 shimmer-text" style="font-size: clamp(1.6rem, 3.5vw, 2.6rem);">AI & DOMINASI</span>
-            <span class="neon-text-cyan block mt-1 animate-pulse-neon" style="font-size: clamp(1.6rem, 3.5vw, 2.6rem);">ALGORITMA</span>
-            <span class="block mt-1" style="color:rgba(226,232,240,0.9);font-size: clamp(1.4rem, 3vw, 2.2rem);">CONTENT CREATOR</span>
-          </h1>
-        </div>
-
-        <p class="text-base leading-relaxed font-rajdhani" style="color:rgba(226,232,240,0.65);max-width:520px;font-size:1.05rem;">
-          Strategi komprehensif mendulang <span class="neon-text-cyan font-semibold">jutaan penayangan organik</span> dengan integrasi kecerdasan buatan — <span style="color:rgba(255,230,0,0.9);">ChatGPT, Sora 2, Veo 3</span>. Dari zero ke viral, dengan metodologi berbasis data.
-        </p>
-
-        <!-- STATS -->
-        <div class="grid grid-cols-3 gap-4">
-          <div class="glass-card p-4 text-center" style="border-radius:4px;">
-            <div class="font-orbitron font-black neon-text-cyan" style="font-size:1.5rem;">10M+</div>
-            <div class="text-xs font-mono mt-1" style="color:rgba(226,232,240,0.5);">Total Views</div>
-          </div>
-          <div class="glass-card p-4 text-center" style="border-radius:4px;">
-            <div class="font-orbitron font-black neon-text-yellow" style="font-size:1.5rem;">3K+</div>
-            <div class="text-xs font-mono mt-1" style="color:rgba(226,232,240,0.5);">Students</div>
-          </div>
-          <div class="glass-card p-4 text-center" style="border-radius:4px;">
-            <div class="font-orbitron font-black" style="font-size:1.5rem;color:var(--neon-green);">98%</div>
-            <div class="text-xs font-mono mt-1" style="color:rgba(226,232,240,0.5);">Satisfaction</div>
-          </div>
-        </div>
-
-        <!-- BUTTONS -->
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="https://youtube.com/@malasberfikir?si=wscNNfLmQA3blcfU" target="_blank" class="btn-neon-cyan inline-flex items-center justify-center gap-2 no-underline" style="border-radius:2px;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05A6.34 6.34 0 003.15 15.3a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.79a4.85 4.85 0 01-1.01-.1z"/></svg>
-            Portofolio YouTube
-          </a>
-          <a href="https://www.tiktok.com/@malasberfikir.official?_r=1&_t=ZS-94zvPA09c51" target="_blank" class="btn-neon-yellow inline-flex items-center justify-center gap-2 no-underline" style="border-radius:2px;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05A6.34 6.34 0 003.15 15.3a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.79a4.85 4.85 0 01-1.01-.1z"/></svg>
-            Portofolio TikTok
-          </a>
-        </div>
-      </div>
-
-      <!-- RIGHT: POSTER IMAGE -->
-      <div class="flex justify-center items-center animate-float delay-200">
-        <div class="relative" style="max-width:420px;width:100%;">
-          <div style="position:absolute;inset:-2px;background:linear-gradient(135deg,var(--neon-cyan),transparent,var(--neon-yellow),transparent,var(--neon-cyan));border-radius:8px;animation:rotate 6s linear infinite;z-index:0;opacity:0.5;"></div>
-          <div class="glass-card relative z-10 overflow-hidden" style="border-radius:6px;">
-            <img src="https://placehold.co/420x560/0a0e1a/00f5ff?text=POSTER+AI+MASTERCLASS&font=oswald"
-                 alt="Poster AI Masterclass"
-                 style="width:100%;display:block;filter:brightness(0.85) saturate(1.2);"
-                 onerror="this.src='https://via.placeholder.com/420x560/0a0e1a/00f5ff?text=Poster+Masterclass'"/>
-            <!-- Corner decorations -->
-            <div style="position:absolute;top:0;left:0;width:30px;height:30px;border-top:2px solid var(--neon-cyan);border-left:2px solid var(--neon-cyan);"></div>
-            <div style="position:absolute;top:0;right:0;width:30px;height:30px;border-top:2px solid var(--neon-cyan);border-right:2px solid var(--neon-cyan);"></div>
-            <div style="position:absolute;bottom:0;left:0;width:30px;height:30px;border-bottom:2px solid var(--neon-yellow);border-left:2px solid var(--neon-yellow);"></div>
-            <div style="position:absolute;bottom:0;right:0;width:30px;height:30px;border-bottom:2px solid var(--neon-yellow);border-right:2px solid var(--neon-yellow);"></div>
-            <div style="position:absolute;top:8px;right:10px;font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--neon-cyan);background:rgba(0,0,0,0.6);padding:2px 8px;">LIVE 2026</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bottom fade -->
-  <div style="position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,transparent,var(--bg-deep));"></div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ══════════════ YOUTUBE PORTFOLIO ══════════════ -->
-<section id="portfolio" class="py-24" style="background:linear-gradient(to bottom,var(--bg-deep),#080c18);">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-
-    <div class="text-center mb-16">
-      <span class="cyber-tag mx-auto mb-4 inline-block">LIVE API · YOUTUBE DATA v3</span>
-      <h2 class="font-orbitron font-black text-2xl md:text-3xl mt-4">
-        <span class="neon-text-cyan">VIDEO</span> <span style="color:white;">TERBARU</span>
-      </h2>
-      <p class="font-rajdhani mt-3 text-base" style="color:rgba(226,232,240,0.5);">Konten live dari channel @malasberfikir</p>
+    <!-- COUNTDOWN -->
+    <div class="mb-6 text-red-400 font-bold">
+      Promo berakhir dalam: <span id="countdown"></span>
     </div>
 
-    <div id="yt-loading" class="text-center py-12">
-      <div style="width:48px;height:48px;border:2px solid rgba(0,245,255,0.2);border-top:2px solid var(--neon-cyan);border-radius:50%;animation:rotate 1s linear infinite;margin:0 auto;"></div>
-      <p class="font-mono text-xs mt-4" style="color:rgba(0,245,255,0.6);">Fetching data from YouTube API...</p>
-    </div>
-
-    <div id="yt-grid" class="grid md:grid-cols-3 gap-6" style="display:none;"></div>
-    <div id="yt-error" style="display:none;" class="text-center py-12">
-      <p class="font-mono text-xs" style="color:rgba(255,230,0,0.7);">⚠ API quota exceeded or error. Showing cached data.</p>
-      <div id="yt-fallback" class="grid md:grid-cols-3 gap-6 mt-8"></div>
-    </div>
+    <a href="#harga" class="bg-gradient-to-r from-purple-600 to-cyan-500 px-8 py-4 rounded-xl btn-glow text-lg">
+      🔥 Ambil Sekarang
+    </a>
   </div>
 </section>
 
-<div class="section-divider"></div>
+<!-- FEATURES -->
+<section class="py-20 px-6 max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
 
-<!-- ══════════════ 5 INTERACTIVE FEATURES ══════════════ -->
-<section id="fitur" class="py-24" style="background: linear-gradient(to bottom, #080c18, #030712);">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+  <div class="glass p-6 rounded-2xl text-center card-hover transition" data-aos="fade-up">
+    <i class="fa-solid fa-comments text-3xl text-purple-400 mb-4"></i>
+    <h3 class="font-bold">Unlimited AI Chat</h3>
+  </div>
 
-    <div class="text-center mb-12">
-      <span class="cyber-tag mx-auto mb-4 inline-block">POWERED BY AI SIMULATION</span>
-      <h2 class="font-orbitron font-black text-2xl md:text-3xl mt-4">
-        <span style="color:white;">TOOLKIT</span> <span class="neon-text-yellow">INTERAKTIF</span>
-      </h2>
-      <p class="font-rajdhani mt-3 text-base" style="color:rgba(226,232,240,0.5);">5 simulator canggih untuk mengoptimalkan strategi konten Anda</p>
-    </div>
+  <div class="glass p-6 rounded-2xl text-center card-hover transition relative" data-aos="fade-up">
+    <span class="absolute top-2 right-2 text-xs bg-red-500 px-2 py-1 rounded">HOT</span>
+    <i class="fa-solid fa-video text-3xl text-cyan-400 mb-4"></i>
+    <h3 class="font-bold">Video Generation</h3>
+  </div>
 
-    <!-- FEATURE TABS -->
-    <div class="flex overflow-x-auto gap-0 mb-8 glass-card" style="border-radius:4px;">
-      <button class="feature-tab active flex-shrink-0" onclick="switchFeature(0)" id="tab-0">💰 AdSense Calc</button>
-      <button class="feature-tab flex-shrink-0" onclick="switchFeature(1)" id="tab-1">🎯 FYP Simulator</button>
-      <button class="feature-tab flex-shrink-0" onclick="switchFeature(2)" id="tab-2">🤖 AI Generator</button>
-      <button class="feature-tab flex-shrink-0" onclick="switchFeature(3)" id="tab-3">🎣 Hook Analyzer</button>
-      <button class="feature-tab flex-shrink-0" onclick="switchFeature(4)" id="tab-4">🗺 Roadmap Algo</button>
-    </div>
+  <div class="glass p-6 rounded-2xl text-center card-hover transition" data-aos="fade-up">
+    <i class="fa-solid fa-bolt text-3xl text-yellow-400 mb-4"></i>
+    <h3 class="font-bold">Prioritas Rendering</h3>
+  </div>
 
-    <!-- FEATURE PANELS -->
-    <!-- PANEL 0: ADSENSE CALCULATOR -->
-    <div id="panel-0" class="feature-panel glass-card p-8" style="border-radius:4px;">
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="space-y-6">
-          <div>
-            <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Kalkulator Estimasi AdSense</h3>
-            <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Estimasi penghasilan berbasis RPM, jumlah views, dan niche konten</p>
-          </div>
-          <div class="space-y-5">
-            <div>
-              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">MONTHLY VIEWS: <span id="views-val" class="neon-text-cyan font-bold">500,000</span></label>
-              <input type="range" min="10000" max="5000000" step="10000" value="500000" id="slider-views" oninput="calcAdsense()"/>
-            </div>
-            <div>
-              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">NICHE / RPM</label>
-              <select id="niche-select" onchange="calcAdsense()" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
-                <option value="1.5">Hiburan Umum (RPM ~$1.5)</option>
-                <option value="3.5" selected>Edukasi / Tutorial (RPM ~$3.5)</option>
-                <option value="5">Tech & AI (RPM ~$5)</option>
-                <option value="8">Finance & Bisnis (RPM ~$8)</option>
-                <option value="12">Legal / Investasi (RPM ~$12)</option>
-              </select>
-            </div>
-            <div>
-              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">CTR (Click Through Rate): <span id="ctr-val" class="neon-text-cyan font-bold">3%</span></label>
-              <input type="range" min="1" max="10" step="0.5" value="3" id="slider-ctr" oninput="calcAdsense()"/>
-            </div>
-          </div>
-        </div>
-        <div class="space-y-4">
-          <div class="glass-card-yellow p-6" style="border-radius:4px;">
-            <p class="font-mono text-xs mb-2" style="color:rgba(255,230,0,0.6);">ESTIMASI PENDAPATAN BULANAN</p>
-            <div id="adsense-result" class="font-orbitron font-black neon-text-yellow" style="font-size:2.2rem;">$1,750</div>
-            <p id="adsense-idr" class="font-mono text-xs mt-1" style="color:rgba(255,230,0,0.5);">≈ Rp 27.650.000</p>
-          </div>
-          <div class="grid grid-cols-2 gap-3">
-            <div class="glass-card p-4" style="border-radius:4px;">
-              <p class="font-mono text-xs" style="color:rgba(226,232,240,0.4);">Per 1.000 Views</p>
-              <p id="rpm-result" class="font-orbitron font-bold neon-text-cyan text-lg mt-1">$3.50</p>
-            </div>
-            <div class="glass-card p-4" style="border-radius:4px;">
-              <p class="font-mono text-xs" style="color:rgba(226,232,240,0.4);">Monetized Views</p>
-              <p id="mon-views" class="font-orbitron font-bold text-lg mt-1" style="color:var(--neon-green);">300K</p>
-            </div>
-          </div>
-          <div class="glass-card p-4" style="border-radius:4px;">
-            <p class="font-mono text-xs mb-2" style="color:rgba(226,232,240,0.4);">REKOMENDASI AI</p>
-            <p id="adsense-tip" class="text-sm font-rajdhani" style="color:rgba(0,245,255,0.7);line-height:1.6;">Tingkatkan konten di niche Finance untuk RPM lebih tinggi.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+</section>
 
-    <!-- PANEL 1: FYP SIMULATOR -->
-    <div id="panel-1" class="feature-panel glass-card p-8" style="border-radius:4px;display:none;">
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="space-y-5">
-          <div>
-            <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Simulator Probabilitas FYP</h3>
-            <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Hitung peluang konten Anda masuk For You Page TikTok/Reels</p>
-          </div>
-          <div class="space-y-4">
-            <div>
-              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">COMPLETION RATE: <span id="cr-val" class="neon-text-cyan font-bold">65%</span></label>
-              <input type="range" min="10" max="100" value="65" id="slider-cr" oninput="calcFYP()"/>
-            </div>
-            <div>
-              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">LIKE RATIO: <span id="lr-val" class="neon-text-cyan font-bold">8%</span></label>
-              <input type="range" min="1" max="20" value="8" id="slider-lr" oninput="calcFYP()"/>
-            </div>
-            <div>
-              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">SHARE RATE: <span id="sr-val" class="neon-text-cyan font-bold">3%</span></label>
-              <input type="range" min="0" max="15" step="0.5" value="3" id="slider-sr" oninput="calcFYP()"/>
-            </div>
-            <div>
-              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">POSTING TIME</label>
-              <select id="pt-select" onchange="calcFYP()" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
-                <option value="0.7">Off-peak (02:00 - 07:00)</option>
-                <option value="0.9">Pagi (07:00 - 11:00)</option>
-                <option value="1.1" selected>Siang (12:00 - 15:00)</option>
-                <option value="1.2">Sore Prime Time (18:00 - 21:00)</option>
-                <option value="1.3">Malam Peak (20:00 - 23:00)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="space-y-4">
-          <!-- FYP METER -->
-          <div class="glass-card-yellow p-6 text-center" style="border-radius:4px;">
-            <p class="font-mono text-xs mb-3" style="color:rgba(255,230,0,0.6);">FYP PROBABILITY SCORE</p>
-            <div id="fyp-score" class="font-orbitron font-black neon-text-yellow" style="font-size:3.5rem;">72%</div>
-            <div class="mt-3 progress-bar" style="height:8px;">
-              <div id="fyp-bar" class="progress-fill" style="width:72%;background:linear-gradient(90deg,var(--neon-yellow),#ff9900);box-shadow:0 0 10px var(--neon-yellow);"></div>
-            </div>
-            <p id="fyp-label" class="font-mono text-xs mt-3 neon-text-yellow">🔥 HIGH POTENTIAL</p>
-          </div>
-          <div class="space-y-2" id="fyp-signals">
-            <div class="flex items-center justify-between p-3 glass-card" style="border-radius:2px;">
-              <span class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">Completion Signal</span>
-              <div class="progress-bar w-24" style="height:4px;"><div id="sig1" class="progress-fill" style="width:65%;"></div></div>
-              <span id="sig1-val" class="font-mono text-xs neon-text-cyan">65%</span>
-            </div>
-            <div class="flex items-center justify-between p-3 glass-card" style="border-radius:2px;">
-              <span class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">Engagement Signal</span>
-              <div class="progress-bar w-24" style="height:4px;"><div id="sig2" class="progress-fill" style="width:40%;"></div></div>
-              <span id="sig2-val" class="font-mono text-xs neon-text-cyan">40%</span>
-            </div>
-            <div class="flex items-center justify-between p-3 glass-card" style="border-radius:2px;">
-              <span class="font-mono text-xs" style="color:rgba(226,232,240,0.6);">Virality Signal</span>
-              <div class="progress-bar w-24" style="height:4px;"><div id="sig3" class="progress-fill" style="width:30%;"></div></div>
-              <span id="sig3-val" class="font-mono text-xs neon-text-cyan">30%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- PRICING -->
+<section id="harga" class="py-20 px-6 max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
 
-    <!-- PANEL 2: AI CONTENT GENERATOR -->
-    <div id="panel-2" class="feature-panel glass-card p-8" style="border-radius:4px;display:none;">
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="space-y-5">
-          <div>
-            <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Generator Ide Konten AI</h3>
-            <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Generate 5 ide konten viral berdasarkan niche dan platform Anda</p>
-          </div>
-          <div class="space-y-4">
-            <div>
-              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">NICHE / TOPIK</label>
-              <input type="text" id="gen-niche" placeholder="Contoh: Investasi Saham, AI Tools, Resep Masakan..." style="width:100%;background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:#e2e8f0;padding:10px 14px;font-family:'Rajdhani',sans-serif;font-size:1rem;outline:none;" />
-            </div>
-            <div>
-              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">PLATFORM TARGET</label>
-              <select id="gen-platform" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
-                <option>TikTok (15-60 detik)</option>
-                <option>YouTube Shorts</option>
-                <option>YouTube Long-form</option>
-                <option>Instagram Reels</option>
-              </select>
-            </div>
-            <div>
-              <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">FORMAT KONTEN</label>
-              <select id="gen-format" style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.2);color:var(--neon-cyan);padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;width:100%;outline:none;">
-                <option>Tutorial / How-to</option>
-                <option>Story-based</option>
-                <option>List / Top 5</option>
-                <option>Controversial / Debat</option>
-                <option>Behind the Scenes</option>
-              </select>
-            </div>
-            <button onclick="generateIdeas()" class="btn-solid-cyan w-full" style="border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-              GENERATE IDE AI
-            </button>
-          </div>
-        </div>
-        <div>
-          <p class="font-mono text-xs mb-3" style="color:rgba(226,232,240,0.4);">OUTPUT · AI GENERATED IDEAS</p>
-          <div id="gen-output" class="space-y-3">
-            <div class="p-4 glass-card" style="border-radius:2px;border-left:3px solid var(--neon-cyan);">
-              <p class="font-mono text-xs neon-text-cyan mb-1">#001 · HIGH VIRAL POTENTIAL</p>
-              <p class="font-rajdhani" style="color:rgba(226,232,240,0.8);">Masukkan topik Anda dan klik Generate untuk mendapatkan 5 ide konten viral yang dioptimalkan oleh AI.</p>
-            </div>
-            <div class="p-4 glass-card" style="border-radius:2px;border-left:3px solid rgba(0,245,255,0.2);">
-              <p class="font-mono text-xs" style="color:rgba(226,232,240,0.3);" >Waiting for input...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="glass p-6 rounded-2xl card-hover" data-aos="zoom-in">
+    <h3 class="text-xl font-bold mb-2">BULANAN</h3>
+    <p class="text-3xl font-bold mb-4">Rp 68.000</p>
 
-    <!-- PANEL 3: HOOK ANALYZER -->
-    <div id="panel-3" class="feature-panel glass-card p-8" style="border-radius:4px;display:none;">
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="space-y-5">
-          <div>
-            <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Analis Hook Video</h3>
-            <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Analisis kekuatan 3 detik pertama konten Anda dengan AI scoring</p>
-          </div>
-          <div>
-            <label class="block font-mono text-xs mb-2" style="color:rgba(0,245,255,0.8);">MASUKKAN TEKS HOOK (Kalimat pembuka video)</label>
-            <textarea id="hook-input" rows="5" placeholder="Contoh: 90% orang tidak tahu cara kerja algoritma TikTok. Hari ini, saya akan ungkap semuanya..." style="width:100%;background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.2);color:#e2e8f0;padding:12px 14px;font-family:'Rajdhani',sans-serif;font-size:0.95rem;outline:none;resize:vertical;line-height:1.6;"></textarea>
-          </div>
-          <button onclick="analyzeHook()" class="btn-solid-cyan w-full" style="border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            ANALISIS HOOK
-          </button>
-        </div>
-        <div class="space-y-4">
-          <p class="font-mono text-xs" style="color:rgba(226,232,240,0.4);">HOOK ANALYSIS REPORT</p>
-          <div id="hook-score-display" class="glass-card-yellow p-5 text-center" style="border-radius:4px;">
-            <p class="font-mono text-xs mb-1" style="color:rgba(255,230,0,0.5);">HOOK SCORE</p>
-            <div id="hook-score" class="font-orbitron font-black neon-text-yellow" style="font-size:3rem;">--</div>
-            <p id="hook-verdict" class="font-mono text-xs mt-1" style="color:rgba(226,232,240,0.5);">Masukkan hook untuk dianalisis</p>
-          </div>
-          <div id="hook-metrics" class="space-y-2">
-            <div class="flex justify-between items-center p-3 glass-card" style="border-radius:2px;">
-              <span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Curiosity Gap</span>
-              <div class="flex items-center gap-2">
-                <div class="progress-bar w-20"><div id="hm1" class="progress-fill" style="width:0%"></div></div>
-                <span id="hm1-val" class="font-mono text-xs neon-text-cyan w-8">0%</span>
-              </div>
-            </div>
-            <div class="flex justify-between items-center p-3 glass-card" style="border-radius:2px;">
-              <span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Emotional Trigger</span>
-              <div class="flex items-center gap-2">
-                <div class="progress-bar w-20"><div id="hm2" class="progress-fill" style="width:0%"></div></div>
-                <span id="hm2-val" class="font-mono text-xs neon-text-cyan w-8">0%</span>
-              </div>
-            </div>
-            <div class="flex justify-between items-center p-3 glass-card" style="border-radius:2px;">
-              <span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Specificity</span>
-              <div class="flex items-center gap-2">
-                <div class="progress-bar w-20"><div id="hm3" class="progress-fill" style="width:0%"></div></div>
-                <span id="hm3-val" class="font-mono text-xs neon-text-cyan w-8">0%</span>
-              </div>
-            </div>
-            <div class="flex justify-between items-center p-3 glass-card" style="border-radius:2px;">
-              <span class="font-mono text-xs" style="color:rgba(226,232,240,0.5);">Pattern Interrupt</span>
-              <div class="flex items-center gap-2">
-                <div class="progress-bar w-20"><div id="hm4" class="progress-fill" style="width:0%"></div></div>
-                <span id="hm4-val" class="font-mono text-xs neon-text-cyan w-8">0%</span>
-              </div>
-            </div>
-          </div>
-          <div id="hook-feedback" class="p-4 glass-card" style="border-radius:2px;border-left:3px solid var(--neon-cyan);display:none;">
-            <p id="hook-feedback-text" class="text-sm font-rajdhani" style="color:rgba(0,245,255,0.8);"></p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ul class="text-gray-300 mb-6 space-y-2">
+      <li>✔ AI Chat</li>
+      <li>✔ Video Limit</li>
+      <li>✔ Garansi 7 Hari</li>
+    </ul>
 
-    <!-- PANEL 4: ROADMAP ALGORITHM -->
-    <div id="panel-4" class="feature-panel glass-card p-8" style="border-radius:4px;display:none;">
-      <div>
-        <div class="mb-8">
-          <h3 class="font-orbitron font-bold text-lg neon-text-cyan mb-2">Roadmap Algoritma Platform</h3>
-          <p class="text-sm font-rajdhani" style="color:rgba(226,232,240,0.55);">Visualisasi interaktif bagaimana algoritma YouTube & TikTok bekerja. Klik node untuk detail.</p>
-        </div>
+    <a href="https://api.whatsapp.com/send?phone=6282219989497&text=Halo%20Admin,%20saya%20mau%20beli%20BULANAN"
+      class="block text-center bg-gradient-to-r from-purple-600 to-cyan-500 py-3 rounded-xl btn-glow">
+      🚀 Beli Sekarang
+    </a>
+  </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
-          <!-- YOUTUBE ROADMAP -->
-          <div>
-            <p class="font-mono text-xs mb-4 text-center" style="color:rgba(255,0,0,0.7);">▶ YOUTUBE ALGORITHM</p>
-            <div class="space-y-3" id="yt-roadmap">
-              <div class="roadmap-node glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid #ff4444;border-radius:2px;" onclick="showAlgoDetail('yt-upload')">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <span class="font-orbitron font-bold text-xs" style="color:#ff4444;">01</span>
-                    <span class="font-rajdhani font-semibold">Video Upload & Processing</span>
-                  </div>
-                  <span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span>
-                </div>
-              </div>
-              <div style="width:2px;height:20px;background:rgba(255,68,68,0.3);margin-left:20px;"></div>
-              <div class="roadmap-node glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid #ff8800;border-radius:2px;" onclick="showAlgoDetail('yt-signals')">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <span class="font-orbitron font-bold text-xs" style="color:#ff8800;">02</span>
-                    <span class="font-rajdhani font-semibold">Click-Through & Watch Time</span>
-                  </div>
-                  <span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span>
-                </div>
-              </div>
-              <div style="width:2px;height:20px;background:rgba(255,136,0,0.3);margin-left:20px;"></div>
-              <div class="roadmap-node glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid var(--neon-yellow);border-radius:2px;" onclick="showAlgoDetail('yt-rank')">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <span class="font-orbitron font-bold text-xs neon-text-yellow">03</span>
-                    <span class="font-rajdhani font-semibold">Homepage Recommendation</span>
-                  </div>
-                  <span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span>
-                </div>
-              </div>
-              <div style="width:2px;height:20px;background:rgba(255,230,0,0.3);margin-left:20px;"></div>
-              <div class="roadmap-node glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid var(--neon-green);border-radius:2px;" onclick="showAlgoDetail('yt-viral')">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <span class="font-orbitron font-bold text-xs" style="color:var(--neon-green);">04</span>
-                    <span class="font-rajdhani font-semibold">Viral Loop & Trending</span>
-                  </div>
-                  <span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="glass p-6 rounded-2xl border-2 border-purple-500 scale-105 card-hover" data-aos="zoom-in">
+    <h3 class="text-xl font-bold mb-2">TAHUNAN (BEST)</h3>
+    <p class="text-3xl font-bold">Rp 230.000</p>
+    <p class="text-green-400 mb-4">Hemat 60%</p>
 
-          <!-- TIKTOK ROADMAP -->
-          <div>
-            <p class="font-mono text-xs mb-4 text-center" style="color:rgba(0,245,255,0.7);">⬛ TIKTOK ALGORITHM</p>
-            <div class="space-y-3">
-              <div class="roadmap-node glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid var(--neon-cyan);border-radius:2px;" onclick="showAlgoDetail('tt-pool')">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <span class="font-orbitron font-bold text-xs neon-text-cyan">01</span>
-                    <span class="font-rajdhani font-semibold">Initial Distribution Pool (200-500)</span>
-                  </div>
-                  <span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span>
-                </div>
-              </div>
-              <div style="width:2px;height:20px;background:rgba(0,245,255,0.3);margin-left:20px;"></div>
-              <div class="roadmap-node glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid #0099ff;border-radius:2px;" onclick="showAlgoDetail('tt-filter')">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <span class="font-orbitron font-bold text-xs" style="color:#0099ff;">02</span>
-                    <span class="font-rajdhani font-semibold">Quality Filter (Engagement Check)</span>
-                  </div>
-                  <span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span>
-                </div>
-              </div>
-              <div style="width:2px;height:20px;background:rgba(0,153,255,0.3);margin-left:20px;"></div>
-              <div class="roadmap-node glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid #6600ff;border-radius:2px;" onclick="showAlgoDetail('tt-expand')">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <span class="font-orbitron font-bold text-xs" style="color:#6600ff;">03</span>
-                    <span class="font-rajdhani font-semibold">Tier Expansion (10K → 100K)</span>
-                  </div>
-                  <span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span>
-                </div>
-              </div>
-              <div style="width:2px;height:20px;background:rgba(102,0,255,0.3);margin-left:20px;"></div>
-              <div class="roadmap-node glass-card p-4 cursor-pointer algo-node" style="border-left:3px solid var(--neon-green);border-radius:2px;" onclick="showAlgoDetail('tt-fyp')">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <span class="font-orbitron font-bold text-xs" style="color:var(--neon-green);">04</span>
-                    <span class="font-rajdhani font-semibold">FYP Global Distribution</span>
-                  </div>
-                  <span class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">▸ DETAIL</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <ul class="text-gray-300 mb-4 space-y-2">
+      <li>✔ Priority Video</li>
+      <li>✔ Garansi 43 Hari</li>
+    </ul>
 
-        <!-- DETAIL POPUP -->
-        <div id="algo-detail" class="mt-6 p-5 glass-card-yellow" style="border-radius:4px;display:none;">
-          <div class="flex justify-between items-start">
-            <div>
-              <p class="font-mono text-xs neon-text-yellow mb-1">NODE DETAIL</p>
-              <p id="algo-detail-title" class="font-orbitron font-bold text-sm text-white mb-2"></p>
-              <p id="algo-detail-text" class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.7);line-height:1.7;"></p>
-            </div>
-            <button onclick="document.getElementById('algo-detail').style.display='none'" style="color:rgba(226,232,240,0.4);font-size:1.2rem;cursor:pointer;margin-left:12px;">✕</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <p class="text-xs text-red-400 mb-4">*High-sensitive</p>
 
+    <a href="https://api.whatsapp.com/send?phone=6282219989497&text=Halo%20Admin,%20saya%20mau%20beli%20TAHUNAN"
+      class="block text-center bg-gradient-to-r from-purple-600 to-cyan-500 py-3 rounded-xl btn-glow">
+      🔥 Ambil Paket Hemat
+    </a>
+  </div>
+
+</section>
+
+<!-- WARNING -->
+<section class="py-16 px-6 max-w-4xl mx-auto">
+  <div class="bg-red-900/40 border border-red-500 p-6 rounded-2xl" data-aos="fade-up">
+    <h2 class="text-xl font-bold mb-4">⚠ SYARAT WAJIB</h2>
+    <p class="text-gray-300 mb-4">
+      WAJIB pakai VPN India. Jika tidak → akun banned & garansi hangus.
+    </p>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<!-- ══════════════ PRICING ══════════════ -->
-<section id="pricing" class="py-24" style="background: linear-gradient(to bottom, #030712, #080c18);">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-
-    <div class="text-center mb-16">
-      <span class="cyber-tag mx-auto mb-4 inline-block">PILIH PAKET INVESTASI TERBAIK</span>
-      <h2 class="font-orbitron font-black text-2xl md:text-3xl mt-4">
-        <span style="color:white;">PAKET</span> <span class="neon-text-cyan">MASTERCLASS</span>
-      </h2>
-      <p class="font-rajdhani mt-3 text-base" style="color:rgba(226,232,240,0.5);">Investasi terbaik untuk karir content creator Anda</p>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8 items-stretch">
-
-      <!-- STARTER -->
-      <div class="pricing-card glass-card p-8 flex flex-col" style="border-radius:4px;">
-        <div>
-          <span class="cyber-tag text-xs mb-4 inline-block" style="border-color:rgba(226,232,240,0.2);color:rgba(226,232,240,0.5);">STARTER</span>
-          <div class="mt-4 mb-2">
-            <span class="font-orbitron font-black text-4xl" style="color:white;">Rp 99K</span>
-          </div>
-          <p class="text-sm font-rajdhani mb-6" style="color:rgba(226,232,240,0.5);">Fundamental algoritma platform & efisiensi editing.</p>
-          <div class="section-divider mb-6"></div>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-start gap-3 text-sm font-rajdhani check-item" style="color:rgba(226,232,240,0.75);">Cara kerja Algoritma YouTube Shorts & TikTok</li>
-            <li class="flex items-start gap-3 text-sm font-rajdhani check-item" style="color:rgba(226,232,240,0.75);">Dasar Prompt ChatGPT untuk konten kreator</li>
-            <li class="flex items-start gap-3 text-sm font-rajdhani check-item" style="color:rgba(226,232,240,0.75);">Trik editing cepat & efisien</li>
-            <li class="flex items-start gap-3 text-sm font-rajdhani check-item" style="color:rgba(226,232,240,0.75);">Materi PDF & Video Tutorial</li>
-            <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.3);">✗ Akses Sora 2 & Veo 3</li>
-            <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.3);">✗ Grup VIP WhatsApp</li>
-          </ul>
-        </div>
-        <div class="mt-auto">
-          <a href="https://wa.me/082219989497?text=Halo%20Admin,%20saya%20ingin%20mendaftar%20Masterclass%20Paket%20Starter%20(Rp99.000)." target="_blank" class="btn-neon-cyan block text-center w-full no-underline" style="border-radius:2px;">Daftar Paket Starter</a>
-        </div>
-      </div>
-
-      <!-- PROFESSIONAL (BEST SELLER) -->
-      <div class="pricing-card relative flex flex-col" style="margin-top:-12px;margin-bottom:-12px;">
-        <span class="badge-bestseller">⚡ PALING DIMINATI</span>
-        <div class="glass-card-yellow p-8 flex flex-col h-full" style="border-radius:4px;border:1px solid rgba(255,230,0,0.3);box-shadow:0 0 40px rgba(255,230,0,0.08);">
-          <div>
-            <span class="cyber-tag text-xs mb-4 inline-block" style="border-color:rgba(255,230,0,0.3);color:var(--neon-yellow);">PROFESSIONAL</span>
-            <div class="mt-4 mb-2">
-              <span class="font-orbitron font-black text-4xl neon-text-yellow">Rp 200K</span>
-            </div>
-            <p class="text-sm font-rajdhani mb-6" style="color:rgba(255,230,0,0.6);">Penguasaan penuh AI generatif dan strategi viralitas tingkat lanjut.</p>
-            <div style="height:1px;background:linear-gradient(90deg,transparent,var(--neon-yellow),transparent);" class="mb-6"></div>
-            <ul class="space-y-3 mb-8">
-              <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-yellow);">▸</span> Semua materi Starter</li>
-              <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-yellow);">▸</span> Akses penuh tutorial Sora 2 & Veo 3</li>
-              <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-yellow);">▸</span> 50+ Prompt AI Rahasia Premium</li>
-              <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-yellow);">▸</span> Strategi Retensi Penonton & Hooks</li>
-              <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-yellow);">▸</span> Template Konten Viral Siap Pakai</li>
-              <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.3);">✗ Bedah Channel 1-on-1</li>
-            </ul>
-          </div>
-          <div class="mt-auto">
-            <a href="https://wa.me/082219989497?text=Halo%20Admin,%20saya%20ingin%20mendaftar%20Masterclass%20Paket%20Professional%20(Rp200.000)." target="_blank" class="btn-neon-yellow block text-center w-full no-underline" style="border-radius:2px;">Daftar Paket Professional</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- EXECUTIVE -->
-      <div class="pricing-card glass-card p-8 flex flex-col" style="border-radius:4px;border-color:rgba(57,255,20,0.15);box-shadow:0 0 20px rgba(57,255,20,0.03);">
-        <div>
-          <span class="cyber-tag text-xs mb-4 inline-block" style="border-color:rgba(57,255,20,0.3);color:var(--neon-green);">EXECUTIVE BUNDLING</span>
-          <div class="mt-4 mb-2">
-            <span class="font-orbitron font-black text-4xl" style="color:var(--neon-green);text-shadow:0 0 15px rgba(57,255,20,0.4);">Rp 499K</span>
-          </div>
-          <p class="text-sm font-rajdhani mb-6" style="color:rgba(57,255,20,0.5);">Mentorship eksklusif dan bedah channel secara langsung.</p>
-          <div style="height:1px;background:linear-gradient(90deg,transparent,var(--neon-green),transparent);" class="mb-6"></div>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Semua materi Professional</li>
-            <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Akses Grup VIP WhatsApp (Lifetime)</li>
-            <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Bedah Channel 1-on-1 (2 sesi)</li>
-            <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Konsultasi Monetisasi & Bisnis Digital</li>
-            <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Priority Support 30 hari</li>
-            <li class="flex items-start gap-3 text-sm font-rajdhani" style="color:rgba(226,232,240,0.85);"><span style="color:var(--neon-green);">▸</span> Akses Update Materi Seumur Hidup</li>
-          </ul>
-        </div>
-        <div class="mt-auto">
-          <a href="https://wa.me/082219989497?text=Halo%20Admin,%20saya%20ingin%20mendaftar%20Masterclass%20Paket%20Executive%20(Rp499.000)." target="_blank" class="block text-center w-full no-underline font-orbitron font-bold text-xs tracking-widest py-3 transition-all" style="background:linear-gradient(135deg,rgba(57,255,20,0.12),rgba(57,255,20,0.04));border:1px solid var(--neon-green);color:var(--neon-green);border-radius:2px;text-shadow:0 0 8px var(--neon-green);box-shadow:0 0 15px rgba(57,255,20,0.15);" onmouseover="this.style.background='linear-gradient(135deg,rgba(57,255,20,0.3),rgba(57,255,20,0.1))'" onmouseout="this.style.background='linear-gradient(135deg,rgba(57,255,20,0.12),rgba(57,255,20,0.04))'">Daftar Paket Executive</a>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- GUARANTEE -->
-    <div class="mt-12 glass-card p-6 flex flex-col md:flex-row items-center gap-6 text-center md:text-left" style="border-radius:4px;">
-      <div style="font-size:2.5rem;flex-shrink:0;">🛡️</div>
-      <div>
-        <p class="font-orbitron font-bold text-sm neon-text-cyan mb-1">GARANSI KEPUASAN 7 HARI</p>
-        <p class="font-rajdhani text-sm" style="color:rgba(226,232,240,0.6);">Tidak puas dengan materi? Kami kembalikan 100% investasi Anda dalam 7 hari tanpa pertanyaan. Kami percaya diri dengan kualitas konten yang kami berikan.</p>
-      </div>
-    </div>
+<!-- FAKE POPUP -->
+<div id="popup" class="fake-popup hidden">
+  <div class="glass p-3 rounded-lg text-sm">
+    🔥 Seseorang baru saja membeli paket Tahunan
   </div>
-</section>
+</div>
 
-<div class="section-divider"></div>
+<!-- SCRIPT -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-<!-- ══════════════ FOOTER ══════════════ -->
-<footer class="py-16 footer-glow" style="background:#030712;">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="grid md:grid-cols-3 gap-12 mb-12">
-      <div>
-        <div class="flex items-center gap-3 mb-4">
-          <div style="width:8px;height:8px;background:var(--neon-cyan);border-radius:50%;box-shadow:0 0 10px var(--neon-cyan);"></div>
-          <span class="font-orbitron font-bold text-sm tracking-widest neon-text-cyan">MALAS BERFIKIR</span>
-        </div>
-        <p class="font-rajdhani text-sm leading-relaxed" style="color:rgba(226,232,240,0.5);">Platform edukasi digital terdepan untuk content creator Indonesia. Belajar strategi AI & algoritma dari praktisi berpengalaman.</p>
-      </div>
-      <div>
-        <p class="font-orbitron font-bold text-xs tracking-widest mb-5" style="color:rgba(226,232,240,0.4);">QUICK LINKS</p>
-        <ul class="space-y-3">
-          <li><a href="#fitur" class="font-rajdhani text-sm hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.55);">Fitur Interaktif</a></li>
-          <li><a href="#portfolio" class="font-rajdhani text-sm hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.55);">Portfolio Video</a></li>
-          <li><a href="#pricing" class="font-rajdhani text-sm hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.55);">Paket Masterclass</a></li>
-          <li><a href="https://youtube.com/@malasberfikir" target="_blank" class="font-rajdhani text-sm hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.55);">YouTube Channel</a></li>
-          <li><a href="https://www.tiktok.com/@malasberfikir.official" target="_blank" class="font-rajdhani text-sm hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.55);">TikTok Channel</a></li>
-        </ul>
-      </div>
-      <div>
-        <p class="font-orbitron font-bold text-xs tracking-widest mb-5" style="color:rgba(226,232,240,0.4);">KONTAK BISNIS</p>
-        <div class="space-y-4">
-          <a href="mailto:business.malasberfikir@gmail.com" class="flex items-center gap-3 group no-underline">
-            <div style="width:36px;height:36px;border:1px solid rgba(0,245,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(0,245,255,0.7)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <span class="font-mono text-xs group-hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.6);">business.malasberfikir@gmail.com</span>
-          </a>
-          <a href="https://wa.me/082219989497" target="_blank" class="flex items-center gap-3 group no-underline">
-            <div style="width:36px;height:36px;border:1px solid rgba(0,245,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(0,245,255,0.7)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.988-1.41A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-            </div>
-            <span class="font-mono text-xs group-hover:text-cyan-400 transition-colors" style="color:rgba(226,232,240,0.6);">+62 822 1998 9497</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(0,245,255,0.15),transparent);" class="mb-8"></div>
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="font-mono text-xs" style="color:rgba(226,232,240,0.3);">© 2026 malas berfikir. All rights reserved.</p>
-      <p class="font-mono text-xs" style="color:rgba(226,232,240,0.2);">Powered by AI · Built with ❤️ in Indonesia</p>
-    </div>
-  </div>
-</footer>
-
-<!-- ══════════════ JAVASCRIPT ══════════════ -->
 <script>
-// ── MOBILE MENU ──
-function toggleMenu() {
-  const menu = document.getElementById('mobile-menu');
-  menu.classList.toggle('open');
-}
+AOS.init();
 
-// ── FEATURE TABS ──
-function switchFeature(index) {
-  for (let i = 0; i < 5; i++) {
-    document.getElementById('panel-' + i).style.display = (i === index) ? 'block' : 'none';
-    const tab = document.getElementById('tab-' + i);
-    tab.classList.toggle('active', i === index);
-  }
-}
+// COUNTDOWN
+let time = 3600;
+setInterval(() => {
+  let m = Math.floor(time / 60);
+  let s = time % 60;
+  document.getElementById("countdown").innerText = m + "m " + s + "s";
+  time--;
+}, 1000);
 
-// ── YOUTUBE API ──
-async function loadYouTube() {
-  const API_KEY = 'AIzaSyDa43LypgkQYvRWTAAfbkdRewhfuYWKmH8';
-  const channelHandle = 'malasberfikir';
-  try {
-    // Step 1: Get channel ID from handle
-    const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${channelHandle}&type=channel&key=${API_KEY}`;
-    const searchRes = await fetch(searchUrl);
-    const searchData = await searchRes.json();
+// FAKE POPUP
+setInterval(() => {
+  const popup = document.getElementById("popup");
+  popup.classList.remove("hidden");
 
-    if (!searchData.items || searchData.items.length === 0) throw new Error('Channel not found');
-    const channelId = searchData.items[0].snippet.channelId;
+  setTimeout(() => {
+    popup.classList.add("hidden");
+  }, 3000);
 
-    // Step 2: Get latest 3 videos
-    const videosUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=3&order=date&type=video&key=${API_KEY}`;
-    const videosRes = await fetch(videosUrl);
-    const videosData = await videosRes.json();
-
-    if (!videosData.items || videosData.items.length === 0) throw new Error('No videos');
-
-    renderYTVideos(videosData.items);
-  } catch (e) {
-    console.error('YouTube API error:', e);
-    showYTFallback();
-  }
-}
-
-function renderYTVideos(items) {
-  const grid = document.getElementById('yt-grid');
-  document.getElementById('yt-loading').style.display = 'none';
-  grid.style.display = 'grid';
-  grid.innerHTML = items.map(item => {
-    const vid = item.id.videoId;
-    const title = item.snippet.title;
-    const thumb = item.snippet.thumbnails.high.url;
-    const date = new Date(item.snippet.publishedAt).toLocaleDateString('id-ID', {day:'numeric',month:'long',year:'numeric'});
-    return `
-    <div class="video-card glass-card overflow-hidden group cursor-pointer" style="border-radius:4px;" onclick="window.open('https://youtube.com/watch?v=${vid}','_blank')">
-      <div class="relative overflow-hidden" style="padding-top:56.25%;">
-        <img src="${thumb}" alt="${title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" class="group-hover:scale-105"/>
-        <div class="video-overlay absolute inset-0 flex items-center justify-center">
-          <div style="width:56px;height:56px;background:rgba(255,0,0,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(255,0,0,0.5);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </div>
-        <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(3,7,18,0.9),transparent);"></div>
-      </div>
-      <div class="p-4">
-        <p class="font-rajdhani font-semibold text-sm leading-snug mb-2" style="color:rgba(226,232,240,0.9);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${title}</p>
-        <div class="flex items-center justify-between">
-          <span class="font-mono text-xs" style="color:rgba(226,232,240,0.35);">${date}</span>
-          <span class="font-mono text-xs neon-text-cyan">▶ Tonton</span>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function showYTFallback() {
-  document.getElementById('yt-loading').style.display = 'none';
-  document.getElementById('yt-error').style.display = 'block';
-  const fb = document.getElementById('yt-fallback');
-  const fallbackVideos = [
-    { id: 'dQw4w9WgXcQ', title: 'Cara Algoritma YouTube Bekerja di 2026', date: '20 Jan 2026' },
-    { id: 'ScMzIvxBSi4', title: 'Rahasia Viral TikTok dengan AI Tools', date: '15 Jan 2026' },
-    { id: '9bZkp7q19f0', title: 'Prompt ChatGPT untuk Konten Creator Pro', date: '10 Jan 2026' },
-  ];
-  fb.innerHTML = fallbackVideos.map(v => `
-    <div class="video-card glass-card overflow-hidden group cursor-pointer" style="border-radius:4px;" onclick="window.open('https://youtube.com/@malasberfikir','_blank')">
-      <div class="relative overflow-hidden" style="padding-top:56.25%;background:linear-gradient(135deg,#0d1424,#1a2235);">
-        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="rgba(255,0,0,0.6)"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05A6.34 6.34 0 003.15 15.3a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.79a4.85 4.85 0 01-1.01-.1z"/></svg>
-          <span class="font-mono text-xs" style="color:rgba(0,245,255,0.5);">@malasberfikir</span>
-        </div>
-        <div class="video-overlay absolute inset-0 flex items-center justify-center">
-          <div style="width:56px;height:56px;background:rgba(0,245,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--neon-cyan);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--neon-cyan)"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </div>
-      </div>
-      <div class="p-4">
-        <p class="font-rajdhani font-semibold text-sm leading-snug mb-2" style="color:rgba(226,232,240,0.9);">${v.title}</p>
-        <div class="flex items-center justify-between">
-          <span class="font-mono text-xs" style="color:rgba(226,232,240,0.35);">${v.date}</span>
-          <span class="font-mono text-xs neon-text-cyan">▶ Tonton</span>
-        </div>
-      </div>
-    </div>`).join('');
-}
-
-// ── ADSENSE CALCULATOR ──
-function calcAdsense() {
-  const views = parseInt(document.getElementById('slider-views').value);
-  const rpm = parseFloat(document.getElementById('niche-select').value);
-  const ctr = parseFloat(document.getElementById('slider-ctr').value);
-
-  document.getElementById('views-val').textContent = views >= 1000000 ? (views/1000000).toFixed(1)+'M' : (views/1000).toFixed(0)+'K';
-  document.getElementById('ctr-val').textContent = ctr + '%';
-
-  const monetizedViews = views * (ctr / 100);
-  const earnings = (monetizedViews / 1000) * rpm;
-  const idr = earnings * 15800;
-
-  document.getElementById('adsense-result').textContent = '$' + earnings.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  document.getElementById('adsense-idr').textContent = '≈ Rp ' + Math.round(idr).toLocaleString('id-ID');
-  document.getElementById('rpm-result').textContent = '$' + rpm.toFixed(2);
-  document.getElementById('mon-views').textContent = monetizedViews >= 1000000 ? (monetizedViews/1000000).toFixed(1)+'M' : (monetizedViews/1000).toFixed(0)+'K';
-
-  const tips = [
-    rpm >= 8 ? '🔥 Niche premium! Fokus pada video 8-15 menit untuk RPM maksimal.' :
-    rpm >= 5 ? '💡 Tech & AI sangat bagus. Tambahkan call-to-action monetisasi.' :
-    '📈 Tingkatkan ke niche Finance/Tech untuk RPM 3-5x lebih tinggi.',
-    views >= 1000000 ? '⚡ Views sudah sangat baik! Optimalkan CTR dengan thumbnail A/B test.' :
-    views >= 500000 ? '🎯 Konsistensi posting 3-4x/minggu untuk melipatgandakan views.' :
-    '🚀 Targetkan 100K views/bulan dulu dengan konten series algoritma.'
-  ];
-  document.getElementById('adsense-tip').textContent = tips[Math.floor(Math.random() * tips.length)];
-}
-
-// ── FYP CALCULATOR ──
-function calcFYP() {
-  const cr = parseInt(document.getElementById('slider-cr').value);
-  const lr = parseFloat(document.getElementById('slider-lr').value);
-  const sr = parseFloat(document.getElementById('slider-sr').value);
-  const pt = parseFloat(document.getElementById('pt-select').value);
-
-  document.getElementById('cr-val').textContent = cr + '%';
-  document.getElementById('lr-val').textContent = lr + '%';
-  document.getElementById('sr-val').textContent = sr + '%';
-
-  const score = Math.min(100, Math.round(
-    (cr * 0.40 + lr * 3.5 + sr * 5) * pt
-  ));
-
-  document.getElementById('fyp-score').textContent = score + '%';
-  document.getElementById('fyp-bar').style.width = score + '%';
-
-  const label = score >= 80 ? '🚀 VIRAL POTENTIAL — Siap FYP!'
-    : score >= 60 ? '🔥 HIGH POTENTIAL — Optimasi 1-2 faktor'
-    : score >= 40 ? '⚡ MEDIUM — Perbaiki completion rate'
-    : '⚠ LOW — Revisi hook & engagement';
-  document.getElementById('fyp-label').textContent = label;
-
-  document.getElementById('sig1').style.width = cr + '%';
-  document.getElementById('sig1-val').textContent = cr + '%';
-  const eng = Math.min(100, Math.round(lr * 4 + sr * 6));
-  document.getElementById('sig2').style.width = eng + '%';
-  document.getElementById('sig2-val').textContent = eng + '%';
-  const vir = Math.min(100, Math.round(sr * 7 + lr * 2));
-  document.getElementById('sig3').style.width = vir + '%';
-  document.getElementById('sig3-val').textContent = vir + '%';
-}
-
-// ── AI CONTENT GENERATOR ──
-const ideaTemplates = {
-  tutorial: [
-    'Cara {niche} dalam 60 Detik yang Tidak Diajarkan di Mana Pun',
-    'Kesalahan Fatal {niche} yang Masih Dilakukan 90% Orang',
-    'Saya Coba {niche} Selama 30 Hari — Ini Hasilnya',
-    'Panduan Lengkap {niche} untuk Pemula (Dari Nol Sampai Mahir)',
-    'Tool {niche} Gratis yang Menggantikan Software Seharga Jutaan'
-  ],
-  story: [
-    'Dari 0 ke 100K Views: Perjalanan {niche} Saya Selama 6 Bulan',
-    'Saya Kehilangan Semua karena {niche} — Pelajaran Pahit',
-    'Percakapan Rahasia di Balik Sukses {niche} Terbesar Indonesia',
-    'Kenapa Saya Berhenti {niche} — Keputusan Terberat Hidup Saya',
-    'Hal yang Tidak Pernah Saya Ceritakan tentang {niche}'
-  ],
-  list: [
-    'Top 5 Rahasia {niche} yang Hanya Diketahui Profesional',
-    '7 Tanda Anda Sudah Level Expert dalam {niche}',
-    '10 Tool {niche} yang Wajib Dicoba di 2026',
-    '5 Hal yang Saya Harap Tahu Sebelum Mulai {niche}',
-    '3 Strategi {niche} yang Hasilkan Passive Income'
-  ],
-  controversial: [
-    '{niche} Itu Scam? Saya Ungkap Faktanya!',
-    'Guru {niche} Tidak Mau Anda Tahu Ini...',
-    'Kenapa Mayoritas Orang Gagal di {niche} (Bukan Salah Mereka)',
-    'Saya Debat Pakar {niche} Selama 30 Menit — Siapa yang Benar?',
-    'Kontroversi Terbesar di Dunia {niche} yang Disembunyikan'
-  ],
-  bts: [
-    'Setup Lengkap {niche} Saya yang Tidak Pernah Diungkap',
-    'Behind the Scenes: Proses Membuat Konten {niche} Viral',
-    'Berapa Modal Saya untuk Memulai {niche}? Jawaban Jujurnya',
-    'Rutinitas Harian Saya sebagai {niche} Content Creator',
-    '1 Hari Penuh di Balik Layar Bisnis {niche} Saya'
-  ]
-};
-
-function generateIdeas() {
-  const niche = document.getElementById('gen-niche').value.trim() || 'Konten Creator';
-  const format = document.getElementById('gen-format').value;
-
-  let tplKey = 'tutorial';
-  if (format.includes('Story')) tplKey = 'story';
-  else if (format.includes('List')) tplKey = 'list';
-  else if (format.includes('Controversial')) tplKey = 'controversial';
-  else if (format.includes('Behind')) tplKey = 'bts';
-
-  const templates = ideaTemplates[tplKey];
-  const shuffled = [...templates].sort(() => Math.random() - 0.5).slice(0, 5);
-  const colors = ['var(--neon-cyan)', '#0099ff', 'var(--neon-yellow)', 'var(--neon-green)', '#ff6600'];
-  const potentials = ['VIRAL POTENTIAL ⚡', 'HIGH TRENDING 🔥', 'ENGAGE BOOSTER 🎯', 'ALGORITHM LOVE 💡', 'FYP READY 🚀'];
-
-  const output = document.getElementById('gen-output');
-  output.innerHTML = '<div style="font-family:\'JetBrains Mono\',monospace;font-size:0.65rem;color:rgba(0,245,255,0.5);margin-bottom:12px;">// AI generating ideas for: ' + niche + '...</div>';
-
-  shuffled.forEach((tpl, i) => {
-    const idea = tpl.replace(/\{niche\}/g, niche);
-    setTimeout(() => {
-      const div = document.createElement('div');
-      div.className = 'glass-card p-4';
-      div.style.cssText = `border-radius:2px;border-left:3px solid ${colors[i]};animation:fadeInUp 0.4s ease forwards;opacity:0;`;
-      div.innerHTML = `
-        <p class="font-mono text-xs mb-1" style="color:${colors[i]};font-size:0.65rem;">#00${i+1} · ${potentials[i]}</p>
-        <p class="font-rajdhani" style="color:rgba(226,232,240,0.85);font-size:0.95rem;">${idea}</p>`;
-      output.appendChild(div);
-    }, i * 200);
-  });
-}
-
-// ── HOOK ANALYZER ──
-function analyzeHook() {
-  const hook = document.getElementById('hook-input').value.trim();
-  if (!hook) { alert('Masukkan teks hook terlebih dahulu!'); return; }
-
-  const lower = hook.toLowerCase();
-  const wordCount = hook.split(/\s+/).length;
-
-  // Scoring algorithms
-  const curiosityTriggers = ['rahasia', 'tidak tahu', 'ungkap', 'tersembunyi', 'fakta', 'sebenarnya', 'ternyata', 'mengejutkan', 'tidak pernah', 'hanya sedikit'];
-  const emotionTriggers = ['saya', 'anda', 'kamu', 'kami', 'kesal', 'kagum', 'percaya', 'takut', 'bangga', 'menyesal', 'berhasil', 'gagal'];
-  const specificTriggers = ['%', 'juta', 'ribu', 'detik', 'menit', 'hari', 'bulan', 'tahun', '#', 'nomor', 'langkah', 'cara', 'tips'];
-  const patternTriggers = ['stop', 'berhenti', 'tunggu', 'dengarkan', 'perhatikan', 'jangan', 'wajib', '!', '?', 'penting', 'darurat'];
-
-  const calcScore = (triggers, text) => {
-    const hits = triggers.filter(t => text.includes(t)).length;
-    return Math.min(100, Math.round((hits / triggers.length) * 100 * 2.5 + (wordCount > 10 ? 20 : 5)));
-  };
-
-  const c = Math.min(95, calcScore(curiosityTriggers, lower));
-  const e = Math.min(95, calcScore(emotionTriggers, lower));
-  const s = Math.min(95, calcScore(specificTriggers, lower));
-  const p = Math.min(95, calcScore(patternTriggers, lower));
-
-  const total = Math.round((c * 0.35 + e * 0.25 + s * 0.2 + p * 0.2));
-
-  document.getElementById('hook-score').textContent = total;
-  const verdict = total >= 75 ? '🔥 HOOK POWERFUL — Tingkat retensi tinggi!'
-    : total >= 55 ? '⚡ GOOD HOOK — Bisa ditingkatkan'
-    : total >= 35 ? '⚠ AVERAGE — Perlu revisi signifikan'
-    : '❌ WEAK HOOK — Rewrite diperlukan';
-  document.getElementById('hook-verdict').textContent = verdict;
-
-  setTimeout(() => { document.getElementById('hm1').style.width = c + '%'; document.getElementById('hm1-val').textContent = c + '%'; }, 100);
-  setTimeout(() => { document.getElementById('hm2').style.width = e + '%'; document.getElementById('hm2-val').textContent = e + '%'; }, 200);
-  setTimeout(() => { document.getElementById('hm3').style.width = s + '%'; document.getElementById('hm3-val').textContent = s + '%'; }, 300);
-  setTimeout(() => { document.getElementById('hm4').style.width = p + '%'; document.getElementById('hm4-val').textContent = p + '%'; }, 400);
-
-  const feedback = total >= 75 ? 'Hook Anda sangat kuat! Mengandung curiosity gap dan emotional trigger yang baik. Pastikan konten memenuhi janji hook ini.'
-    : total >= 55 ? 'Hook cukup menarik namun bisa diperkuat. Tambahkan angka spesifik atau kata trigger seperti "rahasia", "tidak tahu", atau "ungkap".'
-    : total >= 35 ? 'Hook perlu direvisi. Mulai dengan pattern interrupt ("Stop!", "Tunggu!"), lalu masukkan curiosity gap yang kuat.'
-    : 'Hook terlalu lemah. Coba formula: [Pattern Interrupt] + [Angka Spesifik] + [Curiosity Gap]. Contoh: "90% orang tidak tahu cara kerja algoritma TikTok..."';
-
-  const fb = document.getElementById('hook-feedback');
-  fb.style.display = 'block';
-  document.getElementById('hook-feedback-text').textContent = '💡 ' + feedback;
-}
-
-// ── ROADMAP ALGORITHM ──
-const algoDetails = {
-  'yt-upload': { title: 'Video Upload & Processing', text: 'Saat Anda upload, YouTube melakukan content ID scanning, speech-to-text transcription, dan kategorisasi otomatis menggunakan Vision API. Metadata (judul, deskripsi, tag) dianalisis NLP untuk menentukan topik dan target audiens awal.' },
-  'yt-signals': { title: 'Click-Through Rate & Watch Time', text: 'CTR ideal adalah 4-10%. Watch time minimal 50% durasi video untuk dianggap berkualitas. YouTube akan push video ke 200-500 subscriber dahulu (internal test), lalu mengukur response rate sebelum distribusi lebih luas.' },
-  'yt-rank': { title: 'Homepage Recommendation', text: 'Algoritma mencocokkan video Anda dengan viewer history, search behavior, dan satisfaction score. Video masuk ke homepage jika memiliki predicted CTR tinggi + watch time satisfaction yang baik dari test group sebelumnya.' },
-  'yt-viral': { title: 'Viral Loop & Trending', text: 'Saat video masuk Search & Browse, shares di luar platform (WhatsApp, Twitter) meningkatkan external traffic signal. YouTube menginterpretasi ini sebagai "demand" dan memasukkan video ke Trending atau Related section secara masif.' },
-  'tt-pool': { title: 'Initial Distribution Pool', text: 'TikTok mendistribusikan konten baru ke 200-500 user pertama berdasarkan similaritas dengan konten Anda sebelumnya dan interests follower Anda. Ini adalah ujian pertama: jika completion rate & engagement bagus, naik ke tier berikutnya.' },
-  'tt-filter': { title: 'Quality Filter (Engagement Check)', text: 'Dalam 1-2 jam pertama, TikTok mengukur: completion rate (>70% = excellent), like ratio (>8% = good), comment depth, dan replay rate. Video yang melewati threshold naik ke pool 10.000 viewer. Yang gagal berhenti di sini.' },
-  'tt-expand': { title: 'Tier Expansion (10K → 100K)', text: 'Setiap tier expansion memberikan distribusi ke 10x lebih banyak viewer. Dari 500 → 5K → 50K → 500K → FYP Global. Setiap tier memiliki threshold engagement yang LEBIH TINGGI. Inilah mengapa konsistensi kualitas sangat krusial.' },
-  'tt-fyp': { title: 'FYP Global Distribution', text: 'Konten yang mencapai FYP Global akan didistribusikan ke jutaan user di seluruh dunia berdasarkan interest graph mereka, bukan hanya follower Anda. Di sinilah video bisa dari 100K menjadi 10 juta views dalam 24-48 jam.' }
-};
-
-function showAlgoDetail(key) {
-  const detail = algoDetails[key];
-  if (!detail) return;
-  document.getElementById('algo-detail-title').textContent = detail.title;
-  document.getElementById('algo-detail-text').textContent = detail.text;
-  document.getElementById('algo-detail').style.display = 'block';
-  document.getElementById('algo-detail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-// ── INIT ──
-document.addEventListener('DOMContentLoaded', () => {
-  calcAdsense();
-  calcFYP();
-  loadYouTube();
-});
+}, 8000);
 </script>
+
 </body>
 </html>
