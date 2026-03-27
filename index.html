@@ -1,405 +1,1149 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrokAI Premium V2.0 — AI Text & Video Generation</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>GrokAI Premium — AI Text & Video Generation Tanpa Batas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <script>
     tailwind.config = {
-      theme: { extend: { fontFamily: { display: ['Syne','sans-serif'], body: ['DM Sans','sans-serif'] } } }
+      theme: {
+        extend: {
+          fontFamily: { display: ['Syne','sans-serif'], body: ['DM Sans','sans-serif'] }
+        }
+      }
     }
   </script>
-  
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:'DM Sans',sans-serif;background:#05050f;color:#e2e8f0;overflow-x:hidden}
-    
-    /* Background & Glassmorphism */
-    .bg-grid{background-image:linear-gradient(rgba(124,58,237,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.05) 1px,transparent 1px);background-size:40px 40px}
-    .glass{background:rgba(15,15,25,.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.05)}
-    .glass-card{background:linear-gradient(145deg,rgba(30,30,45,.6),rgba(15,15,25,.8));backdrop-filter:blur(20px);border:1px solid rgba(124,58,237,.2);transition:all .3s ease}
-    .glass-card:hover{transform:translateY(-5px);border-color:rgba(167,139,250,.4);box-shadow:0 15px 35px rgba(124,58,237,.15)}
-    
-    /* Gradients & Text */
-    .gradient-text{background:linear-gradient(135deg,#a78bfa 0%,#60a5fa 50%,#22d3ee 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar{width:6px}
-    ::-webkit-scrollbar-track{background:#05050f}
-    ::-webkit-scrollbar-thumb{background:linear-gradient(#7C3AED,#06B6D4);border-radius:10px}
 
-    /* Modal Backdrop */
-    .modal-backdrop { background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); }
-    
-    /* Fake Notification Toast */
-    #fake-toast { transform: translateX(-150%); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 50;}
-    #fake-toast.show { transform: translateX(0); }
+<style>
+/* ─── RESET & BASE ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#04040e;color:#e2e8f0;overflow-x:hidden;position:relative}
 
-    /* Bot Chat UI */
-    #bot-window { transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 100;}
-    #bot-window.active { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
-    .chat-bubble-bot { background: rgba(124,58,237,.15); border: 1px solid rgba(124,58,237,.3); border-radius: 12px 12px 12px 2px; }
-    .chat-bubble-user { background: linear-gradient(135deg,#7C3AED,#4F46E5); border-radius: 12px 12px 2px 12px; color: white;}
-  </style>
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#04040e}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#7C3AED,#06B6D4);border-radius:99px}
+
+/* ─── SCROLL PROGRESS BAR ─── */
+#scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#7C3AED,#4F46E5,#06B6D4);z-index:9999;transition:width .1s linear;border-radius:0 99px 99px 0}
+
+/* ─── NOISE OVERLAY ─── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+
+/* ─── GRID BACKGROUND ─── */
+.bg-grid{background-image:linear-gradient(rgba(124,58,237,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.04) 1px,transparent 1px);background-size:48px 48px}
+
+/* ─── GLASSMORPHISM ─── */
+.glass{background:rgba(12,12,25,.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.06)}
+.glass-strong{background:rgba(15,15,30,.85);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);border:1px solid rgba(124,58,237,.22)}
+.glass-violet{background:rgba(124,58,237,.08);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(124,58,237,.25)}
+
+/* ─── GRADIENT TEXTS ─── */
+.text-grad{background:linear-gradient(135deg,#a78bfa 0%,#60a5fa 55%,#22d3ee 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.text-grad-warm{background:linear-gradient(135deg,#f472b6,#c084fc,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.text-grad-danger{background:linear-gradient(135deg,#f87171,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ─── AMBIENT ORBS ─── */
+.orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
+.orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,.18),transparent 70%);top:-15%;left:-10%;animation:drift 12s ease-in-out infinite}
+.orb-2{width:500px;height:500px;background:radial-gradient(circle,rgba(6,182,212,.13),transparent 70%);bottom:-10%;right:-10%;animation:drift 15s ease-in-out infinite reverse}
+.orb-3{width:350px;height:350px;background:radial-gradient(circle,rgba(236,72,153,.1),transparent 70%);top:40%;right:20%;animation:drift 10s ease-in-out infinite 3s}
+@keyframes drift{0%,100%{transform:translate(0,0)}33%{transform:translate(20px,-30px)}66%{transform:translate(-15px,20px)}}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scanline{0%{top:-2%}100%{top:102%}}
+@keyframes pulse-ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.2);opacity:0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes spin-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.animate-fade-up{animation:fadeUp .7s ease both}
+.animate-fade-in{animation:fadeIn .5s ease both}
+.float-anim{animation:float 4s ease-in-out infinite}
+
+/* ─── HERO SCANLINE ─── */
+.hero-scan{position:absolute;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.3),rgba(34,211,238,.4),rgba(167,139,250,.3),transparent);animation:scanline 6s linear infinite;pointer-events:none;z-index:3}
+
+/* ─── NAVBAR ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1rem 1.5rem;transition:all .4s ease}
+nav.scrolled{background:rgba(4,4,14,.92);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-bottom:1px solid rgba(124,58,237,.18);box-shadow:0 4px 32px rgba(0,0,0,.4)}
+.nav-link{color:#64748b;font-size:.875rem;font-weight:500;transition:color .25s;position:relative}
+.nav-link::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:linear-gradient(90deg,#7C3AED,#06B6D4);transform:scaleX(0);transition:transform .3s ease;transform-origin:center}
+.nav-link:hover{color:#e2e8f0}
+.nav-link:hover::after{transform:scaleX(1)}
+
+/* ─── BUTTONS ─── */
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 2rem;border-radius:99px;background:linear-gradient(135deg,#7C3AED,#4F46E5);color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.02em;border:none;cursor:pointer;text-decoration:none;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;box-shadow:0 0 28px rgba(124,58,237,.45),inset 0 1px 0 rgba(255,255,255,.15)}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#a78bfa,#6366f1,#22d3ee);opacity:0;transition:opacity .4s}
+.btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 0 50px rgba(124,58,237,.6),0 8px 28px rgba(0,0,0,.3)}
+.btn-primary:hover::before{opacity:1}
+.btn-primary>*{position:relative;z-index:1}
+.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.75rem;border-radius:99px;background:transparent;border:1px solid rgba(124,58,237,.4);color:#a78bfa;font-family:'Syne',sans-serif;font-weight:600;font-size:.875rem;cursor:pointer;text-decoration:none;transition:all .3s}
+.btn-secondary:hover{background:rgba(124,58,237,.12);border-color:#a78bfa;box-shadow:0 0 24px rgba(124,58,237,.3);transform:translateY(-2px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.2rem;border-radius:99px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#94a3b8;font-size:.8rem;font-weight:600;font-family:'Syne',sans-serif;cursor:pointer;text-decoration:none;transition:all .25s}
+.btn-ghost:hover{background:rgba(124,58,237,.12);border-color:rgba(124,58,237,.4);color:#a78bfa}
+
+/* ─── SECTION BADGE ─── */
+.badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);border-radius:99px;color:#a78bfa;font-size:.7rem;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.25rem}
+
+/* ─── FEATURE CARDS ─── */
+.feat-card{border-radius:1.5rem;padding:2rem;position:relative;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;cursor:default}
+.feat-card::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at top left,rgba(124,58,237,.08),transparent 60%);transition:opacity .35s}
+.feat-card:hover{transform:translateY(-8px)}
+.feat-card:hover::before{opacity:2}
+.feat-icon{width:3.25rem;height:3.25rem;border-radius:1rem;display:inline-flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1.25rem;position:relative}
+.feat-icon::after{content:'';position:absolute;inset:-1px;border-radius:1rem;background:linear-gradient(135deg,rgba(124,58,237,.6),rgba(79,70,229,.3));z-index:-1;opacity:0;transition:opacity .3s}
+.feat-card:hover .feat-icon::after{opacity:1}
+
+/* ─── PRICING CARDS ─── */
+.price-card{border-radius:1.75rem;padding:2rem;position:relative;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease;display:flex;flex-direction:column}
+.price-card:hover{transform:translateY(-6px)}
+.price-card.featured{background:linear-gradient(145deg,rgba(124,58,237,.14),rgba(79,70,229,.08));border:1px solid rgba(124,58,237,.4);box-shadow:0 0 60px rgba(124,58,237,.2),0 0 120px rgba(79,70,229,.08)}
+.price-card.featured:hover{box-shadow:0 0 80px rgba(124,58,237,.32),0 16px 48px rgba(0,0,0,.4)}
+.price-card::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at top,rgba(124,58,237,.07),transparent 60%)}
+
+/* ─── CHECK ITEMS ─── */
+.chk{display:flex;align-items:flex-start;gap:.75rem;color:#cbd5e1;font-size:.875rem;padding:.3rem 0}
+.chk.off{color:#334155}
+.chk i{font-size:.8rem;margin-top:.15rem;flex-shrink:0}
+
+/* ─── STATS ─── */
+.stat-val{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;line-height:1}
+
+/* ─── WARNING BOX ─── */
+.warn-box{background:linear-gradient(135deg,rgba(239,68,68,.06),rgba(245,158,11,.04));border:1px solid rgba(239,68,68,.3);border-left:4px solid #ef4444;border-radius:1.25rem;padding:2rem;position:relative;overflow:hidden}
+.warn-box::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(239,68,68,.018) 10px,rgba(239,68,68,.018) 11px);pointer-events:none}
+
+/* ─── FAQ ─── */
+.faq-item{border-bottom:1px solid rgba(255,255,255,.05);overflow:hidden}
+.faq-btn{width:100%;text-align:left;background:none;border:none;color:#e2e8f0;font-family:'Syne',sans-serif;font-weight:600;font-size:.95rem;padding:1.25rem 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:color .25s;gap:1rem}
+.faq-btn:hover{color:#a78bfa}
+.faq-icon{flex-shrink:0;color:#a78bfa;transition:transform .35s ease}
+.faq-btn.open .faq-icon{transform:rotate(45deg)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding-bottom .35s ease;color:#94a3b8;font-size:.9rem;line-height:1.8}
+.faq-body.open{max-height:300px;padding-bottom:1.25rem}
+
+/* ─── MODALS ─── */
+.modal-wrap{position:fixed;inset:0;z-index:800;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(0,0,0,.8);backdrop-filter:blur(12px)}
+.modal-wrap.active{display:flex;animation:fadeIn .25s ease}
+.modal-box{background:#0c0c1e;border:1px solid rgba(124,58,237,.28);border-radius:1.75rem;width:100%;max-width:440px;overflow:hidden;animation:fadeUp .3s ease both;max-height:90vh;overflow-y:auto}
+.modal-header{padding:1.5rem;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;background:#0c0c1e;z-index:1}
+.modal-body{padding:1.5rem}
+
+/* ─── FORM INPUTS ─── */
+.form-group{margin-bottom:1.1rem}
+.form-label{display:block;font-size:.78rem;font-weight:600;color:#64748b;margin-bottom:.45rem;letter-spacing:.04em;text-transform:uppercase;font-family:'Syne',sans-serif}
+.form-input{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:.875rem;padding:.75rem 1rem;color:#e2e8f0;font-size:.9rem;font-family:'DM Sans',sans-serif;transition:border-color .25s,background .25s;outline:none}
+.form-input:focus{border-color:rgba(124,58,237,.6);background:rgba(124,58,237,.05)}
+.form-input::placeholder{color:#334155}
+.form-input[readonly]{background:rgba(124,58,237,.06);color:#a78bfa;cursor:not-allowed;border-color:rgba(124,58,237,.2)}
+select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a78bfa' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer}
+select.form-input option{background:#0c0c1e;color:#e2e8f0}
+
+/* ─── PAYMENT METHODS ─── */
+.pay-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.pay-opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;padding:.75rem .5rem;background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.06);border-radius:.875rem;cursor:pointer;transition:all .25s;text-align:center}
+.pay-opt:hover{background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.3)}
+.pay-opt.selected{background:rgba(124,58,237,.12);border-color:#7C3AED;box-shadow:0 0 12px rgba(124,58,237,.25)}
+.pay-opt span{font-size:.7rem;font-weight:600;color:#94a3b8}
+.pay-opt.selected span{color:#a78bfa}
+.pay-opt i{font-size:1.25rem}
+
+/* ─── BOT CHAT ─── */
+#bot-panel{position:fixed;bottom:6rem;right:1.5rem;width:320px;z-index:600;transition:all .35s cubic-bezier(.34,1.56,.64,1);transform:translateY(20px) scale(.96);opacity:0;pointer-events:none}
+#bot-panel.active{transform:translateY(0) scale(1);opacity:1;pointer-events:auto}
+.bot-header{background:linear-gradient(135deg,#7C3AED,#4F46E5);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.bot-body{height:240px;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem;background:#08081a}
+.bot-body::-webkit-scrollbar{width:3px}
+.bot-body::-webkit-scrollbar-thumb{background:#7C3AED}
+.bot-foot{padding:.75rem;border-top:1px solid rgba(255,255,255,.06);background:#08081a;display:flex;gap:.5rem}
+.bubble-bot{background:rgba(124,58,237,.14);border:1px solid rgba(124,58,237,.25);border-radius:12px 12px 12px 3px;padding:.65rem .9rem;color:#cbd5e1;font-size:.82rem;line-height:1.6;max-width:88%;align-self:flex-start}
+.bubble-user{background:linear-gradient(135deg,#7C3AED,#4F46E5);border-radius:12px 12px 3px 12px;padding:.65rem .9rem;color:#fff;font-size:.82rem;max-width:88%;align-self:flex-end}
+.bot-input{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:.875rem;padding:.55rem .85rem;color:#e2e8f0;font-size:.83rem;outline:none;transition:border-color .25s}
+.bot-input:focus{border-color:rgba(124,58,237,.5)}
+.bot-input::placeholder{color:#334155}
+.bot-typing{display:flex;gap:4px;align-items:center;padding:.65rem .9rem}
+.dot{width:6px;height:6px;border-radius:50%;background:#7C3AED;animation:dotBounce 1.2s ease-in-out infinite}
+.dot:nth-child(2){animation-delay:.2s}
+.dot:nth-child(3){animation-delay:.4s}
+@keyframes dotBounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+
+/* ─── WA FLOAT ─── */
+.wa-btn{position:fixed;bottom:1.5rem;right:1.5rem;z-index:600;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;text-decoration:none;box-shadow:0 4px 24px rgba(37,211,102,.5);animation:float 3.5s ease-in-out infinite;transition:transform .3s,box-shadow .3s}
+.wa-btn:hover{transform:scale(1.1);box-shadow:0 8px 36px rgba(37,211,102,.65)}
+.wa-pulse{position:absolute;inset:0;border-radius:50%;background:rgba(37,211,102,.5);animation:pulse-ring 2s ease-out infinite}
+
+/* ─── REVEAL ANIMATION ─── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ─── MOBILE MENU ─── */
+#mob-menu{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(4,4,14,.98);border-bottom:1px solid rgba(124,58,237,.18);backdrop-filter:blur(28px)}
+#mob-menu.open{display:block}
+
+/* ─── TAGS ─── */
+.tag-hot{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;background:linear-gradient(90deg,#ef4444,#f97316);color:#fff;font-size:.62rem;font-weight:800;font-family:'Syne',sans-serif;border-radius:99px;letter-spacing:.08em;animation:fadeIn .3s}
+
+/* RIBBON */
+.ribbon{position:absolute;top:1.4rem;right:-2.5rem;background:linear-gradient(90deg,#7C3AED,#06B6D4);color:#fff;font-family:'Syne',sans-serif;font-size:.62rem;font-weight:800;letter-spacing:.1em;padding:.3rem 3.5rem;transform:rotate(40deg);white-space:nowrap;z-index:1}
+
+/* ─── STEP BADGE (Cara Order) ─── */
+.step-num{width:2.5rem;height:2.5rem;border-radius:50%;background:linear-gradient(135deg,rgba(124,58,237,.3),rgba(79,70,229,.15));border:1px solid rgba(124,58,237,.4);display:inline-flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;color:#a78bfa;flex-shrink:0}
+
+/* ─── PROGRESS BAR ─── */
+.progress-bar-inner{height:3px;border-radius:99px;background:linear-gradient(90deg,#7C3AED,#22d3ee);transition:width .3s ease}
+
+@media(max-width:640px){
+  #bot-panel{width:calc(100vw - 3rem);right:1.5rem}
+  .pay-methods{grid-template-columns:repeat(2,1fr)}
+  .orb-1,.orb-2,.orb-3{opacity:.4}
+}
+</style>
 </head>
+
 <body class="bg-grid">
 
-  <nav class="fixed w-full z-40 glass border-b border-white/5 py-4 px-6 transition-all">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center shadow-[0_0_15px_rgba(124,58,237,0.5)]">
-          <i class="fa-solid fa-cube text-white"></i>
-        </div>
-        <span class="font-display font-bold text-xl gradient-text tracking-wide">GrokAI Premium</span>
-      </a>
-      <div class="hidden md:flex gap-8 text-sm font-medium text-slate-400">
-        <a href="#fitur" class="hover:text-white transition-colors">Fitur</a>
-        <a href="#testimoni" class="hover:text-white transition-colors">Testimoni</a>
-        <a href="#harga" class="hover:text-white transition-colors">Harga</a>
-      </div>
-      <button onclick="document.getElementById('harga').scrollIntoView()" class="bg-white/10 hover:bg-white/20 border border-white/10 px-5 py-2 rounded-full text-sm font-semibold transition-colors">Beli Sekarang</button>
-    </div>
-  </nav>
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
 
-  <section class="relative pt-32 pb-20 px-6 min-h-screen flex items-center justify-center overflow-hidden">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
-    
-    <div class="relative z-10 text-center max-w-4xl mx-auto">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-widest mb-8">
-        <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span> Sistem Aktif & Stabil
+<!-- ══════ NAVBAR ══════ -->
+<nav id="navbar">
+  <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 relative z-10">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2.5 no-underline group">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center relative flex-shrink-0" style="background:linear-gradient(135deg,#7C3AED,#4F46E5);box-shadow:0 0 18px rgba(124,58,237,.55)">
+        <i class="fa-solid fa-cube text-white text-sm"></i>
+        <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(135deg,rgba(167,139,250,.3),transparent);box-shadow:0 0 30px rgba(124,58,237,.6)"></div>
       </div>
-      <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight mb-6">
-        <span class="text-white">GrokAI</span> <span class="gradient-text">Premium</span>
-      </h1>
-      <p class="text-xl md:text-2xl text-slate-300 font-light mb-10 max-w-3xl mx-auto leading-relaxed">
-        Akses AI Teks & Pembuatan Video <span class="font-semibold text-white">Tanpa Batas</span>. <br class="hidden md:block"/>Alternatif Resmi, Aman, dan Super Cepat.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button onclick="document.getElementById('harga').scrollIntoView()" class="bg-gradient-to-r from-purple-600 to-indigo-600 px-8 py-4 rounded-full text-white font-bold tracking-wide hover:scale-105 transition-transform shadow-[0_0_30px_rgba(124,58,237,0.4)]">
-          Pilih Paket Harga
+      <div>
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem" class="text-grad">GrokAI</span>
+        <span style="font-family:'Syne',sans-serif;font-weight:300;font-size:1.1rem;color:#475569"> Premium</span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#fitur" class="nav-link">Fitur</a>
+      <a href="#cara-order" class="nav-link">Cara Order</a>
+      <a href="#harga" class="nav-link">Harga</a>
+      <a href="#aturan" class="nav-link">Ketentuan</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+    </div>
+
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-3">
+      <a href="#harga" class="btn-ghost hidden sm:inline-flex">
+        <i class="fa-solid fa-bolt text-yellow-400 text-xs"></i> Beli Sekarang
+      </a>
+      <button id="ham-btn" class="md:hidden p-2 text-slate-400 hover:text-violet-400 transition-colors" aria-label="Menu">
+        <i id="ham-icon" class="fa-solid fa-bars text-lg"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mob-menu">
+    <div class="flex flex-col px-6 py-3 gap-0.5 max-w-7xl mx-auto">
+      <a href="#fitur"      class="nav-link py-3 block border-b border-white/5" onclick="closeMob()">Fitur</a>
+      <a href="#cara-order" class="nav-link py-3 block border-b border-white/5" onclick="closeMob()">Cara Order</a>
+      <a href="#harga"      class="nav-link py-3 block border-b border-white/5" onclick="closeMob()">Harga</a>
+      <a href="#aturan"     class="nav-link py-3 block border-b border-white/5" onclick="closeMob()">Ketentuan</a>
+      <a href="#faq"        class="nav-link py-3 block" onclick="closeMob()">FAQ</a>
+      <a href="#harga" class="btn-primary mt-4 justify-center" onclick="closeMob()">
+        <i class="fa-solid fa-rocket"></i><span>Mulai Sekarang</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+  <!-- Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <!-- Scanline -->
+  <div class="hero-scan"></div>
+  <!-- Bottom gradient -->
+  <div class="absolute bottom-0 left-0 right-0 h-40 z-10 pointer-events-none" style="background:linear-gradient(to bottom,transparent,#04040e)"></div>
+
+  <!-- Decorative ring -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none" style="border:1px solid rgba(124,58,237,.06)"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none" style="border:1px solid rgba(124,58,237,.08)"></div>
+
+  <div class="relative z-10 text-center max-w-5xl mx-auto px-5 py-24">
+    <!-- Live badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-10" style="background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.22);color:#22d3ee;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;animation:fadeUp .8s ease both">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+      </span>
+      Platform Aktif · Server Stabil 99.9%
+    </div>
+
+    <!-- Headline -->
+    <h1 class="font-display font-extrabold leading-none mb-7" style="letter-spacing:-.03em;animation:fadeUp .8s .15s ease both;opacity:0;animation-fill-mode:both">
+      <span class="block text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white" style="text-shadow:0 0 80px rgba(167,139,250,.2)">GrokAI</span>
+      <span class="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-grad mt-1">Premium</span>
+    </h1>
+
+    <!-- Tagline -->
+    <p class="text-xl md:text-2xl text-slate-300 mb-4 font-light leading-relaxed" style="animation:fadeUp .8s .3s ease both;opacity:0;animation-fill-mode:both">
+      Akses AI Teks &amp; Pembuatan Video <strong class="text-white font-semibold">Tanpa Batas</strong>
+    </p>
+    <p class="text-slate-500 text-base md:text-lg mb-11" style="animation:fadeUp .8s .4s ease both;opacity:0;animation-fill-mode:both">
+      Alternatif Resmi, Aman, dan Super Cepat · Proses Aktivasi &lt; 15 Menit
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20" style="animation:fadeUp .8s .5s ease both;opacity:0;animation-fill-mode:both">
+      <a href="#harga" class="btn-primary text-base w-full sm:w-auto">
+        <i class="fa-solid fa-rocket"></i><span>Pilih Paket Harga</span>
+      </a>
+      <a href="#fitur" class="btn-secondary w-full sm:w-auto">
+        <i class="fa-solid fa-play text-xs"></i> Jelajahi Fitur
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12" style="animation:fadeUp .8s .65s ease both;opacity:0;animation-fill-mode:both">
+      <div class="text-center">
+        <div class="stat-val text-grad" data-target="500">0</div>
+        <div class="text-xs text-slate-600 mt-1 uppercase tracking-widest font-semibold">Pengguna Aktif</div>
+      </div>
+      <div class="hidden sm:block w-px h-12 bg-white/5"></div>
+      <div class="text-center">
+        <div class="stat-val text-grad">99.9<span class="text-3xl">%</span></div>
+        <div class="text-xs text-slate-600 mt-1 uppercase tracking-widest font-semibold">Uptime Server</div>
+      </div>
+      <div class="hidden sm:block w-px h-12 bg-white/5"></div>
+      <div class="text-center">
+        <div class="stat-val text-grad">&lt;15<span class="text-3xl">m</span></div>
+        <div class="text-xs text-slate-600 mt-1 uppercase tracking-widest font-semibold">Waktu Aktivasi</div>
+      </div>
+      <div class="hidden sm:block w-px h-12 bg-white/5"></div>
+      <div class="text-center">
+        <div class="stat-val text-grad">24<span class="text-3xl">/7</span></div>
+        <div class="text-xs text-slate-600 mt-1 uppercase tracking-widest font-semibold">Support Admin</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FEATURES ══════ -->
+<section id="fitur" class="relative py-28 px-5 overflow-hidden z-10">
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(79,70,229,.12),transparent 70%);top:0;left:50%;transform:translateX(-50%)"></div>
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="text-center mb-16 reveal">
+      <div class="badge mx-auto"><i class="fa-solid fa-stars"></i> Keunggulan Platform</div>
+      <h2 class="text-4xl md:text-5xl font-display font-extrabold text-white mb-4">Semua Yang Kamu <span class="text-grad">Butuhkan</span></h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">Fitur lengkap tanpa kompromi — dirancang untuk kreator &amp; profesional Indonesia.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="feat-card glass reveal" style="transition-delay:.05s">
+        <div class="feat-icon bg-violet-500/10 border border-violet-500/25 text-violet-400">
+          <i class="fa-solid fa-comment-dots"></i>
+        </div>
+        <h3 class="font-display font-bold text-xl text-white mb-3">Unlimited AI Chat</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">Obrolan AI tanpa batas harian — analisa data, tulis kode, buat konten — semua tanpa throttle atau antrian.</p>
+        <ul class="space-y-1.5">
+          <li class="chk"><i class="fa-solid fa-check text-violet-400"></i> Unlimited pesan per hari</li>
+          <li class="chk"><i class="fa-solid fa-check text-violet-400"></i> Konteks percakapan panjang</li>
+          <li class="chk"><i class="fa-solid fa-check text-violet-400"></i> Model terbaru tanpa antrian</li>
+        </ul>
+      </div>
+
+      <!-- Card 2 (HOT) -->
+      <div class="feat-card glass-violet reveal" style="transition-delay:.12s">
+        <div class="flex items-start justify-between">
+          <div class="feat-icon text-cyan-400" style="background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.3)">
+            <i class="fa-solid fa-clapperboard"></i>
+          </div>
+          <span class="tag-hot mt-1"><i class="fa-solid fa-fire text-xs"></i> HOT</span>
+        </div>
+        <h3 class="font-display font-bold text-xl text-white mb-3 mt-4">Video Generation</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">Buat video AI berkualitas tinggi hanya dari teks atau gambar. Fitur eksklusif dengan teknologi text-to-video terkini.</p>
+        <ul class="space-y-1.5">
+          <li class="chk"><i class="fa-solid fa-check text-cyan-400"></i> Text-to-Video generasi terbaru</li>
+          <li class="chk"><i class="fa-solid fa-check text-cyan-400"></i> Resolusi hingga 1080p</li>
+          <li class="chk"><i class="fa-solid fa-check text-cyan-400"></i> Durasi hingga 30 detik/video</li>
+        </ul>
+        <div class="absolute inset-0 rounded-2xl pointer-events-none" style="background:radial-gradient(ellipse at bottom right,rgba(6,182,212,.06),transparent 55%)"></div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="feat-card glass reveal" style="transition-delay:.2s">
+        <div class="feat-icon text-amber-400" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.28)">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <h3 class="font-display font-bold text-xl text-white mb-3">Prioritas Rendering</h3>
+        <p class="text-slate-500 text-sm leading-relaxed mb-5">Antrianmu selalu di depan. Proses rendering video hingga 5× lebih cepat dibanding akun reguler.</p>
+        <ul class="space-y-1.5">
+          <li class="chk"><i class="fa-solid fa-check text-amber-400"></i> Priority queue rendering</li>
+          <li class="chk"><i class="fa-solid fa-check text-amber-400"></i> Server dedicated premium</li>
+          <li class="chk"><i class="fa-solid fa-check text-amber-400"></i> SLA respons &lt; 30 detik</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Extra row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+      <div class="feat-card glass reveal" style="transition-delay:.28s;padding:1.5rem 2rem">
+        <div class="flex items-center gap-4">
+          <div class="feat-icon text-emerald-400 mb-0 flex-shrink-0" style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25)">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-lg text-white mb-1">Garansi Resmi</h3>
+            <p class="text-slate-500 text-sm">Masalah pada akun? Kami ganti baru sesuai sisa garansi — maks. 1×24 jam proses.</p>
+          </div>
+        </div>
+      </div>
+      <div class="feat-card glass reveal" style="transition-delay:.34s;padding:1.5rem 2rem">
+        <div class="flex items-center gap-4">
+          <div class="feat-icon text-pink-400 mb-0 flex-shrink-0" style="background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.25)">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-lg text-white mb-1">Support 24/7 via WA</h3>
+            <p class="text-slate-500 text-sm">Admin siap setiap hari, proses aktivasi manual cepat, chat langsung tanpa bot.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CARA ORDER ══════ -->
+<section id="cara-order" class="relative py-24 px-5 z-10 overflow-hidden">
+  <div class="orb" style="width:300px;height:300px;background:radial-gradient(circle,rgba(6,182,212,.1),transparent 70%);bottom:0;right:10%"></div>
+  <div class="max-w-4xl mx-auto relative z-10">
+    <div class="text-center mb-14 reveal">
+      <div class="badge mx-auto"><i class="fa-solid fa-list-check"></i> Cara Pemesanan</div>
+      <h2 class="text-4xl md:text-5xl font-display font-extrabold text-white mb-4">Order Mudah, <span class="text-grad">Cepat Aktif</span></h2>
+      <p class="text-slate-500 text-lg">4 langkah simpel — dari pilih paket hingga akun siap pakai.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div class="glass p-6 rounded-2xl flex items-start gap-4 reveal" style="transition-delay:.05s">
+        <div class="step-num">1</div>
+        <div>
+          <h4 class="font-display font-bold text-white mb-1.5">Pilih Paket</h4>
+          <p class="text-slate-500 text-sm leading-relaxed">Tentukan paket yang sesuai kebutuhan — Mingguan, Bulanan, atau Tahunan.</p>
+        </div>
+      </div>
+      <div class="glass p-6 rounded-2xl flex items-start gap-4 reveal" style="transition-delay:.12s">
+        <div class="step-num">2</div>
+        <div>
+          <h4 class="font-display font-bold text-white mb-1.5">Isi Form Pembelian</h4>
+          <p class="text-slate-500 text-sm leading-relaxed">Masukkan nama, pilih metode bayar, dan nomor rekening/HP kamu.</p>
+        </div>
+      </div>
+      <div class="glass p-6 rounded-2xl flex items-start gap-4 reveal" style="transition-delay:.2s">
+        <div class="step-num">3</div>
+        <div>
+          <h4 class="font-display font-bold text-white mb-1.5">Transfer &amp; Konfirmasi ke WA</h4>
+          <p class="text-slate-500 text-sm leading-relaxed">Bayar sesuai nominal, lalu kirim bukti ke admin via WhatsApp otomatis.</p>
+        </div>
+      </div>
+      <div class="glass p-6 rounded-2xl flex items-start gap-4 reveal" style="transition-delay:.28s">
+        <div class="step-num">4</div>
+        <div>
+          <h4 class="font-display font-bold text-white mb-1.5">Akun Aktif &lt; 15 Menit</h4>
+          <p class="text-slate-500 text-sm leading-relaxed">Setelah pembayaran dikonfirmasi, akun premium langsung aktif dan siap pakai!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PRICING ══════ -->
+<section id="harga" class="relative py-28 px-5 overflow-hidden z-10">
+  <div class="orb" style="width:450px;height:450px;background:radial-gradient(circle,rgba(124,58,237,.12),transparent 68%);bottom:5%;left:-8%"></div>
+  <div class="orb" style="width:320px;height:320px;background:radial-gradient(circle,rgba(6,182,212,.1),transparent 70%);top:8%;right:-5%"></div>
+  <div class="max-w-5xl mx-auto relative z-10">
+    <div class="text-center mb-16 reveal">
+      <div class="badge mx-auto"><i class="fa-solid fa-tag"></i> Paket Harga</div>
+      <h2 class="text-4xl md:text-5xl font-display font-extrabold text-white mb-4">Pilih <span class="text-grad">Paket Ideal</span> Kamu</h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">Harga terjangkau, nilai premium. Garansi resmi, proses mudah via WhatsApp.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+
+      <!-- MINGGUAN -->
+      <div class="price-card glass reveal" style="transition-delay:.05s">
+        <div class="mb-7">
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2 font-display">Mingguan · Starter</div>
+          <div class="flex items-baseline gap-1 mb-1">
+            <span class="text-xl text-slate-500">Rp</span>
+            <span class="text-5xl font-extrabold text-white font-display">30.000</span>
+          </div>
+          <div class="text-slate-600 text-sm">per minggu · per akun</div>
+        </div>
+        <div class="h-px bg-white/5 mb-6"></div>
+        <ul class="space-y-1 mb-8 flex-1">
+          <li class="chk"><i class="fa-solid fa-circle-check text-emerald-500"></i> Akses Dasar AI Chat</li>
+          <li class="chk"><i class="fa-solid fa-circle-check text-emerald-500"></i> Video Generation (Limit Ketat)</li>
+          <li class="chk"><i class="fa-solid fa-circle-check text-emerald-500"></i> Garansi 2 Hari</li>
+          <li class="chk"><i class="fa-solid fa-circle-check text-emerald-500"></i> Support via WhatsApp</li>
+          <li class="chk off"><i class="fa-solid fa-circle-xmark" style="color:#1e293b"></i> Priority Rendering</li>
+          <li class="chk off"><i class="fa-solid fa-circle-xmark" style="color:#1e293b"></i> Extended Guarantee</li>
+        </ul>
+        <button onclick="openModal('MINGGUAN','Rp 30.000')" class="btn-secondary w-full mt-auto">
+          Mulai Mingguan
+        </button>
+      </div>
+
+      <!-- BULANAN (FEATURED) -->
+      <div class="price-card featured reveal" style="transition-delay:.14s">
+        <div class="ribbon">TERLARIS</div>
+        <div class="mb-7">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold uppercase tracking-widest text-violet-400 font-display">Bulanan · Popular</span>
+          </div>
+          <div class="flex items-baseline gap-1 mb-1">
+            <span class="text-xl" style="color:#a78bfa">Rp</span>
+            <span class="text-5xl font-extrabold text-grad font-display">68.000</span>
+          </div>
+          <div class="text-slate-600 text-sm">per bulan · per akun</div>
+        </div>
+        <div class="h-px mb-6" style="background:linear-gradient(90deg,transparent,rgba(124,58,237,.5),transparent)"></div>
+        <ul class="space-y-1 mb-4 flex-1">
+          <li class="chk"><i class="fa-solid fa-circle-check" style="color:#a78bfa"></i> Unlimited AI Chat</li>
+          <li class="chk"><i class="fa-solid fa-circle-check" style="color:#a78bfa"></i> Video Generation Standar</li>
+          <li class="chk"><i class="fa-solid fa-circle-check" style="color:#a78bfa"></i> Garansi 7 Hari</li>
+          <li class="chk"><i class="fa-solid fa-circle-check" style="color:#a78bfa"></i> Support via WhatsApp</li>
+          <li class="chk off"><i class="fa-solid fa-circle-xmark" style="color:#1e293b"></i> Priority Rendering</li>
+          <li class="chk off"><i class="fa-solid fa-circle-xmark" style="color:#1e293b"></i> Extended Guarantee</li>
+        </ul>
+        <button onclick="openModal('BULANAN','Rp 68.000')" class="btn-primary w-full mt-auto">
+          <span>Mulai Bulanan</span>
+        </button>
+      </div>
+
+      <!-- TAHUNAN -->
+      <div class="price-card glass reveal" style="border:1px solid rgba(6,182,212,.25);transition-delay:.24s">
+        <div class="ribbon" style="background:linear-gradient(90deg,#0891b2,#06B6D4)">BEST VALUE</div>
+        <div class="mb-7">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold uppercase tracking-widest text-cyan-400 font-display">Tahunan · Pro</span>
+            <span class="text-xs font-extrabold px-2 py-0.5 rounded-full" style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.22);color:#34d399;font-family:'Syne',sans-serif">HEMAT 76%</span>
+          </div>
+          <div class="flex items-baseline gap-1 mb-1">
+            <span class="text-xl text-slate-500">Rp</span>
+            <span class="text-5xl font-extrabold text-white font-display">230.000</span>
+          </div>
+          <div class="text-slate-600 text-sm">per tahun · <span class="text-slate-500">≈ Rp 19.200/bln</span></div>
+        </div>
+        <div class="h-px bg-white/5 mb-6"></div>
+        <ul class="space-y-1 mb-4 flex-1">
+          <li class="chk"><i class="fa-solid fa-circle-check text-cyan-400"></i> Unlimited AI Chat</li>
+          <li class="chk"><i class="fa-solid fa-circle-check text-cyan-400"></i> Video Generation — Priority</li>
+          <li class="chk"><i class="fa-solid fa-circle-check text-cyan-400"></i> Garansi Ekstra 43 Hari</li>
+          <li class="chk"><i class="fa-solid fa-circle-check text-cyan-400"></i> Support 24/7 Prioritas</li>
+          <li class="chk"><i class="fa-solid fa-circle-check text-cyan-400"></i> Priority Rendering 5×</li>
+          <li class="chk"><i class="fa-solid fa-circle-check text-cyan-400"></i> Extended Guarantee</li>
+        </ul>
+        <p class="text-xs mb-5 flex items-center gap-1.5" style="color:rgba(251,191,36,.65)">
+          <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> High-sensitive account. Wajib prosedur VPN India.
+        </p>
+        <button onclick="openModal('TAHUNAN','Rp 230.000')" class="btn-secondary w-full mt-auto" style="border-color:rgba(6,182,212,.4);color:#22d3ee">
+          Mulai Tahunan
+        </button>
+      </div>
+
+    </div>
+    <p class="text-center text-slate-700 text-xs mt-8 flex items-center justify-center gap-2">
+      <i class="fa-solid fa-shield-halved text-slate-600"></i>
+      Akun aktif maks. 15 menit setelah konfirmasi. Proses manual via WhatsApp oleh admin.
+    </p>
+  </div>
+</section>
+
+<!-- ══════ SYARAT & KETENTUAN ══════ -->
+<section id="aturan" class="relative py-20 px-5 z-10">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10 reveal">
+      <div class="badge mx-auto" style="background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.28);color:#f87171">
+        <i class="fa-solid fa-triangle-exclamation"></i> Penting Dibaca
+      </div>
+      <h2 class="text-4xl md:text-5xl font-display font-extrabold text-white">Syarat &amp; <span class="text-grad-danger">Ketentuan Mutlak</span></h2>
+    </div>
+
+    <div class="warn-box reveal">
+      <div class="flex items-center gap-4 mb-6 relative z-10">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3)">
+          <i class="fa-solid fa-shield-exclamation text-red-400 text-2xl"></i>
+        </div>
+        <div>
+          <div class="text-red-400 font-display font-bold text-sm uppercase tracking-widest">Peringatan Keamanan Akun</div>
+          <div class="text-slate-500 text-xs mt-0.5">Harap baca dengan seksama sebelum melakukan pembelian.</div>
+        </div>
+      </div>
+
+      <div class="space-y-3 relative z-10">
+        <div class="flex gap-3 p-4 rounded-xl" style="background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.13)">
+          <i class="fa-solid fa-earth-asia text-red-400 mt-0.5 flex-shrink-0"></i>
+          <p class="text-slate-300 text-sm leading-relaxed">Akun menggunakan <strong class="text-white">server regional India</strong>. Sistem platform mendeteksi IP login — perbedaan lokasi server akan memicu proteksi otomatis dari pusat.</p>
+        </div>
+        <div class="flex gap-3 p-4 rounded-xl" style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2)">
+          <i class="fa-solid fa-lock text-red-400 mt-0.5 flex-shrink-0"></i>
+          <p class="text-sm leading-relaxed">
+            <strong class="text-red-400 uppercase">WAJIB MENGGUNAKAN VPN INDIA BERKUALITAS</strong>
+            <span class="text-slate-300"> saat login dan selama penggunaan. VPN gratis / kualitas rendah sangat berisiko terhadap keamanan akun.</span>
+          </p>
+        </div>
+        <div class="flex gap-3 p-4 rounded-xl" style="background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.18)">
+          <i class="fa-solid fa-ban text-amber-400 mt-0.5 flex-shrink-0"></i>
+          <p class="text-slate-300 text-sm leading-relaxed">Pelanggaran <strong class="text-amber-400">(login IP lokal tanpa VPN)</strong> → <strong class="text-white">banned permanen</strong> &amp; <strong class="text-amber-400">GARANSI HANGUS tanpa pengecualian</strong>. Tidak ada pemulihan akun setelah terdeteksi.</p>
+        </div>
+        <div class="flex gap-3 p-4 rounded-xl" style="background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.15)">
+          <i class="fa-solid fa-circle-info text-emerald-400 mt-0.5 flex-shrink-0"></i>
+          <p class="text-slate-300 text-sm leading-relaxed">VPN yang direkomendasikan: <strong class="text-white">ExpressVPN, NordVPN, atau Mullvad</strong> dengan server India. Admin siap bantu setting via WhatsApp.</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center gap-3 mt-7 relative z-10">
+        <a href="https://wa.me/6282219989497?text=Halo%20Admin,%20saya%20butuh%20panduan%20setting%20VPN%20India%20untuk%20GrokAI%20Premium." target="_blank" rel="noopener" class="btn-secondary w-full sm:w-auto" style="border-color:rgba(245,158,11,.38);color:#fbbf24">
+          <i class="fa-brands fa-whatsapp text-amber-400"></i> Minta Panduan VPN
+        </a>
+        <a href="#harga" class="btn-ghost w-full sm:w-auto justify-center">
+          <i class="fa-solid fa-arrow-right text-violet-400"></i> Langsung Beli
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FAQ ══════ -->
+<section id="faq" class="relative py-24 px-5 z-10">
+  <div class="orb" style="width:320px;height:320px;background:radial-gradient(circle,rgba(124,58,237,.1),transparent 70%);top:0;right:-5%"></div>
+  <div class="max-w-3xl mx-auto relative z-10">
+    <div class="text-center mb-14 reveal">
+      <div class="badge mx-auto"><i class="fa-solid fa-circle-question"></i> Tanya Jawab</div>
+      <h2 class="text-4xl md:text-5xl font-display font-extrabold text-white">Pertanyaan <span class="text-grad">Umum</span></h2>
+    </div>
+
+    <div class="glass rounded-2xl p-2 md:p-5 reveal">
+      <div class="faq-item px-2">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>Apakah ini aman dan legal digunakan?</span>
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-body">Ini adalah metode akses server regional resmi menggunakan VPN. Semua fitur identik dengan pengguna asli. Platform tidak melarang akses lintas wilayah secara teknis, hanya memerlukan IP server yang sesuai dengan regional akun.</div>
+      </div>
+      <div class="faq-item px-2">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>Bagaimana jika akun bermasalah atau tiba-tiba mati?</span>
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-body">Selama terbukti mematuhi aturan VPN India, kami akan mengganti akun baru sesuai sisa masa garansi (2 hari untuk Mingguan, 7 hari untuk Bulanan, 43 hari untuk Tahunan). Proses penggantian maksimal 1×24 jam.</div>
+      </div>
+      <div class="faq-item px-2">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>VPN India mana yang paling direkomendasikan?</span>
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-body">Kami merekomendasikan ExpressVPN, NordVPN, atau Mullvad dengan server India. Hindari VPN gratis karena tidak stabil dan berisiko trigger deteksi sistem. Admin siap bantu setting via WhatsApp tanpa biaya tambahan.</div>
+      </div>
+      <div class="faq-item px-2">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>Berapa lama aktivasi akun setelah pembayaran?</span>
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-body">Akun aktif maksimal 15 menit setelah pembayaran dikonfirmasi admin. Admin tersedia setiap hari. Pada jam sibuk atau paket Tahunan, verifikasi bisa sedikit lebih lama — namun tidak lebih dari 1 jam.</div>
+      </div>
+      <div class="faq-item px-2">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>Metode pembayaran apa saja yang tersedia?</span>
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-body">Tersedia DANA, OVO, GoPay, Transfer Bank BCA, Mandiri, dan BRI. Pilih yang paling nyaman saat mengisi form pembelian, lalu bukti transfer dikirim ke admin via WhatsApp secara otomatis.</div>
+      </div>
+      <div class="faq-item px-2" style="border-bottom:none">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span>Apakah ada refund jika tidak puas?</span>
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </button>
+        <div class="faq-body">Kami tidak menyediakan refund tunai, namun tersedia garansi penggantian akun selama masa garansi berlaku (syarat dan ketentuan terpenuhi). Pastikan baca aturan pakai sebelum melakukan pembelian.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="relative pt-16 pb-8 px-5 z-10" style="border-top:1px solid rgba(255,255,255,.04)">
+  <div class="orb" style="width:350px;height:350px;background:radial-gradient(circle,rgba(124,58,237,.07),transparent 70%);bottom:-10rem;left:50%;transform:translateX(-50%)"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+
+      <!-- Brand -->
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2.5 mb-5">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,#7C3AED,#4F46E5);box-shadow:0 0 15px rgba(124,58,237,.5)">
+            <i class="fa-solid fa-cube text-white text-sm"></i>
+          </div>
+          <div>
+            <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem" class="text-grad">GrokAI</span>
+            <span style="font-family:'Syne',sans-serif;font-weight:300;color:#475569"> Premium</span>
+          </div>
+        </div>
+        <p class="text-slate-600 text-sm leading-relaxed max-w-xs mb-6">Memberdayakan kreator &amp; profesional Indonesia dengan akses AI terjangkau, tanpa batas, dan terpercaya.</p>
+        <!-- Social Icons -->
+        <div class="flex items-center gap-2.5">
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 hover:text-white hover:bg-gradient-to-br hover:from-pink-500 hover:to-rose-500 transition-all" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)"><i class="fa-brands fa-instagram text-sm"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 hover:text-white hover:bg-black transition-all" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)"><i class="fa-brands fa-tiktok text-sm"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 hover:text-white hover:bg-red-600 transition-all" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)"><i class="fa-brands fa-youtube text-sm"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 hover:text-white hover:bg-black transition-all" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)"><i class="fa-brands fa-x-twitter text-sm"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 hover:text-white hover:bg-blue-600 transition-all" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+          <a href="https://wa.me/6282219989497" target="_blank" rel="noopener" class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-600 hover:text-white transition-all" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);--tw-hover-bg:#25D366"><i class="fa-brands fa-whatsapp text-sm"></i></a>
+        </div>
+      </div>
+
+      <!-- Navigasi -->
+      <div>
+        <h4 class="font-display font-bold text-white text-sm mb-5 uppercase tracking-widest">Navigasi</h4>
+        <ul class="space-y-3">
+          <li><a href="#fitur"      class="text-slate-600 hover:text-violet-400 text-sm transition-colors no-underline">Fitur</a></li>
+          <li><a href="#cara-order" class="text-slate-600 hover:text-violet-400 text-sm transition-colors no-underline">Cara Order</a></li>
+          <li><a href="#harga"      class="text-slate-600 hover:text-violet-400 text-sm transition-colors no-underline">Harga</a></li>
+          <li><a href="#aturan"     class="text-slate-600 hover:text-violet-400 text-sm transition-colors no-underline">Ketentuan</a></li>
+          <li><a href="#faq"        class="text-slate-600 hover:text-violet-400 text-sm transition-colors no-underline">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Dukungan -->
+      <div>
+        <h4 class="font-display font-bold text-white text-sm mb-5 uppercase tracking-widest">Dukungan</h4>
+        <ul class="space-y-3">
+          <li>
+            <a href="mailto:support@grok-premium-id.com" class="text-slate-600 hover:text-violet-400 text-sm transition-colors no-underline flex items-center gap-2">
+              <i class="fa-solid fa-envelope text-xs"></i> support@grok-premium-id.com
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/6282219989497" target="_blank" rel="noopener" class="text-slate-600 hover:text-green-400 text-sm transition-colors no-underline flex items-center gap-2">
+              <i class="fa-brands fa-whatsapp text-xs"></i> WhatsApp Admin
+            </a>
+          </li>
+          <li><a href="#" class="text-slate-600 hover:text-violet-400 text-sm transition-colors no-underline">Syarat &amp; Ketentuan</a></li>
+          <li><a href="#" class="text-slate-600 hover:text-violet-400 text-sm transition-colors no-underline">Kebijakan Privasi</a></li>
+          <li><a href="#" class="text-slate-600 hover:text-violet-400 text-sm transition-colors no-underline">Kebijakan Refund</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="h-px mb-8" style="background:linear-gradient(90deg,transparent,rgba(124,58,237,.2),transparent)"></div>
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-slate-700 text-xs">&copy; 2026 GrokAI Premium. Seluruh hak cipta dilindungi.</p>
+      <p class="text-slate-700 text-xs">Dibuat dengan <i class="fa-solid fa-heart text-violet-700 mx-0.5 text-xs"></i> untuk kreator Indonesia</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════ CHECKOUT MODAL ══════ -->
+<div id="checkoutModal" class="modal-wrap" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 id="modal-title" class="font-display font-bold text-white text-lg">Detail Pembayaran</h3>
+          <p class="text-slate-600 text-xs mt-0.5">Isi data dengan benar agar proses lancar.</p>
+        </div>
+        <button onclick="closeModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/5 transition-all">
+          <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
     </div>
-  </section>
 
-  <section id="testimoni" class="py-24 px-6 relative z-10 border-t border-white/5 bg-[#080814]">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="font-display text-3xl md:text-5xl font-bold mb-4">Testimoni <span class="gradient-text">Pelanggan</span></h2>
-        <p class="text-slate-400">Ribuan kreator sudah membuktikan performa server prioritas kami.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="glass-card p-6 rounded-2xl">
-          <div class="flex text-yellow-400 text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-          <p class="text-slate-300 italic text-sm mb-6">"Awalnya ragu, tapi ternyata render videonya ngebut banget! Asal nurut nyalain VPN India kayak kata admin, aman sentosa. Cuan ngalir dari konten!"</p>
-          <div class="flex items-center gap-3 border-t border-white/10 pt-4">
-            <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center font-bold text-purple-400">B</div>
-            <div>
-              <div class="font-bold text-sm">Budi Santoso</div>
-              <div class="text-xs text-slate-500">Content Creator</div>
+    <div class="modal-body">
+      <form id="checkoutForm" onsubmit="processCheckout(event)" novalidate>
+
+        <!-- Paket terpilih (readonly) -->
+        <div class="form-group">
+          <label class="form-label">Paket Terpilih</label>
+          <input type="text" id="selPaket" readonly class="form-input"/>
+        </div>
+
+        <!-- Nama -->
+        <div class="form-group">
+          <label class="form-label">Nama Lengkap Anda <span class="text-red-400">*</span></label>
+          <input type="text" id="buyerName" required placeholder="Contoh: Budi Santoso" class="form-input"/>
+        </div>
+
+        <!-- Metode Bayar -->
+        <div class="form-group">
+          <label class="form-label">Metode Pembayaran <span class="text-red-400">*</span></label>
+          <div class="pay-methods" id="payGrid">
+            <div class="pay-opt selected" data-val="DANA" onclick="selectPay(this)">
+              <i class="fa-solid fa-wallet text-blue-400"></i><span>DANA</span>
+            </div>
+            <div class="pay-opt" data-val="OVO" onclick="selectPay(this)">
+              <i class="fa-solid fa-wallet text-purple-400"></i><span>OVO</span>
+            </div>
+            <div class="pay-opt" data-val="GoPay" onclick="selectPay(this)">
+              <i class="fa-solid fa-wallet text-green-400"></i><span>GoPay</span>
+            </div>
+            <div class="pay-opt" data-val="BCA" onclick="selectPay(this)">
+              <i class="fa-solid fa-building-columns text-blue-300"></i><span>BCA</span>
+            </div>
+            <div class="pay-opt" data-val="Mandiri" onclick="selectPay(this)">
+              <i class="fa-solid fa-building-columns text-yellow-400"></i><span>Mandiri</span>
+            </div>
+            <div class="pay-opt" data-val="BRI" onclick="selectPay(this)">
+              <i class="fa-solid fa-building-columns text-blue-500"></i><span>BRI</span>
             </div>
           </div>
-        </div>
-        <div class="glass-card p-6 rounded-2xl border-t-2 border-t-indigo-500 md:-translate-y-4">
-          <div class="flex text-yellow-400 text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-          <p class="text-slate-300 italic text-sm mb-6">"Udah langganan paket tahunan. Fiturnya full 100% mirip aslinya. Pernah lupa VPN dan kena limit, tapi admin gercep bantu reset. Recommended parah."</p>
-          <div class="flex items-center gap-3 border-t border-white/10 pt-4">
-            <div class="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center font-bold text-indigo-400">S</div>
-            <div>
-              <div class="font-bold text-sm">Siska Amanda</div>
-              <div class="text-xs text-slate-500">Digital Marketer</div>
-            </div>
-          </div>
-        </div>
-        <div class="glass-card p-6 rounded-2xl">
-          <div class="flex text-yellow-400 text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
-          <p class="text-slate-300 italic text-sm mb-6">"Lumayan ribet dikit harus konek VPN dulu tiap mau pake, tapi *worth it* lah buat harga segini dapet akses premium tanpa antri."</p>
-          <div class="flex items-center gap-3 border-t border-white/10 pt-4">
-            <div class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center font-bold text-cyan-400">F</div>
-            <div>
-              <div class="font-bold text-sm">Fahmi R.</div>
-              <div class="text-xs text-slate-500">Video Editor</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="harga" class="py-24 px-6 relative z-10">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="font-display text-3xl md:text-5xl font-bold mb-4">Investasi <span class="gradient-text">Terbaik</span></h2>
-        <p class="text-slate-400">Pilih paket sesuai kebutuhan. Pembayaran aman, proses manual cepat.</p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="glass-card p-8 rounded-3xl flex flex-col">
-          <div class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Mingguan</div>
-          <div class="flex items-baseline gap-1 mb-6">
-            <span class="text-2xl text-slate-400">Rp</span>
-            <span class="text-4xl font-bold text-white">30.000</span>
-          </div>
-          <ul class="space-y-3 mb-8 flex-1 text-sm text-slate-300">
-            <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Akses Dasar Chat AI</li>
-            <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Limit Video Ketat</li>
-            <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Garansi 2 Hari</li>
-          </ul>
-          <button onclick="openModal('MINGGUAN (Rp 30.000)')" class="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 font-bold transition-colors">Pilih Mingguan</button>
+          <input type="hidden" id="payMethod" value="DANA"/>
         </div>
 
-        <div class="glass-card p-8 rounded-3xl flex flex-col relative border-purple-500/50 shadow-[0_0_30px_rgba(124,58,237,0.15)] transform md:-translate-y-4">
-          <div class="absolute top-0 right-6 -translate-y-1/2 bg-gradient-to-r from-purple-600 to-indigo-600 text-xs font-bold px-3 py-1 rounded-full">TERLARIS</div>
-          <div class="text-sm font-bold text-purple-400 uppercase tracking-widest mb-2">Bulanan</div>
-          <div class="flex items-baseline gap-1 mb-6">
-            <span class="text-2xl text-slate-400">Rp</span>
-            <span class="text-5xl font-bold text-white font-display">68.000</span>
-          </div>
-          <ul class="space-y-3 mb-8 flex-1 text-sm text-slate-300">
-            <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Unlimited Text Generation</li>
-            <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Video Generation Standar</li>
-            <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Garansi 7 Hari</li>
-          </ul>
-          <button onclick="openModal('BULANAN (Rp 68.000)')" class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 font-bold hover:opacity-90 transition-opacity shadow-lg">Pilih Bulanan</button>
+        <!-- No HP / Rekening -->
+        <div class="form-group">
+          <label class="form-label" id="rekLabel">Nomor HP (DANA) <span class="text-red-400">*</span></label>
+          <input type="text" id="buyerRek" required placeholder="08xxxxxxxxxx" class="form-input"/>
         </div>
 
-        <div class="glass-card p-8 rounded-3xl flex flex-col relative border-cyan-500/30">
-          <div class="absolute top-0 right-6 -translate-y-1/2 bg-cyan-600 text-xs font-bold px-3 py-1 rounded-full">BEST VALUE</div>
-          <div class="text-sm font-bold text-cyan-400 uppercase tracking-widest mb-2">Tahunan</div>
-          <div class="flex items-baseline gap-1 mb-6">
-            <span class="text-2xl text-slate-400">Rp</span>
-            <span class="text-4xl font-bold text-white">230.000</span>
-          </div>
-          <ul class="space-y-3 mb-8 flex-1 text-sm text-slate-300">
-            <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Semua Fitur Bulanan</li>
-            <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Prioritas Rendering Video</li>
-            <li><i class="fa-solid fa-check text-purple-400 mr-2"></i> Garansi Ekstra 43 Hari</li>
-          </ul>
-          <button onclick="openModal('TAHUNAN (Rp 230.000)')" class="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 font-bold transition-colors">Pilih Tahunan</button>
-        </div>
-      </div>
-    </div>
-  </section>
+        <!-- Konfirmasi VPN -->
+        <label class="flex items-start gap-3 cursor-pointer mb-6 p-3 rounded-xl" style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2)">
+          <input type="checkbox" id="vpnAgree" required class="mt-0.5 accent-violet-500 flex-shrink-0"/>
+          <span class="text-xs text-slate-400 leading-relaxed">Saya memahami dan setuju untuk <strong class="text-amber-400">selalu menggunakan VPN India</strong> saat menggunakan akun ini. Pelanggaran = garansi hangus.</span>
+        </label>
 
-  <section class="py-10 px-6 max-w-4xl mx-auto">
-    <div class="bg-red-900/20 border border-red-500/30 rounded-2xl p-6 relative overflow-hidden">
-      <div class="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
-      <h3 class="font-bold text-red-400 mb-2 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> SYARAT & KETENTUAN MUTLAK</h3>
-      <p class="text-sm text-red-200/80 leading-relaxed">
-        Sistem menggunakan regional khusus. <strong>WAJIB MENGGUNAKAN VPN INDIA</strong> saat login dan pemakaian. Login menggunakan IP Lokal (Indonesia) tanpa VPN akan memicu sistem blokir otomatis dari pusat. Jika terdeteksi melanggar, <strong>GARANSI HANGUS</strong>.
-      </p>
-    </div>
-  </section>
+        <!-- Error msg -->
+        <p id="formError" class="text-red-400 text-xs mb-3 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i><span id="errorText"></span></p>
 
-  <footer class="border-t border-white/10 bg-[#05050f] pt-16 pb-8 px-6 mt-10 text-center md:text-left">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-      <div class="md:col-span-2">
-        <span class="font-display font-bold text-xl gradient-text block mb-4">GrokAI Premium</span>
-        <p class="text-sm text-slate-500 max-w-sm mx-auto md:mx-0">Memberdayakan kreator Indonesia dengan akses AI terjangkau dan tanpa batas. Alternatif cerdas untuk produktivitas maksimal.</p>
-      </div>
-      <div>
-        <h4 class="font-bold text-white mb-4">Dukungan</h4>
-        <ul class="space-y-2 text-sm text-slate-500">
-          <li>Email: <a href="mailto:support@grok-premium-id.com" class="hover:text-purple-400">support@grok-premium-id.com</a></li>
-          <li>Syarat & Ketentuan</li>
-          <li>Kebijakan Privasi</li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-bold text-white mb-4">Sosial Media Resmi</h4>
-        <div class="flex gap-4 justify-center md:justify-start">
-          <a href="#" class="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-purple-600 transition-colors"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" class="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-purple-600 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
-          <a href="#" class="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-purple-600 transition-colors"><i class="fa-brands fa-youtube"></i></a>
-          <a href="#" class="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-purple-600 transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#" class="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-purple-600 transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
-        </div>
-      </div>
-    </div>
-    <div class="text-xs text-slate-600 text-center">&copy; 2026 Grok Premium ID. All rights reserved.</div>
-  </footer>
-
-  <div id="fake-toast" class="fixed bottom-6 left-6 z-50 glass-card px-4 py-3 rounded-xl flex items-center gap-3 shadow-2xl pointer-events-none border-l-4 border-l-green-500">
-    <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
-      <i class="fa-solid fa-cart-shopping text-xs"></i>
-    </div>
-    <div>
-      <p id="toast-text" class="text-xs text-slate-300">Seseorang dari Jakarta baru saja membeli</p>
-      <p id="toast-paket" class="text-sm font-bold text-white">Paket Tahunan</p>
-    </div>
-  </div>
-
-  <button id="bot-toggle" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(124,58,237,0.5)] hover:scale-110 transition-transform">
-    <i class="fa-solid fa-robot text-white text-xl"></i>
-  </button>
-
-  <div id="bot-window" class="fixed bottom-24 right-6 w-[320px] bg-[#0f0f1c] border border-purple-500/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col">
-    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-4 flex justify-between items-center">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center"><i class="fa-solid fa-robot text-white text-xs"></i></div>
-        <div>
-          <h4 class="font-bold text-white text-sm">Grok Support AI</h4>
-          <p class="text-[10px] text-white/70">Online</p>
-        </div>
-      </div>
-      <button id="bot-close" class="text-white/70 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div id="chat-body" class="p-4 h-64 overflow-y-auto flex flex-col gap-3 text-sm">
-      <div class="chat-bubble-bot p-3 w-[85%] text-slate-300 self-start">
-        Halo! Ada yang bisa dibantu soal paket GrokAI? Ketik "harga", "vpn", atau "garansi".
-      </div>
-    </div>
-    <div class="p-3 border-t border-white/10 bg-[#0a0a14] flex gap-2">
-      <input type="text" id="chat-input" placeholder="Ketik pesan..." class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" onkeypress="handleEnter(event)">
-      <button onclick="sendMsg()" class="bg-purple-600 hover:bg-purple-500 px-4 rounded-lg text-white transition-colors"><i class="fa-solid fa-paper-plane text-xs"></i></button>
-    </div>
-  </div>
-
-  <div id="checkoutModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center px-4 modal-backdrop">
-    <div class="bg-[#0f0f1c] border border-white/10 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl transform transition-all scale-100">
-      <div class="flex justify-between items-center p-5 border-b border-white/5">
-        <h3 class="font-bold text-lg text-white">Detail Pembayaran</h3>
-        <button onclick="closeModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <form id="checkoutForm" onsubmit="processCheckout(event)" class="p-5 space-y-4">
-        <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Paket Terpilih</label>
-          <input type="text" id="selectedPaket" readonly class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white font-bold cursor-not-allowed">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Nama Anda</label>
-          <input type="text" id="buyerName" required placeholder="Contoh: Andi" class="w-full bg-transparent border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-purple-500">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Pilih Metode Pembayaran</label>
-          <select id="payMethod" required class="w-full bg-[#0a0a14] border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-purple-500 appearance-none">
-            <option value="DANA">💰 DANA</option>
-            <option value="OVO">💰 OVO</option>
-            <option value="GoPay">💰 GoPay</option>
-            <option value="BCA">🏦 Transfer BCA</option>
-            <option value="Mandiri">🏦 Transfer Mandiri</option>
-            <option value="BRI">🏦 Transfer BRI</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">No. HP / Rekening Anda</label>
-          <input type="text" id="buyerRek" required placeholder="Untuk pengecekan mutasi" class="w-full bg-transparent border border-white/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-purple-500">
-        </div>
-        
-        <div class="mt-6 pt-4 border-t border-white/5">
-          <button type="submit" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1DA851] text-white font-bold py-3 rounded-xl transition-colors">
-            <i class="fa-brands fa-whatsapp text-lg"></i> Lanjutkan ke WhatsApp
-          </button>
-          <p class="text-[10px] text-center text-slate-500 mt-2">Dengan melanjutkan, Anda menyetujui aturan wajib VPN India.</p>
-        </div>
+        <!-- Submit -->
+        <button type="submit" class="w-full flex items-center justify-center gap-2 font-display font-bold text-white py-3.5 rounded-2xl transition-all text-sm" style="background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 4px 20px rgba(37,211,102,.3)">
+          <i class="fa-brands fa-whatsapp text-xl"></i> Lanjutkan ke WhatsApp Admin
+        </button>
+        <p class="text-center text-slate-600 text-xs mt-2">Pesan akan dirakit otomatis &amp; dikirim ke admin WA.</p>
       </form>
     </div>
   </div>
+</div>
 
-  <script>
-    // --- CHECKOUT MODAL LOGIC ---
-    const modal = document.getElementById('checkoutModal');
-    function openModal(paket) {
-      document.getElementById('selectedPaket').value = paket;
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden'; // prevent scroll
+<!-- ══════ CS BOT ══════ -->
+<div id="bot-panel" class="glass-strong rounded-2xl overflow-hidden shadow-2xl" style="box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgba(124,58,237,.2)">
+  <div class="bot-header">
+    <div class="flex items-center gap-2.5">
+      <div class="relative">
+        <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+          <i class="fa-solid fa-robot text-white text-sm"></i>
+        </div>
+        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-purple-700"></span>
+      </div>
+      <div>
+        <h4 class="font-display font-bold text-white text-sm">GrokBot</h4>
+        <p class="text-white/60 text-[10px]">● Online sekarang</p>
+      </div>
+    </div>
+    <button id="bot-close" class="text-white/50 hover:text-white transition-colors w-7 h-7 rounded-lg hover:bg-white/10 flex items-center justify-center">
+      <i class="fa-solid fa-xmark text-sm"></i>
+    </button>
+  </div>
+
+  <div id="bot-body" class="bot-body">
+    <div class="bubble-bot">👋 Halo! Saya <strong>GrokBot</strong>. Ada yang bisa dibantu?</div>
+    <div class="bubble-bot">Coba ketik: <em>harga</em>, <em>vpn</em>, <em>garansi</em>, <em>bayar</em>, atau <em>aktif</em></div>
+  </div>
+
+  <div class="bot-foot">
+    <input type="text" id="bot-input" class="bot-input" placeholder="Ketik pesan..." onkeydown="botEnter(event)"/>
+    <button onclick="botSend()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-bold hover:opacity-90 transition-opacity flex-shrink-0">
+      <i class="fa-solid fa-paper-plane text-xs"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Bot Toggle Button -->
+<button id="bot-toggle" class="fixed bottom-6 right-6 z-[601] w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110 font-display" style="background:linear-gradient(135deg,#7C3AED,#4F46E5);box-shadow:0 0 24px rgba(124,58,237,.55);z-index:601" aria-label="Buka chat support">
+  <i id="bot-toggle-icon" class="fa-solid fa-robot text-white text-xl"></i>
+</button>
+
+<!-- WA Float (hanya muncul saat bot tutup) -->
+<a id="wa-float" href="https://wa.me/6282219989497?text=Halo%20Admin,%20saya%20tertarik%20dengan%20GrokAI%20Premium.%20Bisa%20info%20lebih%20lanjut?" target="_blank" rel="noopener" class="wa-btn" title="Chat via WhatsApp">
+  <div class="wa-pulse"></div>
+  <i class="fa-brands fa-whatsapp relative z-10"></i>
+</a>
+
+<!-- ══════ JAVASCRIPT ══════ -->
+<script>
+// ─── SCROLL PROGRESS ───
+const progBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const st = window.scrollY;
+  const dh = document.documentElement.scrollHeight - window.innerHeight;
+  progBar.style.width = (st / dh * 100) + '%';
+}, { passive: true });
+
+// ─── NAVBAR ───
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// ─── HAMBURGER ───
+const hamBtn  = document.getElementById('ham-btn');
+const hamIcon = document.getElementById('ham-icon');
+const mobMenu = document.getElementById('mob-menu');
+hamBtn.addEventListener('click', () => {
+  const open = mobMenu.classList.toggle('open');
+  hamIcon.className = open ? 'fa-solid fa-xmark text-lg' : 'fa-solid fa-bars text-lg';
+});
+function closeMob() {
+  mobMenu.classList.remove('open');
+  hamIcon.className = 'fa-solid fa-bars text-lg';
+}
+document.addEventListener('click', e => {
+  if (!navbar.contains(e.target)) closeMob();
+});
+
+// ─── REVEAL ON SCROLL ───
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, idx) => {
+    if (entry.isIntersecting) {
+      const delay = parseFloat(entry.target.style.transitionDelay || '0');
+      setTimeout(() => entry.target.classList.add('visible'), delay * 1000);
+      revealObserver.unobserve(entry.target);
     }
-    function closeModal() {
-      modal.classList.add('hidden');
-      document.body.style.overflow = 'auto';
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ─── COUNTER ANIMATION ───
+function animateCount(el, target, duration) {
+  let start = 0;
+  const step = Math.ceil(target / (duration / 16));
+  const timer = setInterval(() => {
+    start = Math.min(start + step, target);
+    el.textContent = start + '+';
+    if (start >= target) clearInterval(timer);
+  }, 16);
+}
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const t  = parseInt(el.dataset.target);
+      if (t) animateCount(el, t, 1500);
+      statsObserver.unobserve(el);
     }
-    function processCheckout(e) {
-      e.preventDefault();
-      const paket = document.getElementById('selectedPaket').value;
-      const nama = document.getElementById('buyerName').value;
-      const method = document.getElementById('payMethod').value;
-      const rek = document.getElementById('buyerRek').value;
-      
-      const textWa = `Halo Admin, Saya ${nama} ingin membayar Paket ${paket} menggunakan ${method}. Ini nomor/rekening saya: ${rek}. Saya juga paham aturan wajib VPN India.`;
-      const urlWa = `https://wa.me/6282219989497?text=${encodeURIComponent(textWa)}`;
-      
-      window.open(urlWa, '_blank');
-      closeModal();
-    }
+  });
+}, { threshold: .5 });
+document.querySelectorAll('[data-target]').forEach(el => statsObserver.observe(el));
 
-    // --- FAKE LIVE NOTIFICATION LOGIC ---
-    const names = ['Agus', 'Dina', 'Bambang', 'Siti', 'Reza', 'Fajar', 'Maya', 'Rudi'];
-    const cities = ['Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Makassar', 'Bali', 'Yogyakarta'];
-    const packages = ['Paket Bulanan', 'Paket Tahunan', 'Paket Tahunan', 'Paket Mingguan'];
-    const toast = document.getElementById('fake-toast');
-    
-    setInterval(() => {
-      const rName = names[Math.floor(Math.random() * names.length)];
-      const rCity = cities[Math.floor(Math.random() * cities.length)];
-      const rPaket = packages[Math.floor(Math.random() * packages.length)];
-      
-      document.getElementById('toast-text').innerText = `Seseorang dari ${rCity} baru saja membeli`;
-      document.getElementById('toast-paket').innerText = rPaket;
-      
-      toast.classList.add('show');
-      
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 4000); // Tampil selama 4 detik
-    }, 12000); // Muncul tiap 12 detik
+// ─── FAQ ACCORDION ───
+function toggleFaq(btn) {
+  const body = btn.nextElementSibling;
+  const wasOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-btn').forEach(b => {
+    b.classList.remove('open');
+    b.nextElementSibling.classList.remove('open');
+  });
+  if (!wasOpen) { btn.classList.add('open'); body.classList.add('open'); }
+}
 
-    // --- CS BOT LOGIC (VANILLA JS) ---
-    const botToggle = document.getElementById('bot-toggle');
-    const botWindow = document.getElementById('bot-window');
-    const botClose = document.getElementById('bot-close');
-    const chatBody = document.getElementById('chat-body');
-    const chatInput = document.getElementById('chat-input');
+// ─── PAYMENT SELECTION ───
+function selectPay(el) {
+  document.querySelectorAll('.pay-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const val = el.dataset.val;
+  document.getElementById('payMethod').value = val;
+  const isBank = ['BCA','Mandiri','BRI'].includes(val);
+  const label  = document.getElementById('rekLabel');
+  const input  = document.getElementById('buyerRek');
+  label.innerHTML = (isBank ? `Nomor Rekening (${val})` : `Nomor HP (${val})`) + ' <span class="text-red-400">*</span>';
+  input.placeholder = isBank ? '1234567890' : '08xxxxxxxxxx';
+}
 
-    botToggle.addEventListener('click', () => { botWindow.classList.add('active'); });
-    botClose.addEventListener('click', () => { botWindow.classList.remove('active'); });
+// ─── CHECKOUT MODAL ───
+function openModal(namaPaket, harga) {
+  const display = `${namaPaket} — ${harga}`;
+  document.getElementById('selPaket').value = display;
+  document.getElementById('buyerName').value = '';
+  document.getElementById('buyerRek').value  = '';
+  document.getElementById('vpnAgree').checked = false;
+  document.getElementById('formError').classList.add('hidden');
+  // reset payment selection
+  document.querySelectorAll('.pay-opt').forEach((o,i) => {
+    o.classList.toggle('selected', i === 0);
+  });
+  document.getElementById('payMethod').value = 'DANA';
+  selectPay(document.querySelector('.pay-opt'));
 
-    function handleEnter(e) {
-      if(e.key === 'Enter') sendMsg();
-    }
+  const modal = document.getElementById('checkoutModal');
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('checkoutModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+// Close on backdrop click
+document.getElementById('checkoutModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+// Close on ESC
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    function appendMsg(text, sender) {
-      const div = document.createElement('div');
-      div.className = sender === 'user' ? 'chat-bubble-user p-3 w-[85%] self-end' : 'chat-bubble-bot p-3 w-[85%] text-slate-300 self-start';
-      if(sender === 'bot') {
-        div.innerHTML = text; // allow HTML for bot links
-      } else {
-        div.innerText = text;
-      }
-      chatBody.appendChild(div);
-      chatBody.scrollTop = chatBody.scrollHeight;
-    }
+function processCheckout(e) {
+  e.preventDefault();
+  const paket  = document.getElementById('selPaket').value;
+  const nama   = document.getElementById('buyerName').value.trim();
+  const method = document.getElementById('payMethod').value;
+  const rek    = document.getElementById('buyerRek').value.trim();
+  const vpn    = document.getElementById('vpnAgree').checked;
+  const errEl  = document.getElementById('formError');
+  const errTxt = document.getElementById('errorText');
 
-    function sendMsg() {
-      const txt = chatInput.value.trim().toLowerCase();
-      if(!txt) return;
-      
-      appendMsg(chatInput.value, 'user');
-      chatInput.value = '';
-      
-      // Bot Typing Effect Simulation
-      setTimeout(() => {
-        let reply = '';
-        if(txt.includes('harga') || txt.includes('paket') || txt.includes('berapa')) {
-          reply = "Paket kami ada 3: Mingguan (30k), Bulanan (68k), Tahunan (230k). Silakan cek bagian Harga di web.";
-        } else if(txt.includes('vpn') || txt.includes('india') || txt.includes('banned')) {
-          reply = "⚠️ PERHATIAN: Akun ini WAJIB menggunakan VPN India berkualitas saat login dan pemakaian. Jangan login pakai IP Lokal!";
-        } else if(txt.includes('garansi') || txt.includes('mati')) {
-          reply = "Garansi aman selama Anda mematuhi aturan VPN India. Bulanan (7 Hari), Tahunan (43 Hari).";
-        } else {
-          reply = "Maaf, GrokBot kurang paham. Silakan hubungi admin langsung ya: <br><a href='https://wa.me/6282219989497' target='_blank' class='text-purple-400 underline font-bold mt-2 inline-block'>Chat WA Admin</a>";
-        }
-        appendMsg(reply, 'bot');
-      }, 600);
-    }
-  </script>
+  // Validation
+  if (!nama) { errTxt.textContent = 'Nama tidak boleh kosong.'; errEl.classList.remove('hidden'); return; }
+  if (!rek)  { errTxt.textContent = 'Nomor HP/Rekening tidak boleh kosong.'; errEl.classList.remove('hidden'); return; }
+  if (!vpn)  { errTxt.textContent = 'Centang konfirmasi VPN India terlebih dahulu.'; errEl.classList.remove('hidden'); return; }
+  errEl.classList.add('hidden');
+
+  const msg = `Halo Admin, Saya *${nama}* ingin membayar *Paket ${paket}* menggunakan *${method}*. Nomor/rekening saya: *${rek}*. Saya memahami dan setuju menggunakan VPN India setiap saat. Mohon proses pesanan saya.`;
+  const url = `https://wa.me/6282219989497?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+  closeModal();
+}
+
+// ─── CS BOT LOGIC ───
+const botToggle = document.getElementById('bot-toggle');
+const botIcon   = document.getElementById('bot-toggle-icon');
+const botPanel  = document.getElementById('bot-panel');
+const botClose  = document.getElementById('bot-close');
+const botBody   = document.getElementById('bot-body');
+const botInput  = document.getElementById('bot-input');
+const waFloat   = document.getElementById('wa-float');
+
+let botOpen = false;
+
+function toggleBot() {
+  botOpen = !botOpen;
+  botPanel.classList.toggle('active', botOpen);
+  botIcon.className = botOpen ? 'fa-solid fa-xmark text-white text-xl' : 'fa-solid fa-robot text-white text-xl';
+  // Move WA button out of the way when bot is open
+  waFloat.style.bottom = botOpen ? '7rem' : '1.5rem';
+  if (botOpen) setTimeout(() => botInput.focus(), 350);
+}
+
+botToggle.addEventListener('click', toggleBot);
+botClose.addEventListener('click', toggleBot);
+
+function appendBubble(text, type) {
+  const d = document.createElement('div');
+  d.className = type === 'user' ? 'bubble-user' : 'bubble-bot';
+  if (type === 'bot') d.innerHTML = text;
+  else d.textContent = text;
+  botBody.appendChild(d);
+  botBody.scrollTop = botBody.scrollHeight;
+}
+
+function showTyping() {
+  const d = document.createElement('div');
+  d.className = 'bubble-bot bot-typing';
+  d.id = 'typing-indicator';
+  d.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+  botBody.appendChild(d);
+  botBody.scrollTop = botBody.scrollHeight;
+  return d;
+}
+
+function botReply(input) {
+  const t = input.toLowerCase().trim();
+  const wa = `<a href="https://wa.me/6282219989497" target="_blank" rel="noopener" class="text-violet-400 underline font-semibold">Chat WA Admin →</a>`;
+
+  if (/harga|paket|berapa|biaya|tarif|plan/.test(t))
+    return `Paket GrokAI Premium:<br>
+            🟣 <strong>Mingguan</strong> — Rp 30.000 (Garansi 2 hari)<br>
+            🟣 <strong>Bulanan</strong> — Rp 68.000 (Garansi 7 hari) ⭐<br>
+            🟣 <strong>Tahunan</strong> — Rp 230.000 (Garansi 43 hari)<br><br>
+            Klik <em>Pilih Paket</em> untuk lanjut.`;
+
+  if (/vpn|india|setting|konek|ip/.test(t))
+    return `⚠️ <strong>WAJIB VPN India!</strong><br>
+            Rekomendasi: ExpressVPN, NordVPN, Mullvad — pilih server India.<br>
+            Hindari VPN gratis karena tidak stabil.<br>
+            Admin siap bantu setting tanpa biaya! ${wa}`;
+
+  if (/garansi|ganti|mati|error|rusak|hilang/.test(t))
+    return `🛡️ Garansi berlaku selama masa aktif <em>jika VPN India dipakai</em>:<br>
+            • Mingguan → 2 hari<br>
+            • Bulanan → 7 hari<br>
+            • Tahunan → 43 hari<br><br>
+            Penggantian akun maks. 1×24 jam.`;
+
+  if (/bayar|payment|transfer|metode|cara bayar/.test(t))
+    return `💳 Metode pembayaran tersedia:<br>
+            DANA, OVO, GoPay, BCA, Mandiri, BRI.<br><br>
+            Klik tombol <strong>Pilih Paket</strong> → isi form → otomatis diarahkan ke WA Admin!`;
+
+  if (/aktif|aktivasi|berapa lama|kapan|proses/.test(t))
+    return `⚡ Akun aktif dalam <strong>maksimal 15 menit</strong> setelah pembayaran dikonfirmasi admin.<br>
+            Admin online setiap hari. Jam sibuk bisa sedikit lebih lama, tapi tidak lebih dari 1 jam.`;
+
+  if (/video|text.to.video|generate|buat video/.test(t))
+    return `🎬 Fitur Video Generation tersedia di semua paket!<br>
+            • Mingguan/Bulanan → Limit harian standar<br>
+            • Tahunan → Priority rendering 5× lebih cepat + resolusi 1080p`;
+
+  if (/refund|uang kembali|balik duit/.test(t))
+    return `ℹ️ Kami tidak menyediakan refund tunai, namun ada <strong>garansi penggantian akun</strong> selama masa garansi berlaku.<br>Syarat: harus menggunakan VPN India.`;
+
+  if (/hai|halo|hei|hi|hello|ola|pagi|siang|malam/.test(t))
+    return `👋 Halo! Selamat datang di GrokAI Premium Support.<br>Ada yang bisa saya bantu? Coba tanya soal <em>harga</em>, <em>vpn</em>, <em>garansi</em>, atau <em>cara bayar</em>.`;
+
+  if (/makasih|terima kasih|thanks|thx/.test(t))
+    return `😊 Sama-sama! Semoga pengalaman pakai GrokAI Premium menyenangkan. Ada pertanyaan lain?`;
+
+  // Default fallback
+  return `Maaf, GrokBot belum memahami pertanyaan itu. 😅<br>
+          Silakan hubungi admin langsung untuk bantuan lebih lanjut:<br>${wa}`;
+}
+
+function botEnter(e) { if (e.key === 'Enter') botSend(); }
+
+function botSend() {
+  const raw = botInput.value.trim();
+  if (!raw) return;
+
+  // Sanitize output
+  const safe = raw.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  appendBubble(safe, 'user');
+  botInput.value = '';
+
+  const typing = showTyping();
+  setTimeout(() => {
+    typing.remove();
+    appendBubble(botReply(raw), 'bot');
+  }, 700 + Math.random() * 400);
+}
+
+// ─── ACTIVE NAV LINK ON SCROLL ───
+const sections = document.querySelectorAll('section[id], div[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    if (window.scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id');
+  });
+  navLinks.forEach(link => {
+    link.style.color = link.getAttribute('href') === `#${current}` ? '#a78bfa' : '';
+  });
+}, { passive: true });
+</script>
+
 </body>
 </html>
