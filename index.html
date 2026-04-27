@@ -1,818 +1,628 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth dark">
+<html lang="id" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wang Weize AI Access — Premium AI Access Support</title>
-  <meta name="description" content="Platform landing page premium untuk layanan bantuan akses dan support AI tools dengan checkout langsung ke WhatsApp." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
-          },
-          colors: {
-            base: {
-              950: '#060816',
-              900: '#0b1020',
-              800: '#121a31',
-              700: '#1a2645'
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>PremiumAI Store — Akses Akun AI Premium</title>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN + Config darkMode class -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
             },
-            brand: {
-              blue: '#60a5fa',
-              cyan: '#22d3ee',
-              violet: '#8b5cf6',
-              emerald: '#34d399',
-              amber: '#fbbf24',
-              rose: '#fb7185'
-            }
-          },
-          boxShadow: {
-            glow: '0 0 0 1px rgba(255,255,255,0.05), 0 10px 40px rgba(34,211,238,0.12)',
-            soft: '0 12px 40px rgba(2,6,23,0.18)'
-          },
-          backgroundImage: {
-            grid: 'linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)',
-            spotlight: 'radial-gradient(circle at top right, rgba(34,211,238,0.15), transparent 30%), radial-gradient(circle at 20% 20%, rgba(139,92,246,0.18), transparent 28%), radial-gradient(circle at bottom left, rgba(52,211,153,0.12), transparent 26%)'
-          }
         }
-      }
-    };
-  </script>
-  <style>
-    :root {
-      color-scheme: dark;
-    }
-
-    html.light {
-      color-scheme: light;
-    }
-
-    body {
-      background-color: #060816;
-      background-image: radial-gradient(circle at top, rgba(96,165,250,0.12), transparent 18%), radial-gradient(circle at bottom right, rgba(139,92,246,0.12), transparent 24%);
-    }
-
-    html.light body {
-      background-color: #f4f7fb;
-      background-image: radial-gradient(circle at top, rgba(59,130,246,0.10), transparent 18%), radial-gradient(circle at bottom right, rgba(14,165,233,0.10), transparent 24%);
-    }
-
-    .glass {
-      background: rgba(15, 23, 42, 0.58);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    html.light .glass {
-      background: rgba(255,255,255,0.72);
-      border-color: rgba(15,23,42,0.08);
-    }
-
-    .text-gradient {
-      background: linear-gradient(90deg, #ffffff 0%, #7dd3fc 40%, #c4b5fd 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    html.light .text-gradient {
-      background: linear-gradient(90deg, #0f172a 0%, #0369a1 45%, #6d28d9 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .noise::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.07;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='white' fill-opacity='1'%3E%3Ccircle cx='3' cy='3' r='1'/%3E%3Ccircle cx='35' cy='26' r='1'/%3E%3Ccircle cx='78' cy='80' r='1'/%3E%3Ccircle cx='128' cy='38' r='1'/%3E%3Ccircle cx='140' cy='122' r='1'/%3E%3Ccircle cx='92' cy='136' r='1'/%3E%3Ccircle cx='54' cy='112' r='1'/%3E%3C/g%3E%3C/svg%3E");
-    }
-
-    .card-hover {
-      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
-    }
-
-    .card-hover:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 50px rgba(14, 165, 233, 0.14);
-      border-color: rgba(96, 165, 250, 0.35);
-    }
-
-    .toast-enter {
-      animation: slideIn 380ms ease forwards;
-    }
-
-    .toast-exit {
-      animation: slideOut 380ms ease forwards;
-    }
-
-    @keyframes slideIn {
-      from { transform: translateY(18px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes slideOut {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(18px); opacity: 0; }
-    }
-
-    .pulse-dot {
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(0.95); opacity: 0.8; }
-      70% { transform: scale(1.2); opacity: 0.15; }
-      100% { transform: scale(0.95); opacity: 0.8; }
-    }
-  </style>
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6 for some support icons (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* custom glassmorphism & animations */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .light .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+        }
+        .light .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .toast-enter {
+            animation: slideInRight 0.4s ease-out;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(120%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* cart sidebar transition */
+        .cart-sidebar {
+            transition: transform 0.3s ease;
+        }
+        .cart-open {
+            transform: translateX(0);
+        }
+    </style>
 </head>
-<body class="min-h-screen text-slate-100 antialiased transition-colors duration-300 dark:text-slate-100 light:text-slate-900">
-  <div class="fixed inset-0 -z-10 bg-spotlight"></div>
-  <div class="fixed inset-0 -z-10 bg-grid bg-[size:34px_34px] opacity-[0.035]"></div>
+<body class="bg-slate-900 dark:bg-slate-900 light:bg-gray-50 text-white dark:text-white light:text-gray-900 min-h-screen flex flex-col transition-colors duration-300">
 
-  <header class="sticky top-0 z-40 border-b border-white/10 bg-slate-950/55 backdrop-blur-xl dark:bg-slate-950/55 light:bg-white/70">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <a href="#home" class="flex items-center gap-3">
-        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500 text-sm font-black text-white shadow-soft">WW</div>
-        <div>
-          <p class="text-[11px] uppercase tracking-[0.28em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">Independent AI Access Desk</p>
-          <h1 class="text-sm font-semibold text-white dark:text-white light:text-slate-900">Wang Weize AI Access</h1>
+<!-- Header / Navbar glass -->
+<header class="glass-nav sticky top-0 z-50 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+        <div class="flex items-center gap-2">
+            <!-- Brand logo using simple icon (lightning bolt) -->
+            <i class="fas fa-bolt text-2xl text-yellow-400"></i>
+            <span class="font-bold text-xl tracking-tight bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">PremiumAI</span>
         </div>
-      </a>
-
-      <nav class="hidden items-center gap-6 md:flex">
-        <a href="#produk" class="text-sm text-slate-300 transition hover:text-white dark:text-slate-300 light:text-slate-700 light:hover:text-slate-950">Produk</a>
-        <a href="#fitur" class="text-sm text-slate-300 transition hover:text-white dark:text-slate-300 light:text-slate-700 light:hover:text-slate-950">Keunggulan</a>
-        <a href="#cara-order" class="text-sm text-slate-300 transition hover:text-white dark:text-slate-300 light:text-slate-700 light:hover:text-slate-950">Cara Order</a>
-        <a href="#admin" class="text-sm text-slate-300 transition hover:text-white dark:text-slate-300 light:text-slate-700 light:hover:text-slate-950">Admin</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <button id="themeToggle" class="glass inline-flex h-11 w-11 items-center justify-center rounded-2xl text-slate-200 transition hover:scale-[1.03] dark:text-slate-200 light:text-slate-700" aria-label="Toggle theme"></button>
-        <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20tanya%20paket%20AI" target="_blank" rel="noreferrer" class="hidden rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-soft transition hover:-translate-y-0.5 hover:bg-cyan-100 dark:bg-white dark:text-slate-900 light:bg-slate-900 light:text-white light:hover:bg-slate-800 sm:inline-flex">Hubungi via WhatsApp</a>
-      </div>
+        <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+            <a href="#produk" class="hover:text-yellow-400 transition">Produk</a>
+            <a href="#kontak" class="hover:text-yellow-400 transition">Kontak</a>
+            <a href="#" id="cart-toggle-desktop" class="relative hover:text-yellow-400 transition">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count-badge" class="absolute -top-2 -right-3 bg-yellow-400 text-black text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold hidden">0</span>
+            </a>
+            <!-- Dark/Light toggle -->
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition" aria-label="Toggle dark/light mode">
+                <i id="theme-icon" class="fas fa-sun text-yellow-400"></i>
+            </button>
+        </nav>
+        <!-- Mobile menu button (cart + theme) -->
+        <div class="flex md:hidden items-center gap-3">
+            <button id="cart-toggle-mobile" class="relative p-2 hover:bg-white/10 rounded-full">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count-badge-mobile" class="absolute -top-1 -right-2 bg-yellow-400 text-black text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold hidden">0</span>
+            </button>
+            <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition">
+                <i id="theme-icon-mobile" class="fas fa-sun text-yellow-400"></i>
+            </button>
+        </div>
     </div>
-  </header>
+</header>
 
-  <main id="home" class="relative overflow-hidden">
-    <section class="noise relative">
-      <div class="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:py-24">
-        <div class="self-center">
-          <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-medium text-cyan-200 dark:text-cyan-200 light:text-sky-800">
-            <span class="relative flex h-2.5 w-2.5">
-              <span class="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400"></span>
-              <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
-            </span>
-            Slot support aktif hari ini • respon cepat • checkout langsung ke WhatsApp
-          </div>
+<main class="flex-grow">
+    <!-- Hero Section -->
+    <section class="relative pt-20 pb-16 px-4 max-w-7xl mx-auto text-center fade-in">
+        <div class="absolute inset-0 bg-gradient-to-b from-yellow-400/5 to-transparent pointer-events-none"></div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 dark:from-white dark:to-gray-300 light:from-gray-900 light:to-gray-700 bg-clip-text text-transparent">
+            Akses Premium AI <br class="md:hidden">Tanpa Batas
+        </h1>
+        <p class="text-lg max-w-2xl mx-auto text-gray-400 dark:text-gray-400 light:text-gray-600 mb-8">
+            Akun private ChatGPT, Gemini, Grok dengan performa prioritas. Satu akun satu pengguna, server cepat, siap pakai.
+        </p>
+        <a href="#produk" class="inline-block bg-yellow-400 text-black font-semibold px-8 py-3 rounded-full hover:bg-yellow-300 transition transform hover:scale-105 shadow-lg shadow-yellow-400/20">
+            Lihat Produk <i class="fas fa-arrow-down ml-2"></i>
+        </a>
+    </section>
 
-          <h2 class="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white dark:text-white light:text-slate-950 sm:text-5xl lg:text-6xl">
-            Akses AI Premium dengan tampilan <span class="text-gradient">serius, profesional, dan siap closing</span>.
-          </h2>
-
-          <p class="mt-6 max-w-2xl text-base leading-8 text-slate-300 dark:text-slate-300 light:text-slate-700 sm:text-lg">
-            Landing page ini dirancang untuk layanan independen penjualan dan support akses AI. Semua order diarahkan ke WhatsApp agar alur pembelian cepat, simpel, dan conversion-friendly di desktop maupun mobile.
-          </p>
-
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#produk" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-6 py-4 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5">Lihat Paket Sekarang</a>
-            <a href="#admin" class="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-sm font-semibold text-white transition hover:border-cyan-300/30 hover:bg-white/10 dark:text-white light:border-slate-300 light:bg-white/70 light:text-slate-900">Kontak Admin Support</a>
-          </div>
-
-          <div class="mt-8 grid gap-4 sm:grid-cols-3">
-            <div class="glass rounded-3xl p-5 shadow-glow">
-              <p class="text-xs uppercase tracking-[0.24em] text-slate-400 dark:text-slate-400 light:text-slate-600">Checkout</p>
-              <p class="mt-2 text-2xl font-bold text-white dark:text-white light:text-slate-900">1 Klik ke WA</p>
-              <p class="mt-2 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">Tombol beli otomatis membawa calon buyer ke pesan order yang sudah terisi.</p>
-            </div>
-            <div class="glass rounded-3xl p-5 shadow-glow">
-              <p class="text-xs uppercase tracking-[0.24em] text-slate-400 dark:text-slate-400 light:text-slate-600">UI</p>
-              <p class="mt-2 text-2xl font-bold text-white dark:text-white light:text-slate-900">Glass Corporate</p>
-              <p class="mt-2 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">Gaya premium, kontras rapi, responsif, dan cocok untuk halaman jualan yang lebih trustable.</p>
-            </div>
-            <div class="glass rounded-3xl p-5 shadow-glow">
-              <p class="text-xs uppercase tracking-[0.24em] text-slate-400 dark:text-slate-400 light:text-slate-600">Fitur Pintar</p>
-              <p class="mt-2 text-2xl font-bold text-white dark:text-white light:text-slate-900">7 Elemen Konversi</p>
-              <p class="mt-2 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">Termasuk countdown, stock dinamis, live toast, filter produk, dan theme toggle.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="glass rounded-[2rem] border border-white/10 p-6 shadow-glow sm:p-8">
-          <div class="flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <p class="text-xs uppercase tracking-[0.26em] text-slate-400 dark:text-slate-400 light:text-slate-600">Control Center</p>
-              <h3 class="mt-2 text-2xl font-bold text-white dark:text-white light:text-slate-900">Dashboard Penawaran</h3>
-            </div>
-            <div class="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-3 py-2 text-xs font-semibold text-emerald-300 dark:text-emerald-300 light:text-emerald-700">Update otomatis</div>
-          </div>
-
-          <div class="mt-6 grid gap-4 sm:grid-cols-2">
-            <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Promo berakhir dalam</p>
-              <div id="countdown" class="mt-3 grid grid-cols-4 gap-2 text-center"></div>
-            </div>
-            <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Kinerja halaman</p>
-              <div class="mt-4 space-y-4">
-                <div>
-                  <div class="mb-2 flex items-center justify-between text-xs text-slate-400 dark:text-slate-400 light:text-slate-600"><span>Intent beli</span><span>92%</span></div>
-                  <div class="h-2 rounded-full bg-white/10 dark:bg-white/10 light:bg-slate-200"><div class="h-2 w-[92%] rounded-full bg-gradient-to-r from-cyan-400 to-violet-500"></div></div>
+    <!-- Produk Section -->
+    <section id="produk" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <h2 class="text-3xl font-bold text-center mb-12">✨ Paket Langganan AI</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- ChatGPT Plus -->
+            <div class="glass-card rounded-2xl p-6 flex flex-col fade-in relative product-card" data-product-id="chatgpt-plus">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://cdn.simpleicons.org/openai/white" alt="ChatGPT" class="h-8 w-8 dark:brightness-0 dark:invert light:brightness-0" />
+                    <span class="text-xs bg-yellow-400/20 text-yellow-400 px-2 py-0.5 rounded-full font-medium">Best Seller</span>
                 </div>
-                <div>
-                  <div class="mb-2 flex items-center justify-between text-xs text-slate-400 dark:text-slate-400 light:text-slate-600"><span>Respons cepat</span><span>95%</span></div>
-                  <div class="h-2 rounded-full bg-white/10 dark:bg-white/10 light:bg-slate-200"><div class="h-2 w-[95%] rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400"></div></div>
+                <h3 class="text-xl font-bold mb-1">ChatGPT Plus</h3>
+                <p class="text-sm text-gray-400 dark:text-gray-400 light:text-gray-500 mb-4">Akses Private, 1 Akun 1 Gmail</p>
+                <div class="text-2xl font-bold mb-1">Rp 12.000 <span class="text-sm font-normal text-gray-400">/ Bulan</span></div>
+                <div class="flex items-center gap-2 text-sm mb-4">
+                    <span class="text-gray-400">Stok:</span>
+                    <span id="stock-chatgpt-plus" class="font-semibold text-green-400">5</span>
+                    <span class="text-xs text-gray-500">tersisa</span>
                 </div>
-                <div>
-                  <div class="mb-2 flex items-center justify-between text-xs text-slate-400 dark:text-slate-400 light:text-slate-600"><span>Trust visual</span><span>89%</span></div>
-                  <div class="h-2 rounded-full bg-white/10 dark:bg-white/10 light:bg-slate-200"><div class="h-2 w-[89%] rounded-full bg-gradient-to-r from-amber-400 to-rose-400"></div></div>
+                <!-- Flash sale countdown for this product? Not mandatory, but I'll add small timer on Gemini -->
+                <div class="mt-auto space-y-2">
+                    <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize%2C%20saya%20mau%20order%20ChatGPT%20Plus" target="_blank"
+                       class="block w-full bg-green-600 hover:bg-green-500 text-white text-center py-2.5 rounded-xl font-semibold transition transform hover:scale-[1.02] shadow-lg shadow-green-600/20 buy-direct-btn"
+                       data-product="ChatGPT Plus">
+                        <i class="fab fa-whatsapp mr-1"></i> Beli via WhatsApp
+                    </a>
+                    <button onclick="addToCart('chatgpt-plus', 'ChatGPT Plus', 12000)" class="w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded-xl font-medium transition add-to-cart-btn">
+                        <i class="fas fa-cart-plus mr-1"></i> Keranjang
+                    </button>
                 </div>
-              </div>
             </div>
-          </div>
-
-          <div class="mt-6 grid gap-4 sm:grid-cols-3">
-            <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Pengunjung hari ini</p>
-              <p class="mt-2 text-3xl font-black text-white dark:text-white light:text-slate-900"><span class="stat-number" data-target="1284">0</span>+</p>
+            <!-- ChatGPT Business -->
+            <div class="glass-card rounded-2xl p-6 flex flex-col fade-in product-card" data-product-id="chatgpt-business">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://cdn.simpleicons.org/openai/white" alt="ChatGPT Business" class="h-8 w-8 dark:brightness-0 dark:invert light:brightness-0" />
+                    <span class="text-xs bg-blue-400/20 text-blue-400 px-2 py-0.5 rounded-full font-medium">Prioritas</span>
+                </div>
+                <h3 class="text-xl font-bold mb-1">ChatGPT Business</h3>
+                <p class="text-sm text-gray-400 dark:text-gray-400 light:text-gray-500 mb-4">Server Prioritas, Performa Tinggi</p>
+                <div class="text-2xl font-bold mb-1">Rp 30.000 <span class="text-sm font-normal text-gray-400">/ Bulan</span></div>
+                <div class="flex items-center gap-2 text-sm mb-4">
+                    <span class="text-gray-400">Stok:</span>
+                    <span id="stock-chatgpt-business" class="font-semibold text-green-400">3</span>
+                    <span class="text-xs text-gray-500">tersisa</span>
+                </div>
+                <div class="mt-auto space-y-2">
+                    <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize%2C%20saya%20mau%20order%20ChatGPT%20Business" target="_blank"
+                       class="block w-full bg-green-600 hover:bg-green-500 text-white text-center py-2.5 rounded-xl font-semibold transition transform hover:scale-[1.02] shadow-lg shadow-green-600/20 buy-direct-btn"
+                       data-product="ChatGPT Business">
+                        <i class="fab fa-whatsapp mr-1"></i> Beli via WhatsApp
+                    </a>
+                    <button onclick="addToCart('chatgpt-business', 'ChatGPT Business', 30000)" class="w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded-xl font-medium transition add-to-cart-btn">
+                        <i class="fas fa-cart-plus mr-1"></i> Keranjang
+                    </button>
+                </div>
             </div>
-            <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Chat masuk</p>
-              <p class="mt-2 text-3xl font-black text-white dark:text-white light:text-slate-900"><span class="stat-number" data-target="312">0</span>+</p>
+            <!-- Gemini Pro with Flash Sale Countdown -->
+            <div class="glass-card rounded-2xl p-6 flex flex-col fade-in product-card relative overflow-hidden" data-product-id="gemini-pro">
+                <div class="absolute top-3 right-3 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full animate-pulse">Flash Sale</div>
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://cdn.simpleicons.org/googlegemini/white" alt="Gemini" class="h-8 w-8 dark:brightness-0 dark:invert light:brightness-0" />
+                </div>
+                <h3 class="text-xl font-bold mb-1">Gemini Pro</h3>
+                <p class="text-sm text-gray-400 dark:text-gray-400 light:text-gray-500 mb-1">Ekosistem Google</p>
+                <div id="countdown-gemini" class="text-xs font-mono text-yellow-400 mb-2 bg-yellow-400/10 px-2 py-1 rounded inline-block">
+                    Berakhir dalam: <span id="timer-gemini">01:59:59</span>
+                </div>
+                <div class="text-2xl font-bold mb-1">Rp 20.000 <span class="text-sm font-normal text-gray-400">/ 4 Bulan</span></div>
+                <div class="flex items-center gap-2 text-sm mb-4">
+                    <span class="text-gray-400">Stok:</span>
+                    <span id="stock-gemini-pro" class="font-semibold text-green-400">4</span>
+                    <span class="text-xs text-gray-500">tersisa</span>
+                </div>
+                <div class="mt-auto space-y-2">
+                    <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize%2C%20saya%20mau%20order%20Gemini%20Pro" target="_blank"
+                       class="block w-full bg-green-600 hover:bg-green-500 text-white text-center py-2.5 rounded-xl font-semibold transition transform hover:scale-[1.02] shadow-lg shadow-green-600/20 buy-direct-btn"
+                       data-product="Gemini Pro">
+                        <i class="fab fa-whatsapp mr-1"></i> Beli via WhatsApp
+                    </a>
+                    <button onclick="addToCart('gemini-pro', 'Gemini Pro', 20000)" class="w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded-xl font-medium transition add-to-cart-btn">
+                        <i class="fas fa-cart-plus mr-1"></i> Keranjang
+                    </button>
+                </div>
             </div>
-            <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Kepuasan buyer</p>
-              <p class="mt-2 text-3xl font-black text-white dark:text-white light:text-slate-900"><span class="stat-number" data-target="98">0</span>%</p>
+            <!-- Grok AI -->
+            <div class="glass-card rounded-2xl p-6 flex flex-col fade-in product-card" data-product-id="grok-ai">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://cdn.simpleicons.org/xai/white" alt="Grok" class="h-8 w-8 dark:brightness-0 dark:invert light:brightness-0" />
+                    <span class="text-xs bg-purple-400/20 text-purple-400 px-2 py-0.5 rounded-full font-medium">Real-time X</span>
+                </div>
+                <h3 class="text-xl font-bold mb-1">Grok AI</h3>
+                <p class="text-sm text-gray-400 dark:text-gray-400 light:text-gray-500 mb-4">Data X Real-time</p>
+                <div class="text-2xl font-bold mb-1">Rp 10.000 <span class="text-sm font-normal text-gray-400">/ 3 Hari</span></div>
+                <div class="flex items-center gap-2 text-sm mb-4">
+                    <span class="text-gray-400">Stok:</span>
+                    <span id="stock-grok-ai" class="font-semibold text-green-400">7</span>
+                    <span class="text-xs text-gray-500">tersisa</span>
+                </div>
+                <div class="mt-auto space-y-2">
+                    <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize%2C%20saya%20mau%20order%20Grok%20AI" target="_blank"
+                       class="block w-full bg-green-600 hover:bg-green-500 text-white text-center py-2.5 rounded-xl font-semibold transition transform hover:scale-[1.02] shadow-lg shadow-green-600/20 buy-direct-btn"
+                       data-product="Grok AI">
+                        <i class="fab fa-whatsapp mr-1"></i> Beli via WhatsApp
+                    </a>
+                    <button onclick="addToCart('grok-ai', 'Grok AI', 10000)" class="w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded-xl font-medium transition add-to-cart-btn">
+                        <i class="fas fa-cart-plus mr-1"></i> Keranjang
+                    </button>
+                </div>
             </div>
-          </div>
-
-          <div class="mt-6 rounded-3xl border border-amber-400/20 bg-amber-400/10 p-5 text-sm text-amber-100 dark:text-amber-100 light:text-amber-900">
-            <span class="font-semibold">Catatan penting:</span> Template ini dibuat sebagai layanan independen. Gunakan nama brand hanya sebagai referensi kompatibilitas, jangan diposisikan seolah-olah situs resmi atau afiliasi resmi tanpa izin.
-          </div>
         </div>
-      </div>
     </section>
 
-    <section id="produk" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-      <div class="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <p class="text-xs uppercase tracking-[0.30em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">Daftar Produk</p>
-          <h3 class="mt-3 text-3xl font-black text-white dark:text-white light:text-slate-950 sm:text-4xl">Pilih paket yang paling cocok untuk kebutuhan buyer.</h3>
-          <p class="mt-3 max-w-2xl text-slate-300 dark:text-slate-300 light:text-slate-700">Semua kartu produk sudah dilengkapi CTA WhatsApp otomatis, indikator stok, highlight benefit, dan visual pricing yang lebih rapi untuk meningkatkan conversion.</p>
-        </div>
-
-        <div class="grid gap-3 sm:grid-cols-[1fr_auto]">
-          <label class="glass flex items-center gap-3 rounded-2xl px-4 py-3 shadow-glow">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400 dark:text-slate-400 light:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input id="searchInput" type="text" placeholder="Cari paket AI..." class="w-full bg-transparent text-sm text-white placeholder:text-slate-500 outline-none dark:text-white light:text-slate-900" />
-          </label>
-          <button id="promoToggle" class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10 dark:text-white light:border-slate-300 light:bg-white/80 light:text-slate-900">Mode Promo: ON</button>
-        </div>
-      </div>
-
-      <div id="filterChips" class="mb-6 flex flex-wrap gap-3"></div>
-      <div id="productGrid" class="grid gap-6 md:grid-cols-2 xl:grid-cols-4"></div>
-    </section>
-
-    <section id="fitur" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-      <div class="glass rounded-[2rem] p-6 shadow-glow sm:p-8">
-        <div class="max-w-3xl">
-          <p class="text-xs uppercase tracking-[0.30em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">Nilai Tambah</p>
-          <h3 class="mt-3 text-3xl font-black text-white dark:text-white light:text-slate-950 sm:text-4xl">7 fitur yang membuat landing page ini terasa jauh lebih modern.</h3>
-          <p class="mt-3 text-slate-300 dark:text-slate-300 light:text-slate-700">Selain 5 fitur wajib tambahan, saya sekalian tambahkan optimasi visual dan CTA sticky agar website lebih siap pakai ketika langsung di-deploy.</p>
-        </div>
-
-        <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-            <div class="mb-4 inline-flex rounded-2xl bg-cyan-400/15 p-3 text-cyan-300 dark:text-cyan-300 light:text-sky-700">01</div>
-            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Theme Toggle + Persist</h4>
-            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">User bisa pindah dark/light mode, dan preferensi tersimpan otomatis di browser.</p>
-          </div>
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-            <div class="mb-4 inline-flex rounded-2xl bg-violet-400/15 p-3 text-violet-300 dark:text-violet-300 light:text-violet-700">02</div>
-            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Dynamic Stock Counter</h4>
-            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Memberi efek scarcity yang halus dengan stok yang bergerak secara real-time di tiap kartu produk.</p>
-          </div>
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-            <div class="mb-4 inline-flex rounded-2xl bg-emerald-400/15 p-3 text-emerald-300 dark:text-emerald-300 light:text-emerald-700">03</div>
-            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Live Sales Toast</h4>
-            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Popup pembelian simulatif membuat halaman terasa hidup dan menaikkan social proof.</p>
-          </div>
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-            <div class="mb-4 inline-flex rounded-2xl bg-amber-400/15 p-3 text-amber-300 dark:text-amber-300 light:text-amber-700">04</div>
-            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Search + Filter Chips</h4>
-            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Pengunjung bisa langsung menyaring paket berdasarkan brand dan kata kunci.</p>
-          </div>
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-            <div class="mb-4 inline-flex rounded-2xl bg-rose-400/15 p-3 text-rose-300 dark:text-rose-300 light:text-rose-700">05</div>
-            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Promo Countdown</h4>
-            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Timer promo membantu mendorong keputusan lebih cepat tanpa membuat tampilan terlihat murahan.</p>
-          </div>
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-            <div class="mb-4 inline-flex rounded-2xl bg-sky-400/15 p-3 text-sky-300 dark:text-sky-300 light:text-sky-700">06</div>
-            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Animated Metrics</h4>
-            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Angka statistik naik otomatis saat elemen masuk viewport untuk kesan dashboard premium.</p>
-          </div>
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-            <div class="mb-4 inline-flex rounded-2xl bg-fuchsia-400/15 p-3 text-fuchsia-300 dark:text-fuchsia-300 light:text-fuchsia-700">07</div>
-            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Sticky Mobile CTA</h4>
-            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Tombol order tetap terlihat di layar mobile agar peluang chat masuk lebih tinggi.</p>
-          </div>
-          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-            <div class="mb-4 inline-flex rounded-2xl bg-white/10 p-3 text-white dark:text-white light:bg-slate-200 light:text-slate-800">UX+</div>
-            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Komponen siap edit</h4>
-            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Data produk, nama admin, link, harga, stok, dan teks CTA semuanya terpusat di JavaScript agar mudah diubah.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="cara-order" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-      <div class="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-        <div class="glass rounded-[2rem] p-6 shadow-glow sm:p-8">
-          <p class="text-xs uppercase tracking-[0.30em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">Cara Order</p>
-          <h3 class="mt-3 text-3xl font-black text-white dark:text-white light:text-slate-950">Alur pembelian dibuat sesingkat mungkin.</h3>
-          <div class="mt-8 space-y-5">
-            <div class="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-500 font-black text-white">1</div>
-              <div>
-                <h4 class="font-bold text-white dark:text-white light:text-slate-900">Pilih produk</h4>
-                <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Klik salah satu kartu paket yang sesuai dengan kebutuhan buyer.</p>
-              </div>
+    <!-- Kontak Admin Section -->
+    <section id="kontak" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        <div class="glass-card rounded-2xl p-8 text-center">
+            <h2 class="text-2xl font-bold mb-6">👥 Hubungi Admin Support</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="https://www.threads.com/@janebeatrixrety" target="_blank" class="flex items-center gap-3 bg-white/5 hover:bg-white/10 transition rounded-xl px-6 py-3 border border-white/10">
+                    <img src="https://cdn.simpleicons.org/threads/white" alt="Threads" class="h-6 w-6 dark:brightness-0 dark:invert light:brightness-0" />
+                    <span class="font-medium">Admin 1 (Threads)</span>
+                </a>
+                <a href="https://www.tiktok.com/@wangweize10?_r=1&_t=ZS-95siJwLG0Vs" target="_blank" class="flex items-center gap-3 bg-white/5 hover:bg-white/10 transition rounded-xl px-6 py-3 border border-white/10">
+                    <img src="https://cdn.simpleicons.org/tiktok/white" alt="TikTok" class="h-6 w-6 dark:brightness-0 dark:invert light:brightness-0" />
+                    <span class="font-medium">Admin 2 (TikTok)</span>
+                </a>
             </div>
-            <div class="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-400 to-fuchsia-500 font-black text-white">2</div>
-              <div>
-                <h4 class="font-bold text-white dark:text-white light:text-slate-900">Tombol otomatis ke WhatsApp</h4>
-                <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Pesan akan terisi otomatis dengan format: “Halo Wang Weize, saya mau order [Nama Produk]”.</p>
-              </div>
-            </div>
-            <div class="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
-              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-500 font-black text-white">3</div>
-              <div>
-                <h4 class="font-bold text-white dark:text-white light:text-slate-900">Admin follow-up cepat</h4>
-                <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Calon buyer tinggal melanjutkan chat, cocok untuk closing manual yang tetap rapi.</p>
-              </div>
-            </div>
-          </div>
+            <p class="text-sm text-gray-400 mt-4">Atau langsung pesan melalui WhatsApp di tombol produk.</p>
         </div>
-
-        <div class="glass rounded-[2rem] p-6 shadow-glow sm:p-8">
-          <p class="text-xs uppercase tracking-[0.30em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">FAQ Ringkas</p>
-          <h3 class="mt-3 text-3xl font-black text-white dark:text-white light:text-slate-950">Bagian pertanyaan umum untuk menaikkan trust.</h3>
-          <div id="faqList" class="mt-8 space-y-4"></div>
-        </div>
-      </div>
     </section>
+</main>
 
-    <section id="admin" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-      <div class="glass rounded-[2rem] p-6 shadow-glow sm:p-8">
-        <div class="max-w-3xl">
-          <p class="text-xs uppercase tracking-[0.30em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">Admin Support</p>
-          <h3 class="mt-3 text-3xl font-black text-white dark:text-white light:text-slate-950 sm:text-4xl">Sediakan lebih dari satu jalur kontak agar buyer merasa aman.</h3>
-          <p class="mt-3 text-slate-300 dark:text-slate-300 light:text-slate-700">Selain CTA utama ke WhatsApp, bagian admin ini bisa dipakai untuk validasi identitas, backup komunikasi, atau dukungan sebelum closing.</p>
-        </div>
-
-        <div class="mt-8 grid gap-5 md:grid-cols-3">
-          <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20tanya%20paket%20AI" target="_blank" rel="noreferrer" class="card-hover rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-emerald-400/20 to-cyan-400/10 p-6 shadow-soft">
-            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-400/20 text-xl font-black text-emerald-300">WA</div>
-            <h4 class="mt-5 text-xl font-bold text-white dark:text-white light:text-slate-900">WhatsApp Order</h4>
-            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Jalur utama checkout untuk semua produk. Pesan order sudah otomatis terisi.</p>
-            <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald-300 dark:text-emerald-300 light:text-emerald-700">Chat sekarang →</span>
-          </a>
-
-          <a href="https://www.threads.com/@janebeatrixrety" target="_blank" rel="noreferrer" class="card-hover rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-slate-200/10 to-slate-50/5 p-6 shadow-soft">
-            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-xl font-black text-white dark:text-white light:bg-slate-200 light:text-slate-900">@</div>
-            <h4 class="mt-5 text-xl font-bold text-white dark:text-white light:text-slate-900">Admin 1 — Threads</h4>
-            <p class="mt-2 break-all text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">threads.com/@janebeatrixrety</p>
-            <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-100 dark:text-slate-100 light:text-slate-900">Buka profil →</span>
-          </a>
-
-          <a href="https://www.tiktok.com/@wangweize10?_r=1&_t=ZS-95siJwLG0Vs" target="_blank" rel="noreferrer" class="card-hover rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-cyan-400/15 to-fuchsia-400/10 p-6 shadow-soft">
-            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-400/15 text-xl font-black text-cyan-300 dark:text-cyan-300 light:text-sky-700">TT</div>
-            <h4 class="mt-5 text-xl font-bold text-white dark:text-white light:text-slate-900">Admin 2 — TikTok</h4>
-            <p class="mt-2 break-all text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">tiktok.com/@wangweize10</p>
-            <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-cyan-300 dark:text-cyan-300 light:text-sky-700">Lihat akun →</span>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="border-t border-white/10 py-8 dark:border-white/10 light:border-slate-200">
-    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 text-sm text-slate-400 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 dark:text-slate-400 light:text-slate-600">
-      <p>© <span id="year"></span> Wang Weize AI Access. Template landing page independen, satu file, siap deploy.</p>
-      <div class="flex flex-wrap gap-4">
-        <a href="#produk" class="transition hover:text-white dark:hover:text-white light:hover:text-slate-900">Produk</a>
-        <a href="#fitur" class="transition hover:text-white dark:hover:text-white light:hover:text-slate-900">Fitur</a>
-        <a href="#admin" class="transition hover:text-white dark:hover:text-white light:hover:text-slate-900">Admin Support</a>
-      </div>
+<!-- Footer -->
+<footer class="glass-nav py-6 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-400">
+        © 2025 PremiumAI Store — Powered by Wang Weize. All rights reserved.
     </div>
-  </footer>
+</footer>
 
-  <div class="fixed inset-x-4 bottom-4 z-50 md:hidden">
-    <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20tanya%20paket%20AI" target="_blank" rel="noreferrer" class="flex items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-5 py-4 text-sm font-bold text-white shadow-soft">Order / Tanya via WhatsApp</a>
-  </div>
-
-  <div id="toastContainer" class="pointer-events-none fixed bottom-24 right-4 z-50 flex w-[calc(100%-2rem)] max-w-sm flex-col gap-3 md:bottom-6"></div>
-
-  <script>
-    const WHATSAPP_BASE = 'https://wa.me/6282219989497?text=';
-
-    const products = [
-      {
-        id: 'chatgpt-plus-pro',
-        category: 'chatgpt',
-        initials: 'GPT',
-        name: 'ChatGPT Plus / Pro',
-        price: 12000,
-        oldPrice: 18000,
-        billing: '/ Bulan',
-        tag: 'Best Seller',
-        accent: 'from-emerald-400 via-cyan-400 to-blue-500',
-        subtitle: 'Akses private, 1 akun 1 Gmail',
-        desc: 'Pilihan paling fleksibel untuk kebutuhan harian, riset, drafting, dan workflow kreatif.',
-        features: ['Private access', 'Ringkas & cepat', 'Cocok untuk daily usage'],
-        stock: 17,
-        stockMax: 24
-      },
-      {
-        id: 'chatgpt-business',
-        category: 'chatgpt',
-        initials: 'BIZ',
-        name: 'ChatGPT Business',
-        price: 30000,
-        oldPrice: 39000,
-        billing: '/ Bulan',
-        tag: 'Priority',
-        accent: 'from-blue-500 via-cyan-400 to-violet-500',
-        subtitle: 'Server prioritas',
-        desc: 'Dirancang untuk user yang ingin jalur lebih stabil, lebih premium, dan siap dipakai intensif.',
-        features: ['Server prioritas', 'Kesan enterprise', 'Untuk workload tinggi'],
-        stock: 9,
-        stockMax: 16
-      },
-      {
-        id: 'gemini-pro',
-        category: 'google',
-        initials: 'G',
-        name: 'Gemini Pro',
-        price: 20000,
-        oldPrice: 26000,
-        billing: '/ 4 Bulan',
-        tag: 'Value Pack',
-        accent: 'from-violet-400 via-fuchsia-400 to-cyan-400',
-        subtitle: 'Ekosistem Google',
-        desc: 'Opsi menarik untuk buyer yang nyaman dengan ekosistem Google dan penggunaan jangka lebih panjang.',
-        features: ['Durasi 4 bulan', 'Google ecosystem', 'Value-friendly'],
-        stock: 12,
-        stockMax: 20
-      },
-      {
-        id: 'grok-ai',
-        category: 'xai',
-        initials: 'X',
-        name: 'Grok AI',
-        price: 10000,
-        oldPrice: 14000,
-        billing: '/ 3 Hari',
-        tag: 'Fast Test',
-        accent: 'from-slate-200 via-slate-400 to-slate-500',
-        subtitle: 'Data X real-time',
-        desc: 'Paket cepat untuk user yang ingin eksplorasi fitur real-time dan insight berbasis data X.',
-        features: ['Real-time oriented', 'Short-term package', 'Cocok untuk trial cepat'],
-        stock: 14,
-        stockMax: 22
-      }
-    ];
-
-    const categories = [
-      { id: 'all', label: 'Semua Paket' },
-      { id: 'chatgpt', label: 'ChatGPT' },
-      { id: 'google', label: 'Google Ecosystem' },
-      { id: 'xai', label: 'xAI / Grok' }
-    ];
-
-    const faqs = [
-      {
-        q: 'Apakah tombol beli langsung ke WhatsApp?',
-        a: 'Ya. Semua CTA produk otomatis membuka WhatsApp ke nomor 6282219989497 dengan format pesan order yang sudah disiapkan.'
-      },
-      {
-        q: 'Apakah template ini responsif di mobile?',
-        a: 'Ya. Layout dibuat mobile-first, memiliki sticky CTA di layar kecil, grid adaptif, dan tipografi yang tetap rapi pada ukuran sempit.'
-      },
-      {
-        q: 'Bagian mana yang paling mudah diubah?',
-        a: 'Nama produk, harga, stok, kategori, teks benefit, FAQ, link admin, dan teks WhatsApp semuanya berada di satu blok JavaScript agar edit cepat.'
-      },
-      {
-        q: 'Bisa dipakai langsung di GitHub Pages atau hosting biasa?',
-        a: 'Bisa. Ini hanya satu file index.html menggunakan Tailwind CDN dan JavaScript vanilla, jadi tinggal upload lalu deploy.'
-      }
-    ];
-
-    const salesNames = ['Budi', 'Rina', 'Dimas', 'Naila', 'Andra', 'Vio', 'Arga', 'Salsa', 'Kevin', 'Mita'];
-    const salesCities = ['Medan', 'Jakarta', 'Bandung', 'Surabaya', 'Pekanbaru', 'Padang', 'Batam', 'Aceh'];
-
-    let selectedCategory = 'all';
-    let promoMode = true;
-
-    const productGrid = document.getElementById('productGrid');
-    const filterChips = document.getElementById('filterChips');
-    const searchInput = document.getElementById('searchInput');
-    const promoToggle = document.getElementById('promoToggle');
-    const faqList = document.getElementById('faqList');
-    const countdownEl = document.getElementById('countdown');
-    const toastContainer = document.getElementById('toastContainer');
-    const themeToggle = document.getElementById('themeToggle');
-
-    const rupiah = (value) => new Intl.NumberFormat('id-ID').format(value);
-    const waLink = (productName) => `${WHATSAPP_BASE}${encodeURIComponent(`Halo Wang Weize, saya mau order ${productName}`)}`;
-
-    function getTheme() {
-      return localStorage.getItem('ww-theme') || 'dark';
-    }
-
-    function applyTheme(theme) {
-      const html = document.documentElement;
-      html.classList.toggle('dark', theme === 'dark');
-      html.classList.toggle('light', theme === 'light');
-      localStorage.setItem('ww-theme', theme);
-      themeToggle.innerHTML = theme === 'dark'
-        ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 15.5A9 9 0 1112.5 2.25a7.5 7.5 0 009.25 13.25z" /></svg>`
-        : `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 12H3m15.364 6.364l-1.06-1.06M6.697 6.697L5.636 5.636m12.728 0l-1.06 1.06M6.697 17.303l-1.06 1.06M12 16.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9z" /></svg>`;
-    }
-
-    function renderFilterChips() {
-      filterChips.innerHTML = categories.map(cat => {
-        const active = selectedCategory === cat.id;
-        return `
-          <button data-category="${cat.id}" class="filter-chip rounded-2xl border px-4 py-2 text-sm font-semibold transition ${active
-            ? 'border-cyan-300/30 bg-cyan-400/15 text-cyan-200 dark:text-cyan-200 light:border-sky-300 light:bg-sky-100 light:text-sky-700'
-            : 'border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 dark:text-slate-300 light:border-slate-300 light:bg-white/80 light:text-slate-700'}">
-            ${cat.label}
-          </button>
-        `;
-      }).join('');
-
-      document.querySelectorAll('.filter-chip').forEach(button => {
-        button.addEventListener('click', () => {
-          selectedCategory = button.dataset.category;
-          renderFilterChips();
-          renderProducts();
-        });
-      });
-    }
-
-    function productCard(product) {
-      const searchValue = searchInput.value.trim().toLowerCase();
-      const matchCategory = selectedCategory === 'all' || product.category === selectedCategory;
-      const matchSearch = !searchValue || [product.name, product.subtitle, product.desc, ...product.features].join(' ').toLowerCase().includes(searchValue);
-      if (!matchCategory || !matchSearch) return '';
-
-      const stockPercent = Math.max(12, Math.min(100, Math.round((product.stock / product.stockMax) * 100)));
-      const savings = product.oldPrice - product.price;
-
-      return `
-        <article class="card-hover glass rounded-[1.9rem] p-6 shadow-glow">
-          <div class="flex items-start justify-between gap-4">
-            <div class="flex items-center gap-4">
-              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${product.accent} text-lg font-black text-white shadow-soft">${product.initials}</div>
-              <div>
-                <p class="text-xs uppercase tracking-[0.22em] text-slate-400 dark:text-slate-400 light:text-slate-600">${product.tag}</p>
-                <h4 class="mt-1 text-xl font-bold text-white dark:text-white light:text-slate-900">${product.name}</h4>
-              </div>
-            </div>
-            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-slate-300 dark:text-slate-300 light:border-slate-300 light:bg-white/80 light:text-slate-700">${product.subtitle}</span>
-          </div>
-
-          <p class="mt-5 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">${product.desc}</p>
-
-          <div class="mt-6 flex items-end gap-3">
-            <div>
-              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Harga mulai</p>
-              <div class="mt-1 flex items-center gap-3">
-                <span class="text-3xl font-black text-white dark:text-white light:text-slate-950">Rp ${rupiah(product.price)}</span>
-                <span class="text-sm font-medium text-slate-400 dark:text-slate-400 light:text-slate-600">${product.billing}</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-3 ${promoMode ? 'block' : 'hidden'}">
-            <div class="flex items-center gap-3 text-sm">
-              <span class="text-slate-500 line-through dark:text-slate-500 light:text-slate-500">Rp ${rupiah(product.oldPrice)}</span>
-              <span class="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-300 dark:text-emerald-300 light:text-emerald-700">Hemat Rp ${rupiah(savings)}</span>
-            </div>
-          </div>
-
-          <div class="mt-6 space-y-3">
-            ${product.features.map(feature => `
-              <div class="flex items-center gap-3 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">
-                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 dark:bg-white/10 light:bg-slate-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </span>
-                ${feature}
-              </div>
-            `).join('')}
-          </div>
-
-          <div class="mt-6 rounded-3xl border border-white/10 bg-white/5 p-4 dark:bg-white/5 light:bg-white/80">
-            <div class="mb-2 flex items-center justify-between text-sm">
-              <span class="text-slate-400 dark:text-slate-400 light:text-slate-600">Stok aktif hari ini</span>
-              <span class="font-semibold text-white dark:text-white light:text-slate-900">${product.stock} slot</span>
-            </div>
-            <div class="h-2 rounded-full bg-white/10 dark:bg-white/10 light:bg-slate-200"><div class="h-2 rounded-full bg-gradient-to-r ${product.accent}" style="width:${stockPercent}%"></div></div>
-          </div>
-
-          <div class="mt-6 grid gap-3 sm:grid-cols-2">
-            <a href="${waLink(product.name)}" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r ${product.accent} px-5 py-3.5 text-sm font-bold text-white shadow-soft transition hover:-translate-y-0.5">Beli / Pesan</a>
-            <button data-copy="${product.name}" class="copy-btn rounded-2xl border border-white/10 bg-white/5 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10 dark:text-white light:border-slate-300 light:bg-white/80 light:text-slate-900">Salin Nama Paket</button>
-          </div>
-        </article>
-      `;
-    }
-
-    function renderProducts() {
-      const html = products.map(productCard).join('');
-      productGrid.innerHTML = html || `
-        <div class="glass col-span-full rounded-[1.8rem] p-8 text-center shadow-glow">
-          <p class="text-lg font-semibold text-white dark:text-white light:text-slate-900">Paket tidak ditemukan</p>
-          <p class="mt-2 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">Coba kata kunci lain atau ganti filter kategori.</p>
+<!-- Cart Sidebar (offcanvas) -->
+<div id="cart-sidebar" class="fixed top-0 right-0 h-full w-80 max-w-full bg-slate-800 dark:bg-slate-800 light:bg-white shadow-2xl z-50 transform translate-x-full cart-sidebar flex flex-col">
+    <div class="flex items-center justify-between p-4 border-b border-white/10">
+        <h3 class="text-lg font-bold">🛒 Keranjang Anda</h3>
+        <button id="cart-close" class="text-2xl hover:text-yellow-400">&times;</button>
+    </div>
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-3">
+        <p class="text-gray-400 text-center">Keranjang kosong</p>
+    </div>
+    <div class="p-4 border-t border-white/10">
+        <div class="flex justify-between mb-2">
+            <span>Total:</span>
+            <span id="cart-total" class="font-bold">Rp 0</span>
         </div>
-      `;
+        <button id="cart-checkout-btn" class="w-full bg-green-600 hover:bg-green-500 text-white py-2.5 rounded-xl font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+            <i class="fab fa-whatsapp mr-1"></i> Checkout via WhatsApp
+        </button>
+    </div>
+</div>
+<!-- Overlay for cart -->
+<div id="cart-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
 
-      document.querySelectorAll('.copy-btn').forEach(btn => {
-        btn.addEventListener('click', async () => {
-          const packageName = btn.dataset.copy;
-          try {
-            await navigator.clipboard.writeText(packageName);
-            const original = btn.textContent;
-            btn.textContent = 'Tersalin';
-            setTimeout(() => btn.textContent = original, 1400);
-          } catch {
-            alert('Clipboard tidak tersedia di browser ini.');
-          }
-        });
-      });
-    }
+<!-- Toast notification container -->
+<div id="toast-container" class="fixed bottom-6 right-6 z-50 space-y-3 max-w-sm"></div>
 
-    function renderFaq() {
-      faqList.innerHTML = faqs.map((item, index) => `
-        <div class="rounded-3xl border border-white/10 bg-white/5 p-4 dark:bg-white/5 light:bg-white/80">
-          <button class="faq-btn flex w-full items-center justify-between gap-4 text-left" data-index="${index}">
-            <span class="text-base font-semibold text-white dark:text-white light:text-slate-900">${item.q}</span>
-            <span class="text-xl text-cyan-300 dark:text-cyan-300 light:text-sky-700">+</span>
-          </button>
-          <div class="faq-panel hidden pt-3 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">${item.a}</div>
-        </div>
-      `).join('');
+<script>
+    (function() {
+        // ---------- STATE ----------
+        const STORAGE_CART = 'premiumai_cart';
+        const STORAGE_THEME = 'premiumai_theme';
+        const STORAGE_STOCK = 'premiumai_stock';
+        const STORAGE_TIMER_END = 'premiumai_gemini_timer_end';
+        const WA_NUMBER = '6282219989497';
 
-      document.querySelectorAll('.faq-btn').forEach(button => {
-        button.addEventListener('click', () => {
-          const panel = button.nextElementSibling;
-          const icon = button.querySelector('span:last-child');
-          panel.classList.toggle('hidden');
-          icon.textContent = panel.classList.contains('hidden') ? '+' : '−';
-        });
-      });
-    }
-
-    function startCountdown() {
-      const target = new Date();
-      target.setDate(target.getDate() + 2);
-      target.setHours(target.getHours() + 7);
-
-      function update() {
-        const diff = target.getTime() - Date.now();
-        const safeDiff = Math.max(diff, 0);
-        const days = Math.floor(safeDiff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((safeDiff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((safeDiff / (1000 * 60)) % 60);
-        const seconds = Math.floor((safeDiff / 1000) % 60);
-
-        const parts = [
-          { label: 'Hari', value: String(days).padStart(2, '0') },
-          { label: 'Jam', value: String(hours).padStart(2, '0') },
-          { label: 'Menit', value: String(minutes).padStart(2, '0') },
-          { label: 'Detik', value: String(seconds).padStart(2, '0') }
+        // Products definition
+        const products = [
+            { id: 'chatgpt-plus', name: 'ChatGPT Plus', price: 12000, initStock: 5 },
+            { id: 'chatgpt-business', name: 'ChatGPT Business', price: 30000, initStock: 3 },
+            { id: 'gemini-pro', name: 'Gemini Pro', price: 20000, initStock: 4 },
+            { id: 'grok-ai', name: 'Grok AI', price: 10000, initStock: 7 }
         ];
 
-        countdownEl.innerHTML = parts.map(part => `
-          <div class="rounded-2xl border border-white/10 bg-white/5 px-3 py-4 dark:bg-white/5 light:bg-white/80">
-            <div class="text-2xl font-black text-white dark:text-white light:text-slate-900">${part.value}</div>
-            <div class="mt-1 text-[11px] uppercase tracking-[0.24em] text-slate-400 dark:text-slate-400 light:text-slate-600">${part.label}</div>
-          </div>
-        `).join('');
-      }
+        // Load cart from localStorage
+        let cart = JSON.parse(localStorage.getItem(STORAGE_CART)) || []; // { id, name, price, quantity }
 
-      update();
-      setInterval(update, 1000);
-    }
-
-    function startStatsAnimation() {
-      const numbers = document.querySelectorAll('.stat-number');
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          const target = Number(el.dataset.target || 0);
-          const duration = 1200;
-          const start = performance.now();
-
-          function animate(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            el.textContent = Math.floor(progress * target).toLocaleString('id-ID');
-            if (progress < 1) requestAnimationFrame(animate);
-          }
-
-          requestAnimationFrame(animate);
-          obs.unobserve(el);
-        });
-      }, { threshold: 0.5 });
-
-      numbers.forEach(num => observer.observe(num));
-    }
-
-    function startDynamicStock() {
-      setInterval(() => {
-        const index = Math.floor(Math.random() * products.length);
-        const product = products[index];
-        if (product.stock > 4) {
-          product.stock -= 1;
-          renderProducts();
+        // Load stock from localStorage or init
+        let stock = JSON.parse(localStorage.getItem(STORAGE_STOCK));
+        if (!stock) {
+            stock = {};
+            products.forEach(p => stock[p.id] = p.initStock);
+            saveStock();
+        } else {
+            // ensure all keys exist
+            products.forEach(p => { if (stock[p.id] === undefined) stock[p.id] = p.initStock; });
+            saveStock();
         }
-      }, 8500);
-    }
 
-    function showToast(message, productName) {
-      const toast = document.createElement('div');
-      toast.className = 'toast-enter pointer-events-auto glass rounded-3xl p-4 shadow-glow';
-      toast.innerHTML = `
-        <div class="flex items-start gap-3">
-          <div class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-emerald-400/20 text-sm font-black text-emerald-300">✓</div>
-          <div>
-            <p class="text-sm font-semibold text-white dark:text-white light:text-slate-900">${message}</p>
-            <p class="mt-1 text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">Order: ${productName}</p>
-          </div>
-        </div>
-      `;
-      toastContainer.appendChild(toast);
-      setTimeout(() => {
-        toast.classList.remove('toast-enter');
-        toast.classList.add('toast-exit');
-        setTimeout(() => toast.remove(), 380);
-      }, 3400);
-    }
+        // Timer deadline for Gemini flash sale (2 hours from first load if not set)
+        let timerEnd = localStorage.getItem(STORAGE_TIMER_END);
+        if (!timerEnd) {
+            timerEnd = Date.now() + 2 * 60 * 60 * 1000; // 2 hours
+            localStorage.setItem(STORAGE_TIMER_END, timerEnd);
+        } else {
+            timerEnd = parseInt(timerEnd);
+        }
 
-    function startSalesSimulation() {
-      function generate() {
-        const name = salesNames[Math.floor(Math.random() * salesNames.length)];
-        const city = salesCities[Math.floor(Math.random() * salesCities.length)];
-        const product = products[Math.floor(Math.random() * products.length)];
-        showToast(`${name} dari ${city} baru saja memesan`, product.name);
-      }
+        // Theme
+        const html = document.documentElement;
+        const theme = localStorage.getItem(STORAGE_THEME) || 'dark';
+        if (theme === 'light') {
+            html.classList.remove('dark');
+            html.classList.add('light');
+        } else {
+            html.classList.add('dark');
+            html.classList.remove('light');
+        }
 
-      setTimeout(generate, 2500);
-      setInterval(generate, 9000);
-    }
+        // ---------- DOM ELEMENTS ----------
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartTotalEl = document.getElementById('cart-total');
+        const cartCheckoutBtn = document.getElementById('cart-checkout-btn');
+        const cartCountBadge = document.getElementById('cart-count-badge');
+        const cartCountBadgeMobile = document.getElementById('cart-count-badge-mobile');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeIconMobile = document.getElementById('theme-icon-mobile');
+        const toastContainer = document.getElementById('toast-container');
 
-    promoToggle.addEventListener('click', () => {
-      promoMode = !promoMode;
-      promoToggle.textContent = `Mode Promo: ${promoMode ? 'ON' : 'OFF'}`;
-      renderProducts();
-    });
+        // Stock display spans
+        const stockSpans = {
+            'chatgpt-plus': document.getElementById('stock-chatgpt-plus'),
+            'chatgpt-business': document.getElementById('stock-chatgpt-business'),
+            'gemini-pro': document.getElementById('stock-gemini-pro'),
+            'grok-ai': document.getElementById('stock-grok-ai'),
+        };
 
-    searchInput.addEventListener('input', renderProducts);
+        // ---------- FUNCTIONS ----------
+        function saveCart() {
+            localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
+            updateCartUI();
+        }
 
-    themeToggle.addEventListener('click', () => {
-      const current = getTheme();
-      applyTheme(current === 'dark' ? 'light' : 'dark');
-    });
+        function saveStock() {
+            localStorage.setItem(STORAGE_STOCK, JSON.stringify(stock));
+            updateStockUI();
+        }
 
-    document.getElementById('year').textContent = new Date().getFullYear();
+        function updateStockUI() {
+            for (let [id, span] of Object.entries(stockSpans)) {
+                if (span) {
+                    const val = stock[id] || 0;
+                    span.textContent = val;
+                    if (val <= 0) {
+                        span.classList.remove('text-green-400');
+                        span.classList.add('text-red-400');
+                        // disable direct buy button and add to cart for this product
+                        const card = document.querySelector(`.product-card[data-product-id="${id}"]`);
+                        if (card) {
+                            const buyBtn = card.querySelector('.buy-direct-btn');
+                            const cartBtn = card.querySelector('.add-to-cart-btn');
+                            if (buyBtn) {
+                                buyBtn.style.pointerEvents = 'none';
+                                buyBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                                buyBtn.setAttribute('disabled', 'disabled');
+                            }
+                            if (cartBtn) {
+                                cartBtn.disabled = true;
+                                cartBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                            }
+                        }
+                    } else {
+                        span.classList.remove('text-red-400');
+                        span.classList.add('text-green-400');
+                        const card = document.querySelector(`.product-card[data-product-id="${id}"]`);
+                        if (card) {
+                            const buyBtn = card.querySelector('.buy-direct-btn');
+                            const cartBtn = card.querySelector('.add-to-cart-btn');
+                            if (buyBtn) {
+                                buyBtn.style.pointerEvents = 'auto';
+                                buyBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                                buyBtn.removeAttribute('disabled');
+                            }
+                            if (cartBtn) {
+                                cartBtn.disabled = false;
+                                cartBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-    applyTheme(getTheme());
-    renderFilterChips();
-    renderProducts();
-    renderFaq();
-    startCountdown();
-    startStatsAnimation();
-    startDynamicStock();
-    startSalesSimulation();
-  </script>
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            // Update badges
+            const showBadge = totalItems > 0;
+            if (cartCountBadge) {
+                cartCountBadge.textContent = totalItems;
+                cartCountBadge.classList.toggle('hidden', !showBadge);
+            }
+            if (cartCountBadgeMobile) {
+                cartCountBadgeMobile.textContent = totalItems;
+                cartCountBadgeMobile.classList.toggle('hidden', !showBadge);
+            }
+
+            // Update sidebar content
+            if (cartItemsContainer) {
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="text-gray-400 text-center py-8">Keranjang kosong</p>';
+                } else {
+                    cartItemsContainer.innerHTML = cart.map(item => `
+                        <div class="flex justify-between items-center bg-white/5 rounded-lg p-3">
+                            <div>
+                                <p class="font-medium text-sm">${item.name}</p>
+                                <p class="text-xs text-gray-400">Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="updateCartQuantity('${item.id}', -1)" class="text-gray-400 hover:text-white text-lg leading-none">−</button>
+                                <span class="text-sm">${item.quantity}</span>
+                                <button onclick="updateCartQuantity('${item.id}', 1)" class="text-gray-400 hover:text-white text-lg leading-none">+</button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+            if (cartTotalEl) {
+                cartTotalEl.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+            }
+            if (cartCheckoutBtn) {
+                cartCheckoutBtn.disabled = cart.length === 0;
+            }
+        }
+
+        window.addToCart = function(productId, productName, productPrice) {
+            if (stock[productId] <= 0) {
+                showToast('⚠️ Stok habis! Tidak bisa menambah ke keranjang.', 'error');
+                return;
+            }
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                // Check stock limit
+                if (existing.quantity + 1 > stock[productId]) {
+                    showToast('⚠️ Stok tidak mencukupi untuk menambah jumlah.', 'error');
+                    return;
+                }
+                existing.quantity += 1;
+            } else {
+                cart.push({ id: productId, name: productName, price: productPrice, quantity: 1 });
+            }
+            saveCart();
+            showToast(`✅ ${productName} ditambahkan ke keranjang.`, 'success');
+        };
+
+        window.updateCartQuantity = function(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+            const newQty = item.quantity + delta;
+            if (newQty <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            } else {
+                if (delta > 0 && newQty > stock[productId]) {
+                    showToast('⚠️ Stok tidak mencukupi.', 'error');
+                    return;
+                }
+                item.quantity = newQty;
+            }
+            saveCart();
+        };
+
+        function openCart() {
+            cartSidebar.classList.add('cart-open');
+            cartOverlay.classList.remove('hidden');
+        }
+        function closeCart() {
+            cartSidebar.classList.remove('cart-open');
+            cartOverlay.classList.add('hidden');
+        }
+
+        // Checkout cart via WhatsApp
+        function checkoutCart() {
+            if (cart.length === 0) return;
+            const itemsList = cart.map(item => `${item.name} (x${item.quantity})`).join(', ');
+            const message = `Halo Wang Weize, saya mau order ${itemsList}`;
+            const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Direct WhatsApp link (already in HTML, but we can't prevent default, just track)
+
+        // Toast notification
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `glass-card p-3 rounded-xl flex items-center gap-3 toast-enter text-sm`;
+            toast.innerHTML = `<span>${message}</span>`;
+            toastContainer.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 4000);
+        }
+
+        // Simulate live purchase notifications
+        const customerNames = ['Budi', 'Siti', 'Andi', 'Rina', 'Dewi', 'Agus', 'Lina', 'Hadi', 'Nina', 'Rudi'];
+        function randomPurchaseNotification() {
+            // Pick a random product that still has stock > 0
+            const availableProducts = products.filter(p => stock[p.id] > 0);
+            if (availableProducts.length === 0) return;
+            const product = availableProducts[Math.floor(Math.random() * availableProducts.length)];
+            const customer = customerNames[Math.floor(Math.random() * customerNames.length)];
+            // Reduce stock by 1 (simulate purchase)
+            stock[product.id] = Math.max(0, stock[product.id] - 1);
+            saveStock();
+            showToast(`🔔 ${customer} baru saja membeli ${product.name}`, 'purchase');
+            // If stock becomes 0, no further notifications for that product
+        }
+
+        // Set interval for live notifications (every 9-15 seconds random)
+        setInterval(() => {
+            const delay = Math.floor(Math.random() * 7000) + 9000; // 9-16 sec
+            setTimeout(randomPurchaseNotification, delay);
+        }, 15000); // check every 15 sec, but random delay inside so it's staggered
+
+        // Initial notification after 5 seconds
+        setTimeout(randomPurchaseNotification, 5000);
+
+        // Countdown timer for Gemini
+        function updateCountdown() {
+            const now = Date.now();
+            const distance = timerEnd - now;
+            const timerSpan = document.getElementById('timer-gemini');
+            const countdownDiv = document.getElementById('countdown-gemini');
+            if (!timerSpan || !countdownDiv) return;
+
+            if (distance <= 0) {
+                timerSpan.textContent = '00:00:00';
+                countdownDiv.innerHTML = '<span class="text-red-400">Promo berakhir</span>';
+                // possibly disable or change price
+                return;
+            }
+            const hours = Math.floor(distance / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            timerSpan.textContent = `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Theme toggle
+        function setTheme(isDark) {
+            if (isDark) {
+                html.classList.add('dark');
+                html.classList.remove('light');
+                localStorage.setItem(STORAGE_THEME, 'dark');
+                if (themeIcon) themeIcon.className = 'fas fa-sun text-yellow-400';
+                if (themeIconMobile) themeIconMobile.className = 'fas fa-sun text-yellow-400';
+            } else {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                localStorage.setItem(STORAGE_THEME, 'light');
+                if (themeIcon) themeIcon.className = 'fas fa-moon text-gray-700';
+                if (themeIconMobile) themeIconMobile.className = 'fas fa-moon text-gray-700';
+            }
+        }
+        // initial icon
+        if (theme === 'dark') {
+            if (themeIcon) themeIcon.className = 'fas fa-sun text-yellow-400';
+            if (themeIconMobile) themeIconMobile.className = 'fas fa-sun text-yellow-400';
+        } else {
+            if (themeIcon) themeIcon.className = 'fas fa-moon text-gray-700';
+            if (themeIconMobile) themeIconMobile.className = 'fas fa-moon text-gray-700';
+        }
+
+        themeToggle?.addEventListener('click', () => {
+            const isDark = html.classList.contains('dark');
+            setTheme(!isDark);
+        });
+        themeToggleMobile?.addEventListener('click', () => {
+            const isDark = html.classList.contains('dark');
+            setTheme(!isDark);
+        });
+
+        // Cart toggle events
+        document.getElementById('cart-toggle-desktop')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            openCart();
+        });
+        document.getElementById('cart-toggle-mobile')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            openCart();
+        });
+        document.getElementById('cart-close')?.addEventListener('click', closeCart);
+        cartOverlay?.addEventListener('click', closeCart);
+        cartCheckoutBtn?.addEventListener('click', checkoutCart);
+
+        // Update UI on load
+        updateStockUI();
+        updateCartUI();
+
+        // Expose for inline onclick (already global via window)
+        window.updateCartQuantity = updateCartQuantity;
+    })();
+</script>
 </body>
 </html>
