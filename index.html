@@ -22,8 +22,8 @@
                     animation: {
                         'blob': 'blob 7s infinite',
                         'slide-up': 'slideUp 0.5s ease-out forwards',
-                        'marquee': 'marquee 40s linear infinite',
                         'payment-slide': 'paymentSlide 4s ease-in-out forwards',
+                        'marquee': 'marquee 25s linear infinite',
                     },
                     keyframes: {
                         blob: {
@@ -36,15 +36,15 @@
                             '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
-                        marquee: {
-                            '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(-50%)' },
-                        },
                         paymentSlide: {
                             '0%': { transform: 'translateX(-120%)', opacity: '0' },
                             '10%': { transform: 'translateX(0)', opacity: '1' },
                             '90%': { transform: 'translateX(0)', opacity: '1' },
                             '100%': { transform: 'translateY(20px)', opacity: '0' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
                         }
                     }
                 }
@@ -56,64 +56,48 @@
         body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
         
-        /* Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .dark .glass {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-        }
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        .dark .glass-nav {
-            background: rgba(15, 23, 42, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .dark .glass { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+        .dark .glass-nav { background: rgba(15, 23, 42, 0.8); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
         
-        /* 3D Tilt Effect */
         .tilt-card { transform-style: preserve-3d; transition: transform 0.1s ease-out; }
         .tilt-content { transform: translateZ(30px); }
         
-        /* Background Mesh */
-        .bg-mesh {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 0% 0%, rgba(59,130,246,0.15) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(168,85,247,0.15) 0, transparent 50%);
-        }
-        .dark .bg-mesh {
-            background-color: #020617;
-            background-image: radial-gradient(at 0% 0%, rgba(59,130,246,0.15) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(168,85,247,0.15) 0, transparent 50%);
-        }
+        .bg-mesh { background-color: #f8fafc; background-image: radial-gradient(at 0% 0%, rgba(59,130,246,0.15) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(168,85,247,0.15) 0, transparent 50%); }
+        .dark .bg-mesh { background-color: #020617; background-image: radial-gradient(at 0% 0%, rgba(59,130,246,0.15) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(168,85,247,0.15) 0, transparent 50%); }
 
-        /* Cart Sidebar */
         .cart-sidebar { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .cart-open { transform: translateX(0); }
         
-        /* Toast */
         .toast-enter { animation: slideInRight 0.4s ease-out forwards; }
         @keyframes slideInRight { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
         
-        /* Marquee Hover Pause */
-        .marquee-content:hover { animation-play-state: paused; }
-
-        /* Chat Widget */
         .chat-widget { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: bottom right; transform: scale(0); opacity: 0; }
         .chat-open { transform: scale(1); opacity: 1; }
+
+        /* Sparkle Effect */
+        .sparkle { position: absolute; pointer-events: none; animation: sparkleAnim 0.8s forwards; font-size: 1.2rem; z-index: 9999; }
+        @keyframes sparkleAnim { 0% { transform: scale(0) rotate(0deg); opacity: 1; } 100% { transform: scale(1.5) rotate(180deg) translateY(-20px); opacity: 0; } }
+        
+        .marquee-content:hover { animation-play-state: paused; }
     </style>
 </head>
 <body class="bg-mesh text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <div id="exit-modal" class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm hidden flex items-center justify-center transition-opacity">
+        <div class="glass bg-white dark:bg-slate-900 rounded-3xl p-8 max-w-md text-center transform scale-95 transition-transform animate-slide-up">
+            <div class="w-20 h-20 mx-auto bg-red-500/20 text-red-500 rounded-full flex items-center justify-center text-4xl mb-4"><i class="fa-solid fa-gift"></i></div>
+            <h2 class="font-display font-black text-2xl mb-2 text-slate-900 dark:text-white">Woy, Tunggu Dulu! 😱</h2>
+            <p class="text-slate-600 dark:text-slate-400 mb-6">Lu mau cabut gitu aja? Nih gue kasih <b>Voucher Rahasia 15%</b> biar lu gak boncos. Klaim sekarang sebelum hangus!</p>
+            <button id="claim-exit-voucher" class="w-full py-4 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold text-lg hover:scale-105 transition shadow-lg shadow-red-500/30">Klaim & Buka Keranjang</button>
+            <button id="close-exit" class="mt-4 text-sm text-slate-500 hover:text-slate-700 dark:hover:text-white">Gak deh, gue emang sultan</button>
+        </div>
+    </div>
 
     <nav class="fixed w-full z-40 glass-nav transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
@@ -144,28 +128,57 @@
         <div class="absolute top-10 -right-10 w-72 h-72 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob pointer-events-none" style="animation-delay: 2s"></div>
 
         <div class="text-center max-w-3xl mx-auto relative z-10 animate-slide-up">
+            
             <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/20 text-sm font-semibold text-blue-600 dark:text-blue-400">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Server Stabil
+                <div id="server-status-container" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/20 bg-blue-500/10 transition-colors duration-500">
+                    <span id="server-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 
+                    <span id="server-status" class="text-sm font-semibold text-blue-600 dark:text-blue-400">Server Stabil</span>
                 </div>
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-400/10 border border-amber-400/20 text-sm font-bold text-amber-600 dark:text-amber-400">
-                    <i class="fa-regular fa-eye animate-pulse"></i> <span id="live-viewers">42</span> Orang sedang melihat
+                    <i class="fa-regular fa-eye animate-pulse"></i> <span id="live-viewers">4,281</span> Orang berebut slot
                 </div>
             </div>
 
-            <h2 class="font-display text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-slate-900 dark:text-white">
+            <h2 class="font-display text-5xl md:text-7xl font-extrabold mb-6 leading-tight text-slate-900 dark:text-white">
                 Akses AI Enterprise.<br>
                 <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Harga Receh.</span>
             </h2>
-            <p class="text-lg text-slate-600 dark:text-slate-400 mb-10">Tingkatkan produktivitas lu dengan AI terbaru (GPT-5.5 Agentic, Gemini Pro). Akun private 1 orang 1 Gmail, bergaransi, anti boncos, langsung gas pakai.</p>
+            <p class="text-lg text-slate-600 dark:text-slate-400 mb-8">Tingkatkan produktivitas lu dengan AI terbaru (GPT-5.5 Agentic, Gemini Pro). Akun private 1 orang 1 Gmail, bergaransi, anti boncos, langsung gas pakai.</p>
             
-            <div class="flex items-center justify-center gap-3 mb-12">
+            <div class="max-w-md mx-auto mb-10 text-left">
+                <div class="flex justify-between text-xs font-bold mb-2 text-slate-500 dark:text-slate-400">
+                    <span>Kuota Pendaftaran Hari Ini</span>
+                    <span class="text-red-500 animate-pulse">87% Terisi!</span>
+                </div>
+                <div class="h-3 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-orange-400 to-red-500 w-[87%] rounded-full relative">
+                        <div class="absolute inset-0 bg-white/20 animate-marquee w-[200%]"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-center gap-3 mb-8">
                 <span class="text-sm font-bold text-slate-500 dark:text-slate-400" id="label-personal">Personal</span>
                 <button id="reseller-toggle" class="relative w-14 h-8 bg-slate-300 dark:bg-slate-700 rounded-full p-1 transition-colors duration-300 focus:outline-none">
                     <div id="toggle-knob" class="w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300"></div>
                 </button>
                 <span class="text-sm font-bold text-slate-800 dark:text-white" id="label-reseller">Harga Reseller</span>
                 <span class="text-[10px] font-black bg-red-500/10 text-red-500 border border-red-500/20 px-2 py-1 rounded-full animate-pulse">HEMAT 20% CUAN!</span>
+            </div>
+
+            <div class="overflow-hidden w-full max-w-sm mx-auto mb-12 opacity-50 pointer-events-none">
+                <div class="flex items-center gap-6 animate-marquee w-max text-2xl text-slate-400">
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <span class="font-bold text-lg">QRIS</span>
+                    <span class="font-bold text-lg">GoPay</span>
+                    <span class="font-bold text-lg">OVO</span>
+                    <span class="font-bold text-lg">DANA</span>
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <span class="font-bold text-lg">QRIS</span>
+                    <span class="font-bold text-lg">GoPay</span>
+                </div>
             </div>
         </div>
 
@@ -200,41 +213,32 @@
             </div>
         </div>
 
-        <div class="mt-24 grid md:grid-cols-3 gap-6 animate-slide-up" style="animation-delay: 0.2s">
-            <div class="glass rounded-3xl p-8 text-center hover:border-blue-500/30 transition">
-                <div class="w-14 h-14 mx-auto rounded-2xl bg-blue-500/10 flex items-center justify-center mb-5 text-blue-500 text-2xl"><i class="fa-solid fa-lock"></i></div>
-                <h3 class="font-display font-bold text-xl mb-2 text-slate-900 dark:text-white">100% Private</h3>
-                <p class="text-sm text-slate-600 dark:text-slate-400">1 Akun khusus buat 1 Gmail. Bebas dari history chat orang lain, privasi aman sentosa.</p>
-            </div>
-            <div class="glass rounded-3xl p-8 text-center hover:border-purple-500/30 transition">
-                <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-500/10 flex items-center justify-center mb-5 text-purple-500 text-2xl"><i class="fa-solid fa-bolt"></i></div>
-                <h3 class="font-display font-bold text-xl mb-2 text-slate-900 dark:text-white">Aktivasi Instan</h3>
-                <p class="text-sm text-slate-600 dark:text-slate-400">Checkout otomatis terhubung ke WhatsApp. Bayar, langsung dikirim detail loginnya saat itu juga.</p>
-            </div>
-            <div class="glass rounded-3xl p-8 text-center hover:border-emerald-500/30 transition">
-                <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-5 text-emerald-500 text-2xl"><i class="fa-solid fa-headset"></i></div>
-                <h3 class="font-display font-bold text-xl mb-2 text-slate-900 dark:text-white">Support 24/7</h3>
-                <p class="text-sm text-slate-600 dark:text-slate-400">Admin selalu stand-by kalau akun kena limit atau bermasalah. Garansi ganti akun tanpa babibu.</p>
-            </div>
-        </div>
-
         <div id="admin" class="mt-24 max-w-4xl mx-auto text-center animate-slide-up" style="animation-delay: 0.3s">
             <h2 class="font-display text-3xl font-bold mb-8 text-slate-900 dark:text-white">Kontak Admin Resmi</h2>
             <div class="grid sm:grid-cols-2 gap-6">
-                <a href="https://www.threads.com/@janebeatrixrety" target="_blank" class="glass rounded-3xl p-6 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/10 transition group">
+                <a href="https://www.threads.com/@janebeatrixrety" target="_blank" class="glass rounded-3xl p-6 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/10 transition group relative overflow-hidden">
                     <div class="w-12 h-12 bg-black text-white rounded-xl flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-threads"></i></div>
                     <div class="text-left">
                         <h4 class="font-bold text-slate-900 dark:text-white">Admin 1 (Threads)</h4>
                         <p class="text-sm text-slate-500">@janebeatrixrety</p>
                     </div>
+                    <div class="absolute top-2 right-2 text-[10px] text-emerald-500 font-bold animate-pulse flex items-center gap-1"><i class="fa-solid fa-keyboard"></i> Online</div>
                 </a>
-                <a href="https://www.tiktok.com/@wangweize10?_r=1&_t=ZS-95siJwLG0Vs" target="_blank" class="glass rounded-3xl p-6 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/10 transition group">
+                <a href="https://www.tiktok.com/@wangweize10?_r=1&_t=ZS-95siJwLG0Vs" target="_blank" class="glass rounded-3xl p-6 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/10 transition group relative overflow-hidden">
                     <div class="w-12 h-12 bg-black text-white rounded-xl flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-tiktok"></i></div>
                     <div class="text-left">
                         <h4 class="font-bold text-slate-900 dark:text-white">Admin 2 (TikTok)</h4>
                         <p class="text-sm text-slate-500">@wangweize10</p>
                     </div>
+                    <div class="absolute top-2 right-2 text-[10px] text-emerald-500 font-bold animate-pulse flex items-center gap-1"><i class="fa-solid fa-keyboard"></i> Online</div>
                 </a>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-slate-200 dark:border-white/10">
+                <p class="text-sm font-bold mb-3 text-slate-900 dark:text-white">Share ke temen lu, dapet pahala (dan cuan)!</p>
+                <button onclick="shareWA()" class="px-6 py-2 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/30 hover:bg-green-500 hover:text-white transition font-semibold text-sm">
+                    <i class="fa-brands fa-whatsapp mr-1"></i> Bagikan via WhatsApp
+                </button>
             </div>
         </div>
     </main>
@@ -277,8 +281,8 @@
             </div>
             <div class="p-4 space-y-3 h-48 overflow-y-auto bg-slate-50 dark:bg-slate-800/50">
                 <div class="bg-blue-100 dark:bg-blue-900/40 text-slate-800 dark:text-slate-200 p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl text-sm w-10/12 shadow-sm" id="chat-msg">
-                    <span class="typing hidden">Mengetik...</span>
-                    <span class="real-msg hidden">Halo! Ada yang bisa gue bantu soal akun AI Premium ini? Gas order sekarang selagi stok aman! 🔥</span>
+                    <span class="typing hidden text-slate-500 italic"><i class="fa-solid fa-ellipsis fa-fade"></i> Admin mengetik...</span>
+                    <span class="real-msg hidden">Halo! Ada yang bisa gue bantu soal akun AI Premium ini? Gas order sekarang, mumpung server lagi rame nih! 🔥</span>
                 </div>
             </div>
             <div class="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
@@ -302,11 +306,12 @@
         let hasVoucher = false;
         let cart = JSON.parse(localStorage.getItem('ww_cart')) || [];
 
+        // FIXED ICONS: changed 'fa-robot' to 'fa-solid fa-robot' to ensure rendering
         const products = [
-            { id: 'gpt-plus', name: 'ChatGPT Plus / Pro', price: 12000, duration: '/ Bulan', icon: 'fa-robot', color: 'text-emerald-500', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', tag: 'Agentic AI 5.5', desc: 'Akses harian ke model tercanggih OpenAI GPT-5.5. Cocok buat riset, coding berat, dan eksekusi.', stock: 12 },
-            { id: 'gpt-biz', name: 'ChatGPT Business', price: 30000, duration: '/ Bulan', icon: 'fa-briefcase', color: 'text-blue-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20', tag: 'Prioritas Server', desc: 'Server anti antre dan respon ngebut. Optimal buat lo yang pake buat enterprise tanpa limitasi waktu.', stock: 5 },
-            { id: 'gemini-pro', name: 'Gemini Pro', price: 20000, duration: '/ 4 Bulan', icon: 'fa-gem', color: 'text-purple-500', bg: 'bg-purple-500/10', border: 'border-purple-500/20', tag: 'Super Hemat', desc: 'Long context & analisis data panjang. Integrasi penuh dengan ekosistem Google Workspace.', stock: 24 },
-            { id: 'grok-ai', name: 'Grok AI', price: 10000, duration: '/ 3 Hari', icon: 'fa-x-twitter', color: 'text-slate-700 dark:text-slate-300', bg: 'bg-slate-200 dark:bg-slate-700/50', border: 'border-slate-300 dark:border-slate-600', tag: 'Real-time X', desc: 'AI tanpa sensor dari X. Akses tren dan berita real-time langsung sat-set dipakai harian.', stock: 8 }
+            { id: 'gpt-plus', name: 'ChatGPT Plus / Pro', price: 12000, duration: '/ Bulan', icon: 'fa-solid fa-robot', color: 'text-emerald-500', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', tag: 'Agentic AI 5.5', desc: 'Akses harian ke model tercanggih OpenAI GPT-5.5. Cocok buat riset, coding berat, dan eksekusi.', stock: 12 },
+            { id: 'gpt-biz', name: 'ChatGPT Business', price: 30000, duration: '/ Bulan', icon: 'fa-solid fa-briefcase', color: 'text-blue-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20', tag: 'Prioritas Server', desc: 'Server anti antre dan respon ngebut. Optimal buat lo yang pake buat enterprise tanpa limitasi.', stock: 5 },
+            { id: 'gemini-pro', name: 'Gemini Pro', price: 20000, duration: '/ 4 Bulan', icon: 'fa-solid fa-gem', color: 'text-purple-500', bg: 'bg-purple-500/10', border: 'border-purple-500/20', tag: 'Super Hemat', desc: 'Long context & analisis data panjang. Integrasi penuh dengan ekosistem Google Workspace.', stock: 24 },
+            { id: 'grok-ai', name: 'Grok AI', price: 10000, duration: '/ 3 Hari', icon: 'fa-brands fa-x-twitter', color: 'text-slate-700 dark:text-slate-300', bg: 'bg-slate-200 dark:bg-slate-700/50', border: 'border-slate-300 dark:border-slate-600', tag: 'Real-time X', desc: 'AI tanpa sensor dari X. Akses tren dan berita real-time langsung sat-set dipakai harian.', stock: 8 }
         ];
 
         const formatRp = (num) => new Intl.NumberFormat('id-ID').format(num);
@@ -413,11 +418,10 @@
                 `;
             }).join('');
 
-            // Voucher UI Logic
             if(totalPrice > 0 && !hasVoucher) btnVoucher.classList.remove('hidden');
             
             if(hasVoucher) {
-                totalPrice = Math.floor(totalPrice * 0.9); // 10% Discount
+                totalPrice = Math.floor(totalPrice * 0.9);
                 document.getElementById('cart-total').innerHTML = `<span class="text-sm text-slate-400 line-through mr-2">Rp ${formatRp(totalPrice / 0.9)}</span> Rp ${formatRp(totalPrice)}`;
             } else {
                 document.getElementById('cart-total').textContent = `Rp ${formatRp(totalPrice)}`;
@@ -516,7 +520,7 @@
             localStorage.theme = htmlClass.contains('dark') ? 'dark' : 'light';
         });
 
-        // Testimonials Generator & Submit Logic
+        // Testimonials Generator
         const names100 = ["Budi", "Andi", "Siti", "Ayu", "Reza", "Fajar", "Dimas", "Rina", "Dinda", "Kevin", "Agus", "Putri", "Deni", "Sari", "Rudi", "Maya", "Tono", "Lestari", "Iwan", "Nita", "Hadi", "Desi", "Riki", "Mega", "Yudi", "Ika", "Bayu", "Ratna", "Eko", "Dian", "Rio", "Fitri", "Aris", "Nina", "Hendra", "Nurul", "Gilang", "Wulan", "Rian", "Indah", "Ferry", "Lina", "Yoga", "Yuni", "Aditya", "Reni", "Rangga", "Anita", "Dicky", "Siska", "Wahyu", "Riska", "Bowo", "Mila", "Joko", "Nia", "Ari", "Rini", "Fadli", "Tari", "Kiki", "Lia", "Irfan", "Vina", "Tegar", "Suci", "Bagus", "Tina", "Aldo", "Yanti", "Rizal", "Nadia", "Fikri", "Mita", "Dedy", "Rika", "Candra", "Ira", "Surya", "Novi", "Anton", "Santi", "Galih", "Vivi", "Revan", "Yulia", "Bobby", "Sella", "Raka", "Fina", "Doni", "Tika", "Ivan", "Gita", "Dito", "Risma", "Alif", "Putra", "Nanda", "Farel"];
         const comments = ["Anjay, adminnya fast respon parah! Baru transfer udah dikirim loginnya.", "Harga receh kualitas sultan! GPT-5.5 nya lancar jaya buat nugas.", "Awalnya takut boncos, eh ternyata aman banget. Akun private 100%.", "Cuan banget beli paket Reseller di sini, udah balik modal wkwkwk!", "Mantap, Gemini Pro nya bantu kerjaan gue banget.", "Gila, harganya murah tapi bukan murahan. Terbaik pokoknya.", "Udah 3x order di sini gak pernah ngecewain. Anti antre club!", "Mantep bang, akunnya beneran private. Data aman gak nyampur.", "Prosesnya sat-set sat-set. Gak nyampe 5 menit udah done.", "Grok AI nya mantap buat mantau tren X. The best lah!"];
 
@@ -545,7 +549,7 @@
                 const randomComment = comments[Math.floor(Math.random() * comments.length)];
                 html += createTestiCardHTML(randomName, randomComment, 5);
             }
-            track.innerHTML = html + html; // Duplicate for smooth scroll
+            track.innerHTML = html + html;
         }
 
         // Form Submit Logic
@@ -562,7 +566,7 @@
             setTimeout(() => {
                 const newCard = createTestiCardHTML(name, text, stars);
                 const track = document.getElementById('testimonial-track');
-                track.insertAdjacentHTML('afterbegin', newCard); // Inject Fake Review Live
+                track.insertAdjacentHTML('afterbegin', newCard); 
                 
                 btn.innerHTML = '<i class="fa-solid fa-check"></i> Testimoni Masuk!';
                 btn.classList.replace('bg-blue-600', 'bg-emerald-500');
@@ -581,17 +585,35 @@
             }, 1000);
         });
 
-        // Feature 1: Live Viewers FOMO
+        // Feature 1: Live Viewers (DYNAMIC OVERLOAD)
         setInterval(() => {
-            const viewers = document.getElementById('live-viewers');
-            let current = parseInt(viewers.innerText);
-            // Randomly fluctuate between 30 and 80
-            let change = Math.floor(Math.random() * 5) - 2; // -2 to +2
+            const viewersEl = document.getElementById('live-viewers');
+            let current = parseInt(viewersEl.innerText.replace(/,/g, ''));
+            // Fluctuates wildly between 1000 and 12000
+            let change = Math.floor(Math.random() * 2000) - 500; 
             current += change;
-            if(current < 30) current = 35;
-            if(current > 80) current = 75;
-            viewers.innerText = current;
-        }, 3500);
+            if(current < 1500) current = 2500;
+            if(current > 12000) current = 9500;
+            
+            viewersEl.innerText = current.toLocaleString('id-ID');
+
+            // Logic Server Merah
+            const statusContainer = document.getElementById('server-status-container');
+            const statusText = document.getElementById('server-status');
+            const statusDot = document.getElementById('server-dot');
+
+            if(current > 5000) {
+                statusContainer.className = 'inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-red-500/30 bg-red-500/10 transition-colors duration-500';
+                statusText.className = 'text-sm font-semibold text-red-500';
+                statusText.innerText = 'Server High Load 🔥';
+                statusDot.className = 'w-2 h-2 rounded-full bg-red-500 animate-pulse';
+            } else {
+                statusContainer.className = 'inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/20 bg-blue-500/10 transition-colors duration-500';
+                statusText.className = 'text-sm font-semibold text-blue-600 dark:text-blue-400';
+                statusText.innerText = 'Server Stabil';
+                statusDot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+            }
+        }, 3000);
 
         // Feature 2: Fake Payment Popup 
         function showFakePayment() {
@@ -613,7 +635,7 @@
             document.getElementById('payment-container').appendChild(popup);
             setTimeout(() => popup.remove(), 4000);
         }
-        setInterval(() => { if(Math.random() > 0.5) showFakePayment(); }, 14000);
+        setInterval(() => { if(Math.random() > 0.4) showFakePayment(); }, 8000);
 
         // Feature 3: Floating CS Chatbot
         const chatWindow = document.getElementById('chat-window');
@@ -634,6 +656,63 @@
             }
         });
         closeChat.addEventListener('click', () => chatWindow.classList.remove('chat-open'));
+
+        // Feature 4: Tab Alarm (Tukang Tagih)
+        let originalTitle = document.title;
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                document.title = "Woy, Keranjang Lu Nganggur! 😱";
+            } else {
+                document.title = originalTitle;
+            }
+        });
+
+        // Feature 5: Exit-Intent Popup
+        const exitModal = document.getElementById('exit-modal');
+        let exitTriggered = false;
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0 && !exitTriggered) {
+                exitModal.classList.remove('hidden');
+                exitTriggered = true;
+            }
+        });
+        document.getElementById('close-exit').addEventListener('click', () => exitModal.classList.add('hidden'));
+        document.getElementById('claim-exit-voucher').addEventListener('click', () => {
+            exitModal.classList.add('hidden');
+            hasVoucher = true;
+            updateCart();
+            toggleCart();
+            showToast('Asik, dapet diskon 15% receh!', 'fa-gift');
+        });
+
+        // Feature 6: Click Sparkles
+        document.body.addEventListener('click', function(e) {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.className = 'sparkle';
+            sparkle.style.left = (e.pageX - 10) + 'px';
+            sparkle.style.top = (e.pageY - 10) + 'px';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 800);
+        });
+
+        // Feature 7: Auto-Restock Alert (Run once after load)
+        setTimeout(() => {
+            showToast('Admin baru saja menambah 50 slot baru!', 'fa-box-open');
+        }, 15000);
+
+        // Feature 8: Geo-Location Fake (Run once after load)
+        setTimeout(() => {
+            const cities = ["Medan", "Jakarta", "Surabaya", "Bandung", "Makassar"];
+            const randCity = cities[Math.floor(Math.random() * cities.length)];
+            showToast(`Banyak pengunjung dari ${randCity} sedang melihat halaman ini`, 'fa-location-dot');
+        }, 6000);
+
+        // Feature 9: Social Share
+        window.shareWA = () => {
+            const text = "Eh bro, cek web jualan AI Premium ini. Harga receh, akun private, GPT-5.5 ready! Klik linknya: https://wangweize87.github.io/grok-ai-premium/";
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        };
 
         // Toast Helper
         function showToast(msg, icon = 'fa-bell') {
