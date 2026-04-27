@@ -23,6 +23,7 @@
                         'blob': 'blob 7s infinite',
                         'slide-up': 'slideUp 0.5s ease-out forwards',
                         'marquee': 'marquee 40s linear infinite',
+                        'payment-slide': 'paymentSlide 4s ease-in-out forwards',
                     },
                     keyframes: {
                         blob: {
@@ -38,6 +39,12 @@
                         marquee: {
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-50%)' },
+                        },
+                        paymentSlide: {
+                            '0%': { transform: 'translateX(-120%)', opacity: '0' },
+                            '10%': { transform: 'translateX(0)', opacity: '1' },
+                            '90%': { transform: 'translateX(0)', opacity: '1' },
+                            '100%': { transform: 'translateY(20px)', opacity: '0' },
                         }
                     }
                 }
@@ -100,6 +107,10 @@
         
         /* Marquee Hover Pause */
         .marquee-content:hover { animation-play-state: paused; }
+
+        /* Chat Widget */
+        .chat-widget { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: bottom right; transform: scale(0); opacity: 0; }
+        .chat-open { transform: scale(1); opacity: 1; }
     </style>
 </head>
 <body class="bg-mesh text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
@@ -133,9 +144,15 @@
         <div class="absolute top-10 -right-10 w-72 h-72 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob pointer-events-none" style="animation-delay: 2s"></div>
 
         <div class="text-center max-w-3xl mx-auto relative z-10 animate-slide-up">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/20 mb-6 text-sm font-semibold text-blue-600 dark:text-blue-400">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Server Stabil • Fast Response
+            <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/20 text-sm font-semibold text-blue-600 dark:text-blue-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Server Stabil
+                </div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-400/10 border border-amber-400/20 text-sm font-bold text-amber-600 dark:text-amber-400">
+                    <i class="fa-regular fa-eye animate-pulse"></i> <span id="live-viewers">42</span> Orang sedang melihat
+                </div>
             </div>
+
             <h2 class="font-display text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-slate-900 dark:text-white">
                 Akses AI Enterprise.<br>
                 <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Harga Receh.</span>
@@ -157,12 +174,29 @@
 
         <div class="mt-24 relative z-10 animate-slide-up" style="animation-delay: 0.1s">
             <h3 class="font-display font-bold text-2xl text-center mb-8 text-slate-900 dark:text-white">Apa Kata Mereka Yang Udah Cuan? <span class="text-yellow-400">★ 5.0</span></h3>
-            <div class="overflow-hidden relative w-full">
+            <div class="overflow-hidden relative w-full mb-12">
                 <div class="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-[#f8fafc] dark:from-[#020617] to-transparent z-10"></div>
                 <div class="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-[#f8fafc] dark:from-[#020617] to-transparent z-10"></div>
                 
                 <div class="marquee-content flex gap-4 w-max" id="testimonial-track">
                     </div>
+            </div>
+
+            <div class="max-w-xl mx-auto glass rounded-3xl p-6 border-blue-500/30">
+                <h4 class="font-bold text-lg mb-4 text-slate-900 dark:text-white text-center">Beri Penilaian Lu!</h4>
+                <form id="review-form" class="space-y-4">
+                    <div class="flex gap-4">
+                        <input type="text" id="rev-name" placeholder="Nama lu..." required class="w-full bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 outline-none focus:border-blue-500 text-sm dark:text-white">
+                        <select id="rev-star" class="bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 outline-none text-yellow-500 font-bold text-sm">
+                            <option value="5">⭐⭐⭐⭐⭐</option>
+                            <option value="4">⭐⭐⭐⭐</option>
+                        </select>
+                    </div>
+                    <textarea id="rev-text" placeholder="Komentar receh lu..." required rows="2" class="w-full bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 outline-none focus:border-blue-500 text-sm dark:text-white"></textarea>
+                    <button type="submit" id="btn-submit-rev" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition flex justify-center items-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Kirim Testimoni
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -218,32 +252,63 @@
         <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
             </div>
         <div class="p-6 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+            <button id="btn-voucher" class="w-full mb-4 py-2 border border-dashed border-amber-500 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold rounded-lg text-sm hover:bg-amber-500/20 transition hidden">
+                🎁 Klaim Voucher Diskon 10%
+            </button>
+            <div id="voucher-applied" class="w-full mb-4 py-2 border border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold rounded-lg text-sm text-center hidden">
+                ✅ Voucher 10% Diterapkan!
+            </div>
+
             <div class="flex justify-between items-center mb-6">
                 <span class="text-slate-600 dark:text-slate-400 font-medium">Total Bayar:</span>
                 <span id="cart-total" class="font-display font-black text-2xl text-blue-600 dark:text-blue-400">Rp 0</span>
             </div>
             <button id="checkout-wa" class="w-full py-4 rounded-xl bg-[#25D366] hover:bg-[#1DA851] text-white font-bold flex justify-center items-center gap-2 transition-transform hover:scale-[1.02] shadow-lg shadow-green-500/30 disabled:opacity-50 disabled:cursor-not-allowed">
-                <i class="fa-brands fa-whatsapp text-xl"></i> Checkout Borongan via WA
+                <i class="fa-brands fa-whatsapp text-xl"></i> Checkout via WA
             </button>
         </div>
     </div>
 
-    <div id="toast-container" class="fixed bottom-6 left-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-4">
+        <div id="chat-window" class="chat-widget w-72 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+            <div class="bg-blue-600 p-4 text-white flex justify-between items-center">
+                <div class="flex items-center gap-2 font-bold"><div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div> CS Wang Weize</div>
+                <button id="close-chat" class="hover:text-slate-300"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-4 space-y-3 h-48 overflow-y-auto bg-slate-50 dark:bg-slate-800/50">
+                <div class="bg-blue-100 dark:bg-blue-900/40 text-slate-800 dark:text-slate-200 p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl text-sm w-10/12 shadow-sm" id="chat-msg">
+                    <span class="typing hidden">Mengetik...</span>
+                    <span class="real-msg hidden">Halo! Ada yang bisa gue bantu soal akun AI Premium ini? Gas order sekarang selagi stok aman! 🔥</span>
+                </div>
+            </div>
+            <div class="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+                <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20mau%20tanya%20dulu%20nih" target="_blank" class="w-full block text-center bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold hover:opacity-80 transition">
+                    Balas via WhatsApp <i class="fa-solid fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+        <button id="chat-trigger" class="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg shadow-blue-500/40 flex items-center justify-center text-2xl transition-transform hover:scale-110">
+            <i class="fa-regular fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <div id="payment-container" class="fixed bottom-6 left-6 z-50 pointer-events-none"></div>
+    <div id="toast-container" class="fixed bottom-24 left-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
 
     <script>
         // Data & State
         const WA_NUMBER = '6282219989497';
         let isReseller = false;
+        let hasVoucher = false;
         let cart = JSON.parse(localStorage.getItem('ww_cart')) || [];
 
         const products = [
-            { id: 'gpt-plus', name: 'ChatGPT Plus / Pro', price: 12000, duration: '/ Bulan', icon: 'fa-robot', color: 'text-emerald-500', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', tag: 'Agentic AI 5.5', desc: 'Akses harian ke model tercanggih OpenAI GPT-5.5. Cocok buat riset, coding berat, dan eksekusi tugas otomatis.', stock: 12 },
+            { id: 'gpt-plus', name: 'ChatGPT Plus / Pro', price: 12000, duration: '/ Bulan', icon: 'fa-robot', color: 'text-emerald-500', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', tag: 'Agentic AI 5.5', desc: 'Akses harian ke model tercanggih OpenAI GPT-5.5. Cocok buat riset, coding berat, dan eksekusi.', stock: 12 },
             { id: 'gpt-biz', name: 'ChatGPT Business', price: 30000, duration: '/ Bulan', icon: 'fa-briefcase', color: 'text-blue-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20', tag: 'Prioritas Server', desc: 'Server anti antre dan respon ngebut. Optimal buat lo yang pake buat enterprise tanpa limitasi waktu.', stock: 5 },
             { id: 'gemini-pro', name: 'Gemini Pro', price: 20000, duration: '/ 4 Bulan', icon: 'fa-gem', color: 'text-purple-500', bg: 'bg-purple-500/10', border: 'border-purple-500/20', tag: 'Super Hemat', desc: 'Long context & analisis data panjang. Integrasi penuh dengan ekosistem Google Workspace.', stock: 24 },
             { id: 'grok-ai', name: 'Grok AI', price: 10000, duration: '/ 3 Hari', icon: 'fa-x-twitter', color: 'text-slate-700 dark:text-slate-300', bg: 'bg-slate-200 dark:bg-slate-700/50', border: 'border-slate-300 dark:border-slate-600', tag: 'Real-time X', desc: 'AI tanpa sensor dari X. Akses tren dan berita real-time langsung sat-set dipakai harian.', stock: 8 }
         ];
 
-        // Format Currency
         const formatRp = (num) => new Intl.NumberFormat('id-ID').format(num);
 
         // Render Products
@@ -272,7 +337,7 @@
                         </div>
 
                         <div class="flex items-center justify-between text-xs font-semibold mb-4 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800/50">
-                            <span class="text-slate-500">Sisa Slot Hari Ini:</span>
+                            <span class="text-slate-500">Sisa Slot:</span>
                             <span class="${p.stock < 10 ? 'text-red-500 animate-pulse' : 'text-emerald-500'}">${p.stock} Akun</span>
                         </div>
 
@@ -289,7 +354,6 @@
                 `;
             }).join('');
             
-            // Re-attach 3D Tilt Event
             document.querySelectorAll('.tilt-card').forEach(card => {
                 card.addEventListener('mousemove', e => {
                     const rect = card.getBoundingClientRect();
@@ -303,54 +367,7 @@
             });
         }
 
-        // Fake Testimonial Generator (100 Names & Random Comments)
-        function renderTestimonials() {
-            const names100 = ["Budi", "Andi", "Siti", "Ayu", "Reza", "Fajar", "Dimas", "Rina", "Dinda", "Kevin", "Agus", "Putri", "Deni", "Sari", "Rudi", "Maya", "Tono", "Lestari", "Iwan", "Nita", "Hadi", "Desi", "Riki", "Mega", "Yudi", "Ika", "Bayu", "Ratna", "Eko", "Dian", "Rio", "Fitri", "Aris", "Nina", "Hendra", "Nurul", "Gilang", "Wulan", "Rian", "Indah", "Ferry", "Lina", "Yoga", "Yuni", "Aditya", "Reni", "Rangga", "Anita", "Dicky", "Siska", "Wahyu", "Riska", "Bowo", "Mila", "Joko", "Nia", "Ari", "Rini", "Fadli", "Tari", "Kiki", "Lia", "Irfan", "Vina", "Tegar", "Suci", "Bagus", "Tina", "Aldo", "Yanti", "Rizal", "Nadia", "Fikri", "Mita", "Dedy", "Rika", "Candra", "Ira", "Surya", "Novi", "Anton", "Santi", "Galih", "Vivi", "Revan", "Yulia", "Bobby", "Sella", "Raka", "Fina", "Doni", "Tika", "Ivan", "Gita", "Dito", "Risma", "Alif", "Putra", "Nanda", "Farel"];
-            
-            const comments = [
-                "Anjay, adminnya fast respon parah! Baru transfer udah dikirim loginnya. Gas terus!",
-                "Harga receh kualitas sultan! GPT-5.5 nya lancar jaya buat nugas.",
-                "Awalnya takut boncos, eh ternyata aman banget. Akun private 100%.",
-                "Cuan banget beli paket Reseller di sini, udah balik modal wkwkwk!",
-                "Mantap, Gemini Pro nya bantu kerjaan gue banget. Recommended!",
-                "Gila, harganya murah tapi bukan murahan. Terbaik pokoknya.",
-                "Udah 3x order di sini gak pernah ngecewain. Anti antre club!",
-                "Mantep bang, akunnya beneran private. Data aman gak nyampur.",
-                "Prosesnya sat-set sat-set. Gak nyampe 5 menit udah done.",
-                "Grok AI nya mantap buat mantau tren X. The best lah!"
-            ];
-
-            const track = document.getElementById('testimonial-track');
-            let html = '';
-            
-            // Generate 20 random cards from the pool (we duplicate them for smooth marquee effect)
-            for(let i=0; i<20; i++) {
-                const randomName = names100[Math.floor(Math.random() * names100.length)];
-                const randomComment = comments[Math.floor(Math.random() * comments.length)];
-                
-                const card = `
-                <div class="glass p-5 rounded-2xl w-80 shrink-0 border border-slate-200 dark:border-white/10 flex flex-col justify-between">
-                    <div class="flex text-yellow-400 text-xs mb-3">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-sm text-slate-700 dark:text-slate-300 mb-4">"${randomComment}"</p>
-                    <div class="flex items-center gap-3 mt-auto">
-                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-white flex items-center justify-center font-bold text-xs">${randomName.charAt(0)}</div>
-                        <div>
-                            <p class="text-xs font-bold text-slate-900 dark:text-white">${randomName}</p>
-                            <p class="text-[10px] text-emerald-500">Verified Buyer ✓</p>
-                        </div>
-                    </div>
-                </div>
-                `;
-                html += card;
-            }
-            
-            // Inject twice for infinite seamless scroll
-            track.innerHTML = html + html;
-        }
-
-        // Cart Logic
+        // Cart Logic + Voucher Gacha
         function updateCart() {
             localStorage.setItem('ww_cart', JSON.stringify(cart));
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -360,10 +377,16 @@
             badge.classList.toggle('hidden', totalItems === 0);
 
             const cartItemsEl = document.getElementById('cart-items');
+            const btnVoucher = document.getElementById('btn-voucher');
+            const appliedVoucher = document.getElementById('voucher-applied');
+            
             if(cart.length === 0) {
                 cartItemsEl.innerHTML = `<div class="text-center text-slate-400 py-10"><i class="fa-solid fa-basket-shopping text-4xl mb-3 opacity-20"></i><p>Keranjang lu masih kosong nih.</p></div>`;
                 document.getElementById('checkout-wa').disabled = true;
                 document.getElementById('cart-total').textContent = 'Rp 0';
+                btnVoucher.classList.add('hidden');
+                appliedVoucher.classList.add('hidden');
+                hasVoucher = false;
                 return;
             }
 
@@ -390,16 +413,33 @@
                 `;
             }).join('');
 
-            document.getElementById('cart-total').textContent = `Rp ${formatRp(totalPrice)}`;
+            // Voucher UI Logic
+            if(totalPrice > 0 && !hasVoucher) btnVoucher.classList.remove('hidden');
+            
+            if(hasVoucher) {
+                totalPrice = Math.floor(totalPrice * 0.9); // 10% Discount
+                document.getElementById('cart-total').innerHTML = `<span class="text-sm text-slate-400 line-through mr-2">Rp ${formatRp(totalPrice / 0.9)}</span> Rp ${formatRp(totalPrice)}`;
+            } else {
+                document.getElementById('cart-total').textContent = `Rp ${formatRp(totalPrice)}`;
+            }
+            
             document.getElementById('checkout-wa').disabled = false;
         }
+
+        document.getElementById('btn-voucher').addEventListener('click', function() {
+            hasVoucher = true;
+            this.classList.add('hidden');
+            document.getElementById('voucher-applied').classList.remove('hidden');
+            updateCart();
+            showToast('Asik, dapet diskon 10% receh!', 'fa-gift');
+        });
 
         window.addToCart = (id) => {
             const existing = cart.find(i => i.id === id);
             if(existing) existing.qty++;
             else cart.push({ id, qty: 1 });
             updateCart();
-            showToast('Berhasil dimasukin keranjang!', 'fa-check');
+            showToast('Gas dimasukin keranjang!', 'fa-check');
         };
 
         window.changeQty = (index, delta) => {
@@ -410,15 +450,22 @@
 
         document.getElementById('checkout-wa').addEventListener('click', () => {
             let text = "Halo Wang Weize, gue mau order borongan nih:\n\n";
-            let total = 0;
+            let totalRaw = 0;
             cart.forEach(item => {
                 const prod = products.find(p => p.id === item.id);
                 const price = isReseller ? Math.floor(prod.price * 0.8) : prod.price;
                 text += `- ${prod.name} (${item.qty}x)\n`;
-                total += price * item.qty;
+                totalRaw += price * item.qty;
             });
-            text += `\nTotal: Rp ${formatRp(total)}`;
+            
             if(isReseller) text += `\n(Pake Rate Reseller)`;
+            if(hasVoucher) {
+                let final = Math.floor(totalRaw * 0.9);
+                text += `\n(Pake Voucher 10%)`;
+                text += `\nTotal Harga: Rp ${formatRp(final)}`;
+            } else {
+                text += `\nTotal Harga: Rp ${formatRp(totalRaw)}`;
+            }
             
             window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
         });
@@ -469,29 +516,142 @@
             localStorage.theme = htmlClass.contains('dark') ? 'dark' : 'light';
         });
 
-        // Fake Toast Notification
+        // Testimonials Generator & Submit Logic
+        const names100 = ["Budi", "Andi", "Siti", "Ayu", "Reza", "Fajar", "Dimas", "Rina", "Dinda", "Kevin", "Agus", "Putri", "Deni", "Sari", "Rudi", "Maya", "Tono", "Lestari", "Iwan", "Nita", "Hadi", "Desi", "Riki", "Mega", "Yudi", "Ika", "Bayu", "Ratna", "Eko", "Dian", "Rio", "Fitri", "Aris", "Nina", "Hendra", "Nurul", "Gilang", "Wulan", "Rian", "Indah", "Ferry", "Lina", "Yoga", "Yuni", "Aditya", "Reni", "Rangga", "Anita", "Dicky", "Siska", "Wahyu", "Riska", "Bowo", "Mila", "Joko", "Nia", "Ari", "Rini", "Fadli", "Tari", "Kiki", "Lia", "Irfan", "Vina", "Tegar", "Suci", "Bagus", "Tina", "Aldo", "Yanti", "Rizal", "Nadia", "Fikri", "Mita", "Dedy", "Rika", "Candra", "Ira", "Surya", "Novi", "Anton", "Santi", "Galih", "Vivi", "Revan", "Yulia", "Bobby", "Sella", "Raka", "Fina", "Doni", "Tika", "Ivan", "Gita", "Dito", "Risma", "Alif", "Putra", "Nanda", "Farel"];
+        const comments = ["Anjay, adminnya fast respon parah! Baru transfer udah dikirim loginnya.", "Harga receh kualitas sultan! GPT-5.5 nya lancar jaya buat nugas.", "Awalnya takut boncos, eh ternyata aman banget. Akun private 100%.", "Cuan banget beli paket Reseller di sini, udah balik modal wkwkwk!", "Mantap, Gemini Pro nya bantu kerjaan gue banget.", "Gila, harganya murah tapi bukan murahan. Terbaik pokoknya.", "Udah 3x order di sini gak pernah ngecewain. Anti antre club!", "Mantep bang, akunnya beneran private. Data aman gak nyampur.", "Prosesnya sat-set sat-set. Gak nyampe 5 menit udah done.", "Grok AI nya mantap buat mantau tren X. The best lah!"];
+
+        function createTestiCardHTML(name, comment, stars) {
+            let starHtml = '';
+            for(let i=0; i<parseInt(stars); i++) starHtml += '<i class="fa-solid fa-star"></i>';
+            return `
+            <div class="glass p-5 rounded-2xl w-80 shrink-0 border border-slate-200 dark:border-white/10 flex flex-col justify-between bg-white/50 dark:bg-transparent">
+                <div class="flex text-yellow-400 text-xs mb-3">${starHtml}</div>
+                <p class="text-sm text-slate-700 dark:text-slate-300 mb-4">"${comment}"</p>
+                <div class="flex items-center gap-3 mt-auto">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-white flex items-center justify-center font-bold text-xs">${name.charAt(0).toUpperCase()}</div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-900 dark:text-white">${name}</p>
+                        <p class="text-[10px] text-emerald-500">Verified Buyer ✓</p>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderTestimonials() {
+            const track = document.getElementById('testimonial-track');
+            let html = '';
+            for(let i=0; i<20; i++) {
+                const randomName = names100[Math.floor(Math.random() * names100.length)];
+                const randomComment = comments[Math.floor(Math.random() * comments.length)];
+                html += createTestiCardHTML(randomName, randomComment, 5);
+            }
+            track.innerHTML = html + html; // Duplicate for smooth scroll
+        }
+
+        // Form Submit Logic
+        document.getElementById('review-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit-rev');
+            const name = document.getElementById('rev-name').value;
+            const stars = document.getElementById('rev-star').value;
+            const text = document.getElementById('rev-text').value;
+
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Ngirim...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                const newCard = createTestiCardHTML(name, text, stars);
+                const track = document.getElementById('testimonial-track');
+                track.insertAdjacentHTML('afterbegin', newCard); // Inject Fake Review Live
+                
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Testimoni Masuk!';
+                btn.classList.replace('bg-blue-600', 'bg-emerald-500');
+                btn.classList.replace('hover:bg-blue-700', 'hover:bg-emerald-600');
+                
+                document.getElementById('rev-name').value = '';
+                document.getElementById('rev-text').value = '';
+                showToast('Komentar receh lu udah nongol wkwkwk!', 'fa-comment');
+                
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Testimoni';
+                    btn.classList.replace('bg-emerald-500', 'bg-blue-600');
+                    btn.classList.replace('hover:bg-emerald-600', 'hover:bg-blue-700');
+                    btn.disabled = false;
+                }, 3000);
+            }, 1000);
+        });
+
+        // Feature 1: Live Viewers FOMO
+        setInterval(() => {
+            const viewers = document.getElementById('live-viewers');
+            let current = parseInt(viewers.innerText);
+            // Randomly fluctuate between 30 and 80
+            let change = Math.floor(Math.random() * 5) - 2; // -2 to +2
+            current += change;
+            if(current < 30) current = 35;
+            if(current > 80) current = 75;
+            viewers.innerText = current;
+        }, 3500);
+
+        // Feature 2: Fake Payment Popup 
+        function showFakePayment() {
+            const banks = ["BCA", "Mandiri", "GoPay", "OVO", "DANA", "Seabank"];
+            const bank = banks[Math.floor(Math.random() * banks.length)];
+            const price = isReseller ? "Rp 9.600" : "Rp 12.000";
+            const phone = "0812" + Math.floor(1000 + Math.random() * 9000) + "****";
+            
+            const popup = document.createElement('div');
+            popup.className = 'glass bg-white/90 dark:bg-slate-900/90 rounded-2xl p-3 shadow-2xl flex items-center gap-3 border border-emerald-500/30 text-slate-900 dark:text-white mb-3 animate-payment-slide w-max';
+            popup.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center shrink-0"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                <div>
+                    <p class="text-xs font-bold text-emerald-600 dark:text-emerald-400">Pembayaran Berhasil</p>
+                    <p class="text-xs font-semibold">${price} via ${bank}</p>
+                    <p class="text-[10px] text-slate-500">Dari ${phone}</p>
+                </div>
+            `;
+            document.getElementById('payment-container').appendChild(popup);
+            setTimeout(() => popup.remove(), 4000);
+        }
+        setInterval(() => { if(Math.random() > 0.5) showFakePayment(); }, 14000);
+
+        // Feature 3: Floating CS Chatbot
+        const chatWindow = document.getElementById('chat-window');
+        const chatTrigger = document.getElementById('chat-trigger');
+        const closeChat = document.getElementById('close-chat');
+        const typing = document.querySelector('.typing');
+        const realMsg = document.querySelector('.real-msg');
+
+        chatTrigger.addEventListener('click', () => {
+            chatWindow.classList.toggle('chat-open');
+            if(chatWindow.classList.contains('chat-open')) {
+                typing.classList.remove('hidden');
+                realMsg.classList.add('hidden');
+                setTimeout(() => {
+                    typing.classList.add('hidden');
+                    realMsg.classList.remove('hidden');
+                }, 1500);
+            }
+        });
+        closeChat.addEventListener('click', () => chatWindow.classList.remove('chat-open'));
+
+        // Toast Helper
         function showToast(msg, icon = 'fa-bell') {
             const toast = document.createElement('div');
-            toast.className = 'toast-enter glass bg-white/90 dark:bg-slate-900/90 rounded-2xl p-4 shadow-xl flex items-center gap-3 border-l-4 border-blue-500 text-slate-900 dark:text-white';
+            toast.className = 'toast-enter glass bg-white/90 dark:bg-slate-900/90 rounded-2xl p-4 shadow-xl flex items-center gap-3 border-l-4 border-blue-500 text-slate-900 dark:text-white w-max';
             toast.innerHTML = `<div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center shrink-0"><i class="fa-solid ${icon}"></i></div><p class="text-sm font-semibold">${msg}</p>`;
             document.getElementById('toast-container').appendChild(toast);
             setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
         }
-
-        const buyers = ["Dimas", "Ayu", "Raka", "Dinda", "Fajar"];
-        setInterval(() => {
-            if(Math.random() > 0.6) {
-                const name = buyers[Math.floor(Math.random() * buyers.length)];
-                const prod = products[Math.floor(Math.random() * products.length)].name;
-                showToast(`${name} baru aja bungkus ${prod}!`, 'fa-cart-shopping');
-            }
-        }, 12000);
 
         // Init
         document.getElementById('year').textContent = new Date().getFullYear();
         renderProducts();
         renderTestimonials();
         updateCart();
+        
+        // Auto open chat slightly after load
+        setTimeout(() => { if(!chatWindow.classList.contains('chat-open')) chatTrigger.click(); }, 8000);
     </script>
 </body>
 </html>
