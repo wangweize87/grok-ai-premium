@@ -1,628 +1,514 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>PremiumAI Store — Akses Akun AI Premium</title>
-    <!-- Google Fonts Inter -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wang Weize — Premium AI Accounts Enterprise</title>
+    <meta name="description" content="Platform terpercaya untuk akses akun Premium AI: ChatGPT, Gemini, Grok. Harga terjangkau, layanan profesional.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN + Config darkMode class -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
                     },
-                },
-            },
-        }
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome 6 for some support icons (free) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* custom glassmorphism & animations */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .glass-nav {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .light .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.05);
-        }
-        .light .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        .toast-enter {
-            animation: slideInRight 0.4s ease-out;
-        }
-        @keyframes slideInRight {
-            from { transform: translateX(120%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* cart sidebar transition */
-        .cart-sidebar {
-            transition: transform 0.3s ease;
-        }
-        .cart-open {
-            transform: translateX(0);
-        }
-    </style>
-</head>
-<body class="bg-slate-900 dark:bg-slate-900 light:bg-gray-50 text-white dark:text-white light:text-gray-900 min-h-screen flex flex-col transition-colors duration-300">
-
-<!-- Header / Navbar glass -->
-<header class="glass-nav sticky top-0 z-50 w-full">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <div class="flex items-center gap-2">
-            <!-- Brand logo using simple icon (lightning bolt) -->
-            <i class="fas fa-bolt text-2xl text-yellow-400"></i>
-            <span class="font-bold text-xl tracking-tight bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">PremiumAI</span>
-        </div>
-        <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <a href="#produk" class="hover:text-yellow-400 transition">Produk</a>
-            <a href="#kontak" class="hover:text-yellow-400 transition">Kontak</a>
-            <a href="#" id="cart-toggle-desktop" class="relative hover:text-yellow-400 transition">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cart-count-badge" class="absolute -top-2 -right-3 bg-yellow-400 text-black text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold hidden">0</span>
-            </a>
-            <!-- Dark/Light toggle -->
-            <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition" aria-label="Toggle dark/light mode">
-                <i id="theme-icon" class="fas fa-sun text-yellow-400"></i>
-            </button>
-        </nav>
-        <!-- Mobile menu button (cart + theme) -->
-        <div class="flex md:hidden items-center gap-3">
-            <button id="cart-toggle-mobile" class="relative p-2 hover:bg-white/10 rounded-full">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cart-count-badge-mobile" class="absolute -top-1 -right-2 bg-yellow-400 text-black text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold hidden">0</span>
-            </button>
-            <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition">
-                <i id="theme-icon-mobile" class="fas fa-sun text-yellow-400"></i>
-            </button>
-        </div>
-    </div>
-</header>
-
-<main class="flex-grow">
-    <!-- Hero Section -->
-    <section class="relative pt-20 pb-16 px-4 max-w-7xl mx-auto text-center fade-in">
-        <div class="absolute inset-0 bg-gradient-to-b from-yellow-400/5 to-transparent pointer-events-none"></div>
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 dark:from-white dark:to-gray-300 light:from-gray-900 light:to-gray-700 bg-clip-text text-transparent">
-            Akses Premium AI <br class="md:hidden">Tanpa Batas
-        </h1>
-        <p class="text-lg max-w-2xl mx-auto text-gray-400 dark:text-gray-400 light:text-gray-600 mb-8">
-            Akun private ChatGPT, Gemini, Grok dengan performa prioritas. Satu akun satu pengguna, server cepat, siap pakai.
-        </p>
-        <a href="#produk" class="inline-block bg-yellow-400 text-black font-semibold px-8 py-3 rounded-full hover:bg-yellow-300 transition transform hover:scale-105 shadow-lg shadow-yellow-400/20">
-            Lihat Produk <i class="fas fa-arrow-down ml-2"></i>
-        </a>
-    </section>
-
-    <!-- Produk Section -->
-    <section id="produk" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <h2 class="text-3xl font-bold text-center mb-12">✨ Paket Langganan AI</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- ChatGPT Plus -->
-            <div class="glass-card rounded-2xl p-6 flex flex-col fade-in relative product-card" data-product-id="chatgpt-plus">
-                <div class="flex items-center gap-3 mb-4">
-                    <img src="https://cdn.simpleicons.org/openai/white" alt="ChatGPT" class="h-8 w-8 dark:brightness-0 dark:invert light:brightness-0" />
-                    <span class="text-xs bg-yellow-400/20 text-yellow-400 px-2 py-0.5 rounded-full font-medium">Best Seller</span>
-                </div>
-                <h3 class="text-xl font-bold mb-1">ChatGPT Plus</h3>
-                <p class="text-sm text-gray-400 dark:text-gray-400 light:text-gray-500 mb-4">Akses Private, 1 Akun 1 Gmail</p>
-                <div class="text-2xl font-bold mb-1">Rp 12.000 <span class="text-sm font-normal text-gray-400">/ Bulan</span></div>
-                <div class="flex items-center gap-2 text-sm mb-4">
-                    <span class="text-gray-400">Stok:</span>
-                    <span id="stock-chatgpt-plus" class="font-semibold text-green-400">5</span>
-                    <span class="text-xs text-gray-500">tersisa</span>
-                </div>
-                <!-- Flash sale countdown for this product? Not mandatory, but I'll add small timer on Gemini -->
-                <div class="mt-auto space-y-2">
-                    <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize%2C%20saya%20mau%20order%20ChatGPT%20Plus" target="_blank"
-                       class="block w-full bg-green-600 hover:bg-green-500 text-white text-center py-2.5 rounded-xl font-semibold transition transform hover:scale-[1.02] shadow-lg shadow-green-600/20 buy-direct-btn"
-                       data-product="ChatGPT Plus">
-                        <i class="fab fa-whatsapp mr-1"></i> Beli via WhatsApp
-                    </a>
-                    <button onclick="addToCart('chatgpt-plus', 'ChatGPT Plus', 12000)" class="w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded-xl font-medium transition add-to-cart-btn">
-                        <i class="fas fa-cart-plus mr-1"></i> Keranjang
-                    </button>
-                </div>
-            </div>
-            <!-- ChatGPT Business -->
-            <div class="glass-card rounded-2xl p-6 flex flex-col fade-in product-card" data-product-id="chatgpt-business">
-                <div class="flex items-center gap-3 mb-4">
-                    <img src="https://cdn.simpleicons.org/openai/white" alt="ChatGPT Business" class="h-8 w-8 dark:brightness-0 dark:invert light:brightness-0" />
-                    <span class="text-xs bg-blue-400/20 text-blue-400 px-2 py-0.5 rounded-full font-medium">Prioritas</span>
-                </div>
-                <h3 class="text-xl font-bold mb-1">ChatGPT Business</h3>
-                <p class="text-sm text-gray-400 dark:text-gray-400 light:text-gray-500 mb-4">Server Prioritas, Performa Tinggi</p>
-                <div class="text-2xl font-bold mb-1">Rp 30.000 <span class="text-sm font-normal text-gray-400">/ Bulan</span></div>
-                <div class="flex items-center gap-2 text-sm mb-4">
-                    <span class="text-gray-400">Stok:</span>
-                    <span id="stock-chatgpt-business" class="font-semibold text-green-400">3</span>
-                    <span class="text-xs text-gray-500">tersisa</span>
-                </div>
-                <div class="mt-auto space-y-2">
-                    <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize%2C%20saya%20mau%20order%20ChatGPT%20Business" target="_blank"
-                       class="block w-full bg-green-600 hover:bg-green-500 text-white text-center py-2.5 rounded-xl font-semibold transition transform hover:scale-[1.02] shadow-lg shadow-green-600/20 buy-direct-btn"
-                       data-product="ChatGPT Business">
-                        <i class="fab fa-whatsapp mr-1"></i> Beli via WhatsApp
-                    </a>
-                    <button onclick="addToCart('chatgpt-business', 'ChatGPT Business', 30000)" class="w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded-xl font-medium transition add-to-cart-btn">
-                        <i class="fas fa-cart-plus mr-1"></i> Keranjang
-                    </button>
-                </div>
-            </div>
-            <!-- Gemini Pro with Flash Sale Countdown -->
-            <div class="glass-card rounded-2xl p-6 flex flex-col fade-in product-card relative overflow-hidden" data-product-id="gemini-pro">
-                <div class="absolute top-3 right-3 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full animate-pulse">Flash Sale</div>
-                <div class="flex items-center gap-3 mb-4">
-                    <img src="https://cdn.simpleicons.org/googlegemini/white" alt="Gemini" class="h-8 w-8 dark:brightness-0 dark:invert light:brightness-0" />
-                </div>
-                <h3 class="text-xl font-bold mb-1">Gemini Pro</h3>
-                <p class="text-sm text-gray-400 dark:text-gray-400 light:text-gray-500 mb-1">Ekosistem Google</p>
-                <div id="countdown-gemini" class="text-xs font-mono text-yellow-400 mb-2 bg-yellow-400/10 px-2 py-1 rounded inline-block">
-                    Berakhir dalam: <span id="timer-gemini">01:59:59</span>
-                </div>
-                <div class="text-2xl font-bold mb-1">Rp 20.000 <span class="text-sm font-normal text-gray-400">/ 4 Bulan</span></div>
-                <div class="flex items-center gap-2 text-sm mb-4">
-                    <span class="text-gray-400">Stok:</span>
-                    <span id="stock-gemini-pro" class="font-semibold text-green-400">4</span>
-                    <span class="text-xs text-gray-500">tersisa</span>
-                </div>
-                <div class="mt-auto space-y-2">
-                    <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize%2C%20saya%20mau%20order%20Gemini%20Pro" target="_blank"
-                       class="block w-full bg-green-600 hover:bg-green-500 text-white text-center py-2.5 rounded-xl font-semibold transition transform hover:scale-[1.02] shadow-lg shadow-green-600/20 buy-direct-btn"
-                       data-product="Gemini Pro">
-                        <i class="fab fa-whatsapp mr-1"></i> Beli via WhatsApp
-                    </a>
-                    <button onclick="addToCart('gemini-pro', 'Gemini Pro', 20000)" class="w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded-xl font-medium transition add-to-cart-btn">
-                        <i class="fas fa-cart-plus mr-1"></i> Keranjang
-                    </button>
-                </div>
-            </div>
-            <!-- Grok AI -->
-            <div class="glass-card rounded-2xl p-6 flex flex-col fade-in product-card" data-product-id="grok-ai">
-                <div class="flex items-center gap-3 mb-4">
-                    <img src="https://cdn.simpleicons.org/xai/white" alt="Grok" class="h-8 w-8 dark:brightness-0 dark:invert light:brightness-0" />
-                    <span class="text-xs bg-purple-400/20 text-purple-400 px-2 py-0.5 rounded-full font-medium">Real-time X</span>
-                </div>
-                <h3 class="text-xl font-bold mb-1">Grok AI</h3>
-                <p class="text-sm text-gray-400 dark:text-gray-400 light:text-gray-500 mb-4">Data X Real-time</p>
-                <div class="text-2xl font-bold mb-1">Rp 10.000 <span class="text-sm font-normal text-gray-400">/ 3 Hari</span></div>
-                <div class="flex items-center gap-2 text-sm mb-4">
-                    <span class="text-gray-400">Stok:</span>
-                    <span id="stock-grok-ai" class="font-semibold text-green-400">7</span>
-                    <span class="text-xs text-gray-500">tersisa</span>
-                </div>
-                <div class="mt-auto space-y-2">
-                    <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize%2C%20saya%20mau%20order%20Grok%20AI" target="_blank"
-                       class="block w-full bg-green-600 hover:bg-green-500 text-white text-center py-2.5 rounded-xl font-semibold transition transform hover:scale-[1.02] shadow-lg shadow-green-600/20 buy-direct-btn"
-                       data-product="Grok AI">
-                        <i class="fab fa-whatsapp mr-1"></i> Beli via WhatsApp
-                    </a>
-                    <button onclick="addToCart('grok-ai', 'Grok AI', 10000)" class="w-full bg-white/10 hover:bg-white/20 text-white py-2 rounded-xl font-medium transition add-to-cart-btn">
-                        <i class="fas fa-cart-plus mr-1"></i> Keranjang
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Kontak Admin Section -->
-    <section id="kontak" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-        <div class="glass-card rounded-2xl p-8 text-center">
-            <h2 class="text-2xl font-bold mb-6">👥 Hubungi Admin Support</h2>
-            <div class="flex flex-wrap justify-center gap-6">
-                <a href="https://www.threads.com/@janebeatrixrety" target="_blank" class="flex items-center gap-3 bg-white/5 hover:bg-white/10 transition rounded-xl px-6 py-3 border border-white/10">
-                    <img src="https://cdn.simpleicons.org/threads/white" alt="Threads" class="h-6 w-6 dark:brightness-0 dark:invert light:brightness-0" />
-                    <span class="font-medium">Admin 1 (Threads)</span>
-                </a>
-                <a href="https://www.tiktok.com/@wangweize10?_r=1&_t=ZS-95siJwLG0Vs" target="_blank" class="flex items-center gap-3 bg-white/5 hover:bg-white/10 transition rounded-xl px-6 py-3 border border-white/10">
-                    <img src="https://cdn.simpleicons.org/tiktok/white" alt="TikTok" class="h-6 w-6 dark:brightness-0 dark:invert light:brightness-0" />
-                    <span class="font-medium">Admin 2 (TikTok)</span>
-                </a>
-            </div>
-            <p class="text-sm text-gray-400 mt-4">Atau langsung pesan melalui WhatsApp di tombol produk.</p>
-        </div>
-    </section>
-</main>
-
-<!-- Footer -->
-<footer class="glass-nav py-6 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-400">
-        © 2025 PremiumAI Store — Powered by Wang Weize. All rights reserved.
-    </div>
-</footer>
-
-<!-- Cart Sidebar (offcanvas) -->
-<div id="cart-sidebar" class="fixed top-0 right-0 h-full w-80 max-w-full bg-slate-800 dark:bg-slate-800 light:bg-white shadow-2xl z-50 transform translate-x-full cart-sidebar flex flex-col">
-    <div class="flex items-center justify-between p-4 border-b border-white/10">
-        <h3 class="text-lg font-bold">🛒 Keranjang Anda</h3>
-        <button id="cart-close" class="text-2xl hover:text-yellow-400">&times;</button>
-    </div>
-    <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-3">
-        <p class="text-gray-400 text-center">Keranjang kosong</p>
-    </div>
-    <div class="p-4 border-t border-white/10">
-        <div class="flex justify-between mb-2">
-            <span>Total:</span>
-            <span id="cart-total" class="font-bold">Rp 0</span>
-        </div>
-        <button id="cart-checkout-btn" class="w-full bg-green-600 hover:bg-green-500 text-white py-2.5 rounded-xl font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-            <i class="fab fa-whatsapp mr-1"></i> Checkout via WhatsApp
-        </button>
-    </div>
-</div>
-<!-- Overlay for cart -->
-<div id="cart-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
-
-<!-- Toast notification container -->
-<div id="toast-container" class="fixed bottom-6 right-6 z-50 space-y-3 max-w-sm"></div>
-
-<script>
-    (function() {
-        // ---------- STATE ----------
-        const STORAGE_CART = 'premiumai_cart';
-        const STORAGE_THEME = 'premiumai_theme';
-        const STORAGE_STOCK = 'premiumai_stock';
-        const STORAGE_TIMER_END = 'premiumai_gemini_timer_end';
-        const WA_NUMBER = '6282219989497';
-
-        // Products definition
-        const products = [
-            { id: 'chatgpt-plus', name: 'ChatGPT Plus', price: 12000, initStock: 5 },
-            { id: 'chatgpt-business', name: 'ChatGPT Business', price: 30000, initStock: 3 },
-            { id: 'gemini-pro', name: 'Gemini Pro', price: 20000, initStock: 4 },
-            { id: 'grok-ai', name: 'Grok AI', price: 10000, initStock: 7 }
-        ];
-
-        // Load cart from localStorage
-        let cart = JSON.parse(localStorage.getItem(STORAGE_CART)) || []; // { id, name, price, quantity }
-
-        // Load stock from localStorage or init
-        let stock = JSON.parse(localStorage.getItem(STORAGE_STOCK));
-        if (!stock) {
-            stock = {};
-            products.forEach(p => stock[p.id] = p.initStock);
-            saveStock();
-        } else {
-            // ensure all keys exist
-            products.forEach(p => { if (stock[p.id] === undefined) stock[p.id] = p.initStock; });
-            saveStock();
-        }
-
-        // Timer deadline for Gemini flash sale (2 hours from first load if not set)
-        let timerEnd = localStorage.getItem(STORAGE_TIMER_END);
-        if (!timerEnd) {
-            timerEnd = Date.now() + 2 * 60 * 60 * 1000; // 2 hours
-            localStorage.setItem(STORAGE_TIMER_END, timerEnd);
-        } else {
-            timerEnd = parseInt(timerEnd);
-        }
-
-        // Theme
-        const html = document.documentElement;
-        const theme = localStorage.getItem(STORAGE_THEME) || 'dark';
-        if (theme === 'light') {
-            html.classList.remove('dark');
-            html.classList.add('light');
-        } else {
-            html.classList.add('dark');
-            html.classList.remove('light');
-        }
-
-        // ---------- DOM ELEMENTS ----------
-        const cartSidebar = document.getElementById('cart-sidebar');
-        const cartOverlay = document.getElementById('cart-overlay');
-        const cartItemsContainer = document.getElementById('cart-items-container');
-        const cartTotalEl = document.getElementById('cart-total');
-        const cartCheckoutBtn = document.getElementById('cart-checkout-btn');
-        const cartCountBadge = document.getElementById('cart-count-badge');
-        const cartCountBadgeMobile = document.getElementById('cart-count-badge-mobile');
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
-        const themeIcon = document.getElementById('theme-icon');
-        const themeIconMobile = document.getElementById('theme-icon-mobile');
-        const toastContainer = document.getElementById('toast-container');
-
-        // Stock display spans
-        const stockSpans = {
-            'chatgpt-plus': document.getElementById('stock-chatgpt-plus'),
-            'chatgpt-business': document.getElementById('stock-chatgpt-business'),
-            'gemini-pro': document.getElementById('stock-gemini-pro'),
-            'grok-ai': document.getElementById('stock-grok-ai'),
-        };
-
-        // ---------- FUNCTIONS ----------
-        function saveCart() {
-            localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
-            updateCartUI();
-        }
-
-        function saveStock() {
-            localStorage.setItem(STORAGE_STOCK, JSON.stringify(stock));
-            updateStockUI();
-        }
-
-        function updateStockUI() {
-            for (let [id, span] of Object.entries(stockSpans)) {
-                if (span) {
-                    const val = stock[id] || 0;
-                    span.textContent = val;
-                    if (val <= 0) {
-                        span.classList.remove('text-green-400');
-                        span.classList.add('text-red-400');
-                        // disable direct buy button and add to cart for this product
-                        const card = document.querySelector(`.product-card[data-product-id="${id}"]`);
-                        if (card) {
-                            const buyBtn = card.querySelector('.buy-direct-btn');
-                            const cartBtn = card.querySelector('.add-to-cart-btn');
-                            if (buyBtn) {
-                                buyBtn.style.pointerEvents = 'none';
-                                buyBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                                buyBtn.setAttribute('disabled', 'disabled');
-                            }
-                            if (cartBtn) {
-                                cartBtn.disabled = true;
-                                cartBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                            }
+                    colors: {
+                        dark: {
+                            950: '#030712',
+                            900: '#0f172a',
+                            800: '#1e293b',
+                        },
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
                         }
-                    } else {
-                        span.classList.remove('text-red-400');
-                        span.classList.add('text-green-400');
-                        const card = document.querySelector(`.product-card[data-product-id="${id}"]`);
-                        if (card) {
-                            const buyBtn = card.querySelector('.buy-direct-btn');
-                            const cartBtn = card.querySelector('.add-to-cart-btn');
-                            if (buyBtn) {
-                                buyBtn.style.pointerEvents = 'auto';
-                                buyBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                                buyBtn.removeAttribute('disabled');
-                            }
-                            if (cartBtn) {
-                                cartBtn.disabled = false;
-                                cartBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                            }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                        'slide-in': 'slideIn 0.5s ease-out forwards',
+                        'fade-up': 'fadeUp 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-1000px 0' },
+                            '100%': { backgroundPosition: '1000px 0' },
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateX(-100%)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        fadeUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
                         }
                     }
                 }
             }
         }
-
-        function updateCartUI() {
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-            // Update badges
-            const showBadge = totalItems > 0;
-            if (cartCountBadge) {
-                cartCountBadge.textContent = totalItems;
-                cartCountBadge.classList.toggle('hidden', !showBadge);
+    </script>
+    
+    <style>
+        :root {
+            --cursor-glow: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-strong {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+        }
+        
+        /* 3D Tilt Effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+        
+        .tilt-content {
+            transform: translateZ(30px);
+        }
+        
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        
+        /* Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #3b82f6;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #3b82f6;
+        }
+        
+        /* Cursor Glow */
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            background: var(--cursor-glow);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        @media (pointer: fine) {
+            .cursor-glow.active {
+                opacity: 1;
             }
-            if (cartCountBadgeMobile) {
-                cartCountBadgeMobile.textContent = totalItems;
-                cartCountBadgeMobile.classList.toggle('hidden', !showBadge);
-            }
+        }
+        
+        /* Stock Pulse */
+        .stock-urgent {
+            animation: urgentPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes urgentPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Mesh Gradient Background */
+        .mesh-bg {
+            background-color: #030712;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+        }
+        
+        .mesh-bg-light {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(220,100%,96%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(210,100%,92%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(280,100%,96%,1) 0, transparent 50%);
+        }
+        
+        /* Notification Toast */
+        .notification-toast {
+            animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        
+        /* Price Strikethrough Animation */
+        .price-flip {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Magnetic Button */
+        .magnetic-btn {
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        /* Smooth theme transition */
+        *, *::before, *::after {
+            transition: background-color 0.5s ease, border-color 0.5s ease, color 0.3s ease;
+        }
+        
+        /* Hide elements before scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-blue-500 selection:text-white">
 
-            // Update sidebar content
-            if (cartItemsContainer) {
-                if (cart.length === 0) {
-                    cartItemsContainer.innerHTML = '<p class="text-gray-400 text-center py-8">Keranjang kosong</p>';
-                } else {
-                    cartItemsContainer.innerHTML = cart.map(item => `
-                        <div class="flex justify-between items-center bg-white/5 rounded-lg p-3">
-                            <div>
-                                <p class="font-medium text-sm">${item.name}</p>
-                                <p class="text-xs text-gray-400">Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</p>
+    <!-- Cursor Glow Effect -->
+    <div id="cursor-glow" class="cursor-glow hidden lg:block"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-strong border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                        <i class="fa-solid fa-bolt text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-display font-bold text-xl tracking-tight">Wang Weize</h1>
+                        <p class="text-xs text-slate-400 -mt-1">Premium AI Accounts</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#produk" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Produk</a>
+                    <a href="#admin" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Kontak Admin</a>
+                    <a href="#faq" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">FAQ</a>
+                </div>
+                
+                <!-- Right Side -->
+                <div class="flex items-center gap-4">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-all group" aria-label="Toggle Theme">
+                        <i class="fa-solid fa-sun text-amber-400 hidden dark:block group-hover:rotate-90 transition-transform duration-500"></i>
+                        <i class="fa-solid fa-moon text-slate-600 block dark:hidden group-hover:-rotate-12 transition-transform duration-500"></i>
+                    </button>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-full glass flex items-center justify-center">
+                        <i class="fa-solid fa-bars text-slate-300"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden border-t border-white/5 glass-strong">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#produk" class="block px-4 py-2 rounded-lg hover:bg-white/5 text-slate-300">Produk</a>
+                <a href="#admin" class="block px-4 py-2 rounded-lg hover:bg-white/5 text-slate-300">Kontak Admin</a>
+                <a href="#faq" class="block px-4 py-2 rounded-lg hover:bg-white/5 text-slate-300">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden mesh-bg dark:mesh-bg">
+        <!-- Animated Background Orbs -->
+        <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-[100px] animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px] animate-float" style="animation-delay: -3s;"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px]"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/20 mb-8 animate-fade-up">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-sm font-medium text-blue-300">Server Operational — Ready Stock</span>
+            </div>
+            
+            <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-fade-up" style="animation-delay: 0.1s;">
+                Akses <span class="text-gradient">Premium AI</span><br>
+                Tanpa Batas
+            </h1>
+            
+            <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up" style="animation-delay: 0.2s;">
+                Platform terpercaya untuk akun ChatGPT Plus, Business, Gemini Pro, dan Grok AI. 
+                Harga terjangkau, proses instan, dan garansi penuh.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style="animation-delay: 0.3s;">
+                <a href="#produk" class="magnetic-btn group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all overflow-hidden">
+                    <span class="relative z-10 flex items-center gap-2">
+                        Lihat Produk
+                        <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
+                    </span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </a>
+                <a href="#admin" class="magnetic-btn px-8 py-4 rounded-2xl glass text-white font-semibold hover:bg-white/10 transition-all border border-white/10">
+                    Hubungi Admin
+                </a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto animate-fade-up" style="animation-delay: 0.4s;">
+                <div class="glass rounded-2xl p-4 border border-white/5">
+                    <div class="font-display text-3xl font-bold text-white" id="stat-clients">1,247</div>
+                    <div class="text-sm text-slate-400 mt-1">Klien Aktif</div>
+                </div>
+                <div class="glass rounded-2xl p-4 border border-white/5">
+                    <div class="font-display text-3xl font-bold text-white" id="stat-sold">8,532</div>
+                    <div class="text-sm text-slate-400 mt-1">Akun Terjual</div>
+                </div>
+                <div class="glass rounded-2xl p-4 border border-white/5">
+                    <div class="font-display text-3xl font-bold text-white">99.8%</div>
+                    <div class="text-sm text-slate-400 mt-1">Uptime</div>
+                </div>
+                <div class="glass rounded-2xl p-4 border border-white/5">
+                    <div class="font-display text-3xl font-bold text-white">24/7</div>
+                    <div class="text-sm text-slate-400 mt-1">Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="produk" class="relative py-24 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">Pilih Paket <span class="text-gradient">Premium</span></h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">Akses penuh ke AI terbaik dunia dengan harga kompetitif dan garansi layanan.</p>
+            </div>
+            
+            <!-- Pricing Toggle -->
+            <div class="flex items-center justify-center gap-4 mb-12 reveal">
+                <span class="text-sm font-medium text-slate-300" id="label-personal">👤 Personal</span>
+                <div class="relative inline-block w-16 h-8 align-middle select-none">
+                    <input type="checkbox" id="pricing-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-slate-700 appearance-none cursor-pointer transition-all duration-300 top-1 left-1 z-10">
+                    <label for="pricing-toggle" class="toggle-label block overflow-hidden h-8 rounded-full bg-slate-700 cursor-pointer transition-colors duration-300 border border-slate-600"></label>
+                </div>
+                <span class="text-sm font-medium text-slate-500" id="label-reseller">🏢 Reseller</span>
+                <span class="ml-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">HEMAT 20%</span>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" id="products-grid">
+                <!-- Products will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features / Why Us -->
+    <section class="relative py-24 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl font-bold mb-4">Mengapa Memilih <span class="text-gradient">Kami?</span></h2>
+                <p class="text-slate-400">Layanan enterprise dengan standar keamanan tertinggi</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card rounded-3xl p-8 reveal hover:border-blue-500/30 transition-all duration-500 group">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">Akses Private & Aman</h3>
+                    <p class="text-slate-400 leading-relaxed">Setiap akun dikelola secara individual dengan isolasi penuh. Data Anda tidak pernah dibagikan atau digunakan ulang.</p>
+                </div>
+                
+                <div class="glass-card rounded-3xl p-8 reveal hover:border-purple-500/30 transition-all duration-500 group" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bolt text-2xl text-purple-400"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">Proses Instant</h3>
+                    <p class="text-slate-400 leading-relaxed">Akun dikirim dalam hitungan menit setelah konfirmasi pembayaran. Tidak perlu menunggu lama untuk mulai menggunakan.</p>
+                </div>
+                
+                <div class="glass-card rounded-3xl p-8 reveal hover:border-emerald-500/30 transition-all duration-500 group" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-headset text-2xl text-emerald-400"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">Support 24/7</h3>
+                    <p class="text-slate-400 leading-relaxed">Tim admin profesional siap membantu kapan saja. Respon cepat untuk segala kendala teknis maupun billing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Contact Section -->
+    <section id="admin" class="relative py-24 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl font-bold mb-4">Hubungi <span class="text-gradient">Admin Support</span></h2>
+                <p class="text-slate-400">Tim kami siap membantu Anda dengan layanan terbaik</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Admin 1 - Threads -->
+                <a href="https://www.threads.com/@janebeatrixrety" target="_blank" rel="noopener noreferrer" 
+                   class="glass-card rounded-3xl p-8 reveal group hover:border-white/20 transition-all duration-500 block">
+                    <div class="flex items-start gap-6">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center shadow-xl group-hover:scale-105 transition-transform">
+                            <i class="fa-brands fa-threads text-4xl text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <h3 class="font-display text-xl font-bold">Admin Support 1</h3>
+                                <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">Online</span>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <button onclick="updateCartQuantity('${item.id}', -1)" class="text-gray-400 hover:text-white text-lg leading-none">−</button>
-                                <span class="text-sm">${item.quantity}</span>
-                                <button onclick="updateCartQuantity('${item.id}', 1)" class="text-gray-400 hover:text-white text-lg leading-none">+</button>
+                            <p class="text-slate-400 mb-4">@janebeatrixrety</p>
+                            <div class="flex items-center gap-2 text-sm text-blue-400 group-hover:text-blue-300 transition-colors">
+                                <span>Kunjungi Threads</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
                             </div>
                         </div>
-                    `).join('');
-                }
-            }
-            if (cartTotalEl) {
-                cartTotalEl.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
-            }
-            if (cartCheckoutBtn) {
-                cartCheckoutBtn.disabled = cart.length === 0;
-            }
-        }
+                    </div>
+                </a>
+                
+                <!-- Admin 2 - TikTok -->
+                <a href="https://www.tiktok.com/@wangweize10?_r=1&_t=ZS-95siJwLG0Vs" target="_blank" rel="noopener noreferrer"
+                   class="glass-card rounded-3xl p-8 reveal group hover:border-white/20 transition-all duration-500 block" style="transition-delay: 0.1s;">
+                    <div class="flex items-start gap-6">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center shadow-xl group-hover:scale-105 transition-transform">
+                            <i class="fa-brands fa-tiktok text-4xl text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <h3 class="font-display text-xl font-bold">Admin Support 2</h3>
+                                <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">Online</span>
+                            </div>
+                            <p class="text-slate-400 mb-4">@wangweize10</p>
+                            <div class="flex items-center gap-2 text-sm text-blue-400 group-hover:text-blue-300 transition-colors">
+                                <span>Kunjungi TikTok</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- WhatsApp CTA -->
+            <div class="mt-12 text-center reveal">
+                <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize%20,%20saya%20mau%20order" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transition-all hover:scale-105">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    <span>Chat WhatsApp Utama</span>
+                </a>
+                <p class="text-slate-500 text-sm mt-3">+62 822-1998-9497 • Wang Weize</p>
+            </div>
+        </div>
+    </section>
 
-        window.addToCart = function(productId, productName, productPrice) {
-            if (stock[productId] <= 0) {
-                showToast('⚠️ Stok habis! Tidak bisa menambah ke keranjang.', 'error');
-                return;
-            }
-            const existing = cart.find(item => item.id === productId);
-            if (existing) {
-                // Check stock limit
-                if (existing.quantity + 1 > stock[productId]) {
-                    showToast('⚠️ Stok tidak mencukupi untuk menambah jumlah.', 'error');
-                    return;
-                }
-                existing.quantity += 1;
-            } else {
-                cart.push({ id: productId, name: productName, price: productPrice, quantity: 1 });
-            }
-            saveCart();
-            showToast(`✅ ${productName} ditambahkan ke keranjang.`, 'success');
-        };
+    <!-- FAQ Section -->
+    <section id="faq" class="relative py-24">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl font-bold mb-4">Pertanyaan <span class="text-gradient">Umum</span></h2>
+            </div>
+            
+            <div class="space-y-4" id="faq-container">
+                <!-- FAQ items injected by JS -->
+            </div>
+        </div>
+    </section>
 
-        window.updateCartQuantity = function(productId, delta) {
-            const item = cart.find(i => i.id === productId);
-            if (!item) return;
-            const newQty = item.quantity + delta;
-            if (newQty <= 0) {
-                cart = cart.filter(i => i.id !== productId);
-            } else {
-                if (delta > 0 && newQty > stock[productId]) {
-                    showToast('⚠️ Stok tidak mencukupi.', 'error');
-                    return;
-                }
-                item.quantity = newQty;
-            }
-            saveCart();
-        };
-
-        function openCart() {
-            cartSidebar.classList.add('cart-open');
-            cartOverlay.classList.remove('hidden');
-        }
-        function closeCart() {
-            cartSidebar.classList.remove('cart-open');
-            cartOverlay.classList.add('hidden');
-        }
-
-        // Checkout cart via WhatsApp
-        function checkoutCart() {
-            if (cart.length === 0) return;
-            const itemsList = cart.map(item => `${item.name} (x${item.quantity})`).join(', ');
-            const message = `Halo Wang Weize, saya mau order ${itemsList}`;
-            const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
-        }
-
-        // Direct WhatsApp link (already in HTML, but we can't prevent default, just track)
-
-        // Toast notification
-        function showToast(message, type = 'info') {
-            const toast = document.createElement('div');
-            toast.className = `glass-card p-3 rounded-xl flex items-center gap-3 toast-enter text-sm`;
-            toast.innerHTML = `<span>${message}</span>`;
-            toastContainer.appendChild(toast);
-            setTimeout(() => {
-                toast.remove();
-            }, 4000);
-        }
-
-        // Simulate live purchase notifications
-        const customerNames = ['Budi', 'Siti', 'Andi', 'Rina', 'Dewi', 'Agus', 'Lina', 'Hadi', 'Nina', 'Rudi'];
-        function randomPurchaseNotification() {
-            // Pick a random product that still has stock > 0
-            const availableProducts = products.filter(p => stock[p.id] > 0);
-            if (availableProducts.length === 0) return;
-            const product = availableProducts[Math.floor(Math.random() * availableProducts.length)];
-            const customer = customerNames[Math.floor(Math.random() * customerNames.length)];
-            // Reduce stock by 1 (simulate purchase)
-            stock[product.id] = Math.max(0, stock[product.id] - 1);
-            saveStock();
-            showToast(`🔔 ${customer} baru saja membeli ${product.name}`, 'purchase');
-            // If stock becomes 0, no further notifications for that product
-        }
-
-        // Set interval for live notifications (every 9-15 seconds random)
-        setInterval(() => {
-            const delay = Math.floor(Math.random() * 7000) + 9000; // 9-16 sec
-            setTimeout(randomPurchaseNotification, delay);
-        }, 15000); // check every 15 sec, but random delay inside so it's staggered
-
-        // Initial notification after 5 seconds
-        setTimeout(randomPurchaseNotification, 5000);
-
-        // Countdown timer for Gemini
-        function updateCountdown() {
-            const now = Date.now();
-            const distance = timerEnd - now;
-            const timerSpan = document.getElementById('timer-gemini');
-            const countdownDiv = document.getElementById('countdown-gemini');
-            if (!timerSpan || !countdownDiv) return;
-
-            if (distance <= 0) {
-                timerSpan.textContent = '00:00:00';
-                countdownDiv.innerHTML = '<span class="text-red-400">Promo berakhir</span>';
-                // possibly disable or change price
-                return;
-            }
-            const hours = Math.floor(distance / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            timerSpan.textContent = `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-        }
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // Theme toggle
-        function setTheme(isDark) {
-            if (isDark) {
-                html.classList.add('dark');
-                html.classList.remove('light');
-                localStorage.setItem(STORAGE_THEME, 'dark');
-                if (themeIcon) themeIcon.className = 'fas fa-sun text-yellow-400';
-                if (themeIconMobile) themeIconMobile.className = 'fas fa-sun text-yellow-400';
-            } else {
-                html.classList.remove('dark');
-                html.classList.add('light');
-                localStorage.setItem(STORAGE_THEME, 'light');
-                if (themeIcon) themeIcon.className = 'fas fa-moon text-gray-700';
-                if (themeIconMobile) themeIconMobile.className = 'fas fa-moon text-gray-700';
-            }
-        }
-        // initial icon
-        if (theme === 'dark') {
-            if (themeIcon) themeIcon.className = 'fas fa-sun text-yellow-400';
-            if (themeIconMobile) themeIconMobile.className = 'fas fa-sun text-yellow-400';
-        } else {
-            if (themeIcon) themeIcon.className = 'fas fa-moon text-gray-700';
-            if (themeIconMobile) themeIconMobile.className = 'fas fa-moon text-gray-700';
-        }
-
-        themeToggle?.addEventListener('click', () => {
-            const isDark = html.classList.contains('dark');
-            setTheme(!isDark);
-        });
-        themeToggleMobile?.addEventListener('click', () => {
-            const isDark = html.classList.contains('dark');
-            setTheme(!isDark);
-        });
-
-        // Cart toggle events
-        document.getElementById('cart-toggle-desktop')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            openCart();
-        });
-        document.getElementById('cart-toggle-mobile')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            openCart();
-        });
-        document.getElementById('cart-close')?.addEventListener('click', closeCart);
-        cartOverlay?.addEventListener('click', closeCart);
-        cartCheckoutBtn?.addEventListener('click', checkoutCart);
-
-        // Update UI on load
-        updateStockUI();
-        updateCartUI();
-
-        // Expose for inline onclick (already global via window)
-        window.updateCartQuantity = updateCartQuantity;
-    })();
-</script>
-</body>
-</html>
+    <!-- Footer -->
+    <footer class="relative border-t border-white/5 bg-slate-950 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                            <i class="fa-solid fa-bolt text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-xl">Wang Weize</h3>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed max-w-sm">
+                        Penyedia akses akun Premium AI terpercaya di Indonesia. 
+                        Kualitas layanan enterprise dengan harga yang terjangkau.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-white">Produk</h4>
+                    <ul class="space-y-2 text-slate-400">
+                        <li><a href="#produk" class="hover:text-blue-400 transition-colors">ChatGPT Plus</a></li>
+                        <li><a href="#produk" class="hover:text-blue-400 transition-colors">ChatGPT Business</a></li>
+                        <li><a href
