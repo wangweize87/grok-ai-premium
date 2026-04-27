@@ -1,21 +1,14 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wang Weize — Premium AI Accounts Enterprise</title>
-    <meta name="description" content="Platform terpercaya untuk akses akun Premium AI: ChatGPT, Gemini, Grok. Harga terjangkau, layanan profesional.">
+    <title>Wang Weize — Premium AI Enterprise</title>
+    <meta name="description" content="Platform akses AI premium. GPT-5.5, Gemini Pro, Grok. Private, aman, dan bergaransi.">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
         tailwind.config = {
@@ -26,43 +19,25 @@
                         sans: ['Inter', 'sans-serif'],
                         display: ['Plus Jakarta Sans', 'sans-serif'],
                     },
-                    colors: {
-                        dark: {
-                            950: '#030712',
-                            900: '#0f172a',
-                            800: '#1e293b',
-                        },
-                        brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            900: '#1e3a8a',
-                        }
-                    },
                     animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'shimmer': 'shimmer 2s linear infinite',
-                        'slide-in': 'slideIn 0.5s ease-out forwards',
-                        'fade-up': 'fadeUp 0.6s ease-out forwards',
+                        'blob': 'blob 7s infinite',
+                        'slide-up': 'slideUp 0.5s ease-out forwards',
+                        'marquee': 'marquee 40s linear infinite',
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
                         },
-                        shimmer: {
-                            '0%': { backgroundPosition: '-1000px 0' },
-                            '100%': { backgroundPosition: '1000px 0' },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
-                        slideIn: {
-                            '0%': { transform: 'translateX(-100%)', opacity: '0' },
-                            '100%': { transform: 'translateX(0)', opacity: '1' },
-                        },
-                        fadeUp: {
-                            '0%': { transform: 'translateY(30px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
                         }
                     }
                 }
@@ -71,444 +46,452 @@
     </script>
     
     <style>
-        :root {
-            --cursor-glow: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
-        }
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-        }
-        
-        .font-display {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        
-        /* Glassmorphism Utilities */
+        /* Glassmorphism */
         .glass {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        .glass-strong {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .glass-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .dark .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
         
         /* 3D Tilt Effect */
-        .tilt-card {
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
-        }
+        .tilt-card { transform-style: preserve-3d; transition: transform 0.1s ease-out; }
+        .tilt-content { transform: translateZ(30px); }
         
-        .tilt-content {
-            transform: translateZ(30px);
-        }
-        
-        /* Gradient Text */
-        .text-gradient {
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .text-gradient-gold {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
-        }
-        
-        /* Toggle Switch */
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: #3b82f6;
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #3b82f6;
-        }
-        
-        /* Cursor Glow */
-        .cursor-glow {
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            background: var(--cursor-glow);
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        @media (pointer: fine) {
-            .cursor-glow.active {
-                opacity: 1;
-            }
-        }
-        
-        /* Stock Pulse */
-        .stock-urgent {
-            animation: urgentPulse 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes urgentPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        /* Mesh Gradient Background */
-        .mesh-bg {
-            background-color: #030712;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
-        }
-        
-        .mesh-bg-light {
+        /* Background Mesh */
+        .bg-mesh {
             background-color: #f8fafc;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(220,100%,96%,1) 0, transparent 50%), 
-                radial-gradient(at 50% 0%, hsla(210,100%,92%,1) 0, transparent 50%), 
-                radial-gradient(at 100% 0%, hsla(280,100%,96%,1) 0, transparent 50%);
+            background-image: radial-gradient(at 0% 0%, rgba(59,130,246,0.15) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(168,85,247,0.15) 0, transparent 50%);
         }
+        .dark .bg-mesh {
+            background-color: #020617;
+            background-image: radial-gradient(at 0% 0%, rgba(59,130,246,0.15) 0, transparent 50%), radial-gradient(at 100% 0%, rgba(168,85,247,0.15) 0, transparent 50%);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .cart-open { transform: translateX(0); }
         
-        /* Notification Toast */
-        .notification-toast {
-            animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
+        /* Toast */
+        .toast-enter { animation: slideInRight 0.4s ease-out forwards; }
+        @keyframes slideInRight { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         
-        /* Price Strikethrough Animation */
-        .price-flip {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
         
-        /* Magnetic Button */
-        .magnetic-btn {
-            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        /* Smooth theme transition */
-        *, *::before, *::after {
-            transition: background-color 0.5s ease, border-color 0.5s ease, color 0.3s ease;
-        }
-        
-        /* Hide elements before scroll reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        /* Marquee Hover Pause */
+        .marquee-content:hover { animation-play-state: paused; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased selection:bg-blue-500 selection:text-white">
+<body class="bg-mesh text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
 
-    <!-- Cursor Glow Effect -->
-    <div id="cursor-glow" class="cursor-glow hidden lg:block"></div>
-
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass-strong border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
-                        <i class="fa-solid fa-bolt text-white text-lg"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-display font-bold text-xl tracking-tight">Wang Weize</h1>
-                        <p class="text-xs text-slate-400 -mt-1">Premium AI Accounts</p>
-                    </div>
+    <nav class="fixed w-full z-40 glass-nav transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
+                    <i class="fa-solid fa-bolt text-white"></i>
                 </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="#produk" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Produk</a>
-                    <a href="#admin" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Kontak Admin</a>
-                    <a href="#faq" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">FAQ</a>
+                <div>
+                    <h1 class="font-display font-bold text-xl tracking-tight text-slate-900 dark:text-white">Wang Weize</h1>
+                    <p class="text-[10px] uppercase tracking-widest text-blue-500 dark:text-blue-400 -mt-1 font-bold">AI Premium Hub</p>
                 </div>
-                
-                <!-- Right Side -->
-                <div class="flex items-center gap-4">
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-all group" aria-label="Toggle Theme">
-                        <i class="fa-solid fa-sun text-amber-400 hidden dark:block group-hover:rotate-90 transition-transform duration-500"></i>
-                        <i class="fa-solid fa-moon text-slate-600 block dark:hidden group-hover:-rotate-12 transition-transform duration-500"></i>
-                    </button>
-                    
-                    <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-full glass flex items-center justify-center">
-                        <i class="fa-solid fa-bars text-slate-300"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden border-t border-white/5 glass-strong">
-            <div class="px-4 py-4 space-y-3">
-                <a href="#produk" class="block px-4 py-2 rounded-lg hover:bg-white/5 text-slate-300">Produk</a>
-                <a href="#admin" class="block px-4 py-2 rounded-lg hover:bg-white/5 text-slate-300">Kontak Admin</a>
-                <a href="#faq" class="block px-4 py-2 rounded-lg hover:bg-white/5 text-slate-300">FAQ</a>
+            </a>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="p-2.5 rounded-full glass hover:bg-black/5 dark:hover:bg-white/10 transition">
+                    <i class="fa-solid fa-moon text-slate-700 block dark:hidden"></i>
+                    <i class="fa-solid fa-sun text-yellow-400 hidden dark:block"></i>
+                </button>
+                <button id="cart-toggle" class="relative p-2.5 rounded-full glass hover:bg-black/5 dark:hover:bg-white/10 transition">
+                    <i class="fa-solid fa-cart-shopping text-slate-700 dark:text-white"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold h-5 w-5 rounded-full flex items-center justify-center hidden shadow-lg">0</span>
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden mesh-bg dark:mesh-bg">
-        <!-- Animated Background Orbs -->
-        <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-[100px] animate-float"></div>
-        <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px] animate-float" style="animation-delay: -3s;"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px]"></div>
-        
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/20 mb-8 animate-fade-up">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-sm font-medium text-blue-300">Server Operational — Ready Stock</span>
+    <main class="flex-grow pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative w-full">
+        <div class="absolute top-10 -left-10 w-72 h-72 bg-blue-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob pointer-events-none"></div>
+        <div class="absolute top-10 -right-10 w-72 h-72 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob pointer-events-none" style="animation-delay: 2s"></div>
+
+        <div class="text-center max-w-3xl mx-auto relative z-10 animate-slide-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/20 mb-6 text-sm font-semibold text-blue-600 dark:text-blue-400">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Server Stabil • Fast Response
             </div>
+            <h2 class="font-display text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-slate-900 dark:text-white">
+                Akses AI Enterprise.<br>
+                <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Harga Receh.</span>
+            </h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400 mb-10">Tingkatkan produktivitas lu dengan AI terbaru (GPT-5.5 Agentic, Gemini Pro). Akun private 1 orang 1 Gmail, bergaransi, anti boncos, langsung gas pakai.</p>
             
-            <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-fade-up" style="animation-delay: 0.1s;">
-                Akses <span class="text-gradient">Premium AI</span><br>
-                Tanpa Batas
-            </h1>
-            
-            <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up" style="animation-delay: 0.2s;">
-                Platform terpercaya untuk akun ChatGPT Plus, Business, Gemini Pro, dan Grok AI. 
-                Harga terjangkau, proses instan, dan garansi penuh.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style="animation-delay: 0.3s;">
-                <a href="#produk" class="magnetic-btn group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all overflow-hidden">
-                    <span class="relative z-10 flex items-center gap-2">
-                        Lihat Produk
-                        <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition-transform"></i>
-                    </span>
-                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </a>
-                <a href="#admin" class="magnetic-btn px-8 py-4 rounded-2xl glass text-white font-semibold hover:bg-white/10 transition-all border border-white/10">
-                    Hubungi Admin
-                </a>
-            </div>
-            
-            <!-- Stats -->
-            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto animate-fade-up" style="animation-delay: 0.4s;">
-                <div class="glass rounded-2xl p-4 border border-white/5">
-                    <div class="font-display text-3xl font-bold text-white" id="stat-clients">1,247</div>
-                    <div class="text-sm text-slate-400 mt-1">Klien Aktif</div>
-                </div>
-                <div class="glass rounded-2xl p-4 border border-white/5">
-                    <div class="font-display text-3xl font-bold text-white" id="stat-sold">8,532</div>
-                    <div class="text-sm text-slate-400 mt-1">Akun Terjual</div>
-                </div>
-                <div class="glass rounded-2xl p-4 border border-white/5">
-                    <div class="font-display text-3xl font-bold text-white">99.8%</div>
-                    <div class="text-sm text-slate-400 mt-1">Uptime</div>
-                </div>
-                <div class="glass rounded-2xl p-4 border border-white/5">
-                    <div class="font-display text-3xl font-bold text-white">24/7</div>
-                    <div class="text-sm text-slate-400 mt-1">Support</div>
-                </div>
+            <div class="flex items-center justify-center gap-3 mb-12">
+                <span class="text-sm font-bold text-slate-500 dark:text-slate-400" id="label-personal">Personal</span>
+                <button id="reseller-toggle" class="relative w-14 h-8 bg-slate-300 dark:bg-slate-700 rounded-full p-1 transition-colors duration-300 focus:outline-none">
+                    <div id="toggle-knob" class="w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300"></div>
+                </button>
+                <span class="text-sm font-bold text-slate-800 dark:text-white" id="label-reseller">Harga Reseller</span>
+                <span class="text-[10px] font-black bg-red-500/10 text-red-500 border border-red-500/20 px-2 py-1 rounded-full animate-pulse">HEMAT 20% CUAN!</span>
             </div>
         </div>
-    </section>
 
-    <!-- Products Section -->
-    <section id="produk" class="relative py-24 bg-slate-950">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Section Header -->
-            <div class="text-center mb-16 reveal">
-                <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">Pilih Paket <span class="text-gradient">Premium</span></h2>
-                <p class="text-slate-400 text-lg max-w-2xl mx-auto">Akses penuh ke AI terbaik dunia dengan harga kompetitif dan garansi layanan.</p>
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
             </div>
-            
-            <!-- Pricing Toggle -->
-            <div class="flex items-center justify-center gap-4 mb-12 reveal">
-                <span class="text-sm font-medium text-slate-300" id="label-personal">👤 Personal</span>
-                <div class="relative inline-block w-16 h-8 align-middle select-none">
-                    <input type="checkbox" id="pricing-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-slate-700 appearance-none cursor-pointer transition-all duration-300 top-1 left-1 z-10">
-                    <label for="pricing-toggle" class="toggle-label block overflow-hidden h-8 rounded-full bg-slate-700 cursor-pointer transition-colors duration-300 border border-slate-600"></label>
-                </div>
-                <span class="text-sm font-medium text-slate-500" id="label-reseller">🏢 Reseller</span>
-                <span class="ml-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">HEMAT 20%</span>
-            </div>
-            
-            <!-- Products Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" id="products-grid">
-                <!-- Products will be injected by JS -->
-            </div>
-        </div>
-    </section>
 
-    <!-- Features / Why Us -->
-    <section class="relative py-24 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950"></div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal">
-                <h2 class="font-display text-4xl font-bold mb-4">Mengapa Memilih <span class="text-gradient">Kami?</span></h2>
-                <p class="text-slate-400">Layanan enterprise dengan standar keamanan tertinggi</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass-card rounded-3xl p-8 reveal hover:border-blue-500/30 transition-all duration-500 group">
-                    <div class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-shield-halved text-2xl text-blue-400"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold mb-3">Akses Private & Aman</h3>
-                    <p class="text-slate-400 leading-relaxed">Setiap akun dikelola secara individual dengan isolasi penuh. Data Anda tidak pernah dibagikan atau digunakan ulang.</p>
-                </div>
+        <div class="mt-24 relative z-10 animate-slide-up" style="animation-delay: 0.1s">
+            <h3 class="font-display font-bold text-2xl text-center mb-8 text-slate-900 dark:text-white">Apa Kata Mereka Yang Udah Cuan? <span class="text-yellow-400">★ 5.0</span></h3>
+            <div class="overflow-hidden relative w-full">
+                <div class="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-[#f8fafc] dark:from-[#020617] to-transparent z-10"></div>
+                <div class="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-[#f8fafc] dark:from-[#020617] to-transparent z-10"></div>
                 
-                <div class="glass-card rounded-3xl p-8 reveal hover:border-purple-500/30 transition-all duration-500 group" style="transition-delay: 0.1s;">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-bolt text-2xl text-purple-400"></i>
+                <div class="marquee-content flex gap-4 w-max" id="testimonial-track">
                     </div>
-                    <h3 class="font-display text-xl font-bold mb-3">Proses Instant</h3>
-                    <p class="text-slate-400 leading-relaxed">Akun dikirim dalam hitungan menit setelah konfirmasi pembayaran. Tidak perlu menunggu lama untuk mulai menggunakan.</p>
-                </div>
+            </div>
+        </div>
+
+        <div class="mt-24 grid md:grid-cols-3 gap-6 animate-slide-up" style="animation-delay: 0.2s">
+            <div class="glass rounded-3xl p-8 text-center hover:border-blue-500/30 transition">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-blue-500/10 flex items-center justify-center mb-5 text-blue-500 text-2xl"><i class="fa-solid fa-lock"></i></div>
+                <h3 class="font-display font-bold text-xl mb-2 text-slate-900 dark:text-white">100% Private</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400">1 Akun khusus buat 1 Gmail. Bebas dari history chat orang lain, privasi aman sentosa.</p>
+            </div>
+            <div class="glass rounded-3xl p-8 text-center hover:border-purple-500/30 transition">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-500/10 flex items-center justify-center mb-5 text-purple-500 text-2xl"><i class="fa-solid fa-bolt"></i></div>
+                <h3 class="font-display font-bold text-xl mb-2 text-slate-900 dark:text-white">Aktivasi Instan</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Checkout otomatis terhubung ke WhatsApp. Bayar, langsung dikirim detail loginnya saat itu juga.</p>
+            </div>
+            <div class="glass rounded-3xl p-8 text-center hover:border-emerald-500/30 transition">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-5 text-emerald-500 text-2xl"><i class="fa-solid fa-headset"></i></div>
+                <h3 class="font-display font-bold text-xl mb-2 text-slate-900 dark:text-white">Support 24/7</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Admin selalu stand-by kalau akun kena limit atau bermasalah. Garansi ganti akun tanpa babibu.</p>
+            </div>
+        </div>
+
+        <div id="admin" class="mt-24 max-w-4xl mx-auto text-center animate-slide-up" style="animation-delay: 0.3s">
+            <h2 class="font-display text-3xl font-bold mb-8 text-slate-900 dark:text-white">Kontak Admin Resmi</h2>
+            <div class="grid sm:grid-cols-2 gap-6">
+                <a href="https://www.threads.com/@janebeatrixrety" target="_blank" class="glass rounded-3xl p-6 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/10 transition group">
+                    <div class="w-12 h-12 bg-black text-white rounded-xl flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-threads"></i></div>
+                    <div class="text-left">
+                        <h4 class="font-bold text-slate-900 dark:text-white">Admin 1 (Threads)</h4>
+                        <p class="text-sm text-slate-500">@janebeatrixrety</p>
+                    </div>
+                </a>
+                <a href="https://www.tiktok.com/@wangweize10?_r=1&_t=ZS-95siJwLG0Vs" target="_blank" class="glass rounded-3xl p-6 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/10 transition group">
+                    <div class="w-12 h-12 bg-black text-white rounded-xl flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-tiktok"></i></div>
+                    <div class="text-left">
+                        <h4 class="font-bold text-slate-900 dark:text-white">Admin 2 (TikTok)</h4>
+                        <p class="text-sm text-slate-500">@wangweize10</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-200 dark:border-white/10 bg-white/50 dark:bg-slate-950/50 backdrop-blur-md mt-auto py-8 text-center text-sm text-slate-500">
+        <p>© <span id="year"></span> Wang Weize AI Access. Enterprise Grade Solutions.</p>
+    </footer>
+
+    <div id="cart-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white dark:bg-slate-900 shadow-2xl z-50 transform translate-x-full cart-sidebar flex flex-col border-l border-slate-200 dark:border-slate-800">
+        <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+            <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white"><i class="fa-solid fa-basket-shopping text-blue-500 mr-2"></i> Keranjang Lu</h3>
+            <button id="close-cart" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-red-500 flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            </div>
+        <div class="p-6 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-slate-600 dark:text-slate-400 font-medium">Total Bayar:</span>
+                <span id="cart-total" class="font-display font-black text-2xl text-blue-600 dark:text-blue-400">Rp 0</span>
+            </div>
+            <button id="checkout-wa" class="w-full py-4 rounded-xl bg-[#25D366] hover:bg-[#1DA851] text-white font-bold flex justify-center items-center gap-2 transition-transform hover:scale-[1.02] shadow-lg shadow-green-500/30 disabled:opacity-50 disabled:cursor-not-allowed">
+                <i class="fa-brands fa-whatsapp text-xl"></i> Checkout Borongan via WA
+            </button>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-6 left-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <script>
+        // Data & State
+        const WA_NUMBER = '6282219989497';
+        let isReseller = false;
+        let cart = JSON.parse(localStorage.getItem('ww_cart')) || [];
+
+        const products = [
+            { id: 'gpt-plus', name: 'ChatGPT Plus / Pro', price: 12000, duration: '/ Bulan', icon: 'fa-robot', color: 'text-emerald-500', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', tag: 'Agentic AI 5.5', desc: 'Akses harian ke model tercanggih OpenAI GPT-5.5. Cocok buat riset, coding berat, dan eksekusi tugas otomatis.', stock: 12 },
+            { id: 'gpt-biz', name: 'ChatGPT Business', price: 30000, duration: '/ Bulan', icon: 'fa-briefcase', color: 'text-blue-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20', tag: 'Prioritas Server', desc: 'Server anti antre dan respon ngebut. Optimal buat lo yang pake buat enterprise tanpa limitasi waktu.', stock: 5 },
+            { id: 'gemini-pro', name: 'Gemini Pro', price: 20000, duration: '/ 4 Bulan', icon: 'fa-gem', color: 'text-purple-500', bg: 'bg-purple-500/10', border: 'border-purple-500/20', tag: 'Super Hemat', desc: 'Long context & analisis data panjang. Integrasi penuh dengan ekosistem Google Workspace.', stock: 24 },
+            { id: 'grok-ai', name: 'Grok AI', price: 10000, duration: '/ 3 Hari', icon: 'fa-x-twitter', color: 'text-slate-700 dark:text-slate-300', bg: 'bg-slate-200 dark:bg-slate-700/50', border: 'border-slate-300 dark:border-slate-600', tag: 'Real-time X', desc: 'AI tanpa sensor dari X. Akses tren dan berita real-time langsung sat-set dipakai harian.', stock: 8 }
+        ];
+
+        // Format Currency
+        const formatRp = (num) => new Intl.NumberFormat('id-ID').format(num);
+
+        // Render Products
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = products.map(p => {
+                const finalPrice = isReseller ? Math.floor(p.price * 0.8) : p.price;
+                const oldPriceHtml = isReseller ? `<span class="text-sm text-red-400 line-through mr-2">Rp ${formatRp(p.price)}</span>` : '';
                 
-                <div class="glass-card rounded-3xl p-8 reveal hover:border-emerald-500/30 transition-all duration-500 group" style="transition-delay: 0.2s;">
-                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-headset text-2xl text-emerald-400"></i>
+                return `
+                <div class="glass tilt-card rounded-3xl p-6 flex flex-col group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 ${p.bg} text-[10px] font-bold ${p.color} px-3 py-1 rounded-bl-xl border-b border-l ${p.border}">${p.tag}</div>
+                    <div class="tilt-content flex-grow flex flex-col">
+                        <div class="w-12 h-12 rounded-2xl ${p.bg} flex items-center justify-center ${p.color} text-2xl mb-5 group-hover:scale-110 transition-transform">
+                            <i class="${p.icon}"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white mb-2">${p.name}</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 flex-grow">${p.desc}</p>
+                        
+                        <div class="mb-6">
+                            ${oldPriceHtml}
+                            <div class="flex items-baseline gap-1">
+                                <span class="font-display font-black text-3xl text-slate-900 dark:text-white">Rp ${formatRp(finalPrice)}</span>
+                                <span class="text-xs font-medium text-slate-500">${p.duration}</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between text-xs font-semibold mb-4 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800/50">
+                            <span class="text-slate-500">Sisa Slot Hari Ini:</span>
+                            <span class="${p.stock < 10 ? 'text-red-500 animate-pulse' : 'text-emerald-500'}">${p.stock} Akun</span>
+                        </div>
+
+                        <div class="grid grid-cols-[1fr_auto] gap-2 mt-auto">
+                            <a href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Halo Wang Weize, saya mau order ${p.name} (Langsung WA)`)}" target="_blank" class="w-full py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm flex justify-center items-center gap-2 hover:opacity-80 transition transform hover:-translate-y-0.5">
+                                Pesan Langsung
+                            </a>
+                            <button onclick="addToCart('${p.id}')" class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500 hover:text-white transition flex items-center justify-center group-hover:shadow-lg">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="font-display text-xl font-bold mb-3">Support 24/7</h3>
-                    <p class="text-slate-400 leading-relaxed">Tim admin profesional siap membantu kapan saja. Respon cepat untuk segala kendala teknis maupun billing.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Admin Contact Section -->
-    <section id="admin" class="relative py-24 bg-slate-950">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal">
-                <h2 class="font-display text-4xl font-bold mb-4">Hubungi <span class="text-gradient">Admin Support</span></h2>
-                <p class="text-slate-400">Tim kami siap membantu Anda dengan layanan terbaik</p>
-            </div>
+                `;
+            }).join('');
             
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Admin 1 - Threads -->
-                <a href="https://www.threads.com/@janebeatrixrety" target="_blank" rel="noopener noreferrer" 
-                   class="glass-card rounded-3xl p-8 reveal group hover:border-white/20 transition-all duration-500 block">
-                    <div class="flex items-start gap-6">
-                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center shadow-xl group-hover:scale-105 transition-transform">
-                            <i class="fa-brands fa-threads text-4xl text-white"></i>
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center gap-2 mb-2">
-                                <h3 class="font-display text-xl font-bold">Admin Support 1</h3>
-                                <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">Online</span>
-                            </div>
-                            <p class="text-slate-400 mb-4">@janebeatrixrety</p>
-                            <div class="flex items-center gap-2 text-sm text-blue-400 group-hover:text-blue-300 transition-colors">
-                                <span>Kunjungi Threads</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+            // Re-attach 3D Tilt Event
+            document.querySelectorAll('.tilt-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width/2;
+                    const y = e.clientY - rect.top - rect.height/2;
+                    card.style.transform = `perspective(1000px) rotateX(${-y/10}deg) rotateY(${x/10}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                });
+            });
+        }
+
+        // Fake Testimonial Generator (100 Names & Random Comments)
+        function renderTestimonials() {
+            const names100 = ["Budi", "Andi", "Siti", "Ayu", "Reza", "Fajar", "Dimas", "Rina", "Dinda", "Kevin", "Agus", "Putri", "Deni", "Sari", "Rudi", "Maya", "Tono", "Lestari", "Iwan", "Nita", "Hadi", "Desi", "Riki", "Mega", "Yudi", "Ika", "Bayu", "Ratna", "Eko", "Dian", "Rio", "Fitri", "Aris", "Nina", "Hendra", "Nurul", "Gilang", "Wulan", "Rian", "Indah", "Ferry", "Lina", "Yoga", "Yuni", "Aditya", "Reni", "Rangga", "Anita", "Dicky", "Siska", "Wahyu", "Riska", "Bowo", "Mila", "Joko", "Nia", "Ari", "Rini", "Fadli", "Tari", "Kiki", "Lia", "Irfan", "Vina", "Tegar", "Suci", "Bagus", "Tina", "Aldo", "Yanti", "Rizal", "Nadia", "Fikri", "Mita", "Dedy", "Rika", "Candra", "Ira", "Surya", "Novi", "Anton", "Santi", "Galih", "Vivi", "Revan", "Yulia", "Bobby", "Sella", "Raka", "Fina", "Doni", "Tika", "Ivan", "Gita", "Dito", "Risma", "Alif", "Putra", "Nanda", "Farel"];
+            
+            const comments = [
+                "Anjay, adminnya fast respon parah! Baru transfer udah dikirim loginnya. Gas terus!",
+                "Harga receh kualitas sultan! GPT-5.5 nya lancar jaya buat nugas.",
+                "Awalnya takut boncos, eh ternyata aman banget. Akun private 100%.",
+                "Cuan banget beli paket Reseller di sini, udah balik modal wkwkwk!",
+                "Mantap, Gemini Pro nya bantu kerjaan gue banget. Recommended!",
+                "Gila, harganya murah tapi bukan murahan. Terbaik pokoknya.",
+                "Udah 3x order di sini gak pernah ngecewain. Anti antre club!",
+                "Mantep bang, akunnya beneran private. Data aman gak nyampur.",
+                "Prosesnya sat-set sat-set. Gak nyampe 5 menit udah done.",
+                "Grok AI nya mantap buat mantau tren X. The best lah!"
+            ];
+
+            const track = document.getElementById('testimonial-track');
+            let html = '';
+            
+            // Generate 20 random cards from the pool (we duplicate them for smooth marquee effect)
+            for(let i=0; i<20; i++) {
+                const randomName = names100[Math.floor(Math.random() * names100.length)];
+                const randomComment = comments[Math.floor(Math.random() * comments.length)];
                 
-                <!-- Admin 2 - TikTok -->
-                <a href="https://www.tiktok.com/@wangweize10?_r=1&_t=ZS-95siJwLG0Vs" target="_blank" rel="noopener noreferrer"
-                   class="glass-card rounded-3xl p-8 reveal group hover:border-white/20 transition-all duration-500 block" style="transition-delay: 0.1s;">
-                    <div class="flex items-start gap-6">
-                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center shadow-xl group-hover:scale-105 transition-transform">
-                            <i class="fa-brands fa-tiktok text-4xl text-white"></i>
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center gap-2 mb-2">
-                                <h3 class="font-display text-xl font-bold">Admin Support 2</h3>
-                                <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">Online</span>
-                            </div>
-                            <p class="text-slate-400 mb-4">@wangweize10</p>
-                            <div class="flex items-center gap-2 text-sm text-blue-400 group-hover:text-blue-300 transition-colors">
-                                <span>Kunjungi TikTok</span>
-                                <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                            </div>
-                        </div>
+                const card = `
+                <div class="glass p-5 rounded-2xl w-80 shrink-0 border border-slate-200 dark:border-white/10 flex flex-col justify-between">
+                    <div class="flex text-yellow-400 text-xs mb-3">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
-                </a>
-            </div>
-            
-            <!-- WhatsApp CTA -->
-            <div class="mt-12 text-center reveal">
-                <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize%20,%20saya%20mau%20order" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transition-all hover:scale-105">
-                    <i class="fa-brands fa-whatsapp text-2xl"></i>
-                    <span>Chat WhatsApp Utama</span>
-                </a>
-                <p class="text-slate-500 text-sm mt-3">+62 822-1998-9497 • Wang Weize</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="relative py-24">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal">
-                <h2 class="font-display text-4xl font-bold mb-4">Pertanyaan <span class="text-gradient">Umum</span></h2>
-            </div>
-            
-            <div class="space-y-4" id="faq-container">
-                <!-- FAQ items injected by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="relative border-t border-white/5 bg-slate-950 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-12 mb-12">
-                <div class="md:col-span-2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                            <i class="fa-solid fa-bolt text-white"></i>
-                        </div>
+                    <p class="text-sm text-slate-700 dark:text-slate-300 mb-4">"${randomComment}"</p>
+                    <div class="flex items-center gap-3 mt-auto">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-white flex items-center justify-center font-bold text-xs">${randomName.charAt(0)}</div>
                         <div>
-                            <h3 class="font-display font-bold text-xl">Wang Weize</h3>
+                            <p class="text-xs font-bold text-slate-900 dark:text-white">${randomName}</p>
+                            <p class="text-[10px] text-emerald-500">Verified Buyer ✓</p>
                         </div>
                     </div>
-                    <p class="text-slate-400 leading-relaxed max-w-sm">
-                        Penyedia akses akun Premium AI terpercaya di Indonesia. 
-                        Kualitas layanan enterprise dengan harga yang terjangkau.
-                    </p>
                 </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4 text-white">Produk</h4>
-                    <ul class="space-y-2 text-slate-400">
-                        <li><a href="#produk" class="hover:text-blue-400 transition-colors">ChatGPT Plus</a></li>
-                        <li><a href="#produk" class="hover:text-blue-400 transition-colors">ChatGPT Business</a></li>
-                        <li><a href
+                `;
+                html += card;
+            }
+            
+            // Inject twice for infinite seamless scroll
+            track.innerHTML = html + html;
+        }
+
+        // Cart Logic
+        function updateCart() {
+            localStorage.setItem('ww_cart', JSON.stringify(cart));
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            
+            const badge = document.getElementById('cart-badge');
+            badge.textContent = totalItems;
+            badge.classList.toggle('hidden', totalItems === 0);
+
+            const cartItemsEl = document.getElementById('cart-items');
+            if(cart.length === 0) {
+                cartItemsEl.innerHTML = `<div class="text-center text-slate-400 py-10"><i class="fa-solid fa-basket-shopping text-4xl mb-3 opacity-20"></i><p>Keranjang lu masih kosong nih.</p></div>`;
+                document.getElementById('checkout-wa').disabled = true;
+                document.getElementById('cart-total').textContent = 'Rp 0';
+                return;
+            }
+
+            let totalPrice = 0;
+            cartItemsEl.innerHTML = cart.map((item, index) => {
+                const prod = products.find(p => p.id === item.id);
+                const price = isReseller ? Math.floor(prod.price * 0.8) : prod.price;
+                const subtotal = price * item.qty;
+                totalPrice += subtotal;
+
+                return `
+                <div class="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/40 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
+                    <div class="w-12 h-12 rounded-xl ${prod.bg} ${prod.color} flex items-center justify-center text-xl shrink-0"><i class="${prod.icon}"></i></div>
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-sm text-slate-900 dark:text-white">${prod.name}</h4>
+                        <div class="text-blue-600 dark:text-blue-400 font-bold text-sm">Rp ${formatRp(price)}</div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white dark:bg-slate-900 rounded-lg p-1 border border-slate-200 dark:border-slate-700">
+                        <button onclick="changeQty(${index}, -1)" class="w-6 h-6 flex items-center justify-center text-slate-500 hover:text-red-500"><i class="fa-solid fa-minus text-xs"></i></button>
+                        <span class="text-sm font-bold w-4 text-center dark:text-white">${item.qty}</span>
+                        <button onclick="changeQty(${index}, 1)" class="w-6 h-6 flex items-center justify-center text-slate-500 hover:text-blue-500"><i class="fa-solid fa-plus text-xs"></i></button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            document.getElementById('cart-total').textContent = `Rp ${formatRp(totalPrice)}`;
+            document.getElementById('checkout-wa').disabled = false;
+        }
+
+        window.addToCart = (id) => {
+            const existing = cart.find(i => i.id === id);
+            if(existing) existing.qty++;
+            else cart.push({ id, qty: 1 });
+            updateCart();
+            showToast('Berhasil dimasukin keranjang!', 'fa-check');
+        };
+
+        window.changeQty = (index, delta) => {
+            cart[index].qty += delta;
+            if(cart[index].qty <= 0) cart.splice(index, 1);
+            updateCart();
+        };
+
+        document.getElementById('checkout-wa').addEventListener('click', () => {
+            let text = "Halo Wang Weize, gue mau order borongan nih:\n\n";
+            let total = 0;
+            cart.forEach(item => {
+                const prod = products.find(p => p.id === item.id);
+                const price = isReseller ? Math.floor(prod.price * 0.8) : prod.price;
+                text += `- ${prod.name} (${item.qty}x)\n`;
+                total += price * item.qty;
+            });
+            text += `\nTotal: Rp ${formatRp(total)}`;
+            if(isReseller) text += `\n(Pake Rate Reseller)`;
+            
+            window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+        });
+
+        // Sidebar UI
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const toggleCart = () => {
+            cartSidebar.classList.toggle('cart-open');
+            cartOverlay.classList.toggle('hidden');
+        };
+        document.getElementById('cart-toggle').addEventListener('click', toggleCart);
+        document.getElementById('close-cart').addEventListener('click', toggleCart);
+        cartOverlay.addEventListener('click', toggleCart);
+
+        // Toggle Reseller
+        const resellerBtn = document.getElementById('reseller-toggle');
+        const knob = document.getElementById('toggle-knob');
+        resellerBtn.addEventListener('click', () => {
+            isReseller = !isReseller;
+            if(isReseller) {
+                resellerBtn.classList.replace('bg-slate-300', 'bg-blue-500');
+                resellerBtn.classList.replace('dark:bg-slate-700', 'dark:bg-blue-600');
+                knob.classList.add('translate-x-6');
+                document.getElementById('label-reseller').classList.add('text-blue-600', 'dark:text-blue-400');
+                document.getElementById('label-personal').classList.replace('text-slate-800', 'text-slate-500');
+                document.getElementById('label-personal').classList.replace('dark:text-white', 'dark:text-slate-400');
+            } else {
+                resellerBtn.classList.replace('bg-blue-500', 'bg-slate-300');
+                resellerBtn.classList.replace('dark:bg-blue-600', 'dark:bg-slate-700');
+                knob.classList.remove('translate-x-6');
+                document.getElementById('label-reseller').classList.remove('text-blue-600', 'dark:text-blue-400');
+                document.getElementById('label-personal').classList.replace('text-slate-500', 'text-slate-800');
+                document.getElementById('label-personal').classList.replace('dark:text-slate-400', 'dark:text-white');
+            }
+            renderProducts();
+            updateCart();
+        });
+
+        // Theme Toggle
+        const themeBtn = document.getElementById('theme-toggle');
+        const htmlClass = document.documentElement.classList;
+        if(localStorage.theme === 'dark' || (!('theme' in localStorage))) htmlClass.add('dark');
+        else htmlClass.remove('dark');
+
+        themeBtn.addEventListener('click', () => {
+            htmlClass.toggle('dark');
+            localStorage.theme = htmlClass.contains('dark') ? 'dark' : 'light';
+        });
+
+        // Fake Toast Notification
+        function showToast(msg, icon = 'fa-bell') {
+            const toast = document.createElement('div');
+            toast.className = 'toast-enter glass bg-white/90 dark:bg-slate-900/90 rounded-2xl p-4 shadow-xl flex items-center gap-3 border-l-4 border-blue-500 text-slate-900 dark:text-white';
+            toast.innerHTML = `<div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center shrink-0"><i class="fa-solid ${icon}"></i></div><p class="text-sm font-semibold">${msg}</p>`;
+            document.getElementById('toast-container').appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
+        }
+
+        const buyers = ["Dimas", "Ayu", "Raka", "Dinda", "Fajar"];
+        setInterval(() => {
+            if(Math.random() > 0.6) {
+                const name = buyers[Math.floor(Math.random() * buyers.length)];
+                const prod = products[Math.floor(Math.random() * products.length)].name;
+                showToast(`${name} baru aja bungkus ${prod}!`, 'fa-cart-shopping');
+            }
+        }, 12000);
+
+        // Init
+        document.getElementById('year').textContent = new Date().getFullYear();
+        renderProducts();
+        renderTestimonials();
+        updateCart();
+    </script>
+</body>
+</html>
