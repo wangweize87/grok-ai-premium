@@ -1,1145 +1,818 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NexAI Store — Premium AI Access Platform</title>
+  <title>Wang Weize AI Access — Premium AI Access Support</title>
+  <meta name="description" content="Platform landing page premium untuk layanan bantuan akses dan support AI tools dengan checkout langsung ke WhatsApp." />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            base: {
+              950: '#060816',
+              900: '#0b1020',
+              800: '#121a31',
+              700: '#1a2645'
+            },
+            brand: {
+              blue: '#60a5fa',
+              cyan: '#22d3ee',
+              violet: '#8b5cf6',
+              emerald: '#34d399',
+              amber: '#fbbf24',
+              rose: '#fb7185'
+            }
+          },
+          boxShadow: {
+            glow: '0 0 0 1px rgba(255,255,255,0.05), 0 10px 40px rgba(34,211,238,0.12)',
+            soft: '0 12px 40px rgba(2,6,23,0.18)'
+          },
+          backgroundImage: {
+            grid: 'linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)',
+            spotlight: 'radial-gradient(circle at top right, rgba(34,211,238,0.15), transparent 30%), radial-gradient(circle at 20% 20%, rgba(139,92,246,0.18), transparent 28%), radial-gradient(circle at bottom left, rgba(52,211,153,0.12), transparent 26%)'
+          }
+        }
+      }
+    };
+  </script>
   <style>
     :root {
-      --bg-primary: #050811;
-      --bg-secondary: #0a1020;
-      --bg-card: rgba(14, 22, 40, 0.85);
-      --border-glass: rgba(99, 179, 237, 0.15);
-      --accent-gold: #f6c90e;
-      --accent-blue: #38bdf8;
-      --accent-emerald: #34d399;
-      --text-primary: #f0f4ff;
-      --text-muted: #8b9cc0;
-      --glow-gold: rgba(246, 201, 14, 0.3);
-      --glow-blue: rgba(56, 189, 248, 0.3);
-    }
-    [data-theme="light"] {
-      --bg-primary: #f0f4ff;
-      --bg-secondary: #e2e9f7;
-      --bg-card: rgba(255, 255, 255, 0.85);
-      --border-glass: rgba(56, 189, 248, 0.25);
-      --text-primary: #0a1020;
-      --text-muted: #4a5568;
-      --glow-gold: rgba(246, 201, 14, 0.2);
-      --glow-blue: rgba(56, 189, 248, 0.2);
+      color-scheme: dark;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
+    html.light {
+      color-scheme: light;
+    }
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-      transition: background 0.4s ease, color 0.4s ease;
+      background-color: #060816;
+      background-image: radial-gradient(circle at top, rgba(96,165,250,0.12), transparent 18%), radial-gradient(circle at bottom right, rgba(139,92,246,0.12), transparent 24%);
     }
 
-    h1, h2, h3, h4, h5 { font-family: 'Syne', sans-serif; }
-
-    /* ── Canvas background ── */
-    #bg-canvas {
-      position: fixed; inset: 0; z-index: 0;
-      pointer-events: none;
+    html.light body {
+      background-color: #f4f7fb;
+      background-image: radial-gradient(circle at top, rgba(59,130,246,0.10), transparent 18%), radial-gradient(circle at bottom right, rgba(14,165,233,0.10), transparent 24%);
     }
 
-    /* ── Glass card ── */
-    .glass-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 20px;
-      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-    }
-    .glass-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 40px var(--glow-blue);
-      border-color: var(--accent-blue);
+    .glass {
+      background: rgba(15, 23, 42, 0.58);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
-    /* ── Featured card ── */
-    .card-featured {
-      border-color: var(--accent-gold);
-      box-shadow: 0 0 30px var(--glow-gold);
-    }
-    .card-featured:hover {
-      box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 50px var(--glow-gold);
-      border-color: var(--accent-gold);
+    html.light .glass {
+      background: rgba(255,255,255,0.72);
+      border-color: rgba(15,23,42,0.08);
     }
 
-    /* ── Gradient text ── */
-    .gradient-gold {
-      background: linear-gradient(135deg, #f6c90e 0%, #ff9f1c 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    .text-gradient {
+      background: linear-gradient(90deg, #ffffff 0%, #7dd3fc 40%, #c4b5fd 100%);
+      -webkit-background-clip: text;
       background-clip: text;
+      color: transparent;
     }
-    .gradient-blue {
-      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+
+    html.light .text-gradient {
+      background: linear-gradient(90deg, #0f172a 0%, #0369a1 45%, #6d28d9 100%);
+      -webkit-background-clip: text;
       background-clip: text;
-    }
-    .gradient-emerald {
-      background: linear-gradient(135deg, #34d399 0%, #06b6d4 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: transparent;
     }
 
-    /* ── Button ── */
-    .btn-primary {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 13px 28px;
-      background: linear-gradient(135deg, #f6c90e, #ff9f1c);
-      color: #0a1020;
-      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem;
-      border-radius: 12px; border: none; cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
-    .btn-primary:hover {
-      transform: scale(1.04);
-      box-shadow: 0 8px 30px var(--glow-gold);
-      filter: brightness(1.1);
-    }
-
-    .btn-wa {
-      background: linear-gradient(135deg, #25d366, #128c7e);
-      color: #fff;
-    }
-    .btn-wa:hover { box-shadow: 0 8px 30px rgba(37,211,102,0.4); }
-
-    /* ── Badge ── */
-    .badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 4px 12px; border-radius: 999px; font-size: 0.72rem;
-      font-family: 'Syne', sans-serif; font-weight: 600; letter-spacing: 0.05em;
-    }
-    .badge-gold { background: rgba(246,201,14,0.15); color: #f6c90e; border: 1px solid rgba(246,201,14,0.3); }
-    .badge-blue { background: rgba(56,189,248,0.12); color: #38bdf8; border: 1px solid rgba(56,189,248,0.25); }
-    .badge-emerald { background: rgba(52,211,153,0.12); color: #34d399; border: 1px solid rgba(52,211,153,0.25); }
-    .badge-red   { background: rgba(248,113,113,0.12); color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
-
-    /* ── Stock bar ── */
-    .stock-bar { height: 5px; border-radius: 99px; background: rgba(255,255,255,0.08); overflow: hidden; }
-    .stock-bar-fill { height: 100%; border-radius: 99px; transition: width 1s ease; }
-
-    /* ── Live notification ── */
-    #live-notif {
-      position: fixed; bottom: 28px; left: 28px; z-index: 9999;
-      max-width: 310px; display: none;
-      background: var(--bg-card);
-      border: 1px solid var(--border-glass);
-      backdrop-filter: blur(20px);
-      border-radius: 14px;
-      padding: 14px 18px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-      animation: slideUp 0.4s ease;
-    }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Nav ── */
-    #navbar {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(5,8,17,0.75);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border-glass);
-      transition: background 0.4s;
-    }
-    [data-theme="light"] #navbar { background: rgba(240,244,255,0.85); }
-
-    /* ── Section ── */
-    .section { position: relative; z-index: 1; }
-
-    /* ── Countdown ── */
-    .countdown-digit {
-      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.6rem;
-      background: var(--bg-card); border: 1px solid var(--border-glass);
-      padding: 8px 14px; border-radius: 10px; min-width: 56px; text-align: center;
-    }
-
-    /* ── Hero glow ── */
-    .hero-glow {
+    .noise::before {
+      content: '';
       position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
+      inset: 0;
       pointer-events: none;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='white' fill-opacity='1'%3E%3Ccircle cx='3' cy='3' r='1'/%3E%3Ccircle cx='35' cy='26' r='1'/%3E%3Ccircle cx='78' cy='80' r='1'/%3E%3Ccircle cx='128' cy='38' r='1'/%3E%3Ccircle cx='140' cy='122' r='1'/%3E%3Ccircle cx='92' cy='136' r='1'/%3E%3Ccircle cx='54' cy='112' r='1'/%3E%3C/g%3E%3C/svg%3E");
     }
 
-    /* ── Scroll reveal ── */
-    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── Mobile menu ── */
-    #mobile-menu { display: none; }
-    #mobile-menu.open { display: block; }
-
-    /* ── Theme toggle ── */
-    .theme-toggle {
-      width: 46px; height: 24px; border-radius: 999px;
-      background: linear-gradient(135deg, #1e3a5f, #0f2040);
-      border: 1px solid var(--border-glass);
-      cursor: pointer; position: relative; transition: background 0.3s;
-      outline: none;
-    }
-    .theme-toggle::after {
-      content: ''; position: absolute; top: 3px; left: 3px;
-      width: 16px; height: 16px; border-radius: 50%;
-      background: #38bdf8;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-    [data-theme="light"] .theme-toggle::after {
-      transform: translateX(22px); background: #f6c90e;
+    .card-hover {
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
     }
 
-    /* ── Feature icon ── */
-    .feature-icon {
-      width: 52px; height: 52px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
+    .card-hover:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 50px rgba(14, 165, 233, 0.14);
+      border-color: rgba(96, 165, 250, 0.35);
     }
 
-    /* ── Testimonial ── */
-    .testi-card { animation: scrollX 28s linear infinite; }
-    @keyframes scrollX {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .testi-track { overflow: hidden; }
-
-    /* ── Contact link ── */
-    .contact-link {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 12px 20px;
-      border-radius: 12px;
-      border: 1px solid var(--border-glass);
-      background: var(--bg-card);
-      transition: all 0.3s ease;
-      text-decoration: none;
-      color: var(--text-primary);
-    }
-    .contact-link:hover {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 20px var(--glow-blue);
-      transform: translateY(-3px);
+    .toast-enter {
+      animation: slideIn 380ms ease forwards;
     }
 
-    /* ── Scrollbar ── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-primary); }
-    ::-webkit-scrollbar-thumb { background: rgba(99,179,237,0.3); border-radius: 999px; }
-
-    /* ── Ripple ── */
-    @keyframes ripple {
-      0% { transform: scale(0); opacity: 0.6; }
-      100% { transform: scale(4); opacity: 0; }
-    }
-    .ripple-effect {
-      position: absolute; border-radius: 50%;
-      background: rgba(246,201,14,0.35);
-      animation: ripple 0.7s ease-out forwards;
-      pointer-events: none;
+    .toast-exit {
+      animation: slideOut 380ms ease forwards;
     }
 
-    /* ── Pulse dot ── */
+    @keyframes slideIn {
+      from { transform: translateY(18px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideOut {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(18px); opacity: 0; }
+    }
+
     .pulse-dot {
-      width: 8px; height: 8px; border-radius: 50%; background: #34d399;
-      animation: pulseDot 2s ease-in-out infinite;
-      display: inline-block;
-    }
-    @keyframes pulseDot {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0.6); }
-      50% { box-shadow: 0 0 0 6px rgba(52,211,153,0); }
+      animation: pulse 1.8s infinite;
     }
 
-    /* ── Logo brand ── */
-    .logo-brand { letter-spacing: -0.04em; }
-
-    /* mobile */
-    @media (max-width: 640px) {
-      .countdown-digit { font-size: 1.2rem; min-width: 44px; padding: 6px 10px; }
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      70% { transform: scale(1.2); opacity: 0.15; }
+      100% { transform: scale(0.95); opacity: 0.8; }
     }
   </style>
 </head>
-<body>
+<body class="min-h-screen text-slate-100 antialiased transition-colors duration-300 dark:text-slate-100 light:text-slate-900">
+  <div class="fixed inset-0 -z-10 bg-spotlight"></div>
+  <div class="fixed inset-0 -z-10 bg-grid bg-[size:34px_34px] opacity-[0.035]"></div>
 
-<!-- ── Particle canvas ── -->
-<canvas id="bg-canvas"></canvas>
-
-<!-- ─────────────────────── LIVE NOTIFICATION ─────────────────────── -->
-<div id="live-notif" role="alert" aria-live="polite">
-  <div class="flex items-start gap-3">
-    <div id="notif-avatar" class="text-2xl flex-shrink-0">🤖</div>
-    <div>
-      <p class="text-xs" style="color:var(--text-muted);">Baru saja bergabung</p>
-      <p id="notif-text" class="font-semibold text-sm mt-0.5" style="color:var(--text-primary);">Budi membeli ChatGPT Plus</p>
-      <p class="text-xs mt-1" style="color:var(--accent-emerald);">✓ Terverifikasi · Bandung, ID</p>
-    </div>
-    <button onclick="document.getElementById('live-notif').style.display='none'"
-      class="ml-auto text-sm" style="color:var(--text-muted);" aria-label="Tutup">✕</button>
-  </div>
-</div>
-
-<!-- ─────────────────────── NAVBAR ─────────────────────── -->
-<nav id="navbar">
-  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-    <!-- Logo -->
-    <a href="#" class="flex items-center gap-2 no-underline">
-      <div style="width:34px;height:34px;background:linear-gradient(135deg,#f6c90e,#ff9f1c);border-radius:9px;display:flex;align-items:center;justify-content:center;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#0a1020" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <span class="logo-brand font-bold text-lg" style="font-family:'Syne',sans-serif;color:var(--text-primary);">Nex<span class="gradient-gold">AI</span></span>
-    </a>
-
-    <!-- Desktop nav -->
-    <div class="hidden md:flex items-center gap-6 text-sm" style="color:var(--text-muted);">
-      <a href="#products" class="hover:text-white transition-colors">Produk</a>
-      <a href="#features" class="hover:text-white transition-colors">Fitur</a>
-      <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
-      <a href="#contact" class="hover:text-white transition-colors">Kontak</a>
-    </div>
-
-    <!-- Right -->
-    <div class="flex items-center gap-3">
-      <!-- Theme toggle -->
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle tema" title="Ganti tema"></button>
-
-      <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20ingin%20bertanya%20tentang%20produk%20AI"
-         target="_blank" rel="noopener"
-         class="btn-primary btn-wa hidden sm:inline-flex text-xs px-4 py-2">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Order Sekarang
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-slate-950/55 backdrop-blur-xl dark:bg-slate-950/55 light:bg-white/70">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="#home" class="flex items-center gap-3">
+        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500 text-sm font-black text-white shadow-soft">WW</div>
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.28em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">Independent AI Access Desk</p>
+          <h1 class="text-sm font-semibold text-white dark:text-white light:text-slate-900">Wang Weize AI Access</h1>
+        </div>
       </a>
 
-      <!-- Mobile hamburger -->
-      <button id="hamburger" class="md:hidden p-2" style="color:var(--text-primary);" aria-label="Menu">
-        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
-    </div>
-  </div>
+      <nav class="hidden items-center gap-6 md:flex">
+        <a href="#produk" class="text-sm text-slate-300 transition hover:text-white dark:text-slate-300 light:text-slate-700 light:hover:text-slate-950">Produk</a>
+        <a href="#fitur" class="text-sm text-slate-300 transition hover:text-white dark:text-slate-300 light:text-slate-700 light:hover:text-slate-950">Keunggulan</a>
+        <a href="#cara-order" class="text-sm text-slate-300 transition hover:text-white dark:text-slate-300 light:text-slate-700 light:hover:text-slate-950">Cara Order</a>
+        <a href="#admin" class="text-sm text-slate-300 transition hover:text-white dark:text-slate-300 light:text-slate-700 light:hover:text-slate-950">Admin</a>
+      </nav>
 
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="md:hidden px-4 pb-4 flex flex-col gap-3 text-sm" style="color:var(--text-muted);border-top:1px solid var(--border-glass);">
-    <a href="#products" class="pt-3 hover:text-white transition-colors" onclick="closeMobile()">Produk</a>
-    <a href="#features" class="hover:text-white transition-colors" onclick="closeMobile()">Fitur</a>
-    <a href="#faq" class="hover:text-white transition-colors" onclick="closeMobile()">FAQ</a>
-    <a href="#contact" class="hover:text-white transition-colors" onclick="closeMobile()">Kontak</a>
-    <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20ingin%20bertanya%20tentang%20produk%20AI"
-       target="_blank" rel="noopener" class="btn-primary btn-wa mt-1 text-xs">
-      Order via WhatsApp
-    </a>
-  </div>
-</nav>
-
-<!-- ─────────────────────── HERO ─────────────────────── -->
-<section class="section relative min-h-screen flex flex-col items-center justify-center px-4 py-24 text-center overflow-hidden">
-  <!-- Decorative glows -->
-  <div class="hero-glow" style="width:500px;height:500px;background:radial-gradient(circle,rgba(246,201,14,0.12) 0%,transparent 70%);top:-120px;left:-100px;"></div>
-  <div class="hero-glow" style="width:400px;height:400px;background:radial-gradient(circle,rgba(56,189,248,0.1) 0%,transparent 70%);bottom:-80px;right:-80px;"></div>
-
-  <div class="relative z-10 max-w-4xl mx-auto">
-    <!-- Status pill -->
-    <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-xs font-semibold"
-         style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);color:#34d399;">
-      <span class="pulse-dot"></span>
-      SISTEM AKTIF — Stok tersedia hari ini
-    </div>
-
-    <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight mb-6" style="letter-spacing:-0.03em;">
-      Akses <span class="gradient-gold">AI Premium</span><br/>
-      Harga <span class="gradient-blue">Enterprise</span><br/>
-      <span style="color:var(--text-muted);font-size:0.6em;font-weight:500;">untuk semua kalangan</span>
-    </h1>
-
-    <p class="text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed" style="color:var(--text-muted);">
-      ChatGPT Plus, Gemini Pro, Grok AI dan lebih banyak lagi — harga jauh lebih hemat, aktivasi kilat, dukungan penuh dari admin berpengalaman.
-    </p>
-
-    <!-- CTA buttons -->
-    <div class="flex flex-wrap items-center justify-center gap-4 mb-14">
-      <a href="#products" class="btn-primary text-sm">
-        Lihat Semua Produk
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20bertanya%20tentang%20produk%20AI"
-         target="_blank" rel="noopener"
-         class="btn-primary btn-wa text-sm">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Chat WhatsApp
-      </a>
-    </div>
-
-    <!-- Stats row -->
-    <div class="flex flex-wrap justify-center gap-8">
-      <div class="text-center">
-        <div class="text-2xl font-extrabold gradient-gold" id="stat-customers">1.000.000+</div>
-        <div class="text-xs mt-1" style="color:var(--text-muted);">Pelanggan Aktif</div>
-      </div>
-      <div class="w-px" style="background:var(--border-glass);"></div>
-      <div class="text-center">
-        <div class="text-2xl font-extrabold gradient-blue">99.8%</div>
-        <div class="text-xs mt-1" style="color:var(--text-muted);">Uptime Platform</div>
-      </div>
-      <div class="w-px" style="background:var(--border-glass);"></div>
-      <div class="text-center">
-        <div class="text-2xl font-extrabold gradient-emerald">&lt;5 Menit</div>
-        <div class="text-xs mt-1" style="color:var(--text-muted);">Waktu Aktivasi</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40">
-    <div class="text-xs" style="color:var(--text-muted);">scroll</div>
-    <div class="w-px h-8 bg-gradient-to-b from-blue-400 to-transparent"></div>
-  </div>
-</section>
-
-<!-- ─────────────────────── COUNTDOWN BANNER ─────────────────────── -->
-<section class="section px-4 py-6 reveal">
-  <div class="max-w-4xl mx-auto">
-    <div class="glass-card p-5 flex flex-wrap items-center justify-between gap-4"
-         style="border-color:rgba(246,201,14,0.3);background:rgba(246,201,14,0.05);">
       <div class="flex items-center gap-3">
-        <span style="font-size:1.6rem;">⚡</span>
-        <div>
-          <p class="font-bold text-sm" style="font-family:'Syne',sans-serif;color:#f6c90e;">FLASH SALE AKTIF</p>
-          <p class="text-xs" style="color:var(--text-muted);">Harga spesial berakhir dalam</p>
-        </div>
+        <button id="themeToggle" class="glass inline-flex h-11 w-11 items-center justify-center rounded-2xl text-slate-200 transition hover:scale-[1.03] dark:text-slate-200 light:text-slate-700" aria-label="Toggle theme"></button>
+        <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20tanya%20paket%20AI" target="_blank" rel="noreferrer" class="hidden rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-soft transition hover:-translate-y-0.5 hover:bg-cyan-100 dark:bg-white dark:text-slate-900 light:bg-slate-900 light:text-white light:hover:bg-slate-800 sm:inline-flex">Hubungi via WhatsApp</a>
       </div>
-      <div class="flex items-center gap-2">
-        <div class="text-center"><div class="countdown-digit" id="cd-hours">00</div><div class="text-xs mt-1" style="color:var(--text-muted);">Jam</div></div>
-        <span class="text-xl font-bold" style="color:var(--accent-gold);">:</span>
-        <div class="text-center"><div class="countdown-digit" id="cd-mins">00</div><div class="text-xs mt-1" style="color:var(--text-muted);">Menit</div></div>
-        <span class="text-xl font-bold" style="color:var(--accent-gold);">:</span>
-        <div class="text-center"><div class="countdown-digit" id="cd-secs">00</div><div class="text-xs mt-1" style="color:var(--text-muted);">Detik</div></div>
-      </div>
-      <a href="#products" class="btn-primary text-xs px-4 py-2">Ambil Sekarang →</a>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ─────────────────────── PRODUCTS ─────────────────────── -->
-<section id="products" class="section px-4 py-20">
-  <div class="max-w-6xl mx-auto">
-    <div class="text-center mb-14 reveal">
-      <div class="badge badge-blue mb-4">KATALOG PRODUK</div>
-      <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Pilih <span class="gradient-gold">AI Terbaik</span> Anda</h2>
-      <p class="max-w-lg mx-auto text-sm" style="color:var(--text-muted);">Akses premium ke model AI terdepan dunia dengan harga yang terjangkau dan proses aktivasi kilat.</p>
-    </div>
+  <main id="home" class="relative overflow-hidden">
+    <section class="noise relative">
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:py-24">
+        <div class="self-center">
+          <div class="mb-6 inline-flex items-center gap-3 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-medium text-cyan-200 dark:text-cyan-200 light:text-sky-800">
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400"></span>
+              <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+            </span>
+            Slot support aktif hari ini • respon cepat • checkout langsung ke WhatsApp
+          </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 class="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white dark:text-white light:text-slate-950 sm:text-5xl lg:text-6xl">
+            Akses AI Premium dengan tampilan <span class="text-gradient">serius, profesional, dan siap closing</span>.
+          </h2>
 
-      <!-- ChatGPT Plus -->
-      <div class="glass-card p-6 flex flex-col gap-4 reveal" data-delay="0">
-        <div class="flex items-start justify-between">
-          <div class="flex items-center gap-3">
-            <!-- OpenAI SVG -->
-            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--text-primary)"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08-4.778 2.758a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg>
+          <p class="mt-6 max-w-2xl text-base leading-8 text-slate-300 dark:text-slate-300 light:text-slate-700 sm:text-lg">
+            Landing page ini dirancang untuk layanan independen penjualan dan support akses AI. Semua order diarahkan ke WhatsApp agar alur pembelian cepat, simpel, dan conversion-friendly di desktop maupun mobile.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#produk" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-6 py-4 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5">Lihat Paket Sekarang</a>
+            <a href="#admin" class="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-sm font-semibold text-white transition hover:border-cyan-300/30 hover:bg-white/10 dark:text-white light:border-slate-300 light:bg-white/70 light:text-slate-900">Kontak Admin Support</a>
+          </div>
+
+          <div class="mt-8 grid gap-4 sm:grid-cols-3">
+            <div class="glass rounded-3xl p-5 shadow-glow">
+              <p class="text-xs uppercase tracking-[0.24em] text-slate-400 dark:text-slate-400 light:text-slate-600">Checkout</p>
+              <p class="mt-2 text-2xl font-bold text-white dark:text-white light:text-slate-900">1 Klik ke WA</p>
+              <p class="mt-2 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">Tombol beli otomatis membawa calon buyer ke pesan order yang sudah terisi.</p>
             </div>
+            <div class="glass rounded-3xl p-5 shadow-glow">
+              <p class="text-xs uppercase tracking-[0.24em] text-slate-400 dark:text-slate-400 light:text-slate-600">UI</p>
+              <p class="mt-2 text-2xl font-bold text-white dark:text-white light:text-slate-900">Glass Corporate</p>
+              <p class="mt-2 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">Gaya premium, kontras rapi, responsif, dan cocok untuk halaman jualan yang lebih trustable.</p>
+            </div>
+            <div class="glass rounded-3xl p-5 shadow-glow">
+              <p class="text-xs uppercase tracking-[0.24em] text-slate-400 dark:text-slate-400 light:text-slate-600">Fitur Pintar</p>
+              <p class="mt-2 text-2xl font-bold text-white dark:text-white light:text-slate-900">7 Elemen Konversi</p>
+              <p class="mt-2 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">Termasuk countdown, stock dinamis, live toast, filter produk, dan theme toggle.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-[2rem] border border-white/10 p-6 shadow-glow sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <h3 class="font-bold text-sm" style="font-family:'Syne',sans-serif;">ChatGPT Plus</h3>
-              <p class="text-xs" style="color:var(--text-muted);">by OpenAI</p>
+              <p class="text-xs uppercase tracking-[0.26em] text-slate-400 dark:text-slate-400 light:text-slate-600">Control Center</p>
+              <h3 class="mt-2 text-2xl font-bold text-white dark:text-white light:text-slate-900">Dashboard Penawaran</h3>
+            </div>
+            <div class="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-3 py-2 text-xs font-semibold text-emerald-300 dark:text-emerald-300 light:text-emerald-700">Update otomatis</div>
+          </div>
+
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Promo berakhir dalam</p>
+              <div id="countdown" class="mt-3 grid grid-cols-4 gap-2 text-center"></div>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Kinerja halaman</p>
+              <div class="mt-4 space-y-4">
+                <div>
+                  <div class="mb-2 flex items-center justify-between text-xs text-slate-400 dark:text-slate-400 light:text-slate-600"><span>Intent beli</span><span>92%</span></div>
+                  <div class="h-2 rounded-full bg-white/10 dark:bg-white/10 light:bg-slate-200"><div class="h-2 w-[92%] rounded-full bg-gradient-to-r from-cyan-400 to-violet-500"></div></div>
+                </div>
+                <div>
+                  <div class="mb-2 flex items-center justify-between text-xs text-slate-400 dark:text-slate-400 light:text-slate-600"><span>Respons cepat</span><span>95%</span></div>
+                  <div class="h-2 rounded-full bg-white/10 dark:bg-white/10 light:bg-slate-200"><div class="h-2 w-[95%] rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400"></div></div>
+                </div>
+                <div>
+                  <div class="mb-2 flex items-center justify-between text-xs text-slate-400 dark:text-slate-400 light:text-slate-600"><span>Trust visual</span><span>89%</span></div>
+                  <div class="h-2 rounded-full bg-white/10 dark:bg-white/10 light:bg-slate-200"><div class="h-2 w-[89%] rounded-full bg-gradient-to-r from-amber-400 to-rose-400"></div></div>
+                </div>
+              </div>
             </div>
           </div>
-          <span class="badge badge-gold">Popular</span>
-        </div>
 
-        <div>
-          <div class="text-2xl font-extrabold gradient-gold">Rp 12.000</div>
-          <div class="text-xs" style="color:var(--text-muted);">per bulan</div>
-        </div>
-
-        <ul class="flex flex-col gap-2 text-xs" style="color:var(--text-muted);">
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Akses Private</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> 1 Akun 1 Gmail</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> GPT-4o + DALL·E</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Aktivasi &lt;5 Menit</li>
-        </ul>
-
-        <!-- Stock -->
-        <div>
-          <div class="flex justify-between text-xs mb-1" style="color:var(--text-muted);">
-            <span>Stok tersedia</span>
-            <span id="stock-1" class="font-semibold" style="color:#f6c90e;">7 slot</span>
-          </div>
-          <div class="stock-bar">
-            <div class="stock-bar-fill" id="stock-bar-1" style="width:30%;background:linear-gradient(90deg,#f6c90e,#ff9f1c);"></div>
-          </div>
-        </div>
-
-        <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20order%20ChatGPT%20Plus%20%2F%20Pro"
-           target="_blank" rel="noopener"
-           class="btn-primary btn-wa w-full text-xs justify-center ripple-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Pesan Sekarang
-        </a>
-      </div>
-
-      <!-- ChatGPT Business — FEATURED -->
-      <div class="glass-card card-featured p-6 flex flex-col gap-4 relative reveal" data-delay="1">
-        <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-          <span class="badge badge-gold px-4">⭐ TERLARIS</span>
-        </div>
-
-        <div class="flex items-start justify-between mt-2">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(246,201,14,0.1);border:1px solid rgba(246,201,14,0.3);">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="#f6c90e"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08-4.778 2.758a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg>
+          <div class="mt-6 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Pengunjung hari ini</p>
+              <p class="mt-2 text-3xl font-black text-white dark:text-white light:text-slate-900"><span class="stat-number" data-target="1284">0</span>+</p>
             </div>
-            <div>
-              <h3 class="font-bold text-sm gradient-gold" style="font-family:'Syne',sans-serif;">ChatGPT Business</h3>
-              <p class="text-xs" style="color:var(--text-muted);">by OpenAI</p>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Chat masuk</p>
+              <p class="mt-2 text-3xl font-black text-white dark:text-white light:text-slate-900"><span class="stat-number" data-target="312">0</span>+</p>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Kepuasan buyer</p>
+              <p class="mt-2 text-3xl font-black text-white dark:text-white light:text-slate-900"><span class="stat-number" data-target="98">0</span>%</p>
             </div>
           </div>
-          <span class="badge badge-red">Hot 🔥</span>
-        </div>
 
-        <div>
-          <div class="text-2xl font-extrabold gradient-gold">Rp 30.000</div>
-          <div class="text-xs" style="color:var(--text-muted);">per bulan</div>
-        </div>
-
-        <ul class="flex flex-col gap-2 text-xs" style="color:var(--text-muted);">
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Server Prioritas</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> No Usage Cap</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> GPT-4o + Plugins</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Business Analytics</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Prioritas Support</li>
-        </ul>
-
-        <div>
-          <div class="flex justify-between text-xs mb-1" style="color:var(--text-muted);">
-            <span>Stok tersedia</span>
-            <span id="stock-2" class="font-semibold" style="color:#f87171;">3 slot</span>
-          </div>
-          <div class="stock-bar">
-            <div class="stock-bar-fill" id="stock-bar-2" style="width:12%;background:linear-gradient(90deg,#f87171,#ef4444);"></div>
+          <div class="mt-6 rounded-3xl border border-amber-400/20 bg-amber-400/10 p-5 text-sm text-amber-100 dark:text-amber-100 light:text-amber-900">
+            <span class="font-semibold">Catatan penting:</span> Template ini dibuat sebagai layanan independen. Gunakan nama brand hanya sebagai referensi kompatibilitas, jangan diposisikan seolah-olah situs resmi atau afiliasi resmi tanpa izin.
           </div>
         </div>
+      </div>
+    </section>
 
-        <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20order%20ChatGPT%20Business"
-           target="_blank" rel="noopener"
-           class="btn-primary w-full text-xs justify-center ripple-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Pesan Sekarang
-        </a>
+    <section id="produk" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
+      <div class="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-[0.30em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">Daftar Produk</p>
+          <h3 class="mt-3 text-3xl font-black text-white dark:text-white light:text-slate-950 sm:text-4xl">Pilih paket yang paling cocok untuk kebutuhan buyer.</h3>
+          <p class="mt-3 max-w-2xl text-slate-300 dark:text-slate-300 light:text-slate-700">Semua kartu produk sudah dilengkapi CTA WhatsApp otomatis, indikator stok, highlight benefit, dan visual pricing yang lebih rapi untuk meningkatkan conversion.</p>
+        </div>
+
+        <div class="grid gap-3 sm:grid-cols-[1fr_auto]">
+          <label class="glass flex items-center gap-3 rounded-2xl px-4 py-3 shadow-glow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400 dark:text-slate-400 light:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input id="searchInput" type="text" placeholder="Cari paket AI..." class="w-full bg-transparent text-sm text-white placeholder:text-slate-500 outline-none dark:text-white light:text-slate-900" />
+          </label>
+          <button id="promoToggle" class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10 dark:text-white light:border-slate-300 light:bg-white/80 light:text-slate-900">Mode Promo: ON</button>
+        </div>
       </div>
 
-      <!-- Gemini Pro -->
-      <div class="glass-card p-6 flex flex-col gap-4 reveal" data-delay="2">
-        <div class="flex items-start justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(66,133,244,0.08);border:1px solid rgba(66,133,244,0.2);">
-              <!-- Google Gemini official color SVG -->
-              <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="gem1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#4285F4"/>
-                    <stop offset="50%" style="stop-color:#9B72CB"/>
-                    <stop offset="100%" style="stop-color:#D96570"/>
-                  </linearGradient>
-                </defs>
-                <path d="M12 2C12 2 6 9 6 12C6 15 9 18 12 18C15 18 18 15 18 12C18 9 12 2 12 2Z" fill="url(#gem1)"/>
-                <path d="M12 22C12 22 18 15 18 12C18 9 15 6 12 6C9 6 6 9 6 12C6 15 12 22 12 22Z" fill="url(#gem1)" opacity="0.6"/>
-              </svg>
+      <div id="filterChips" class="mb-6 flex flex-wrap gap-3"></div>
+      <div id="productGrid" class="grid gap-6 md:grid-cols-2 xl:grid-cols-4"></div>
+    </section>
+
+    <section id="fitur" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
+      <div class="glass rounded-[2rem] p-6 shadow-glow sm:p-8">
+        <div class="max-w-3xl">
+          <p class="text-xs uppercase tracking-[0.30em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">Nilai Tambah</p>
+          <h3 class="mt-3 text-3xl font-black text-white dark:text-white light:text-slate-950 sm:text-4xl">7 fitur yang membuat landing page ini terasa jauh lebih modern.</h3>
+          <p class="mt-3 text-slate-300 dark:text-slate-300 light:text-slate-700">Selain 5 fitur wajib tambahan, saya sekalian tambahkan optimasi visual dan CTA sticky agar website lebih siap pakai ketika langsung di-deploy.</p>
+        </div>
+
+        <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+            <div class="mb-4 inline-flex rounded-2xl bg-cyan-400/15 p-3 text-cyan-300 dark:text-cyan-300 light:text-sky-700">01</div>
+            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Theme Toggle + Persist</h4>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">User bisa pindah dark/light mode, dan preferensi tersimpan otomatis di browser.</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+            <div class="mb-4 inline-flex rounded-2xl bg-violet-400/15 p-3 text-violet-300 dark:text-violet-300 light:text-violet-700">02</div>
+            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Dynamic Stock Counter</h4>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Memberi efek scarcity yang halus dengan stok yang bergerak secara real-time di tiap kartu produk.</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+            <div class="mb-4 inline-flex rounded-2xl bg-emerald-400/15 p-3 text-emerald-300 dark:text-emerald-300 light:text-emerald-700">03</div>
+            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Live Sales Toast</h4>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Popup pembelian simulatif membuat halaman terasa hidup dan menaikkan social proof.</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+            <div class="mb-4 inline-flex rounded-2xl bg-amber-400/15 p-3 text-amber-300 dark:text-amber-300 light:text-amber-700">04</div>
+            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Search + Filter Chips</h4>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Pengunjung bisa langsung menyaring paket berdasarkan brand dan kata kunci.</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+            <div class="mb-4 inline-flex rounded-2xl bg-rose-400/15 p-3 text-rose-300 dark:text-rose-300 light:text-rose-700">05</div>
+            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Promo Countdown</h4>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Timer promo membantu mendorong keputusan lebih cepat tanpa membuat tampilan terlihat murahan.</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+            <div class="mb-4 inline-flex rounded-2xl bg-sky-400/15 p-3 text-sky-300 dark:text-sky-300 light:text-sky-700">06</div>
+            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Animated Metrics</h4>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Angka statistik naik otomatis saat elemen masuk viewport untuk kesan dashboard premium.</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+            <div class="mb-4 inline-flex rounded-2xl bg-fuchsia-400/15 p-3 text-fuchsia-300 dark:text-fuchsia-300 light:text-fuchsia-700">07</div>
+            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Sticky Mobile CTA</h4>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Tombol order tetap terlihat di layar mobile agar peluang chat masuk lebih tinggi.</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+            <div class="mb-4 inline-flex rounded-2xl bg-white/10 p-3 text-white dark:text-white light:bg-slate-200 light:text-slate-800">UX+</div>
+            <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900">Komponen siap edit</h4>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Data produk, nama admin, link, harga, stok, dan teks CTA semuanya terpusat di JavaScript agar mudah diubah.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cara-order" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
+      <div class="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+        <div class="glass rounded-[2rem] p-6 shadow-glow sm:p-8">
+          <p class="text-xs uppercase tracking-[0.30em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">Cara Order</p>
+          <h3 class="mt-3 text-3xl font-black text-white dark:text-white light:text-slate-950">Alur pembelian dibuat sesingkat mungkin.</h3>
+          <div class="mt-8 space-y-5">
+            <div class="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-500 font-black text-white">1</div>
+              <div>
+                <h4 class="font-bold text-white dark:text-white light:text-slate-900">Pilih produk</h4>
+                <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Klik salah satu kartu paket yang sesuai dengan kebutuhan buyer.</p>
+              </div>
             </div>
-            <div>
-              <h3 class="font-bold text-sm" style="font-family:'Syne',sans-serif;">Gemini Pro</h3>
-              <p class="text-xs" style="color:var(--text-muted);">by Google</p>
+            <div class="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-400 to-fuchsia-500 font-black text-white">2</div>
+              <div>
+                <h4 class="font-bold text-white dark:text-white light:text-slate-900">Tombol otomatis ke WhatsApp</h4>
+                <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Pesan akan terisi otomatis dengan format: “Halo Wang Weize, saya mau order [Nama Produk]”.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-5 dark:bg-white/5 light:bg-white/80">
+              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-500 font-black text-white">3</div>
+              <div>
+                <h4 class="font-bold text-white dark:text-white light:text-slate-900">Admin follow-up cepat</h4>
+                <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Calon buyer tinggal melanjutkan chat, cocok untuk closing manual yang tetap rapi.</p>
+              </div>
             </div>
           </div>
-          <span class="badge badge-emerald">Ekosistem Google</span>
         </div>
 
-        <div>
-          <div class="text-2xl font-extrabold gradient-emerald">Rp 20.000</div>
-          <div class="text-xs" style="color:var(--text-muted);">per 4 bulan</div>
+        <div class="glass rounded-[2rem] p-6 shadow-glow sm:p-8">
+          <p class="text-xs uppercase tracking-[0.30em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">FAQ Ringkas</p>
+          <h3 class="mt-3 text-3xl font-black text-white dark:text-white light:text-slate-950">Bagian pertanyaan umum untuk menaikkan trust.</h3>
+          <div id="faqList" class="mt-8 space-y-4"></div>
         </div>
-
-        <ul class="flex flex-col gap-2 text-xs" style="color:var(--text-muted);">
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Gemini 1.5 Pro</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Integrasi Google Suite</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Multimodal AI</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> 1M Token Context</li>
-        </ul>
-
-        <div>
-          <div class="flex justify-between text-xs mb-1" style="color:var(--text-muted);">
-            <span>Stok tersedia</span>
-            <span id="stock-3" class="font-semibold" style="color:#34d399;">12 slot</span>
-          </div>
-          <div class="stock-bar">
-            <div class="stock-bar-fill" id="stock-bar-3" style="width:60%;background:linear-gradient(90deg,#34d399,#06b6d4);"></div>
-          </div>
-        </div>
-
-        <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20order%20Gemini%20Pro"
-           target="_blank" rel="noopener"
-           class="btn-primary btn-wa w-full text-xs justify-center ripple-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Pesan Sekarang
-        </a>
       </div>
+    </section>
 
-      <!-- Grok AI -->
-      <div class="glass-card p-6 flex flex-col gap-4 reveal" data-delay="3">
-        <div class="flex items-start justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);">
-              <!-- Grok / X AI logo SVG -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--text-primary)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </div>
-            <div>
-              <h3 class="font-bold text-sm" style="font-family:'Syne',sans-serif;">Grok AI</h3>
-              <p class="text-xs" style="color:var(--text-muted);">by xAI</p>
-            </div>
-          </div>
-          <span class="badge badge-blue">Real-time</span>
+    <section id="admin" class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
+      <div class="glass rounded-[2rem] p-6 shadow-glow sm:p-8">
+        <div class="max-w-3xl">
+          <p class="text-xs uppercase tracking-[0.30em] text-cyan-300 dark:text-cyan-300 light:text-sky-700">Admin Support</p>
+          <h3 class="mt-3 text-3xl font-black text-white dark:text-white light:text-slate-950 sm:text-4xl">Sediakan lebih dari satu jalur kontak agar buyer merasa aman.</h3>
+          <p class="mt-3 text-slate-300 dark:text-slate-300 light:text-slate-700">Selain CTA utama ke WhatsApp, bagian admin ini bisa dipakai untuk validasi identitas, backup komunikasi, atau dukungan sebelum closing.</p>
         </div>
 
-        <div>
-          <div class="text-2xl font-extrabold gradient-blue">Rp 10.000</div>
-          <div class="text-xs" style="color:var(--text-muted);">per 3 hari</div>
+        <div class="mt-8 grid gap-5 md:grid-cols-3">
+          <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20tanya%20paket%20AI" target="_blank" rel="noreferrer" class="card-hover rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-emerald-400/20 to-cyan-400/10 p-6 shadow-soft">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-400/20 text-xl font-black text-emerald-300">WA</div>
+            <h4 class="mt-5 text-xl font-bold text-white dark:text-white light:text-slate-900">WhatsApp Order</h4>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Jalur utama checkout untuk semua produk. Pesan order sudah otomatis terisi.</p>
+            <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald-300 dark:text-emerald-300 light:text-emerald-700">Chat sekarang →</span>
+          </a>
+
+          <a href="https://www.threads.com/@janebeatrixrety" target="_blank" rel="noreferrer" class="card-hover rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-slate-200/10 to-slate-50/5 p-6 shadow-soft">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-xl font-black text-white dark:text-white light:bg-slate-200 light:text-slate-900">@</div>
+            <h4 class="mt-5 text-xl font-bold text-white dark:text-white light:text-slate-900">Admin 1 — Threads</h4>
+            <p class="mt-2 break-all text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">threads.com/@janebeatrixrety</p>
+            <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-100 dark:text-slate-100 light:text-slate-900">Buka profil →</span>
+          </a>
+
+          <a href="https://www.tiktok.com/@wangweize10?_r=1&_t=ZS-95siJwLG0Vs" target="_blank" rel="noreferrer" class="card-hover rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-cyan-400/15 to-fuchsia-400/10 p-6 shadow-soft">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-400/15 text-xl font-black text-cyan-300 dark:text-cyan-300 light:text-sky-700">TT</div>
+            <h4 class="mt-5 text-xl font-bold text-white dark:text-white light:text-slate-900">Admin 2 — TikTok</h4>
+            <p class="mt-2 break-all text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">tiktok.com/@wangweize10</p>
+            <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-cyan-300 dark:text-cyan-300 light:text-sky-700">Lihat akun →</span>
+          </a>
         </div>
-
-        <ul class="flex flex-col gap-2 text-xs" style="color:var(--text-muted);">
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Data X Real-time</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Grok-2 Access</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Image Generation</li>
-          <li class="flex items-center gap-2"><span style="color:#34d399;">✓</span> Uncensored Mode</li>
-        </ul>
-
-        <div>
-          <div class="flex justify-between text-xs mb-1" style="color:var(--text-muted);">
-            <span>Stok tersedia</span>
-            <span id="stock-4" class="font-semibold" style="color:#38bdf8;">5 slot</span>
-          </div>
-          <div class="stock-bar">
-            <div class="stock-bar-fill" id="stock-bar-4" style="width:25%;background:linear-gradient(90deg,#38bdf8,#818cf8);"></div>
-          </div>
-        </div>
-
-        <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20order%20Grok%20AI"
-           target="_blank" rel="noopener"
-           class="btn-primary btn-wa w-full text-xs justify-center ripple-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Pesan Sekarang
-        </a>
       </div>
+    </section>
+  </main>
 
-    </div><!-- /grid -->
+  <footer class="border-t border-white/10 py-8 dark:border-white/10 light:border-slate-200">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 text-sm text-slate-400 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 dark:text-slate-400 light:text-slate-600">
+      <p>© <span id="year"></span> Wang Weize AI Access. Template landing page independen, satu file, siap deploy.</p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#produk" class="transition hover:text-white dark:hover:text-white light:hover:text-slate-900">Produk</a>
+        <a href="#fitur" class="transition hover:text-white dark:hover:text-white light:hover:text-slate-900">Fitur</a>
+        <a href="#admin" class="transition hover:text-white dark:hover:text-white light:hover:text-slate-900">Admin Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="fixed inset-x-4 bottom-4 z-50 md:hidden">
+    <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20tanya%20paket%20AI" target="_blank" rel="noreferrer" class="flex items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-5 py-4 text-sm font-bold text-white shadow-soft">Order / Tanya via WhatsApp</a>
   </div>
-</section>
 
-<!-- ─────────────────────── WHY CHOOSE US ─────────────────────── -->
-<section id="features" class="section px-4 py-20">
-  <div class="max-w-5xl mx-auto">
-    <div class="text-center mb-14 reveal">
-      <div class="badge badge-emerald mb-4">KEUNGGULAN KAMI</div>
-      <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Kenapa <span class="gradient-blue">NexAI Store</span>?</h2>
-      <p class="max-w-lg mx-auto text-sm" style="color:var(--text-muted);">Platform terpercaya dengan ribuan pelanggan puas dan sistem yang dioptimalkan untuk kemudahan transaksi.</p>
-    </div>
+  <div id="toastContainer" class="pointer-events-none fixed bottom-24 right-4 z-50 flex w-[calc(100%-2rem)] max-w-sm flex-col gap-3 md:bottom-6"></div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <!-- Feature 1 -->
-      <div class="glass-card p-6 flex gap-4 reveal">
-        <div class="feature-icon flex-shrink-0" style="background:rgba(246,201,14,0.1);">⚡</div>
-        <div>
-          <h4 class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif;">Aktivasi Super Cepat</h4>
-          <p class="text-xs leading-relaxed" style="color:var(--text-muted);">Akun siap pakai dalam waktu kurang dari 5 menit setelah pembayaran dikonfirmasi.</p>
-        </div>
-      </div>
-      <!-- Feature 2 -->
-      <div class="glass-card p-6 flex gap-4 reveal">
-        <div class="feature-icon flex-shrink-0" style="background:rgba(56,189,248,0.1);">🛡️</div>
-        <div>
-          <h4 class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif;">100% Aman & Terpercaya</h4>
-          <p class="text-xs leading-relaxed" style="color:var(--text-muted);">Sistem terenkripsi end-to-end. Data dan privasi Anda adalah prioritas utama kami.</p>
-        </div>
-      </div>
-      <!-- Feature 3 -->
-      <div class="glass-card p-6 flex gap-4 reveal">
-        <div class="feature-icon flex-shrink-0" style="background:rgba(52,211,153,0.1);">💬</div>
-        <div>
-          <h4 class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif;">Dukungan 24/7</h4>
-          <p class="text-xs leading-relaxed" style="color:var(--text-muted);">Tim support kami siap membantu kapan saja via WhatsApp, Threads, dan TikTok.</p>
-        </div>
-      </div>
-      <!-- Feature 4 -->
-      <div class="glass-card p-6 flex gap-4 reveal">
-        <div class="feature-icon flex-shrink-0" style="background:rgba(129,140,248,0.1);">💰</div>
-        <div>
-          <h4 class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif;">Harga Terjangkau</h4>
-          <p class="text-xs leading-relaxed" style="color:var(--text-muted);">Hemat hingga 90% dibanding harga resmi. Kualitas enterprise, budget pelajar.</p>
-        </div>
-      </div>
-      <!-- Feature 5 -->
-      <div class="glass-card p-6 flex gap-4 reveal">
-        <div class="feature-icon flex-shrink-0" style="background:rgba(248,113,113,0.1);">🔄</div>
-        <div>
-          <h4 class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif;">Garansi Penuh</h4>
-          <p class="text-xs leading-relaxed" style="color:var(--text-muted);">Jika akun bermasalah, kami ganti atau refund tanpa tanya-tanya.</p>
-        </div>
-      </div>
-      <!-- Feature 6 -->
-      <div class="glass-card p-6 flex gap-4 reveal">
-        <div class="feature-icon flex-shrink-0" style="background:rgba(246,201,14,0.1);">🌐</div>
-        <div>
-          <h4 class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif;">Akses Global</h4>
-          <p class="text-xs leading-relaxed" style="color:var(--text-muted);">Bisa digunakan dari mana saja di seluruh Indonesia dan seluruh dunia.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  <script>
+    const WHATSAPP_BASE = 'https://wa.me/6282219989497?text=';
 
-<!-- ─────────────────────── TESTIMONIALS MARQUEE ─────────────────────── -->
-<section class="section px-4 py-12 overflow-hidden reveal">
-  <div class="max-w-6xl mx-auto mb-6 text-center">
-    <div class="badge badge-blue mb-3">TESTIMONI NYATA</div>
-    <h2 class="text-2xl font-extrabold">Apa Kata <span class="gradient-gold">Pelanggan Kami</span></h2>
-  </div>
-  <div class="testi-track">
-    <div class="testi-card flex gap-4" style="width:max-content;">
-      <!-- Duplicated for infinite loop -->
-      <div id="testi-inner" class="flex gap-4"></div>
-      <div id="testi-inner2" class="flex gap-4"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────── FAQ ─────────────────────── -->
-<section id="faq" class="section px-4 py-20">
-  <div class="max-w-3xl mx-auto">
-    <div class="text-center mb-12 reveal">
-      <div class="badge badge-gold mb-4">FAQ</div>
-      <h2 class="text-3xl font-extrabold mb-4">Pertanyaan <span class="gradient-blue">Umum</span></h2>
-    </div>
-
-    <div class="flex flex-col gap-4" id="faq-list">
-      <!-- Dynamically inserted -->
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────── CONTACT ─────────────────────── -->
-<section id="contact" class="section px-4 py-20">
-  <div class="max-w-4xl mx-auto">
-    <div class="text-center mb-12 reveal">
-      <div class="badge badge-emerald mb-4">HUBUNGI KAMI</div>
-      <h2 class="text-3xl font-extrabold mb-4">Admin <span class="gradient-gold">Siap Membantu</span></h2>
-      <p class="text-sm" style="color:var(--text-muted);">Punya pertanyaan? Hubungi admin kami langsung melalui platform pilihan Anda.</p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 reveal">
-
-      <!-- WhatsApp -->
-      <a href="https://wa.me/6282219989497?text=Halo%20Wang%20Weize,%20saya%20mau%20bertanya%20tentang%20produk%20AI"
-         target="_blank" rel="noopener" class="contact-link flex-col items-center text-center py-8"
-         style="border-color:rgba(37,211,102,0.3);">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4"
-             style="background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </div>
-        <div class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif;color:#25d366;">WhatsApp Order</div>
-        <div class="text-xs" style="color:var(--text-muted);">Wang Weize<br/>+62 822-1998-9497</div>
-      </a>
-
-      <!-- Threads – Admin 1 -->
-      <a href="https://www.threads.com/@janebeatrixrety"
-         target="_blank" rel="noopener" class="contact-link flex-col items-center text-center py-8"
-         style="border-color:rgba(255,255,255,0.1);">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4"
-             style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);">
-          <!-- Threads SVG -->
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--text-primary)"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.587 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.skateboarding41-.479-1.012-.724-1.77-.756-1.639-.063-2.95.748-3.98 2.47l-1.788-1.01c1.36-2.336 3.387-3.558 5.776-3.466 1.218.046 2.277.414 3.066 1.066.862.71 1.437 1.75 1.711 3.09.148.73.214 1.501.197 2.295-.01.43-.053.843-.126 1.227.406.283.756.608 1.042.97C21.48 15.063 21.494 18.1 19.459 20.1c-1.8 1.76-4.113 2.603-7.274 2.626zm-.548-7.998-.065.003c-.871.05-1.56.281-2.003.668-.38.336-.562.745-.535 1.185.045.81.668 1.49 1.649 1.762.44.12.918.152 1.4.092.894-.109 1.595-.469 2.085-1.07.494-.607.745-1.496.745-2.644-.55-.1-1.137-.15-1.751-.15l-.525.004c-.333.017-.654.054-.97.107l-.03.043z"/></svg>
-        </div>
-        <div class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif;">Threads</div>
-        <div class="text-xs" style="color:var(--text-muted);">Admin 1 — Jane Beatrix<br/>@janebeatrixrety</div>
-      </a>
-
-      <!-- TikTok – Admin 2 -->
-      <a href="https://www.tiktok.com/@wangweize10?_r=1&_t=ZS-95siJwLG0Vs"
-         target="_blank" rel="noopener" class="contact-link flex-col items-center text-center py-8"
-         style="border-color:rgba(255,0,80,0.2);">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4"
-             style="background:rgba(255,0,80,0.08);border:1px solid rgba(255,0,80,0.2);">
-          <!-- TikTok SVG -->
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--text-primary)"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.17 8.17 0 004.78 1.53V6.79a4.85 4.85 0 01-1.01-.1z"/></svg>
-        </div>
-        <div class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif;">TikTok</div>
-        <div class="text-xs" style="color:var(--text-muted);">Admin 2 — Wang Weize<br/>@wangweize10</div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────── FOOTER ─────────────────────── -->
-<footer class="section px-4 py-12 text-center" style="border-top:1px solid var(--border-glass);">
-  <div class="max-w-5xl mx-auto">
-    <div class="flex items-center justify-center gap-2 mb-4">
-      <div style="width:30px;height:30px;background:linear-gradient(135deg,#f6c90e,#ff9f1c);border-radius:8px;display:flex;align-items:center;justify-content:center;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#0a1020" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <span class="logo-brand font-bold" style="font-family:'Syne',sans-serif;color:var(--text-primary);">Nex<span class="gradient-gold">AI</span> Store</span>
-    </div>
-    <p class="text-xs mb-6" style="color:var(--text-muted);">Platform Premium AI Account Access — Terpercaya sejak 2023</p>
-    <div class="flex flex-wrap justify-center gap-6 text-xs mb-8" style="color:var(--text-muted);">
-      <a href="#products" class="hover:text-white transition-colors">Produk</a>
-      <a href="#features" class="hover:text-white transition-colors">Fitur</a>
-      <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
-      <a href="#contact" class="hover:text-white transition-colors">Kontak</a>
-      <a href="https://wa.me/6282219989497" target="_blank" class="hover:text-white transition-colors">WhatsApp</a>
-    </div>
-    <p class="text-xs" style="color:rgba(139,156,192,0.5);">© 2025 NexAI Store · Hak Cipta Dilindungi · Semua merek dagang milik pemilik masing-masing</p>
-  </div>
-</footer>
-
-<!-- ─────────────────────── SCRIPTS ─────────────────────── -->
-<script>
-/* ===== 1. PARTICLE CANVAS BACKGROUND ===== */
-(function() {
-  const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let W, H;
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-
-  function createParticle() {
-    return {
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: Math.random() * 1.5 + 0.3,
-      dx: (Math.random() - 0.5) * 0.4,
-      dy: (Math.random() - 0.5) * 0.4,
-      alpha: Math.random() * 0.5 + 0.1
-    };
-  }
-
-  function init() {
-    particles = [];
-    const count = Math.min(120, Math.floor(W * H / 8000));
-    for (let i = 0; i < count; i++) particles.push(createParticle());
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-    particles.forEach(p => {
-      p.x += p.dx;
-      p.y += p.dy;
-      if (p.x < 0) p.x = W;
-      if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H;
-      if (p.y > H) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = isDark
-        ? `rgba(99,179,237,${p.alpha})`
-        : `rgba(56,130,180,${p.alpha * 0.5})`;
-      ctx.fill();
-    });
-
-    // Draw connection lines
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          const a = isDark ? (1 - dist / 120) * 0.12 : (1 - dist / 120) * 0.06;
-          ctx.strokeStyle = `rgba(99,179,237,${a})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
+    const products = [
+      {
+        id: 'chatgpt-plus-pro',
+        category: 'chatgpt',
+        initials: 'GPT',
+        name: 'ChatGPT Plus / Pro',
+        price: 12000,
+        oldPrice: 18000,
+        billing: '/ Bulan',
+        tag: 'Best Seller',
+        accent: 'from-emerald-400 via-cyan-400 to-blue-500',
+        subtitle: 'Akses private, 1 akun 1 Gmail',
+        desc: 'Pilihan paling fleksibel untuk kebutuhan harian, riset, drafting, dan workflow kreatif.',
+        features: ['Private access', 'Ringkas & cepat', 'Cocok untuk daily usage'],
+        stock: 17,
+        stockMax: 24
+      },
+      {
+        id: 'chatgpt-business',
+        category: 'chatgpt',
+        initials: 'BIZ',
+        name: 'ChatGPT Business',
+        price: 30000,
+        oldPrice: 39000,
+        billing: '/ Bulan',
+        tag: 'Priority',
+        accent: 'from-blue-500 via-cyan-400 to-violet-500',
+        subtitle: 'Server prioritas',
+        desc: 'Dirancang untuk user yang ingin jalur lebih stabil, lebih premium, dan siap dipakai intensif.',
+        features: ['Server prioritas', 'Kesan enterprise', 'Untuk workload tinggi'],
+        stock: 9,
+        stockMax: 16
+      },
+      {
+        id: 'gemini-pro',
+        category: 'google',
+        initials: 'G',
+        name: 'Gemini Pro',
+        price: 20000,
+        oldPrice: 26000,
+        billing: '/ 4 Bulan',
+        tag: 'Value Pack',
+        accent: 'from-violet-400 via-fuchsia-400 to-cyan-400',
+        subtitle: 'Ekosistem Google',
+        desc: 'Opsi menarik untuk buyer yang nyaman dengan ekosistem Google dan penggunaan jangka lebih panjang.',
+        features: ['Durasi 4 bulan', 'Google ecosystem', 'Value-friendly'],
+        stock: 12,
+        stockMax: 20
+      },
+      {
+        id: 'grok-ai',
+        category: 'xai',
+        initials: 'X',
+        name: 'Grok AI',
+        price: 10000,
+        oldPrice: 14000,
+        billing: '/ 3 Hari',
+        tag: 'Fast Test',
+        accent: 'from-slate-200 via-slate-400 to-slate-500',
+        subtitle: 'Data X real-time',
+        desc: 'Paket cepat untuk user yang ingin eksplorasi fitur real-time dan insight berbasis data X.',
+        features: ['Real-time oriented', 'Short-term package', 'Cocok untuk trial cepat'],
+        stock: 14,
+        stockMax: 22
       }
+    ];
+
+    const categories = [
+      { id: 'all', label: 'Semua Paket' },
+      { id: 'chatgpt', label: 'ChatGPT' },
+      { id: 'google', label: 'Google Ecosystem' },
+      { id: 'xai', label: 'xAI / Grok' }
+    ];
+
+    const faqs = [
+      {
+        q: 'Apakah tombol beli langsung ke WhatsApp?',
+        a: 'Ya. Semua CTA produk otomatis membuka WhatsApp ke nomor 6282219989497 dengan format pesan order yang sudah disiapkan.'
+      },
+      {
+        q: 'Apakah template ini responsif di mobile?',
+        a: 'Ya. Layout dibuat mobile-first, memiliki sticky CTA di layar kecil, grid adaptif, dan tipografi yang tetap rapi pada ukuran sempit.'
+      },
+      {
+        q: 'Bagian mana yang paling mudah diubah?',
+        a: 'Nama produk, harga, stok, kategori, teks benefit, FAQ, link admin, dan teks WhatsApp semuanya berada di satu blok JavaScript agar edit cepat.'
+      },
+      {
+        q: 'Bisa dipakai langsung di GitHub Pages atau hosting biasa?',
+        a: 'Bisa. Ini hanya satu file index.html menggunakan Tailwind CDN dan JavaScript vanilla, jadi tinggal upload lalu deploy.'
+      }
+    ];
+
+    const salesNames = ['Budi', 'Rina', 'Dimas', 'Naila', 'Andra', 'Vio', 'Arga', 'Salsa', 'Kevin', 'Mita'];
+    const salesCities = ['Medan', 'Jakarta', 'Bandung', 'Surabaya', 'Pekanbaru', 'Padang', 'Batam', 'Aceh'];
+
+    let selectedCategory = 'all';
+    let promoMode = true;
+
+    const productGrid = document.getElementById('productGrid');
+    const filterChips = document.getElementById('filterChips');
+    const searchInput = document.getElementById('searchInput');
+    const promoToggle = document.getElementById('promoToggle');
+    const faqList = document.getElementById('faqList');
+    const countdownEl = document.getElementById('countdown');
+    const toastContainer = document.getElementById('toastContainer');
+    const themeToggle = document.getElementById('themeToggle');
+
+    const rupiah = (value) => new Intl.NumberFormat('id-ID').format(value);
+    const waLink = (productName) => `${WHATSAPP_BASE}${encodeURIComponent(`Halo Wang Weize, saya mau order ${productName}`)}`;
+
+    function getTheme() {
+      return localStorage.getItem('ww-theme') || 'dark';
     }
 
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  init();
-  draw();
-  window.addEventListener('resize', () => { resize(); init(); });
-})();
-
-/* ===== 2. DARK / LIGHT MODE TOGGLE ===== */
-const themeToggle = document.getElementById('themeToggle');
-themeToggle.addEventListener('click', () => {
-  const root = document.documentElement;
-  const isDark = root.getAttribute('data-theme') === 'dark';
-  root.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('nexai-theme', isDark ? 'light' : 'dark');
-});
-// Remember preference
-const saved = localStorage.getItem('nexai-theme');
-if (saved) document.documentElement.setAttribute('data-theme', saved);
-
-/* ===== 3. COUNTDOWN TIMER ===== */
-(function() {
-  // Flash sale ends 11:59PM tonight
-  const now = new Date();
-  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
-
-  function tick() {
-    const diff = Math.max(0, end - new Date());
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
-    document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
-    document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
-  }
-  tick();
-  setInterval(tick, 1000);
-})();
-
-/* ===== 4. LIVE NOTIFICATION POPUP ===== */
-(function() {
-  const notifications = [
-    { name: "Budi R.", city: "Bandung", product: "ChatGPT Plus", emoji: "🤖" },
-    { name: "Siti A.", city: "Jakarta", product: "ChatGPT Business", emoji: "💼" },
-    { name: "Rahmat K.", city: "Surabaya", product: "Gemini Pro", emoji: "🔮" },
-    { name: "Dewi L.", city: "Medan", product: "Grok AI", emoji: "⚡" },
-    { name: "Andi P.", city: "Makassar", product: "ChatGPT Plus", emoji: "🤖" },
-    { name: "Nurul H.", city: "Yogyakarta", product: "Gemini Pro", emoji: "🔮" },
-    { name: "Fajar M.", city: "Malang", product: "ChatGPT Business", emoji: "💼" },
-    { name: "Rini W.", city: "Semarang", product: "Grok AI", emoji: "⚡" },
-    { name: "Hasan T.", city: "Palembang", product: "ChatGPT Plus", emoji: "🤖" },
-    { name: "Maya S.", city: "Denpasar", product: "Gemini Pro", emoji: "🔮" },
-  ];
-
-  let idx = 0;
-  const notif = document.getElementById('live-notif');
-  const notifText = document.getElementById('notif-text');
-  const notifAvatar = document.getElementById('notif-avatar');
-
-  function showNotif() {
-    const n = notifications[idx % notifications.length];
-    idx++;
-    notifAvatar.textContent = n.emoji;
-    notifText.textContent = `${n.name} (${n.city}) membeli ${n.product}`;
-    notif.style.display = 'block';
-    notif.style.animation = 'none';
-    void notif.offsetWidth;
-    notif.style.animation = 'slideUp 0.4s ease';
-    setTimeout(() => { notif.style.display = 'none'; }, 4500);
-  }
-
-  // First popup after 3s, then every 8s
-  setTimeout(() => {
-    showNotif();
-    setInterval(showNotif, 8000);
-  }, 3000);
-})();
-
-/* ===== 5. DYNAMIC STOCK COUNTER (random slow depletion) ===== */
-(function() {
-  const stocks = [
-    { id: 'stock-1', barId: 'stock-bar-1', count: 7, max: 20, color: 'linear-gradient(90deg,#f6c90e,#ff9f1c)', textColor: '#f6c90e' },
-    { id: 'stock-2', barId: 'stock-bar-2', count: 3, max: 20, color: 'linear-gradient(90deg,#f87171,#ef4444)', textColor: '#f87171' },
-    { id: 'stock-3', barId: 'stock-bar-3', count: 12, max: 20, color: 'linear-gradient(90deg,#34d399,#06b6d4)', textColor: '#34d399' },
-    { id: 'stock-4', barId: 'stock-bar-4', count: 5, max: 20, color: 'linear-gradient(90deg,#38bdf8,#818cf8)', textColor: '#38bdf8' },
-  ];
-
-  function updateStock() {
-    stocks.forEach(s => {
-      if (s.count > 1 && Math.random() < 0.3) {
-        s.count--;
-        const el = document.getElementById(s.id);
-        const bar = document.getElementById(s.barId);
-        if (el) {
-          el.textContent = s.count + ' slot';
-          el.style.color = s.textColor;
-        }
-        if (bar) {
-          const pct = Math.max(5, (s.count / s.max) * 100);
-          bar.style.width = pct + '%';
-        }
-      }
-    });
-  }
-
-  setInterval(updateStock, 12000 + Math.random() * 8000);
-})();
-
-/* ===== MOBILE MENU ===== */
-document.getElementById('hamburger').addEventListener('click', () => {
-  document.getElementById('mobile-menu').classList.toggle('open');
-});
-function closeMobile() {
-  document.getElementById('mobile-menu').classList.remove('open');
-}
-
-/* ===== SCROLL REVEAL ===== */
-(function() {
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const d = e.target.getAttribute('data-delay') || 0;
-        setTimeout(() => e.target.classList.add('visible'), Number(d) * 120);
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-})();
-
-/* ===== RIPPLE EFFECT ON BUTTONS ===== */
-document.querySelectorAll('.ripple-btn').forEach(btn => {
-  btn.style.position = 'relative';
-  btn.style.overflow = 'hidden';
-  btn.addEventListener('click', function(e) {
-    const rect = btn.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const ripple = document.createElement('span');
-    ripple.classList.add('ripple-effect');
-    ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;`;
-    btn.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 700);
-  });
-});
-
-/* ===== FAQ ACCORDION ===== */
-(function() {
-  const faqs = [
-    { q: "Apakah akun ini aman digunakan?", a: "Ya, 100% aman. Semua akun adalah akun premium resmi dengan sistem akses yang aman. Privasi Anda terjaga penuh." },
-    { q: "Bagaimana cara melakukan pemesanan?", a: "Klik tombol 'Pesan Sekarang' pada produk yang Anda inginkan, lalu Anda akan diarahkan ke WhatsApp admin. Setelah konfirmasi pembayaran, akun langsung diaktifkan dalam &lt;5 menit." },
-    { q: "Metode pembayaran apa yang diterima?", a: "Kami menerima transfer bank (BCA, Mandiri, BNI, BRI), GoPay, OVO, DANA, ShopeePay, dan QRIS." },
-    { q: "Apa yang terjadi jika akun bermasalah?", a: "Kami memberikan garansi penuh. Jika ada masalah teknis, akun akan diganti atau uang dikembalikan tanpa syarat rumit." },
-    { q: "Bisakah saya perpanjang langganan?", a: "Tentu! Hubungi admin kami via WhatsApp sebelum masa akses berakhir dan kami akan bantu proses perpanjangan dengan harga yang sama." },
-    { q: "Berapa lama proses aktivasi?", a: "Rata-rata kurang dari 5 menit setelah pembayaran dikonfirmasi. Beberapa kasus bisa langsung instan." },
-  ];
-
-  const list = document.getElementById('faq-list');
-  faqs.forEach((item, i) => {
-    const el = document.createElement('div');
-    el.classList.add('glass-card', 'overflow-hidden', 'reveal');
-    el.innerHTML = `
-      <button class="w-full flex items-center justify-between gap-4 p-5 text-left" onclick="toggleFaq(${i})">
-        <span class="font-semibold text-sm" style="font-family:'Syne',sans-serif;">${item.q}</span>
-        <span id="faq-icon-${i}" class="text-lg flex-shrink-0 transition-transform duration-300" style="color:var(--accent-blue);">+</span>
-      </button>
-      <div id="faq-body-${i}" class="faq-body" style="max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.35s ease;">
-        <p class="px-5 pb-5 text-sm leading-relaxed" style="color:var(--text-muted);">${item.a}</p>
-      </div>
-    `;
-    list.appendChild(el);
-  });
-})();
-
-let openFaq = null;
-function toggleFaq(i) {
-  const body = document.getElementById('faq-body-' + i);
-  const icon = document.getElementById('faq-icon-' + i);
-  if (openFaq !== null && openFaq !== i) {
-    document.getElementById('faq-body-' + openFaq).style.maxHeight = '0';
-    document.getElementById('faq-icon-' + openFaq).textContent = '+';
-    document.getElementById('faq-icon-' + openFaq).style.transform = 'rotate(0deg)';
-  }
-  if (openFaq === i) {
-    body.style.maxHeight = '0';
-    icon.textContent = '+';
-    icon.style.transform = 'rotate(0deg)';
-    openFaq = null;
-  } else {
-    body.style.maxHeight = body.scrollHeight + 40 + 'px';
-    icon.textContent = '×';
-    icon.style.transform = 'rotate(90deg)';
-    openFaq = i;
-  }
-}
-
-/* ===== TESTIMONIAL MARQUEE ===== */
-(function() {
-  const testimonials = [
-    { name: "Adi Setiawan", city: "Jakarta", star: 5, text: "Aktivasi cepat banget! Kurang dari 2 menit langsung bisa pakai ChatGPT Plus. Harga terjangkau, worth it!", product: "ChatGPT Plus" },
-    { name: "Rina Marlina", city: "Bandung", star: 5, text: "Sudah langganan 3 bulan, nggak ada masalah sama sekali. Admin responsif, recommended banget!", product: "Gemini Pro" },
-    { name: "Dimas Kurniawan", city: "Surabaya", star: 5, text: "Grok AI real-time datanya keren banget. Buat research X/Twitter jauh lebih mudah. Mantap!", product: "Grok AI" },
-    { name: "Fitri Handayani", city: "Yogyakarta", star: 5, text: "ChatGPT Business server-nya nggak pernah lag meski jam sibuk. Value for money banget!", product: "ChatGPT Business" },
-    { name: "Bram Santoso", city: "Malang", star: 5, text: "Paling suka Gemini Pro karena integrasi Google Docs-nya. Workflow jadi 10x lebih efisien!", product: "Gemini Pro" },
-    { name: "Anisa Putri", city: "Semarang", star: 5, text: "Admin fast respon, payment langsung diproses. Sudah rekomendasikan ke teman-teman semua!", product: "ChatGPT Plus" },
-  ];
-
-  function makeCard(t) {
-    return `<div class="glass-card flex-shrink-0 p-5" style="width:280px;">
-      <div class="flex items-center gap-3 mb-3">
-        <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm"
-             style="background:linear-gradient(135deg,#38bdf8,#818cf8);color:#fff;">
-          ${t.name.charAt(0)}
-        </div>
-        <div>
-          <div class="font-bold text-xs" style="font-family:'Syne',sans-serif;">${t.name}</div>
-          <div class="text-xs" style="color:var(--text-muted);">${t.city}</div>
-        </div>
-        <div class="ml-auto text-xs text-yellow-400">${'★'.repeat(t.star)}</div>
-      </div>
-      <p class="text-xs leading-relaxed mb-2" style="color:var(--text-muted);">"${t.text}"</p>
-      <div class="badge badge-blue text-xs">${t.product}</div>
-    </div>`;
-  }
-
-  const html = testimonials.map(makeCard).join('');
-  document.getElementById('testi-inner').innerHTML = html;
-  document.getElementById('testi-inner2').innerHTML = html;
-})();
-
-/* ===== ANIMATING STAT COUNTER ===== */
-(function() {
-  let animated = false;
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting && !animated) {
-        animated = true;
-        animateCount('stat-customers', 0, 1200, 1800, '+');
-      }
-    });
-  }, { threshold: 0.5 });
-  const el = document.getElementById('stat-customers');
-  if (el) io.observe(el);
-
-  function animateCount(id, from, to, dur, suffix) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const start = performance.now();
-    function step(now) {
-      const prog = Math.min((now - start) / dur, 1);
-      const ease = 1 - Math.pow(1 - prog, 3);
-      el.textContent = Math.round(from + (to - from) * ease).toLocaleString() + (suffix || '');
-      if (prog < 1) requestAnimationFrame(step);
+    function applyTheme(theme) {
+      const html = document.documentElement;
+      html.classList.toggle('dark', theme === 'dark');
+      html.classList.toggle('light', theme === 'light');
+      localStorage.setItem('ww-theme', theme);
+      themeToggle.innerHTML = theme === 'dark'
+        ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 15.5A9 9 0 1112.5 2.25a7.5 7.5 0 009.25 13.25z" /></svg>`
+        : `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 12H3m15.364 6.364l-1.06-1.06M6.697 6.697L5.636 5.636m12.728 0l-1.06 1.06M6.697 17.303l-1.06 1.06M12 16.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9z" /></svg>`;
     }
-    requestAnimationFrame(step);
-  }
-})();
-</script>
+
+    function renderFilterChips() {
+      filterChips.innerHTML = categories.map(cat => {
+        const active = selectedCategory === cat.id;
+        return `
+          <button data-category="${cat.id}" class="filter-chip rounded-2xl border px-4 py-2 text-sm font-semibold transition ${active
+            ? 'border-cyan-300/30 bg-cyan-400/15 text-cyan-200 dark:text-cyan-200 light:border-sky-300 light:bg-sky-100 light:text-sky-700'
+            : 'border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 dark:text-slate-300 light:border-slate-300 light:bg-white/80 light:text-slate-700'}">
+            ${cat.label}
+          </button>
+        `;
+      }).join('');
+
+      document.querySelectorAll('.filter-chip').forEach(button => {
+        button.addEventListener('click', () => {
+          selectedCategory = button.dataset.category;
+          renderFilterChips();
+          renderProducts();
+        });
+      });
+    }
+
+    function productCard(product) {
+      const searchValue = searchInput.value.trim().toLowerCase();
+      const matchCategory = selectedCategory === 'all' || product.category === selectedCategory;
+      const matchSearch = !searchValue || [product.name, product.subtitle, product.desc, ...product.features].join(' ').toLowerCase().includes(searchValue);
+      if (!matchCategory || !matchSearch) return '';
+
+      const stockPercent = Math.max(12, Math.min(100, Math.round((product.stock / product.stockMax) * 100)));
+      const savings = product.oldPrice - product.price;
+
+      return `
+        <article class="card-hover glass rounded-[1.9rem] p-6 shadow-glow">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${product.accent} text-lg font-black text-white shadow-soft">${product.initials}</div>
+              <div>
+                <p class="text-xs uppercase tracking-[0.22em] text-slate-400 dark:text-slate-400 light:text-slate-600">${product.tag}</p>
+                <h4 class="mt-1 text-xl font-bold text-white dark:text-white light:text-slate-900">${product.name}</h4>
+              </div>
+            </div>
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-slate-300 dark:text-slate-300 light:border-slate-300 light:bg-white/80 light:text-slate-700">${product.subtitle}</span>
+          </div>
+
+          <p class="mt-5 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">${product.desc}</p>
+
+          <div class="mt-6 flex items-end gap-3">
+            <div>
+              <p class="text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Harga mulai</p>
+              <div class="mt-1 flex items-center gap-3">
+                <span class="text-3xl font-black text-white dark:text-white light:text-slate-950">Rp ${rupiah(product.price)}</span>
+                <span class="text-sm font-medium text-slate-400 dark:text-slate-400 light:text-slate-600">${product.billing}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3 ${promoMode ? 'block' : 'hidden'}">
+            <div class="flex items-center gap-3 text-sm">
+              <span class="text-slate-500 line-through dark:text-slate-500 light:text-slate-500">Rp ${rupiah(product.oldPrice)}</span>
+              <span class="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-300 dark:text-emerald-300 light:text-emerald-700">Hemat Rp ${rupiah(savings)}</span>
+            </div>
+          </div>
+
+          <div class="mt-6 space-y-3">
+            ${product.features.map(feature => `
+              <div class="flex items-center gap-3 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">
+                <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 dark:bg-white/10 light:bg-slate-200">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+                ${feature}
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="mt-6 rounded-3xl border border-white/10 bg-white/5 p-4 dark:bg-white/5 light:bg-white/80">
+            <div class="mb-2 flex items-center justify-between text-sm">
+              <span class="text-slate-400 dark:text-slate-400 light:text-slate-600">Stok aktif hari ini</span>
+              <span class="font-semibold text-white dark:text-white light:text-slate-900">${product.stock} slot</span>
+            </div>
+            <div class="h-2 rounded-full bg-white/10 dark:bg-white/10 light:bg-slate-200"><div class="h-2 rounded-full bg-gradient-to-r ${product.accent}" style="width:${stockPercent}%"></div></div>
+          </div>
+
+          <div class="mt-6 grid gap-3 sm:grid-cols-2">
+            <a href="${waLink(product.name)}" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r ${product.accent} px-5 py-3.5 text-sm font-bold text-white shadow-soft transition hover:-translate-y-0.5">Beli / Pesan</a>
+            <button data-copy="${product.name}" class="copy-btn rounded-2xl border border-white/10 bg-white/5 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10 dark:text-white light:border-slate-300 light:bg-white/80 light:text-slate-900">Salin Nama Paket</button>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderProducts() {
+      const html = products.map(productCard).join('');
+      productGrid.innerHTML = html || `
+        <div class="glass col-span-full rounded-[1.8rem] p-8 text-center shadow-glow">
+          <p class="text-lg font-semibold text-white dark:text-white light:text-slate-900">Paket tidak ditemukan</p>
+          <p class="mt-2 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">Coba kata kunci lain atau ganti filter kategori.</p>
+        </div>
+      `;
+
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const packageName = btn.dataset.copy;
+          try {
+            await navigator.clipboard.writeText(packageName);
+            const original = btn.textContent;
+            btn.textContent = 'Tersalin';
+            setTimeout(() => btn.textContent = original, 1400);
+          } catch {
+            alert('Clipboard tidak tersedia di browser ini.');
+          }
+        });
+      });
+    }
+
+    function renderFaq() {
+      faqList.innerHTML = faqs.map((item, index) => `
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-4 dark:bg-white/5 light:bg-white/80">
+          <button class="faq-btn flex w-full items-center justify-between gap-4 text-left" data-index="${index}">
+            <span class="text-base font-semibold text-white dark:text-white light:text-slate-900">${item.q}</span>
+            <span class="text-xl text-cyan-300 dark:text-cyan-300 light:text-sky-700">+</span>
+          </button>
+          <div class="faq-panel hidden pt-3 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">${item.a}</div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll('.faq-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          const panel = button.nextElementSibling;
+          const icon = button.querySelector('span:last-child');
+          panel.classList.toggle('hidden');
+          icon.textContent = panel.classList.contains('hidden') ? '+' : '−';
+        });
+      });
+    }
+
+    function startCountdown() {
+      const target = new Date();
+      target.setDate(target.getDate() + 2);
+      target.setHours(target.getHours() + 7);
+
+      function update() {
+        const diff = target.getTime() - Date.now();
+        const safeDiff = Math.max(diff, 0);
+        const days = Math.floor(safeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((safeDiff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((safeDiff / (1000 * 60)) % 60);
+        const seconds = Math.floor((safeDiff / 1000) % 60);
+
+        const parts = [
+          { label: 'Hari', value: String(days).padStart(2, '0') },
+          { label: 'Jam', value: String(hours).padStart(2, '0') },
+          { label: 'Menit', value: String(minutes).padStart(2, '0') },
+          { label: 'Detik', value: String(seconds).padStart(2, '0') }
+        ];
+
+        countdownEl.innerHTML = parts.map(part => `
+          <div class="rounded-2xl border border-white/10 bg-white/5 px-3 py-4 dark:bg-white/5 light:bg-white/80">
+            <div class="text-2xl font-black text-white dark:text-white light:text-slate-900">${part.value}</div>
+            <div class="mt-1 text-[11px] uppercase tracking-[0.24em] text-slate-400 dark:text-slate-400 light:text-slate-600">${part.label}</div>
+          </div>
+        `).join('');
+      }
+
+      update();
+      setInterval(update, 1000);
+    }
+
+    function startStatsAnimation() {
+      const numbers = document.querySelectorAll('.stat-number');
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = Number(el.dataset.target || 0);
+          const duration = 1200;
+          const start = performance.now();
+
+          function animate(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            el.textContent = Math.floor(progress * target).toLocaleString('id-ID');
+            if (progress < 1) requestAnimationFrame(animate);
+          }
+
+          requestAnimationFrame(animate);
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+
+      numbers.forEach(num => observer.observe(num));
+    }
+
+    function startDynamicStock() {
+      setInterval(() => {
+        const index = Math.floor(Math.random() * products.length);
+        const product = products[index];
+        if (product.stock > 4) {
+          product.stock -= 1;
+          renderProducts();
+        }
+      }, 8500);
+    }
+
+    function showToast(message, productName) {
+      const toast = document.createElement('div');
+      toast.className = 'toast-enter pointer-events-auto glass rounded-3xl p-4 shadow-glow';
+      toast.innerHTML = `
+        <div class="flex items-start gap-3">
+          <div class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-emerald-400/20 text-sm font-black text-emerald-300">✓</div>
+          <div>
+            <p class="text-sm font-semibold text-white dark:text-white light:text-slate-900">${message}</p>
+            <p class="mt-1 text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">Order: ${productName}</p>
+          </div>
+        </div>
+      `;
+      toastContainer.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.remove('toast-enter');
+        toast.classList.add('toast-exit');
+        setTimeout(() => toast.remove(), 380);
+      }, 3400);
+    }
+
+    function startSalesSimulation() {
+      function generate() {
+        const name = salesNames[Math.floor(Math.random() * salesNames.length)];
+        const city = salesCities[Math.floor(Math.random() * salesCities.length)];
+        const product = products[Math.floor(Math.random() * products.length)];
+        showToast(`${name} dari ${city} baru saja memesan`, product.name);
+      }
+
+      setTimeout(generate, 2500);
+      setInterval(generate, 9000);
+    }
+
+    promoToggle.addEventListener('click', () => {
+      promoMode = !promoMode;
+      promoToggle.textContent = `Mode Promo: ${promoMode ? 'ON' : 'OFF'}`;
+      renderProducts();
+    });
+
+    searchInput.addEventListener('input', renderProducts);
+
+    themeToggle.addEventListener('click', () => {
+      const current = getTheme();
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    applyTheme(getTheme());
+    renderFilterChips();
+    renderProducts();
+    renderFaq();
+    startCountdown();
+    startStatsAnimation();
+    startDynamicStock();
+    startSalesSimulation();
+  </script>
 </body>
 </html>
